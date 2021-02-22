@@ -1,0 +1,129 @@
+
+.header {
+  overflow: hidden;
+  background-color: rgb(18, 153, 231);
+  padding: 20px 10px;
+}
+
+.header a {
+  float: left;
+  color: rgb(243, 239, 239);
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+
+.header a.active {
+  background-color: rgb(52, 52, 53);
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+.carousel-caption{
+  font-style: italic;
+  font-size: 200%;
+  background-color: rgba(33,169,245,0.4);
+  text-align: center;
+  border:0px;
+  border-radius:0.3px;
+}
+
+.list{
+  list-style-type: none;
+}
+
+.carousel-inner .item{ 
+  height:800px; 
+  width: 100%;
+  size:cover;
+}
+
+.container{
+  width:auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+
+#mission, #vision{
+  font-style:italic;
+  font-size:20px;
+}
+
+
+h2{
+  color:black;
+  font-size:20px;
+  font-weight: bolder;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+  
+}
+
+
+.site-footer
+{
+  background-color:#26272b;
+  padding:45px 0 20px;
+  font-size:15px;
+  line-height:24px;
+  color:#737373;
+}
+.site-footer hr
+{
+  border-top-color:#bbb;
+  opacity:0.5
+}
+.site-footer hr.small
+{
+  margin:20px 0
+}
+
+.site-footer h6
+{
+  color:#fff;
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+
+.copyright-text
+{
+  margin:0
+}
+@media (max-width:991px)
+{
+  .site-footer [class^=col-]
+  {
+    margin-bottom:30px
+  }
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0
+  }
+  .site-footer .copyright-text,.site-footer .social-icons
+  {
+    text-align:center
+  }
+}
+
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;} 
+}

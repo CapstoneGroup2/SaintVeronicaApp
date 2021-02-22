@@ -1,0 +1,233 @@
+body {
+  background-color: #FCF4A3 !important;
+  margin-top: 80px !important;
+}
+
+/* body::after {
+  content: "";
+  background: url(/images/logo.jpg) center/50% fixed;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 2%;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: -1;  
+} */
+
+div.card {
+  padding: 10px;
+  margin: 30px 20px;
+  font-size: 16px;
+}
+
+.list{
+  list-style-type: none;
+}
+
+/* Style the header with a grey background and some padding */
+nav {
+  /* overflow: hidden; */
+  background-color: #3f704d !important;
+  min-height: 80px !important;
+  margin-bottom: 0 !important;
+}
+
+.navbar-brand {
+  padding:0 0 10px 0 !important;
+}
+
+.navbar-toggler {
+  font-size: 2rem !important;
+  margin: 10px;
+  float: right !important;
+}
+
+.navbar-brand>img#logo-navbar {
+  display: inline !important;
+}
+
+div.login {
+  width: 150px;
+  margin: 100px;
+}
+
+/* Style the header links */
+.header a {
+  float: left;
+  color: #FCF4A3 !important;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.header-right a{
+  float: right !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 13px 30px !important;
+}
+
+.header-right button{
+  float: right !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+.header a.logo {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* Change the background color on mouse-over */
+.header-right a:hover {
+  color: white !important;
+}
+
+/* Style the active/current link*/
+.header a.active {
+  background-color: lightgrey;
+  color: white;
+}
+
+/* Float the link section to the right */
+.header-right {
+  float: right !important;
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
+}
+
+a.dropdown-item {
+  width: 195px;
+  float: right !important;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 10px 20px !important;
+  font-size: 15px;
+  text-align: left;
+  background-color: #3f704d;
+}
+
+a.dropdown-item:hover {
+  background-color: #FCF4A3 !important;
+  color: #3f704d !important;
+}
+
+img#logo-navbar {
+  width: 70px;
+  border-radius: 50%;
+  height: 60px;
+  padding: 5px;
+  margin-top: -5px;
+}
+
+img#profile {
+  width: 50px;
+  border-radius: 50%;
+  height: 40px;
+  padding: 5px;
+}
+
+img#logo-login {
+  width: 150px;
+  border-radius: 50%;
+  height: 140px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+.login-container{
+  margin: 50px auto;
+  width: 50%;
+  padding: 10px;
+}
+.login-form-1{
+  padding: 0 5%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.login-form-1 h3{
+  text-align: center;
+  color: #333;
+}
+.login-container form{
+  padding: 10%;
+}
+.btnSubmit
+{ 
+  width: 50%;
+  border-radius: 1rem;
+  padding: 1.5%;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+.login-form-1 .btnSubmit{
+  font-weight: 600;
+  color: #fff;
+  background-color: #3f704d;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.form-control {
+  font-size: 15px !important;
+  padding: 20px !important;
+  background-color: #3f704d3a !important;
+  border-radius: 5px !important;
+  color: black !important;
+}
+
+/* Set black background color, white text and some padding */
+footer {  
+  background-color: #3f704d;
+  color: #FCF4A3;
+  padding: 15px;
+  position: relative;
+  bottom: 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.site-footer h6
+{
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+
+table th {
+  font-size: 18px !important;
+  padding: 10px !important;
+}
+
+table td {
+  font-size: 13px !important;
+  padding: 10px !important;
+}
+tfoot input {
+  font-size: 13px;
+  padding: 3px;
+  box-sizing: border-box;
+}

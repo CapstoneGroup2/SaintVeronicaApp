@@ -23,7 +23,7 @@ class EnrolleeController extends Controller
      */
     public function create()
     {
-        //
+        return view('enrollees.create');
     }
 
     /**
@@ -34,7 +34,33 @@ class EnrolleeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'first-name'    =>  'required',
+            'middle_name'   =>  'required',
+            'last_name'     =>  'required',
+            'email'         =>  'required',
+            'address'       =>  'required',
+            'birthdate'     =>  'required',
+            'age'           =>  'required',
+            'gender'        =>  'required',
+            'status'        =>  'required',
+        ]);
+        
+        $enrollee = new Enrollee();
+        $enrollee->id = mt_rand( 10000000 , 19999999);
+        $enrollee->enrollee_first_name = $request['first_name'];
+        $enrollee->enrollee_middle_name = $request['middle_name'];
+        $enrollee->enrollee_last_name = $request['last_name'];
+        $enrollee->enrollee_email = $request['email'];
+        $enrollee->enrollee_address = $request['address'];
+        $enrollee->enrollee_gender = $request['birthdate'];
+        $enrollee->enrollee_age = $request['age'];
+        $enrollee->enrollee_birth_date = $request['gender'];
+        $enrollee->enrollee_status = $request['status'];
+        $enrollee->enrollee_active_status = 1;
+        $enrollee->save();
+
+        return redirect('/enrollees');
     }
 
     /**

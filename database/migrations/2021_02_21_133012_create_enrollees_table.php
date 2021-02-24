@@ -15,14 +15,16 @@ class CreateEnrolleesTable extends Migration
     {
         Schema::create('enrollees', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('first_name');
-            $table->string('middle_name');
-            $table->string('last_name');
-            $table->string('email')->unique();
-            $table->string('gender');
-            $table->integer('age');
-            $table->date('birth_date');
-            $table->string('status');
+            $table->string('enrollee_first_name');
+            $table->string('enrollee_middle_name');
+            $table->string('enrollee_last_name');
+            $table->string('enrollee_email');
+            $table->string('enrollee_address');
+            $table->string('enrollee_gender');
+            $table->integer('enrollee_age');
+            $table->date('enrollee_birth_date');
+            $table->string('enrollee_status');
+            $table->integer('enrollee_active_status');
             $table->timestamps();
         });
     }

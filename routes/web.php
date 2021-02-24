@@ -17,10 +17,10 @@ Route::get('/login', function() {
 
 Route::get('/index', 'PagesController@index')->name('index');
 
-Route::get('/enrollees/index', 'PagesController@enrollees')->name('enrollees');
-
 Route::get('/payments', 'PagesController@payments')->name('payments');
 
-Route::resource('enrollees', 'EnrolleeController', ['names' => [
-    'index' => 'enrollee.index',
+// Route::post('/enrollees', 'EnrolleeController@store');
+Route::resource('/enrollees', 'EnrolleeController', ['names' => [
+    'index'     =>  'enrollees',
+    'create'    =>  'enrollee.create'
 ]]);

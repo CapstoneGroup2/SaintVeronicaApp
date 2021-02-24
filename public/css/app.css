@@ -153,14 +153,15 @@ img#logo-login {
 }
 
 div.container {
-  max-width: 100% !important;
+  max-width: 95% !important;
+  padding: 10px 0;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {height: 450px}
 
 .login-container{
-  margin: 50px auto;
+  margin: 10px auto;
   width: 50%;
   padding: 10px;
 }
@@ -258,10 +259,6 @@ label {
   font-size: 15px;
 }
 
-.modal-body .form-control {
-  font-size: 12px !important;
-}
-
 label.search {
   font-size: 14px;
   letter-spacing: 1px;
@@ -276,20 +273,20 @@ label.entries {
   text-align: left !important;
 }
 
-div.container {
-  padding-top: 10px;
-}
-
 div.right {
   float: right;
   margin-right: 0;
 }
 
 #enrollment-form {
-  padding: 0 20%;
+  margin: 0 15%;
+  padding: 5%;
+  background-color: #3f704d;
+  color: #FCF4A3;
 }
 
 #enrollment-form .form-control {
   font-size: 12px;
   border-radius: 5px;
+  margin: 10px 0;
 }

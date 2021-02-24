@@ -19,8 +19,7 @@ Route::get('/index', 'PagesController@index')->name('index');
 
 Route::get('/payments', 'PagesController@payments')->name('payments');
 
-// Route::post('/enrollees', 'EnrolleeController@store');
-Route::resource('/enrollees', 'EnrolleeController', ['names' => [
-    'index'     =>  'enrollees',
-    'create'    =>  'enrollee.create'
+Route::resource('/students', 'StudentsController', ['names' => [
+    'index'     =>  'students',
+    'create'    =>  'student.create'
 ]]);

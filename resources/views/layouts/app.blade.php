@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse header-right" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
                     <a class="nav-link nav-item" href="{{ route('index') }}">Dashboard</a>
-                    <a class="nav-link nav-item" href="{{ route('enrollees') }}">Enrollees</a>
+                    <a class="nav-link nav-item" href="{{ route('students') }}">Students</a>
                     <a class="nav-link nav-item" href="{{ route('payments') }}">Payments</a>
                     <!-- <a class="nav-link nav-item" href="{{ route('login') }}">Josephine Morre</a> -->
                     <div class="dropdown">

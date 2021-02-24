@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
-class EnrolleeController extends Controller
+class StudentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +16,9 @@ class EnrolleeController extends Controller
      */
     public function index()
     {
-        return view('enrollees.index');
+        $students = DB::table('students')->get();
+        error_log(print_r($students, true));
+        return view('students.index', ['students' => $students]);
     }
 
     /**
@@ -23,7 +28,7 @@ class EnrolleeController extends Controller
      */
     public function create()
     {
-        return view('enrollees.create');
+        return view('students.create');
     }
 
     /**
@@ -35,10 +40,11 @@ class EnrolleeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'first-name'    =>  'required',
+            'first_name'    =>  'required',
             'middle_name'   =>  'required',
             'last_name'     =>  'required',
             'email'         =>  'required',
+            'contact'       =>  'required',
             'address'       =>  'required',
             'birthdate'     =>  'required',
             'age'           =>  'required',
@@ -46,21 +52,22 @@ class EnrolleeController extends Controller
             'status'        =>  'required',
         ]);
         
-        $enrollee = new Enrollee();
-        $enrollee->id = mt_rand( 10000000 , 19999999);
-        $enrollee->enrollee_first_name = $request['first_name'];
-        $enrollee->enrollee_middle_name = $request['middle_name'];
-        $enrollee->enrollee_last_name = $request['last_name'];
-        $enrollee->enrollee_email = $request['email'];
-        $enrollee->enrollee_address = $request['address'];
-        $enrollee->enrollee_gender = $request['birthdate'];
-        $enrollee->enrollee_age = $request['age'];
-        $enrollee->enrollee_birth_date = $request['gender'];
-        $enrollee->enrollee_status = $request['status'];
-        $enrollee->enrollee_active_status = 1;
-        $enrollee->save();
+        $student = new Student();
+        $student->student_first_name = $request['first_name'];
+        $student->student_middle_name = $request['middle_name'];
+        $student->student_last_name = $request['last_name'];
+        $student->student_email = $request['email'];
+        $student->student_home_contact = $request['contact'];
+        $student->student_address = $request['address'];
+        $student->student_gender = $request['gender'];
+        $student->student_age = $request['age'];
+        $student->student_birth_date = date('Y-m-d', strtotime($request['birthdate']));
+        $student->student_status = $request['status'];
+        $student->student_active_status = 1;
 
-        return redirect('/enrollees');
+        $student->save();   
+
+        return redirect('/students');
     }
 
     /**

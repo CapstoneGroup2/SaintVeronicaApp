@@ -1,55 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Enrollment Form</h2> 
+<form id="enrollment-form" action="/students" method="post">
+<h1>Enrollment Form</h1> 
+<p>Fill up the form carefully</p>
 <hr>
-<form id="enrollment-form" action="/enrollees" method="post">
 @csrf
     <div class="row">
         <div class="col">    
             <div class="form-group">
                 <label for="First Name">First Name</label>
-                <input type="text" class="form-control" id="first_name" placeholder="first name">
+                <input type="text" class="form-control" name="first_name" placeholder="first name" value="{{ old('first_name') }}">
             </div>
         </div>
         <div class="col">    
             <div class="form-group">
                 <label for="First Name">Middle Name</label>
-                <input type="text" class="form-control" id="middle_name" placeholder="middle name">
+                <input type="text" class="form-control" name="middle_name" placeholder="middle name" value="{{ old('middle_name') }}">
             </div>
         </div>
         <div class="col">    
             <div class="form-group">
                 <label for="First Name">Last Name</label>
-                <input type="text" class="form-control" id="last_name" placeholder="last name">
+                <input type="text" class="form-control" name="last_name" placeholder="last name">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" name="email" placeholder="name@example.com">
+            </div>
+        </div>
+        <div class="col-5">    
+            <div class="form-group">
+                <label for="contact">Home Contact Number</label>
+                <input type="text" class="form-control" name="contact" placeholder="+639">
             </div>
         </div>
     </div>
     <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email" placeholder="name@example.com">
-    </div>
-    <div class="form-group">
-        <label for="address">Address</label>
-        <input type="email" class="form-control" id="address" placeholder="present address">
+        <label for="address">Home Address</label>
+        <input type="text" class="form-control" name="address" placeholder="present address">
     </div>
     <div class="row">
         <div class="col">    
             <div class="form-group">
                 <label for="birthdate">Birthdate</label>
-                <input type="date" class="form-control" id="birthdate">
+                <input type="date" class="form-control" name="birthdate">
             </div>
         </div>  
         <div class="col-2">    
             <div class="form-group">
                 <label for="age">Age</label>
-                <input type="number" class="form-control" id="age">
+                <input type="number" class="form-control" name="age">
             </div>
         </div>
         <div class="col-3">    
             <div class="form-group">
                 <label for="gender">Gender</label>
-                <select class="form-control" id="gender">
+                <select class="form-control" name="gender">
                     <option selected>Select Gender</option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
@@ -59,7 +70,7 @@
         <div class="col">    
             <div class="form-group">
                 <label for="status">Status</label>
-                <select class="form-control" id="status">
+                <select class="form-control" name="status">
                     <option selected>Select Status</option>
                     <option value="Single">Single</option>
                     <option value="Married">Married</option>
@@ -68,12 +79,12 @@
         </div>
     </div>
     <div class="right">
-        <a href="{{ route('enrollees') }}" class="btn btn-lg btn-danger btn-cancel" role="button">Cancel</a>
+        <a href="{{ route('students') }}" class="btn btn-lg btn-danger btn-cancel" role="button">Cancel</a>
         <button type="submit" class="btn btn-lg btn-primary btn-submit">Submit</button>
     </div>
 </form>
 @endsection
 
 @section('script')
-  <script src="{{ URL::to('/js/enrollees.js') }}"></script>
+  <script src="{{ URL::to('/js/student.js') }}"></script>
 @endsection

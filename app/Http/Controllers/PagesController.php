@@ -10,8 +10,8 @@ class PagesController extends Controller
         return view('pages.index');
     }
     
-    public function enrollees() {
-        return view('pages.enrollees');
+    public function students() {
+        return view('pages.students');
     }
     
     public function payments() {

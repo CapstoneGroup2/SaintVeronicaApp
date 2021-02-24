@@ -21,5 +21,9 @@
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
         "vue": "^2.5.17"
+    },
+    "dependencies": {
+        "heroku": "^7.47.13",
+        "heroku-cli": "^7.0.9"
     }
 }

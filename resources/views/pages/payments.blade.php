@@ -141,3 +141,7 @@
     </table>
   </div>
 @endsection
+
+@section('script')
+  <script src="{{ URL::to('/js/dashboard.js') }}"></script>
+@endsection

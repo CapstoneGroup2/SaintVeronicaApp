@@ -152,6 +152,10 @@ img#logo-login {
   margin-right: auto;
 }
 
+div.container {
+  max-width: 100% !important;
+}
+
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {height: 450px}
 
@@ -190,7 +194,7 @@ img#logo-login {
   font-size: 15px;
 }
 
-.form-control {
+.login-form-1 .form-control {
   font-size: 15px !important;
   padding: 20px !important;
   background-color: #3f704d3a !important;
@@ -230,4 +234,62 @@ tfoot input {
   font-size: 13px;
   padding: 3px;
   box-sizing: border-box;
+}
+
+td.center{
+  text-align: center;
+  width: 20%;
+}
+
+h2 {
+  text-align: center;
+  letter-spacing: 5px;
+}
+
+.btn-enroll {
+  font-size: 16px !important;
+  letter-spacing: 2px;
+  padding: 5px 20px !important;
+  background-color: #3f704d;
+  color: #FCF4A3
+}
+
+label {
+  font-size: 15px;
+}
+
+.modal-body .form-control {
+  font-size: 12px !important;
+}
+
+label.search {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+label.entries {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+#search-input {
+  text-align: left !important;
+}
+
+div.container {
+  padding-top: 10px;
+}
+
+div.right {
+  float: right;
+  margin-right: 0;
+}
+
+#enrollment-form {
+  padding: 0 20%;
+}
+
+#enrollment-form .form-control {
+  font-size: 12px;
+  border-radius: 5px;
 }

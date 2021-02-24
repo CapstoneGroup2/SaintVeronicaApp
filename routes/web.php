@@ -15,10 +15,12 @@ Route::get('/login', function() {
     return view('layouts.login');
 })->name('login');
 
-Route::get('/', 'PagesController@index')->name('index');
+Route::get('/index', 'PagesController@index')->name('index');
 
-Route::get('/enrollees', 'PagesController@enrollees')->name('enrollees');
+Route::get('/enrollees/index', 'PagesController@enrollees')->name('enrollees');
 
 Route::get('/payments', 'PagesController@payments')->name('payments');
 
-// Route::get('/login', 'PagesController@login')->name('login');
+Route::resource('enrollees', 'EnrolleeController', ['names' => [
+    'index' => 'enrollee.index',
+]]);

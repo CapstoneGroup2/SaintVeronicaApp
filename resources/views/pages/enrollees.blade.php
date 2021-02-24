@@ -1,9 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Table of Enrollees</h2>
-  <div class="table-responsive bg-default">          
-  <table id="dataTable-enrollees" class="table table-striped table-enrollment">
+<h2>Table of Enrollees</h2> 
+  <table id="dataTable-enrollees" class="table table-striped table-enrollment" data-page-length='5'>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <a href="{{ route('enrollee.index') }}" role="button" class="btn btn-lg btn-enroll">Enroll Student</a>
+      </div>
+      <div class="col-7">
+        <label class="search" for="search">Search/Filter:</label>
+        <input id="search-input" name="search" type="text" class="btn btn-lg">
+      </div>
+      <div class="col">
+        <label for="" class="entries">Entries per page</label>
+        <select name="" id="filter-length" class="btn btn-lg" data-target="#dataTable-enrollees">
+          <option value="10">5</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      
+    </div>
+    <hr>
     <thead>
         <tr>
         <th scope="col">ID Number</th>
@@ -16,26 +36,24 @@
         <th scope="col"></th>
         </tr>
     </thead>
-    <hr/>
     <tbody>
         <tr>
         <th>18105358</th>
         <td>Josephine Morre</td>
         <td>Female</td>
         <td>josephine.morre@gmail.com</td>
-        <td>
+        <td class="center">
           <button class="btn btn-lg btn-primary">View</button>
           <button class="btn btn-lg btn-warning">Edit</button>
           <button class="btn btn-lg btn-danger">Delete</button>
         </td>
         </tr>
-        <hr/>
         <tr>
         <th>18105358</th>
         <td>Josephine Morre</td>
         <td>Female</td>
         <td>josephine.morre@gmail.com</td>
-        <td>
+        <td class="center">
           <button class="btn btn-lg btn-primary">View</button>
           <button class="btn btn-lg btn-warning">Edit</button>
           <button class="btn btn-lg btn-danger">Delete</button>
@@ -46,7 +64,7 @@
         <td>Josephine Morre</td>
         <td>Female</td>
         <td>josephine.morre@gmail.com</td>
-        <td>
+        <td class="center">
           <button class="btn btn-lg btn-primary">View</button>
           <button class="btn btn-lg btn-warning">Edit</button>
           <button class="btn btn-lg btn-danger">Delete</button>
@@ -57,7 +75,7 @@
         <td>Josephine Morre</td>
         <td>Female</td>
         <td>josephine.morre@gmail.com</td>
-        <td>
+        <td class="center">
           <button class="btn btn-lg btn-primary">View</button>
           <button class="btn btn-lg btn-warning">Edit</button>
           <button class="btn btn-lg btn-danger">Delete</button>
@@ -68,7 +86,7 @@
         <td>Josephine Morre</td>
         <td>Female</td>
         <td>josephine.morre@gmail.com</td>
-        <td>
+        <td class="center">
           <button class="btn btn-lg btn-primary">View</button>
           <button class="btn btn-lg btn-warning">Edit</button>
           <button class="btn btn-lg btn-danger">Delete</button>
@@ -79,7 +97,7 @@
         <td>Josephine Morre</td>
         <td>Female</td>
         <td>josephine.morre@gmail.com</td>
-        <td>
+        <td class="center">
           <button class="btn btn-lg btn-primary">View</button>
           <button class="btn btn-lg btn-warning">Edit</button>
           <button class="btn btn-lg btn-danger">Delete</button>
@@ -89,234 +107,17 @@
         <th scope="row">18105358</th>
         <td>Josephine Morre</td>
         <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
+        <td>josephine.morre@gmail.comm</td>
+        <td class="center">
           <button class="btn btn-lg btn-primary">View</button>
           <button class="btn btn-lg btn-warning">Edit</button>
           <button class="btn btn-lg btn-danger">Delete</button>
         </td>
         </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">18105358</th>
-        <td>Josephine Morre</td>
-        <td>Female</td>
-        <td>josephine.morre@gmail.com</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </td>
-        </tr>
-        <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>Otto</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </tr>
-        <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>Otto</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </tr>
-        <tr>
-        <th scope="row">4</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>Otto</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </tr>
-        <tr>
-        <th scope="row">5</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>Otto</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </tr>
-        <tr>
-        <th scope="row">6</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>Otto</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </tr>
-        <tr>
-        <th scope="row">7</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>Otto</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </tr>
-        <tr>
-        <th scope="row">8</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>Otto</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </tr>
-        <tr>
-        <th scope="row">9</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>Otto</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </tr>
-        <tr>
-        <th scope="row">10</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>Otto</td>
-        <td>
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
-        </tr> 
         </tbody>
-        <tfoot>
-            <tr>
-              <th>ID Number</th>
-              <th>Full Name</th>
-              <th>Gender</th>
-              <th>Email Address</th>
-              <th></th>
-            </tr>
-        </tfoot>
     </table>
-  </div>
+@endsection
+
+@section('script')
+  <script src="{{ URL::to('/js/enrollees.js') }}"></script>
 @endsection

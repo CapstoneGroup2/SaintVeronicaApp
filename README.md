@@ -72,3 +72,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 adding charts : https://appdividend.com/2017/07/13/add-charts-laravel-using-chartjs/
+
+## Heroku
+
+https://saint-veronica-system.herokuapp.com/
+
+## Github
+
+https://git.heroku.com/saint-veronica-system.git

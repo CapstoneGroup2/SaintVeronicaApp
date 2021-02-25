@@ -6,7 +6,7 @@
     <hr>
     <div class="row">
       <div class="col">
-        <a href="{{ route('student.create') }}" role="button" class="btn btn-lg btn-enroll">Enroll Student</a>
+        <a href="/students/create" role="button" class="btn btn-lg btn-enroll">Enroll Student</a>
       </div>
       <div class="col-7">
         <label class="search" for="search">Search/Filter:</label>
@@ -26,7 +26,7 @@
     <hr>
     <thead>
         <tr>
-        <th scope="col">ID Number</th>
+        <th scope="col">ID No.</th>
         <th scope="col">Full Name</th>
         <th scope="col">Email Address</th>
         <th scope="col">Home Address</th>
@@ -36,16 +36,17 @@
     </thead>
     <tbody>
       @foreach($students as $student)
-        <tr>
-        <td scope="col">{{ $student->id }}</th>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <tr id="{{ $student->id }}">
+        <th>{{ $student->id }}</th>
         <td>{{ $student->student_first_name . ' ' . $student->student_middle_name . ' ' . $student->student_last_name }}</td>
         <td>{{ $student->student_email }}</td>
         <td>{{ $student->student_address }}</td>
         <td>{{ $student->student_home_contact }}</td>
         <td class="center">
-          <button class="btn btn-lg btn-primary">View</button>
-          <button class="btn btn-lg btn-warning">Edit</button>
-          <button class="btn btn-lg btn-danger">Delete</button>
+          <a href="/students/{{ $student->id }}" class="btn btn-md btn-primary" role="button">View</a>
+          <a href="/students/{{ $student->id }}/edit" class="btn btn-md btn-warning" role="button">Edit</a>
+          <button class="btn btn-md btn-danger btn-remove">Remove</button>
         </td>
         </tr>
       @endforeach

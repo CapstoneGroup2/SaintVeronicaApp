@@ -16,10 +16,8 @@ Route::get('/login', function() {
 })->name('login');
 
 Route::get('/index', 'PagesController@index')->name('index');
-
 Route::get('/payments', 'PagesController@payments')->name('payments');
 
 Route::resource('/students', 'StudentsController', ['names' => [
-    'index'     =>  'students',
-    'create'    =>  'student.create'
+    'index'     =>  'students'
 ]]);

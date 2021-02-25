@@ -60,7 +60,7 @@ div.login {
   color: #FCF4A3 !important;
   text-align: center;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 25px;
 }
 
@@ -223,7 +223,7 @@ footer {
 }
 
 table th {
-  font-size: 18px !important;
+  font-size: 15px !important;
   padding: 10px !important;
 }
 
@@ -245,6 +245,8 @@ td.center{
 h2 {
   text-align: center;
   letter-spacing: 5px;
+  font-weight: 900 !important;
+  font-size: 25px !important;
 }
 
 .btn-enroll {
@@ -275,7 +277,7 @@ label.entries {
 
 div.right {
   float: right;
-  margin-right: 0;
+  margin: 5px;
 }
 
 #enrollment-form {
@@ -283,10 +285,37 @@ div.right {
   padding: 5%;
   background-color: #3f704d;
   color: #FCF4A3;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 #enrollment-form .form-control {
-  font-size: 12px;
+  font-size: 13px;
   border-radius: 5px;
   margin: 10px 0;
+  letter-spacing: 1px;
+}
+
+#enrollment-form select.form-control   {
+  font-size: 13px;
+  padding: 3px;
+  height: 35px;
+}
+
+label span {
+  font-size: 30px;
+  text-decoration: underline;
+}
+
+div.title-id {
+  text-align: right;
+}
+
+.btn-lg {
+  font-size: 15px !important;
+}
+
+.btn-md {
+  font-size: 13px !important;
 }

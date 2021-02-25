@@ -61,7 +61,6 @@
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select class="form-control" name="gender">
-                    <option selected>Select Gender</option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
                 </select>
@@ -71,16 +70,16 @@
             <div class="form-group">
                 <label for="status">Status</label>
                 <select class="form-control" name="status">
-                    <option selected>Select Status</option>
                     <option value="Single">Single</option>
                     <option value="Married">Married</option>
                 </select>
             </div>
         </div>
     </div>
+    <hr>
     <div class="right">
-        <a href="{{ route('students') }}" class="btn btn-lg btn-danger btn-cancel" role="button">Cancel</a>
-        <button type="submit" class="btn btn-lg btn-primary btn-submit">Submit</button>
+        <a href="/students" class="btn btn-lg btn-danger" role="button">Cancel</a>
+        <button type="submit" class="btn btn-lg btn-success">Submit</button>
     </div>
 </form>
 @endsection

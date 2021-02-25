@@ -47,9 +47,9 @@
                             <label for="password">Password:</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" value="" />
                         </div>
-                    </br/>
+                    <br>
                         <div class="form-group">
-                            <a class="btnSubmit btn-lg" type="submit" href="{{ route('index') }}" role="button">Login</a>
+                            <a class="btn btnSubmit btn-lg" type="submit" href="{{ route('index') }}" role="button">Login</a>
                             <!-- <input type="submit" class="btnSubmit btn-lg" value="Login" /> -->
                         </div>
                     </form>

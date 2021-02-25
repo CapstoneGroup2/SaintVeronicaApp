@@ -25,7 +25,8 @@
     },
     "dependencies": {
         "heroku": "^7.47.13",
-        "heroku-cli": "^7.0.9"
+        "heroku-cli": "^7.0.9",
+        "select2": "^4.1.0-rc.0"
     },
     "engines": {
         "node": "10.15"

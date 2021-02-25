@@ -249,12 +249,13 @@ h2 {
   font-size: 25px !important;
 }
 
-.btn-enroll {
+.btn-add {
   font-size: 16px !important;
-  letter-spacing: 2px;
+  letter-spacing: 5px;
   padding: 5px 20px !important;
   background-color: #3f704d;
-  color: #FCF4A3
+  color: #FCF4A3;
+  font-weight: 700 !important;
 }
 
 label {

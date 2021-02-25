@@ -18,6 +18,8 @@ Route::get('/login', function() {
 Route::get('/index', 'PagesController@index')->name('index');
 Route::get('/payments', 'PagesController@payments')->name('payments');
 
-Route::resource('/students', 'StudentsController', ['names' => [
-    'index'     =>  'students'
-]]);
+Route::resource('/students', 'StudentsController');
+
+Route::resource('/item', 'ItemsController');
+
+Route::resource('/payment', 'PaymentsController');

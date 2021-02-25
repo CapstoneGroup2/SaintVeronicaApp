@@ -141,8 +141,8 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        $students = DB::delete('delete from students where id = ' . $id);
+        DB::delete('delete from students where id = ' . $id);
 
-        return redirect()->route('students'); 
+        return redirect('/students'); 
     }
 }

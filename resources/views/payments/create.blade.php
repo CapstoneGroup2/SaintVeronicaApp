@@ -82,7 +82,6 @@
             <div class="form-group">
                 <label for="status">Year Level</label>
                 <select class="form-control" name="year_level">
-                    <option value="none" selected>Select year level</option>
                     <option value="Nursery">Nursery</option>
                     <option value="Nursery Kinder1">Nursery 1</option>
                     <option value="Kinder 1">Kinder 1</option>
@@ -96,12 +95,8 @@
                 </select>
             </div>
         </div>
-        <div class="col-8">
-            <div class="form-group">
-                <label for="status">Add Tutorial</label>
-                <select class="form-control" name="tutorials[]" id="tutorial">
-                </select>
-            </div>
+        <div class="col">
+            
         </div>
     </div>
     <hr>

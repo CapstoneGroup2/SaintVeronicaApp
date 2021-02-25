@@ -1,1 +1,1 @@
-web: node app.blade.php
+web: node index.js

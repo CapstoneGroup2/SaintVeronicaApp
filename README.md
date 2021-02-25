@@ -75,8 +75,10 @@ adding charts : https://appdividend.com/2017/07/13/add-charts-laravel-using-char
 
 ## Heroku
 
-https://saint-veronica-system.herokuapp.com/
+https://saintveronicasystem.herokuapp.com/
 
 ## Github
 
-https://git.heroku.com/saint-veronica-system.git
+https://git.heroku.com/saintveronicasystem.git
+
+git push heroku main

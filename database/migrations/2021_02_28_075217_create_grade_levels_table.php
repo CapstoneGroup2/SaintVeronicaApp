@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserRolesTable extends Migration
+class CreateGradeLevelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateUserRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_roles', function (Blueprint $table) {
+        Schema::create('grade_levels', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_role_name');
+            $table->string('grade_level_name');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateUserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('grade_levels');
     }
 }

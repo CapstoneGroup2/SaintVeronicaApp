@@ -15,6 +15,8 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('grade_level_id');
+            $table->unsignedBigInteger('tutorial_id');
             $table->string('student_first_name');
             $table->string('student_middle_name');
             $table->string('student_last_name');
@@ -26,6 +28,8 @@ class CreateStudentsTable extends Migration
             $table->date('student_birth_date');
             $table->string('student_status');
             $table->integer('student_active_status');
+            $table->foreign('grade_level_id')->references('id')->on('grade_levels');
+            $table->foreign('tutorial_id')->references('id')->on('tutorials');
             $table->timestamps();
         });
     }

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Payments
+@endsection
+
 @section('content')
 <form id="enrollment-form" action="/students" method="post">
 <h1>Enrollment Form</h1> 

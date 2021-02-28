@@ -24,7 +24,12 @@ class StudentsTableSeeder extends Seeder
             'student_birth_date' => date('Y-m-d', strtotime('11/13/2010')),
             'student_status' => 'Single',
             'student_active_status' => 0,
-            'created_at' => date('Y-m-d')
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d'),
+
         ]);
+
+        factory(App\Models\Student::class, 50)->create();
+
     }
 }

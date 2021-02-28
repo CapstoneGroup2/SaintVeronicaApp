@@ -12,11 +12,15 @@ class UserRolesTableSeeder extends Seeder
     public function run()
     {
         DB::table('user_roles')->insert([
-            'user_roles'     => 'admin',
+            'user_role_name'     => 'Administrator',
+            'created_at'         => date('Y-m-d'),
+            'updated_at'         => date('Y-m-d')
         ]);
         
         DB::table('user_roles')->insert([
-            'user_roles'     => 'registrar',
+            'user_role_name'     => 'Registrar',
+            'created_at'         => date('Y-m-d'),
+            'updated_at'         => date('Y-m-d')
         ]);
     }
 }

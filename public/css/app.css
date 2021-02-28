@@ -69,6 +69,7 @@ div.login {
   letter-spacing: 2px;
   text-transform: uppercase;
   padding: 13px 30px !important;
+  font-weight: 700px !important;
 }
 
 .header-right button{

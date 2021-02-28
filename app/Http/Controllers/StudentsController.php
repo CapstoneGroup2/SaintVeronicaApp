@@ -39,30 +39,31 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'first_name'    =>  'required',
-            'middle_name'   =>  'required',
-            'last_name'     =>  'required',
-            'email'         =>  'required',
-            'contact'       =>  'required',
-            'address'       =>  'required',
-            'birthdate'     =>  'required',
-            'age'           =>  'required',
-            'gender'        =>  'required',
-            'status'        =>  'required',
+            'student_first_name'    =>  'required',
+            'student_middle_name'   =>  'required',
+            'student_last_name'     =>  'required',
+            'student_email'         =>  'required',
+            'student_home_contact'  =>  'required',
+            'student_address'       =>  'required',
+            'student_birth_date'    =>  'required',
+            'student_age'           =>  'required',
+            'student_gender'        =>  'required',
+            'student_status'        =>  'required',
         ]);
         
         $student = new Student();
-        $student->student_first_name = $request['first_name'];
-        $student->student_middle_name = $request['middle_name'];
-        $student->student_last_name = $request['last_name'];
-        $student->student_email = $request['email'];
-        $student->student_home_contact = $request['contact'];
-        $student->student_address = $request['address'];
-        $student->student_gender = $request['gender'];
-        $student->student_age = $request['age'];
-        $student->student_birth_date = date('Y-m-d', strtotime($request['birthdate']));
-        $student->student_status = $request['status'];
+        $student->student_first_name = $request['student_first_name'];
+        $student->student_middle_name = $request['student_middle_name'];
+        $student->student_last_name = $request['student_last_name'];
+        $student->student_email = $request['student_email'];
+        $student->student_home_contact = $request['student_home_contact'];
+        $student->student_address = $request['student_address'];
+        $student->student_gender = $request['student_gender'];
+        $student->student_age = $request['student_age'];
+        $student->student_birth_date = date('Y-m-d', strtotime($request['student_birth_date']));
+        $student->student_status = $request['student_status'];
         $student->student_active_status = 1;
+        $student->created_at = date('Y-m-d');
 
         $student->save();   
 
@@ -77,7 +78,7 @@ class StudentsController extends Controller
      */
     public function show($id)
     {        
-        $students = DB::select('select * from students where id = ' . $id);
+        $students = DB::select('select id from students where user_role = ' . $id);
         return view('students.show', ['students' => $students]);
     }
 
@@ -103,30 +104,31 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'first_name'    =>  'required',
-            'middle_name'   =>  'required',
-            'last_name'     =>  'required',
-            'email'         =>  'required',
-            'contact'       =>  'required',
-            'address'       =>  'required',
-            'birthdate'     =>  'required',
-            'age'           =>  'required',
-            'gender'        =>  'required',
-            'status'        =>  'required',
+            'student_first_name'    =>  'required',
+            'student_middle_name'   =>  'required',
+            'student_last_name'     =>  'required',
+            'student_email'         =>  'required',
+            'student_home_contact'  =>  'required',
+            'student_address'       =>  'required',
+            'student_birth_date'    =>  'required',
+            'student_age'           =>  'required',
+            'student_gender'        =>  'required',
+            'student_status'        =>  'required',
         ]);
         
         $student = Student::find($id);
-        $student->student_first_name = $request['first_name'];
-        $student->student_middle_name = $request['middle_name'];
-        $student->student_last_name = $request['last_name'];
-        $student->student_email = $request['email'];
-        $student->student_home_contact = $request['contact'];
-        $student->student_address = $request['address'];
-        $student->student_gender = $request['gender'];
-        $student->student_age = $request['age'];
-        $student->student_birth_date = date('Y-m-d', strtotime($request['birthdate']));
-        $student->student_status = $request['status'];
+        $student->student_first_name = $request['student_first_name'];
+        $student->student_middle_name = $request['student_middle_name'];
+        $student->student_last_name = $request['student_last_name'];
+        $student->student_email = $request['student_email'];
+        $student->student_home_contact = $request['student_home_contact'];
+        $student->student_address = $request['student_address'];
+        $student->student_gender = $request['student_gender'];
+        $student->student_age = $request['student_age'];
+        $student->student_birth_date = date('Y-m-d', strtotime($request['student_birth_date']));
+        $student->student_status = $request['student_status'];
         $student->student_active_status = 1;
+        $student->updated_at = date('Y-m-d');
 
         $student->save();
 

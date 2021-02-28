@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Students
+@endsection
+
 @section('content')
   @foreach($students as $student)
     <form id="enrollment-form" action="" method="">

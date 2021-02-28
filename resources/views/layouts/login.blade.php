@@ -27,7 +27,7 @@
 </head>
 <body>
     <nav class="header navbar fixed-top navbar-expand-lg navbar-dark">
-        <a class="navbar-brand logo" href="{{ route('index') }}"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}" alt="logo">Saint Veronica Learning Center</a>
+        <a class="navbar-brand logo" href="{{ route('index') }}"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}" alt="logo">St. Veronica Learning Center</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,20 +35,32 @@
         <div class="container content">
         <div class="login-container">
                 <div class="login-form-1">
-                    <form>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
                         <div class="form-group">
                         <img id="logo-login" src="{{ URL::to('/images/logo.jpg') }}" alt="logo">
                         </div>
                         <div class="form-group">
                             <label for="email">Email:</label>
                             <input type="email" class="form-control" id="name" name="email" placeholder="Your Email *" value="" />
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" value="" />
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     <br>
                         <div class="form-group">
+                            <button type="submits" class="btn btn-lg btnSubmit">Login</button>
                             <a class="btn btnSubmit btn-lg" type="submit" href="{{ route('index') }}" role="button">Login</a>
                             <!-- <input type="submit" class="btnSubmit btn-lg" value="Login" /> -->
                         </div>

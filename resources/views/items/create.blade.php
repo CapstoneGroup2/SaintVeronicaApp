@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+
+@section('title')
+Items
+@endsection
+
 @section('content')
 <form id="enrollment-form" action="/item" method="post">
     <h1>Add Item</h1> 

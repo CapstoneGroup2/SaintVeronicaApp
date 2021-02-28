@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
+@section('title')
+Students
+@endsection
+
 @section('content')
 <h2>Table of Students</h2> 
-  <table id="dataTable-students" class="table table-striped table-enrollment">
+  <table id="dataTable-students" class="table table-striped table-enrollment display">
     <hr>
     <div class="row">
       <div class="col">

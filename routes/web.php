@@ -15,11 +15,13 @@ Route::get('/login', function() {
     return view('layouts.login');
 })->name('login');
 
-Route::get('/index', 'PagesController@index')->name('index');
+Route::get('/index', 'PagesController@index')->name('index')->middleware('web');
 Route::get('/payments', 'PagesController@payments')->name('payments');
 
-Route::resource('/students', 'StudentsController');
+Route::resource('/students', 'StudentsController')->middleware('web');
 
-Route::resource('/item', 'ItemsController');
+Route::resource('/items', 'ItemsController')->middleware('web');
 
-Route::resource('/payment', 'PaymentsController');
+Route::resource('/payments', 'PaymentsController')->middleware('web');
+
+Route::resource('/users', 'UsersController')->middleware('web');

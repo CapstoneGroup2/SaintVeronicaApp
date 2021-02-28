@@ -1,4 +1,12 @@
+var $  = require( 'jquery' );
+var dt = require( 'datatables.net' )();
+
 $(document).ready(function(){
+    $('table').DataTable({
+        paging: false,
+        scrollY: 400
+    });
+
     $("#search-input").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $("tbody tr").filter(function() {

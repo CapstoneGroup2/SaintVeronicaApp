@@ -15,12 +15,11 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('enrollee_id')->unsigned();
-            $table->foreign('enrollee_id')->references('id')->on('enrollees');
+            $table->unsignedBigInteger('student_id');
             $table->date('date_payed');
             $table->string('description');
             $table->float('amount');
-            $table->string('amount_int_text');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->timestamps();
         });
     }

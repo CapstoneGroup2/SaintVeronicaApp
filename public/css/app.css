@@ -1,13 +1,14 @@
 body {
   background-color: #FCF4A3 !important;
   margin-top: 80px !important;
+  font-size: 13px !important;
 }
 
 /* body::after {
   content: "";
   background: url(/images/logo.jpg) center/50% fixed;
   opacity: 0.1;
-  top: 0;
+  top: 0;f
   left: 0;
   bottom: 0;
   right: 0;
@@ -21,6 +22,7 @@ div.card {
   padding: 10px;
   margin: 30px 20px;
   font-size: 16px;
+  box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%);
 }
 
 .list{
@@ -60,7 +62,7 @@ div.login {
   color: #FCF4A3 !important;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 25px;
 }
 
@@ -68,7 +70,7 @@ div.login {
   float: right !important;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 13px 30px !important;
+  padding: 13px 20px !important;
   font-weight: 700px !important;
 }
 
@@ -118,8 +120,8 @@ a.dropdown-item {
   float: right !important;
   letter-spacing: 0;
   text-transform: none;
-  padding: 10px 20px !important;
-  font-size: 15px;
+  padding: 2px 20px !important;
+  font-size: 12px;
   text-align: left;
   background-color: #3f704d;
 }
@@ -167,7 +169,7 @@ div.container {
   padding: 10px;
 }
 .login-form-1{
-  padding: 0 5%;
+  padding-top: 6%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 .login-form-1 h3{
@@ -175,7 +177,7 @@ div.container {
   color: #333;
 }
 .login-container form{
-  padding: 10%;
+  padding: 2% 15% 5% 15%;
 }
 .btnSubmit
 { 
@@ -185,6 +187,9 @@ div.container {
   border: none;
   cursor: pointer;
   text-align: center;
+  letter-spacing: 5px;
+  font-weight: 800 !important;
+  font-size: 15px;
 }
 .login-form-1 .btnSubmit{
   font-weight: 600;
@@ -223,13 +228,18 @@ footer {
   letter-spacing:2px
 }
 
+table {
+  background-color: #3f704d !important;
+}
+
 table th {
-  font-size: 15px !important;
-  padding: 10px !important;
+  font-size: 16px !important;
+  padding: 15px !important;
+  color: #FCF4A3 !important;
 }
 
 table td {
-  font-size: 13px !important;
+  font-size: 14px !important;
   padding: 10px !important;
 }
 tfoot input {
@@ -245,18 +255,8 @@ td.center{
 
 h2 {
   text-align: center;
-  letter-spacing: 5px;
   font-weight: 900 !important;
   font-size: 25px !important;
-}
-
-.btn-add {
-  font-size: 16px !important;
-  letter-spacing: 5px;
-  padding: 5px 20px !important;
-  background-color: #3f704d;
-  color: #FCF4A3;
-  font-weight: 700 !important;
 }
 
 label {
@@ -320,4 +320,21 @@ div.title-id {
 
 .btn-md {
   font-size: 13px !important;
+}
+
+.btn-add {
+  font-size: 18px !important;
+  letter-spacing: 5px;
+  padding: 5px 20px !important;
+  background-color: #3f704d;
+  color: #FCF4A3;
+  font-weight: 700 !important;
+}
+
+.card-body {
+  text-align: center !important;
+}
+
+td a, td button {
+  padding: 5px 10px !important;
 }

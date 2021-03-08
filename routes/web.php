@@ -11,17 +11,24 @@
 |
 */
 
-Route::get('/login', function() {
-    return view('layouts.login');
-})->name('login');
+Route::get('/dashboard', 'DashboardController@index');
+Route::get('/login', 'Auth\MainController@index');
+Route::post('/login', 'Auth\MainController@checklogin');
 
-Route::get('/index', 'PagesController@index')->name('index')->middleware('web');
-Route::get('/payments', 'PagesController@payments')->name('payments');
+Route::group(['middleware' => 'web'], function() {
+    Route::resource('/students', 'StudentsController');
 
-Route::resource('/students', 'StudentsController')->middleware('web');
+    Route::get('/index', 'PagesController@index');
+    
+    Route::resource('/items', 'ItemsController');
+    
+    Route::resource('/payments', 'PaymentsController');
 
-Route::resource('/items', 'ItemsController')->middleware('web');
-
-Route::resource('/payments', 'PaymentsController')->middleware('web');
-
-Route::resource('/users', 'UsersController')->middleware('web');
+    Route::resource('/students/gradelevels', 'GradeLevelsController');
+    
+    Route::resource('/students/tutorials', 'TutorialsController');
+    
+    Route::resource('/users', 'UsersController');
+    
+    Route::get('logout', 'Auth\MainController@logout');
+});

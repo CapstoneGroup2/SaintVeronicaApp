@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model; 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     protected $primaryKey= 'id';
+
+    protected $table = 'users';
 
     protected $fillable = [
         'user_role_id',
@@ -14,7 +17,7 @@ class User extends Model
         'user_middle_name',
         'user_last_name',
         'user_email',
-        'user_password',
+        'password',
         'user_contact',
         'user_address',
         'user_gender',

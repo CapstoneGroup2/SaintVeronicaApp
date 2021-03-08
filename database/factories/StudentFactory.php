@@ -2,16 +2,17 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Models\Student;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Student::class, function (Faker $faker) {
     return [
         'grade_level_id'        => $faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
-        'tutorial_id'           => $faker->randomElement([1, 2, 3]),
+        'tutorial_id'           => 1,
         'student_first_name'    => $faker->firstName,
         'student_middle_name'   => $faker->lastName,
-        'student_first_name'    => $faker->lastName,
+        'student_last_name'     => $faker->lastName,
         'student_email'         => $faker->unique()->safeEmail,
         'student_home_contact'  => $faker->phoneNumber,
         'student_address'       => $faker->address,

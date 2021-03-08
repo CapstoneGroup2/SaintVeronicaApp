@@ -11,6 +11,11 @@ class GradeLevelsTableSeeder extends Seeder
      */
     public function run()
     {
+        
+        DB::table('grade_levels')->insert([
+            'grade_level_name'     => 'No Grade Level'
+        ]);
+
         DB::table('grade_levels')->insert([
             'grade_level_name'     => 'Nursery'
         ]);
@@ -49,10 +54,6 @@ class GradeLevelsTableSeeder extends Seeder
         
         DB::table('grade_levels')->insert([
             'grade_level_name'     => 'Grade 6'
-        ]);
-        
-        DB::table('grade_levels')->insert([
-            'grade_level_name'     => 'Other'
         ]);
     }
 }

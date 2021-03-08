@@ -27,22 +27,37 @@
 </head>
 <body>
     <nav class="header navbar fixed-top navbar-expand-lg navbar-dark">
-        <a class="navbar-brand logo" href="{{ route('index') }}"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}" alt="logo">St. Veronica Learning Center</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand logo" href=""><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}" alt="logo">St. Veronica Learning Center</a>
+        
     </nav>
         <div class="container content">
         <div class="login-container">
                 <div class="login-form-1">
-                    <form method="POST" action="{{ route('login') }}">
+                    <img id="logo-login" src="{{ URL::to('/images/logo.jpg') }}" alt="logo">
+                    
+                    <form method="POST" action="{{ url('/login') }}">
                         @csrf
-                        <div class="form-group">
-                        <img id="logo-login" src="{{ URL::to('/images/logo.jpg') }}" alt="logo">
-                        </div>
+                        @if(isset(Auth::user()->user_email))
+                            <script>window.location="/index";</script>
+                        @endif
+                        @if($message = Session::get('error'))
+                            <div class="alert alert-danger alert-block" style="font-size: 13px;">
+                                <button class="close" type="button" data-dismiss="alert">x</button>
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @endif
+                        @if(count($errors) > 0)
+                            <div class="alert alert-danger" style="font-size: 13px;">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="name" name="email" placeholder="Your Email *" value="" />
+                            <input type="email" class="form-control" id="name" name="email" placeholder="Your Email *" value="{{ old('email') }}" />
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -51,7 +66,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" value="" />
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" value="{{ old('password') }}" />
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -60,58 +75,11 @@
                         </div>
                     <br>
                         <div class="form-group">
-                            <button type="submits" class="btn btn-lg btnSubmit">Login</button>
-                            <a class="btn btnSubmit btn-lg" type="submit" href="{{ route('index') }}" role="button">Login</a>
-                            <!-- <input type="submit" class="btnSubmit btn-lg" value="Login" /> -->
+                            <button type="submit" class="btn btn-lg btnSubmit">Login</button>
                         </div>
                     </form>
                 </div>
         </div>
         </div>
-
-        <!-- <footer class="site-footer">
-            <div class="row  row-no-gutters">
-                <div class="col-sm-12 col-md-6">
-                <ul class="list">
-                    <h6>Visit Us</h6>
-                    <p class="text-justify">Bantug St., Tagnipa, Maasin City, Southern Leyte
-                    <h6>Contact Us</h6>
-                    <li>
-                        <i class= "fa fa-phone"></i>
-                        (053)570-2182
-                    </li>
-                    <li>
-                        <i class= "fa fa-phone"></i>
-                        0917-314-8374
-                    </li>
-                </ul>
-                </div>
-
-
-
-                <div class="col-xs-6 col-md-6">
-                <ul class="list">
-                    <h6>Message Us</h6>
-                    <li>
-                        <i class="fa fa-envelope"></i>
-                        stveronicalearningcenter@gmail.com
-                    </li>
-                    <li>
-                        <i class="fab fa-facebook-square"></i>
-                        www.facebook.com/St-Veronica-Learning-Center
-                    </li>
-                </ul>
-                </div>
-            </div>
-                <hr>
-            <div class="container">
-                <div class="row row-no-gutters">
-                <div class="col-md-8 col-sm-6 col-xs-12">
-                    <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by 
-                <a href="#">St.Veronica Learning Center</a>.
-                    </p>
-                </div>
-            </div>
-        </footer> -->
     </body>
 </html>

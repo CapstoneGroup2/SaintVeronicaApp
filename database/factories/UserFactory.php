@@ -1,7 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -21,7 +21,7 @@ $factory->define(User::class, function (Faker $faker) {
         'user_role_id'       => $faker->randomElement([1, 2]),
         'user_first_name'    => $faker->firstName,
         'user_middle_name'   => $faker->lastName,
-        'user_first_name'    => $faker->lastName,
+        'user_last_name'    => $faker->lastName,
         'user_email'         => $faker->unique()->safeEmail,
         'user_password'      => bcrypt('password'),
         'user_contact'       => $faker->phoneNumber,

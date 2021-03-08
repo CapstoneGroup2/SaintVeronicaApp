@@ -78,7 +78,7 @@ class StudentsController extends Controller
      */
     public function show($id)
     {        
-        $students = DB::select('select id from students where user_role = ' . $id);
+        $students = DB::select('select * from students where id = ' . $id);
         return view('students.show', ['students' => $students]);
     }
 

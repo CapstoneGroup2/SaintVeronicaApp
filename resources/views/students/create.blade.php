@@ -80,23 +80,13 @@ Students
             </div>
         </div>
     </div>
-    <hr>
-    <div class="row">
+    
+    <div class="row" style="display: none">
         <div class="col">
             <div class="form-group">
                 <label for="status">Year Level</label>
                 <select class="form-control" name="student_year_level">
-                    <option value="none" selected>Select year level</option>
-                    <option value="Nursery">Nursery</option>
-                    <option value="Nursery Kinder1">Nursery 1</option>
-                    <option value="Kinder 1">Kinder 1</option>
-                    <option value="Kinder 2">Kinder 2</option>
-                    <option value="Grade 1">Grade 1</option>
-                    <option value="Grade 2">Grade 2</option>
-                    <option value="Grade 3">Grade 3</option>
-                    <option value="Grade 4">Grade 4</option>
-                    <option value="Grade 5">Grade 5</option>
-                    <option value="Grade 6">Grade 6</option>
+                    <option value="" selected></option>
                 </select>
             </div>
         </div>

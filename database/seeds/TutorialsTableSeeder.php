@@ -12,7 +12,7 @@ class TutorialsTableSeeder extends Seeder
     public function run()
     {
         DB::table('tutorials')->insert([
-            'tutorial_name'     => 'Music Tutorial'
+            'tutorial_name'     => 'No Tutorial'
         ]);
 
         DB::table('tutorials')->insert([
@@ -20,7 +20,7 @@ class TutorialsTableSeeder extends Seeder
         ]);
 
         DB::table('tutorials')->insert([
-            'tutorial_name'     => 'Other'
+            'tutorial_name'     => 'Music Tutorial'
         ]);
     }
 }

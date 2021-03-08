@@ -9,16 +9,15 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.min.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.min.css') }}"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+    <!-- <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" /> -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
   
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
     <script src="vendor/select2/dist/js/select2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,24 +34,65 @@
 </head>
 <body>
     <nav class="header navbar fixed-top navbar-expand-lg navbar-dark">
-        <a class="navbar-brand logo" href="{{ route('index') }}"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand logo" href="/index"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse header-right" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-                    <a class="nav-link nav-item" href="/students">Students</a>
-                    <a class="nav-link nav-item" href="/items">Items</a>
-                    <a class="nav-link nav-item" href="/payments">Payments</a>
-                    <a class="nav-link nav-item" href="/users">users</a>
                     <div class="dropdown">
+                        <a href="" class="dropdown-toggle nav-link nav-item" id="gradelevel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Students</a>
+                        <div class="dropdown-menu" aria-labelledby="gradelevel">
+                            <a class="dropdown-item" href="/students/gradelevels/2">Nursery</a>
+                            <a class="dropdown-item" href="/students/gradelevels/3">Nursery 2</a>
+                            <a class="dropdown-item" href="/students/gradelevels/4">Kinder 1</a>
+                            <a class="dropdown-item" href="/students/gradelevels/5">Kinder 2</a>
+                            <a class="dropdown-item" href="/students/gradelevels/6">Grade 1</a>
+                            <a class="dropdown-item" href="/students/gradelevels/7">Grade 2</a>
+                            <a class="dropdown-item" href="/students/gradelevels/8">Grade 3</a>
+                            <a class="dropdown-item" href="/students/gradelevels/9">Grade 4</a>
+                            <a class="dropdown-item" href="/students/gradelevels/10">Grade 5</a>
+                            <a class="dropdown-item" href="/students/gradelevels/11">Grade 6</a>
+                            <a class="dropdown-item" href="/students/tutorials/2">Music Tutorial</a>
+                            <a class="dropdown-item" href="/students/tutorials/3">Piano Tutorial</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="" class="dropdown-toggle nav-link nav-item" id="items" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Miscellanious & Other Fees</a>
+                        <div class="dropdown-menu" aria-labelledby="items">
+                            <a class="dropdown-item" href="/items">Nursery</a>
+                            <a class="dropdown-item" href="/items">Nursery 2</a>
+                            <a class="dropdown-item" href="/items">Kinder 1</a>
+                            <a class="dropdown-item" href="/items">Kinder 2</a>
+                            <a class="dropdown-item" href="/items">Grade 1</a>
+                            <a class="dropdown-item" href="/items">Grade 2</a>
+                            <a class="dropdown-item" href="/items">Grade 3</a>
+                            <a class="dropdown-item" href="/items">Grade 4</a>
+                            <a class="dropdown-item" href="/items">Grade 5</a>
+                            <a class="dropdown-item" href="/items">Grade 6</a>
+                            <a class="dropdown-item" href="/items">Music Tutorial</a>
+                            <a class="dropdown-item" href="/items">Piano Tutorial</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="" class="dropdown-toggle nav-link nav-item" id="management" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Management</a>
+                        <div class="dropdown-menu" aria-labelledby="management">
+                            <a class="dropdown-item" href="/users">Users</a>
+                            <a class="dropdown-item" href="">Permissions</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        @if(isset(Auth::user()->user_email))
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img id="profile" src="{{ URL::to('/images/profile.jpg') }}">Josephine Morre
+                            <img id="profile" src="{{ URL::to('/images/profile.jpg') }}">{{ Auth::user()->user_first_name . ' ' . Auth::user()->user_last_name }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Account Settings</a>
-                            <a class="dropdown-item" href="{{ route('login') }}">Logout</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
                         </div>
+                        @else
+                            <script>window.location = "/login";</script>
+                        @endif
                     </div>
             </div>
         </div>

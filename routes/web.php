@@ -11,12 +11,13 @@
 |
 */
 
-Route::get('/dashboard', 'DashboardController@index');
 Route::get('/login', 'Auth\MainController@index');
 Route::post('/login', 'Auth\MainController@checklogin');
 
 Route::group(['middleware' => 'web'], function() {
     Route::resource('/students', 'StudentsController');
+
+    Route::get('/', 'PagesController@index');
 
     Route::get('/index', 'PagesController@index');
     

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">
     <!-- <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.min.css') }}"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
@@ -41,47 +42,6 @@
         <div class="collapse navbar-collapse header-right" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
                     <div class="dropdown">
-                        <a href="" class="dropdown-toggle nav-link nav-item" id="gradelevel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Students</a>
-                        <div class="dropdown-menu" aria-labelledby="gradelevel">
-                            <a class="dropdown-item" href="/students/gradelevels/2">Nursery</a>
-                            <a class="dropdown-item" href="/students/gradelevels/3">Nursery 2</a>
-                            <a class="dropdown-item" href="/students/gradelevels/4">Kinder 1</a>
-                            <a class="dropdown-item" href="/students/gradelevels/5">Kinder 2</a>
-                            <a class="dropdown-item" href="/students/gradelevels/6">Grade 1</a>
-                            <a class="dropdown-item" href="/students/gradelevels/7">Grade 2</a>
-                            <a class="dropdown-item" href="/students/gradelevels/8">Grade 3</a>
-                            <a class="dropdown-item" href="/students/gradelevels/9">Grade 4</a>
-                            <a class="dropdown-item" href="/students/gradelevels/10">Grade 5</a>
-                            <a class="dropdown-item" href="/students/gradelevels/11">Grade 6</a>
-                            <a class="dropdown-item" href="/students/tutorials/2">Music Tutorial</a>
-                            <a class="dropdown-item" href="/students/tutorials/3">Piano Tutorial</a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <a href="" class="dropdown-toggle nav-link nav-item" id="items" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Miscellanious & Other Fees</a>
-                        <div class="dropdown-menu" aria-labelledby="items">
-                            <a class="dropdown-item" href="/items">Nursery</a>
-                            <a class="dropdown-item" href="/items">Nursery 2</a>
-                            <a class="dropdown-item" href="/items">Kinder 1</a>
-                            <a class="dropdown-item" href="/items">Kinder 2</a>
-                            <a class="dropdown-item" href="/items">Grade 1</a>
-                            <a class="dropdown-item" href="/items">Grade 2</a>
-                            <a class="dropdown-item" href="/items">Grade 3</a>
-                            <a class="dropdown-item" href="/items">Grade 4</a>
-                            <a class="dropdown-item" href="/items">Grade 5</a>
-                            <a class="dropdown-item" href="/items">Grade 6</a>
-                            <a class="dropdown-item" href="/items">Music Tutorial</a>
-                            <a class="dropdown-item" href="/items">Piano Tutorial</a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <a href="" class="dropdown-toggle nav-link nav-item" id="management" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Management</a>
-                        <div class="dropdown-menu" aria-labelledby="management">
-                            <a class="dropdown-item" href="/users">Users</a>
-                            <a class="dropdown-item" href="">Permissions</a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
                         @if(isset(Auth::user()->user_email))
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img id="profile" src="{{ URL::to('/images/profile.jpg') }}">{{ Auth::user()->user_first_name . ' ' . Auth::user()->user_last_name }}
@@ -97,12 +57,86 @@
             </div>
         </div>
     </nav>
-        <div class="container content">
-            
-            @include('layouts.messages')
-            @yield('content')
+    
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/index"><i class="fa fa-fw fa-home"></i> Home</a>
+        <button class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="/students/gradelevels/2">Nursery</a>
+            <a href="/students/gradelevels/3">Nursery 2</a>
+            <a href="/students/gradelevels/4">Kinder 1</a>
+            <a href="/students/gradelevels/5">Kinder 2</a>
+            <a href="/students/gradelevels/6">Grade 1</a>
+            <a href="/students/gradelevels/7">Grade 2</a>
+            <a href="/students/gradelevels/8">Grade 3</a>
+            <a href="/students/gradelevels/9">Grade 4</a>
+            <a href="/students/gradelevels/10">Grade 5</a>
+            <a href="/students/gradelevels/11">Grade 6</a>
+            <a href="/students/tutorials/2">Music Tutorial</a>
+            <a href="/students/tutorials/3">Piano Tutorial</a>
         </div>
+        <button class="dropdown-btn"><i class="fa fa-fw fa-envelope"></i> Miscellanious & Other Fees
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            
+            <a href="/items">Nursery</a>
+            <a href="/items">Nursery 2</a>
+            <a href="/items">Kinder 1</a>
+            <a href="/items">Kinder 2</a>
+            <a href="/items">Grade 1</a>
+            <a href="/items">Grade 2</a>
+            <a href="/items">Grade 3</a>
+            <a href="/items">Grade 4</a>
+            <a href="/items">Grade 5</a>
+            <a href="/items">Grade 6</a>
+            <a href="/items">Music Tutorial</a>
+            <a href="/items">Piano Tutorial</a>
+        </div>
+        <button class="dropdown-btn"><i class="fa fa-fw fa-wrench"></i> Management
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+    <span style="font-size:30px;cursor:pointer; margin-left: 10px;" onclick="openNav()">&#9776;</span>
+    <div class="container content" id="main">
+        
+        @include('layouts.messages')
+        @yield('content')
+    </div>
     @yield('script')
     <script src="{{ URL::to('/js/app.js') }}"></script>
+    <script>
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
+    function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+    document.getElementById("mySidenav").style.marginTop = "60px";
+    }
+
+    function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "auto";
+    }
+    </script>
     </body>
 </html>

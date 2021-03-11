@@ -4,20 +4,97 @@ body {
   font-size: 13px !important;
 }
 
-/* body::after {
-  content: "";
-  background: url(/images/logo.jpg) center/50% fixed;
-  opacity: 0.1;
-  top: 0;f
+.sidenav {
+  border: 1px #3f704d;
+  height: 90%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
-  padding: 2%;
-  background-repeat: no-repeat;
-  position: absolute;
-  z-index: -1;  
-} */
+  background-color: #FCF4A3;
+  color: #3f704d;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
 
+.sidenav a, .dropdown-btn  {
+  padding: 15px 8px 15px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  transition: 0.3s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  color: #3f704d;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #FCF4A3;
+  background-color: #3f704d;
+}
+
+.sidenav .closebtn:hover {
+  color: #3f704d !important;
+  background-color: #FCF4A3 !important;
+}
+
+.sidenav .closebtn {
+  width: 0 !important;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: #3f704d;
+  color: #FCF4A3;
+}
+
+.dropdown-container {
+  display: none;
+  /* background-color: #FCF4A3; */
+  padding-left: 8px;
+}
+
+.dropdown-container a {
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #3f704d;
+  color: #FCF4A3;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.dropdown-container a:hover {
+  background-color: #FCF4A3;
+  color: #3f704d;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+#main {
+  transition: margin-left .5s;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 16px;}
+}
 div.card {
   padding: 10px;
   margin: 30px 20px;
@@ -70,7 +147,7 @@ div.login {
   float: right !important;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 13px 20px !important;
+  padding: 13px 10px !important;
   font-weight: 700px !important;
 }
 
@@ -82,9 +159,9 @@ div.login {
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 /* Change the background color on mouse-over */
@@ -228,14 +305,11 @@ footer {
   letter-spacing:2px
 }
 
-table {
-  background-color: #3f704d !important;
-}
-
 table th {
   font-size: 16px !important;
   padding: 15px !important;
   color: #FCF4A3 !important;
+  background-color: #3f704d !important;
 }
 
 table td {

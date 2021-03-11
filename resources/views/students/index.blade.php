@@ -5,7 +5,7 @@ Students
 @endsection
 
 @section('content')
-  <table id="dataTable" class="table table-striped table-enrollment">
+  <table id="dataTable" class="table table-striped table-enrollment table-default">
     <div class="row">
       <div class="col">
         <h2 style="text-align: left"></h2> 

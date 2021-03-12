@@ -82,7 +82,6 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            
             <a href="/items">Nursery</a>
             <a href="/items">Nursery 2</a>
             <a href="/items">Kinder 1</a>
@@ -100,8 +99,8 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
+            <a href="/users">Users</a>
+            <a href="#"></a>
             <a href="#">Link 3</a>
         </div>
     </div>

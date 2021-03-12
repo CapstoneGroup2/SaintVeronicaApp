@@ -47,6 +47,8 @@ class TutorialsController extends Controller
      */
     public function show($id)
     {
+        session()->put('category', 'tutorial');
+        session()->put('category_id', $id);
         $students = DB::select('select * from students where tutorial_id = ' . $id);
         if (request()->ajax())
         {

@@ -106,7 +106,7 @@ Students
     setTable();
 
     $('.btn-add').click(function () {
-      window.location = "/students/" + category + "/" + num + "/create";
+      window.location = "/students/create";
     })
   });
   

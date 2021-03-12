@@ -102,6 +102,11 @@ div.card {
   box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%);
 }
 
+.card-home {
+  margin: 20px !important;
+  height: 160px;
+}
+
 .list{
   list-style-type: none;
 }
@@ -242,7 +247,7 @@ div.container {
 
 .login-container{
   margin: 10px auto;
-  width: 50%;
+  width: 500px;
   padding: 10px;
 }
 .login-form-1{

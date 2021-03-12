@@ -7,7 +7,11 @@ Students
 @section('content')
 <form id="enrollment-form" action="/students" method="post">
 <h1>Enrollment Form</h1> 
-<p>Fill up the form carefully</p>
+<p>for Nursery Students</p>
+<?php
+    if (session()->get('category') == 'gradeLevel') {
+    }
+?>
 <hr>
 @csrf
     <div class="row">
@@ -82,21 +86,22 @@ Students
     </div>
     
     <div class="row" style="display: none">
-        <div class="col">
-            <div class="form-group">
-                <label for="status">Year Level</label>
-                <select class="form-control" name="student_year_level">
-                    <option value="" selected></option>
-                </select>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="form-group">
-                <label for="status">Add Tutorial</label>
-                <select class="form-control" name="student_tutorials[]" id="tutorial">
-                </select>
-            </div>
-        </div>
+        @if(session()->get('category') == 'gradeLevel')
+            <select class="form-control" name="grade_level_id">
+                <option value="{{session()->get('category_id')}}" selected>{{session()->get('category_id')}}</option>
+            </select>
+            <label for="status">Tutorial</label>
+            <select class="form-control" name="tutorial_id">
+                <option value="1" selected>1</option>
+            </select>
+        @elseif(session()->get('key') == 'tutorial')
+            <select class="form-control" name="grade_level_id">
+                <option value="{{session()->get('category_id')}}" selected>{{session()->get('category_id')}}</option>
+            </select>
+            <select class="form-control" name="tutorial_id">
+                <option value="{{session()->get('category_id')}}" selected>{{session()->get('category_id')}}</option>
+            </select>
+        @endif
     </div>
     <hr>
     <div class="right">

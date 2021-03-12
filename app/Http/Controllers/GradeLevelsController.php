@@ -47,6 +47,10 @@ class GradeLevelsController extends Controller
      */
     public function show($id)
     {
+        $gradeLevel = DB::select('select `grade_level_name` from grade_levels where id = ' . $id);
+        session()->put('category', 'gradeLevel');
+        session()->put('category_id', $id);
+        session()->put('gradeLevelName', $gradeLevel);
         $students = DB::select('select * from students where grade_level_id = ' . $id);
         if (request()->ajax())
         {

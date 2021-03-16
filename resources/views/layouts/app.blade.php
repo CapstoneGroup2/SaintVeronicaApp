@@ -58,23 +58,23 @@
         </div>
     </nav>
     
-    <div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav" style="margin-top: 60px;">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="/index"><i class="fa fa-fw fa-home"></i> Home</a>
         <button class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a href="/students/gradelevels/2">Nursery</a>
-            <a href="/students/gradelevels/3">Nursery 2</a>
-            <a href="/students/gradelevels/4">Kinder 1</a>
-            <a href="/students/gradelevels/5">Kinder 2</a>
-            <a href="/students/gradelevels/6">Grade 1</a>
-            <a href="/students/gradelevels/7">Grade 2</a>
-            <a href="/students/gradelevels/8">Grade 3</a>
-            <a href="/students/gradelevels/9">Grade 4</a>
-            <a href="/students/gradelevels/10">Grade 5</a>
-            <a href="/students/gradelevels/11">Grade 6</a>
+            <a href="/students/grade-levels/1">Nursery</a>
+            <a href="/students/grade-levels/2">Nursery 2</a>
+            <a href="/students/grade-levels/3">Kinder 1</a>
+            <a href="/students/grade-levels/4">Kinder 2</a>
+            <a href="/students/grade-levels/5">Grade 1</a>
+            <a href="/students/grade-levels/6">Grade 2</a>
+            <a href="/students/grade-levels/7">Grade 3</a>
+            <a href="/students/grade-levels/8">Grade 4</a>
+            <a href="/students/grade-levels/9">Grade 5</a>
+            <a href="/students/grade-levels/10">Grade 6</a>
             <a href="/students/tutorials/2">Music Tutorial</a>
             <a href="/students/tutorials/3">Piano Tutorial</a>
         </div>
@@ -82,26 +82,25 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            
-            <a href="/items">Nursery</a>
-            <a href="/items">Nursery 2</a>
-            <a href="/items">Kinder 1</a>
-            <a href="/items">Kinder 2</a>
-            <a href="/items">Grade 1</a>
-            <a href="/items">Grade 2</a>
-            <a href="/items">Grade 3</a>
-            <a href="/items">Grade 4</a>
-            <a href="/items">Grade 5</a>
-            <a href="/items">Grade 6</a>
-            <a href="/items">Music Tutorial</a>
-            <a href="/items">Piano Tutorial</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/1">Nursery</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/2">Nursery 2</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/3">Kinder 1</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/4">Kinder 2</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/5">Grade 1</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/6">Grade 2</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/7">Grade 3</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/8">Grade 4</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/9">Grade 5</a>
+            <a href="/miscellaneous-and-other-fees/grade-levels/10">Grade 6</a>
+            <a href="/miscellaneous-and-other-fees/tutorials/2">Music Tutorial</a>
+            <a href="/miscellaneous-and-other-fees/tutorials/3">Piano Tutorial</a>
         </div>
         <button class="dropdown-btn"><i class="fa fa-fw fa-wrench"></i> Management
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
+            <a href="/users">Users</a>
+            <a href="#"></a>
             <a href="#">Link 3</a>
         </div>
     </div>
@@ -116,7 +115,6 @@
     <script>
     var dropdown = document.getElementsByClassName("dropdown-btn");
     var i;
-
     for (i = 0; i < dropdown.length; i++) {
         dropdown[i].addEventListener("click", function() {
             this.classList.toggle("active");
@@ -129,10 +127,9 @@
         });
     }
     function openNav() {
-    document.getElementById("mySidenav").style.width = "200px";
-    document.getElementById("mySidenav").style.marginTop = "60px";
+    document.getElementById("mySidenav").style.width = "350px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
     }
-
     function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft= "auto";

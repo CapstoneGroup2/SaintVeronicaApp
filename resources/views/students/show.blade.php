@@ -66,27 +66,70 @@ Students
             <div class="col-3">    
                 <div class="form-group">
                     <label for="gender">Gender</label>
-                    <select class="form-control" name="gender" readonly>
-                        <option selected>{{ $student->student_gender }}</option>
-                    </select>
+                    <input type="text" class="form-control" value="{{ $student->student_gender }}" readonly>
                 </div>
             </div>
             <div class="col">    
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <select class="form-control" name="status" readonly>
-                        <option selected>{{ $student->student_status }}</option>
-                    </select>
+                    <input type="text" class="form-control" name="age" value="{{ $student->student_status }}" readonly>
                 </div>
             </div>
         </div>
         <hr>
-        <div class="right">
-            <a href="/students" class="btn btn-lg btn-danger" role="button">Cancel</a>
-            <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
-        </div>
-    </form>
   @endforeach
+  
+  <h1>Miscellaneous and Other Fees</h1> 
+    <?php
+        if (session()->get('category') == 'grade-levels') {
+            echo '<h5>for ' . session()->get("gradeLevelName") . ' Students</h5>';
+        } else if (session()->get('category') == 'tutorials') {
+            echo '<h5>for ' . session()->get("tutorialName") . ' Students</h5>';
+        }
+    ?>
+    <hr>
+    <div style="color: white">
+        <div class="row">
+            <div class="col-4">
+                <h3>Name</h3>
+            </div>
+            <div class="col">
+                <h3>Description</h3>
+            </div>
+            <div class="col-2">
+                <h3>Price</h3>
+            </div>
+        </div>
+        <?php $total = 0; ?>
+        @foreach($miscellaneous_and_other_fees as $miscellaneous_and_other_fee)
+        <div class="row">
+            <div class="col-4">
+                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_name }}</p>
+            </div>
+            <div class="col">
+                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_description }}</p>
+            </div>
+            <div class="col-2">
+                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price }} pesos</p>
+                <?php $total += $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price; ?>
+            </div>
+        </div>
+        @endforeach
+        <div class="row">
+            <div class="col">
+                <h3 style="letter-spacing: 5px;">T O T A L - - - - - - - - - - - - - - - - - - - - - - - </h3>
+            </div>
+            <div class="col-2">
+                <h3>{{ $total }} pesos</h3>
+                <script>$total = {{ $total }}</script>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <a href="/students" class="btn btn-lg btn-danger" role="button">Cancel</a>
+        <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
+    </div>
+</form>
 @endsection
 
 @section('script')  

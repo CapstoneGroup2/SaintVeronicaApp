@@ -14,10 +14,56 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showGradeLevelStudents($id)
     {
-        $students = DB::select('select * from students where student_active_status = 1');
-        return view('students.index', ['students' => $students]);
+        $gradeLevel = DB::select('select `grade_level_name` from grade_levels where id = ' . $id);
+        session()->put('category', 'grade-levels');
+        session()->put('category_id', $id);
+        session()->put('gradeLevelName', $gradeLevel[0]->grade_level_name);
+        $students = DB::select('select * from students where grade_level_id = ' . $id);
+        if (request()->ajax())
+        {
+            return datatables()->of($students)
+                ->addColumn('full_name', function($data) {
+                    $full_name = $data->student_first_name . ' ' . $data->student_middle_name . ' ' . $data->student_last_name;
+                    return $full_name;
+                })
+                ->addColumn('action', function($data) {
+                    $button = '<a href="/students/'. $data->id . '" class="btn btn-md btn-primary" role="button" style="margin: 0 3%">View</a>';
+                    $button .= '<a href="/students/'. $data->id .'/edit" class="btn btn-md btn-warning" role="button" style="margin: 0 3%">Edit</a>';
+                    $button .= '<button id="'. $data->id .'" class="btn btn-md btn-danger btn-remove" style="margin: 0 3%">Remove</button>';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('students.index', compact('students'));
+    }
+    
+    public function showTutorialStudents($id) {
+        
+        $tutorial = DB::select('select `tutorial_name` from tutorials where id = ' . $id);
+        session()->put('category', 'tutorials');
+        session()->put('category_id', $id);
+        session()->put('tutorialName', $tutorial[0]->tutorial_name);
+        $students = DB::select('select * from students where tutorial_id = ' . $id);
+        if (request()->ajax())
+        {
+            return datatables()->of($students)
+            ->addColumn('full_name', function($data) {
+                $full_name = $data->student_first_name . ' ' . $data->student_middle_name . ' ' . $data->student_last_name;
+                return $full_name;
+            })
+            ->addColumn('action', function($data) {
+                $button = '<a href="/students/'. $data->id . '" class="btn btn-md btn-primary" role="button" style="margin: 0 3%">View</a>';
+                $button .= '<a href="/students/'. $data->id .'/edit" class="btn btn-md btn-warning" role="button" style="margin: 0 3%">Edit</a>';
+                $button .= '<button id="'. $data->id .'" class="btn btn-md btn-danger btn-remove" style="margin: 0 3%">Remove</button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+        return view('students.index', compact('students'));
     }
 
     /**
@@ -39,6 +85,8 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'grade_level_id'        =>  'required',
+            'tutorial_id'           =>  'required',
             'student_first_name'    =>  'required',
             'student_middle_name'   =>  'required',
             'student_last_name'     =>  'required',
@@ -52,6 +100,9 @@ class StudentsController extends Controller
         ]);
         
         $student = new Student();
+        
+        $student->grade_level_id = $request['grade_level_id'];
+        $student->tutorial_id = $request['tutorial_id'];
         $student->student_first_name = $request['student_first_name'];
         $student->student_middle_name = $request['student_middle_name'];
         $student->student_last_name = $request['student_last_name'];
@@ -66,8 +117,8 @@ class StudentsController extends Controller
         $student->created_at = date('Y-m-d');
 
         $student->save();   
-
-        return redirect('/students');
+        
+        return redirect('/miscellaneous-and-other-fees/' . rtrim(session()->get('category'), "s") . '/' . session()->get('category_id'));
     }
 
     /**
@@ -79,7 +130,14 @@ class StudentsController extends Controller
     public function show($id)
     {        
         $students = DB::select('select * from students where id = ' . $id);
-        return view('students.show', ['students' => $students]);
+
+        if(session()->get('category') == 'grade-levels') {
+            $miscellaneous_and_other_fees = DB::select('select * from miscellaneous_and_other_fees where grade_level_id = ' . session()->get('category_id'));
+        } else if(session()->get('category') == 'tutorials') {
+            $miscellaneous_and_other_fees = DB::select('select * from miscellaneous_and_other_fees where tutorial_id = ' . session()->get('category_id'));
+        }
+
+        return view('students.show', ['students' => $students, 'miscellaneous_and_other_fees' => $miscellaneous_and_other_fees]);
     }
 
     /**
@@ -104,6 +162,8 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'grade_level_id'        =>  'required',
+            'tutorial_id'           =>  'required',
             'student_first_name'    =>  'required',
             'student_middle_name'   =>  'required',
             'student_last_name'     =>  'required',
@@ -117,6 +177,9 @@ class StudentsController extends Controller
         ]);
         
         $student = Student::find($id);
+        
+        $student->grade_level_id = $request['grade_level_id'];
+        $student->tutorial_id = $request['tutorial_id'];
         $student->student_first_name = $request['student_first_name'];
         $student->student_middle_name = $request['student_middle_name'];
         $student->student_last_name = $request['student_last_name'];

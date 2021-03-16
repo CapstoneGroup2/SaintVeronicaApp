@@ -13,7 +13,7 @@ body {
   top: 0;
   left: 0;
   background-color: #FCF4A3;
-  color: #3f704d;
+  color: #74d890;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -357,7 +357,7 @@ div.right {
 }
 
 #enrollment-form {
-  margin: 0 15%;
+  /* margin: 0 15%; */
   padding: 5%;
   background-color: #3f704d;
   color: #FCF4A3;

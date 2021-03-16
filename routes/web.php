@@ -15,19 +15,28 @@ Route::get('/login', 'Auth\MainController@index');
 Route::post('/login', 'Auth\MainController@checklogin');
 
 Route::group(['middleware' => 'web'], function() {
-    Route::resource('/students', 'StudentsController');
 
     Route::get('/', 'PagesController@index');
 
     Route::get('/index', 'PagesController@index');
+
+    Route::get('/students/grade-levels/{id}', 'StudentsController@showGradeLevelStudents');
     
-    Route::resource('/items', 'ItemsController');
+    Route::get('/students/tutorials/{id}', 'StudentsController@showTutorialStudents');
+
+    Route::resource('/students', 'StudentsController');
+
+    Route::get('/miscellaneous-and-other-fees/grade-level/{id}', 'MiscellaneousAndOtherFeesController@showGradeLevelMiscellaneousAndOtherFeesAfterEnroll');
+    
+    Route::get('/miscellaneous-and-other-fees/tutorial/{id}', 'MiscellaneousAndOtherFeesController@showTutorialMiscellaneousAndOtherFeesAfterEnroll');
+
+    Route::get('/miscellaneous-and-other-fees/grade-levels/{id}', 'MiscellaneousAndOtherFeesController@showGradeLevelMiscellaneousAndOtherFees');
+    
+    Route::get('/miscellaneous-and-other-fees/tutorials/{id}', 'MiscellaneousAndOtherFeesController@showTutorialMiscellaneousAndOtherFees');
+    
+    Route::resource('/miscellaneous-and-other-fees', 'MiscellaneousAndOtherFeesController');
     
     Route::resource('/payments', 'PaymentsController');
-
-    Route::resource('/students/gradelevels', 'GradeLevelsController');
-    
-    Route::resource('/students/tutorials', 'TutorialsController');
     
     Route::resource('/users', 'UsersController');
     

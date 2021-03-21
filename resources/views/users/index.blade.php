@@ -25,7 +25,6 @@ Users
           <option value="100">100</option>
         </select>
       </div>
-      
     </div>
     <hr>
     <thead>

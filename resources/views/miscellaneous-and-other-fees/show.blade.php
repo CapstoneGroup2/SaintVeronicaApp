@@ -78,7 +78,7 @@
         </div>
         <hr>
         <div class="right">
-            <a href="/students" class="btn btn-lg btn-danger" role="button">Cancel</a>
+            <a href="/students" class="btn btn-lg btn-danger btn-close" role="button">Cancel</a>
             <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
         </div>
     </form>

@@ -33,12 +33,14 @@ Route::group(['middleware' => 'web'], function() {
     Route::get('/miscellaneous-and-other-fees/grade-levels/{id}', 'MiscellaneousAndOtherFeesController@showGradeLevelMiscellaneousAndOtherFees');
     
     Route::get('/miscellaneous-and-other-fees/tutorials/{id}', 'MiscellaneousAndOtherFeesController@showTutorialMiscellaneousAndOtherFees');
-    
+
     Route::resource('/miscellaneous-and-other-fees', 'MiscellaneousAndOtherFeesController');
     
     Route::resource('/payments', 'PaymentsController');
     
     Route::resource('/users', 'UsersController');
+
+    Route::resource('/announcements', 'AnnouncementsController');
     
     Route::get('logout', 'Auth\MainController@logout');
 });

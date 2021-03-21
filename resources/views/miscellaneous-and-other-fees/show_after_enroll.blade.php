@@ -31,13 +31,13 @@ Miscellaneous & Other Fees
         @foreach($miscellaneous_and_other_fees as $miscellaneous_and_other_fee)
         <div class="row">
             <div class="col-4">
-                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_name }}</p>
+                <p>{{ $miscellaneous_and_other_fee -> miscellaneous_and_other_fee_name }}</p>
             </div>
             <div class="col">
-                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_description }}</p>
+                <p>{{ $miscellaneous_and_other_fee -> miscellaneous_and_other_fee_description }}</p>
             </div>
             <div class="col-2">
-                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price }} pesos</p>
+                <p>{{ $miscellaneous_and_other_fee -> miscellaneous_and_other_fee_price }} pesos</p>
                 <?php $total += $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price; ?>
             </div>
         </div>

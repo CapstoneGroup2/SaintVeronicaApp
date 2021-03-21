@@ -56,7 +56,8 @@ class StudentsController extends Controller
             })
             ->addColumn('action', function($data) {
                 $button = '<a href="/students/'. $data->id . '" class="btn btn-md btn-primary" role="button" style="margin: 0 3%">View</a>';
-                $button .= '<a href="/students/'. $data->id .'/edit" class="btn btn-md btn-warning" role="button" style="margin: 0 3%">Edit</a>';
+                $button .= '<a href="/students/'. $data->id .'/
+                " class="btn btn-md btn-warning" role="button" style="margin: 0 3%">Edit</a>';
                 $button .= '<button id="'. $data->id .'" class="btn btn-md btn-danger btn-remove" style="margin: 0 3%">Remove</button>';
                 return $button;
             })

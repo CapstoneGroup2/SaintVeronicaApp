@@ -43,7 +43,7 @@ body {
 
 .sidenav .closebtn:hover {
   color: #3f704d !important;
-  background-color: #FCF4A3 !important;
+  background-color: white !important;
 }
 
 .sidenav .closebtn {
@@ -224,9 +224,9 @@ img#profile {
 }
 
 img#logo-login {
-  width: 150px;
+  width: 30%;
   border-radius: 50%;
-  height: 140px;
+  height: 30%;
   display: block;
   margin-left: auto;
   margin-right: auto;

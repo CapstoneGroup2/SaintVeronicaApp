@@ -86,7 +86,7 @@ Students
         </div>
         <hr>
         <div class="right">
-            <a href="/students" class="btn btn-lg btn-danger" role="button">Cancel</a>
+            <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
             <button type="submit" class="btn btn-lg btn-success">Update</button>
         </div>
     </form>

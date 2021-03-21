@@ -7,41 +7,28 @@ Students
 @section('content')
   @foreach($students as $student)
     <form id="enrollment-form" action="" method="">
-      <div class="title-id">
-        <label>Student ID Number : <span>{{ $student->id }}</span></label>
-      </div>
+        <div class="row">
+            <div class="col">
+                <label>Student Full Name : <span>{{ $student->student_first_name . ' ' . $student->student_last_name }}</span></label><br>
+                <label>Student ID Number : <span>{{ $student->id }}</span></label>
+            </div>
+        </div>
     <hr>
     @csrf
         <div class="row">
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">First Name</label>
-                    <input type="text" class="form-control" name="first_name" value="{{ $student->student_first_name }}" readonly>
-                </div>
-            </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">Middle Name</label>
-                    <input type="text" class="form-control" name="middle_name" value="{{ $student->student_middle_name }}" readonly>
-                </div>
-            </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" value="{{ $student->student_last_name }}" readonly>
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" name="email" value="{{ $student->student_email}}" readonly>
+                    <label for="email">Email Address:
+                        <span style = "color:white; font-size:15px;"> {{ $student->student_email}}</span>
+                    </label>
                 </div>
             </div>
             <div class="col-5">    
                 <div class="form-group">
                     <label for="contact">Home Contact Number</label>
+                    <label for="email">Email Address:
+                        <span style = "color:white; font-size:15px;"> {{ $student->student_email}}</span>
+                    </label>
                     <input type="text" class="form-control" name="contact" value="{{ $student->student_home_contact }}" readonly>
                 </div>
             </div>
@@ -110,23 +97,24 @@ Students
                 <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_description }}</p>
             </div>
             <div class="col-2">
-                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price }} pesos</p>
+                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price }}</p>
                 <?php $total += $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price; ?>
             </div>
         </div>
         @endforeach
         <div class="row">
             <div class="col">
-                <h3 style="letter-spacing: 5px;">T O T A L - - - - - - - - - - - - - - - - - - - - - - - </h3>
+                <h3 style="letter-spacing: 5px;">T O T A L - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</h3>
             </div>
             <div class="col-2">
-                <h3>{{ $total }} pesos</h3>
+                <h3 style="color:orange;"> {{ $total }}</h3>
                 <script>$total = {{ $total }}</script>
             </div>
         </div>
     </div>
+    <hr>
     <div class="right">
-        <a href="/students" class="btn btn-lg btn-danger" role="button">Cancel</a>
+        <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
         <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
     </div>
 </form>

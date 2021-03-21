@@ -81,4 +81,6 @@ https://saintveronicasystem.herokuapp.com/
 
 https://git.heroku.com/saintveronicasystem.git
 
-git push heroku main
+git clone
+npm install
+composer install

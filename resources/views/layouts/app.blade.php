@@ -35,6 +35,7 @@
 </head>
 <body>
     <nav class="header navbar fixed-top navbar-expand-lg navbar-dark">
+    <span style="font-size:30px;cursor:pointer; margin: 0 10px;color:white;" onclick="openNav()">&#9776;</span>
         <a class="navbar-brand logo" href="/index"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -58,7 +59,7 @@
         </div>
     </nav>
     
-    <div id="mySidenav" class="sidenav" style="margin-top: 60px;">
+    <div id="mySidenav" class="sidenav" style="margin-top: 60px; background-color:white;">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="/index"><i class="fa fa-fw fa-home"></i> Home</a>
         <button class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 
@@ -78,7 +79,7 @@
             <a href="/students/tutorials/2">Music Tutorial</a>
             <a href="/students/tutorials/3">Piano Tutorial</a>
         </div>
-        <button class="dropdown-btn"><i class="fa fa-fw fa-envelope"></i> Miscellanious & Other Fees
+        <button class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-container">
@@ -100,11 +101,16 @@
         </button>
         <div class="dropdown-container">
             <a href="/users">Users</a>
-            <a href="#"></a>
-            <a href="#">Link 3</a>
+            <a href="#">Add Tutorial</a>
+            <a href="#">Approve Announcements</a>
         </div>
+        <a href="/announcements"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>
+        <a href="/#"><i class="fa fa-fw fa fa-area-chart"></i> Reports</a>
+
+
+
+
     </div>
-    <span style="font-size:30px;cursor:pointer; margin-left: 10px;" onclick="openNav()">&#9776;</span>
     <div class="container content" id="main">
         
         @include('layouts.messages')
@@ -127,8 +133,8 @@
         });
     }
     function openNav() {
-    document.getElementById("mySidenav").style.width = "350px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "260px";
     }
     function closeNav() {
     document.getElementById("mySidenav").style.width = "0";

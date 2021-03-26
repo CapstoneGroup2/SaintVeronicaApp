@@ -4,134 +4,101 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MiscellaneousAndOtherFees;
+use App\Models\Classes;
+use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Auth;
 
 class MiscellaneousAndOtherFeesController extends Controller
 {
-    public function showGradeLevelMiscellaneousAndOtherFeesAfterEnroll($id) {
-        $gradeLevel = DB::select('select `grade_level_name` from grade_levels where id = ' . $id);
-        session()->put('category', 'grade-levels');
-        session()->put('category_id', $id);
-        session()->put('gradeLevelName', $gradeLevel[0]->grade_level_name);
-        $miscellaneous_and_other_fees = DB::select('select * from miscellaneous_and_other_fees where grade_level_id = ' . $id);
-    
-        return view('miscellaneous-and-other-fees.show_after_enroll', compact('miscellaneous_and_other_fees'));
-    }
-
-    public function showTutorialMiscellaneousAndOtherFeesAfterEnroll($id) {
-        $tutorial = DB::select('select `tutorial_name` from tutorials where id = ' . $id);
-        session()->put('category', 'tutorials');
-        session()->put('category_id', $id);
-        session()->put('tutorialName', $tutorial[0]->tutorial_name);
-        $miscellaneous_and_other_fees = DB::select('select * from miscellaneous_and_other_fees where tutorial_id = ' . $id);
-    
-        return view('miscellaneous-and-other-fees.show_after_enroll', compact('miscellaneous_and_other_fees'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showGradeLevelMiscellaneousAndOtherFees($id)
+    public function showMiscellaneousAndOtherFees($id)
     {
-        $gradeLevel = DB::select('select `grade_level_name` from grade_levels where id = ' . $id);
-        session()->put('category', 'grade-levels');
-        session()->put('category_id', $id);
-        session()->put('gradeLevelName', $gradeLevel[0]->grade_level_name);
-        $miscellaneous_and_other_fees = DB::select('select * from miscellaneous_and_other_fees where grade_level_id = ' . $id);
+        $classes = Classes::where('id' , $id)->get();
+
+        session()->put('present_class_id', $id);
+        session()->put('present_class_name', $classes[0]->class_name);
+
+        $miscellaneous_and_other_fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
+
         if (request()->ajax())
         {
             return datatables()->of($miscellaneous_and_other_fees)
-                ->addColumn('image', function($data){
-                    return '<img src="/images/logo.jpg" width="80px">';
+                ->addColumn('item_price', function($data){
+                    return number_format($data->item_price, 2, '.', '');
+                }) 
+                ->addColumn('item_image', function($data){
+                    if ($data->item_image != '') {
+                        return '<a href="/images/items/'. $data->item_image . ' " target="_blank"><img src="/images/items/'. $data->item_image . ' "height="100px" style="margin-left: 10px;margin-right: auto;"></a>';
+                    }
+                    return '<img src="/images/default.png" height="100px" alt="default">';
                 })  
                 ->addColumn('action', function($data) {
-                    $button = '<a href="/miscellaneous_and_other_fees/'. $data->id . '" class="btn btn-md btn-primary" role="button" style="margin: 0 3%">View</a>';
-                    $button .= '<a href="/miscellaneous_and_other_fees/'. $data->id .'/edit" class="btn btn-md btn-warning" role="button" style="margin: 0 3%">Edit</a>';
-                    $button .= '<button id="'. $data->id .'" class="btn btn-md btn-danger btn-remove" style="margin: 0 3%">Remove</button>';
+                    $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                    $button .= '<a href="/miscellaneous-and-other-fees/'. $data->id .'/edit" data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
+                    $button .= '<button type="button" id="'. $data->id . '" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
                     return $button;
                 })
-                ->rawColumns(['image', 'action'])
+                ->rawColumns(['item_price', 'item_image', 'action'])
                 ->make(true);
         }
-        return view('miscellaneous-and-other-fees.index', compact('miscellaneous_and_other_fees'));
-    }
-    
-    public function showTutorialMiscellaneousAndOtherFees($id) {
-        
-        $tutorial = DB::select('select `tutorial_name` from tutorials where id = ' . $id);
-        session()->put('category', 'tutorials');
-        session()->put('category_id', $id);
-        session()->put('tutorialName', $tutorial[0]->tutorial_name);
-        $miscellaneous_and_other_fees = DB::select('select * from miscellaneous_and_other_fees where tutorial_id = ' . $id);
-        if (request()->ajax())
-        {
-            return datatables()->of($miscellaneous_and_other_fees)
-                ->addColumn('action', function($data) {
-                    $button = '<a href="/miscellaneous_and_other_fees/'. $data->id . '" class="btn btn-md btn-primary" role="button" style="margin: 0 3%">View</a>';
-                    $button .= '<a href="/miscellaneous_and_other_fees/'. $data->id .'/edit" class="btn btn-md btn-warning" role="button" style="margin: 0 3%">Edit</a>';
-                    $button .= '<button id="'. $data->id .'" class="btn btn-md btn-danger btn-remove" style="margin: 0 3%">Remove</button>';
-                    return $button;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-        return view('miscellaneous-and-other-fees.index', compact('miscellaneous_and_other_fees'));
+
+        return view('miscellaneous-and-other-fees.index', compact('miscellaneous-and-other-fees'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('miscellaneous-and-other-fees.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'grade_level_id'                            =>  'required',
-            'tutorial_id'                               =>  'required',
-            'miscellaneous_and_other_fee_name'          =>  'required',
-            'miscellaneous_and_other_fee_description'   =>  'required',
-            'miscellaneous_and_other_fee_price'         =>  'required',
-            'miscellaneous_and_other_fee_image'         =>  'required',
+            'item_code'          =>  'required',
+            'item_description'   =>  'required',
+            'item_price'         =>  'required',
+            'item_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        if ($request->hasFile('item_image')) {
+            $image = $request->file('item_image');
+            $name = $image->getClientOriginalName();
+            $destinationPath = public_path('/images/items');
+            $image->move($destinationPath, $name);
+        } else {
+            $name = 'default.png';
+        }
         
         $miscellaneous_and_other_fee = new MiscellaneousAndOtherFees();
-        
-        $miscellaneous_and_other_fee->grade_level_id = $request['grade_level_id'];
-        $miscellaneous_and_other_fee->tutorial_id = $request['tutorial_id'];
-        $miscellaneous_and_other_fee->miscellaneous_and_other_fee_name = $request['miscellaneous_and_other_fee_name'];
-        $miscellaneous_and_other_fee->miscellaneous_and_other_fee_description = $request['miscellaneous_and_other_fee_description'];
-        $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price = floatval($request['miscellaneous_and_other_fee_price']);
-        $miscellaneous_and_other_fee->miscellaneous_and_other_fee_image = $request['miscellaneous_and_other_fee_image'];
-
+        $miscellaneous_and_other_fee->class_id = session()->get('present_class_id');
+        $miscellaneous_and_other_fee->item_code = $request['item_code'];
+        $miscellaneous_and_other_fee->item_description = $request['item_description'];
+        $miscellaneous_and_other_fee->item_price = doubleval($request['item_price']);
+        $miscellaneous_and_other_fee->item_image = $name;
         $miscellaneous_and_other_fee->save();   
 
-        return redirect('/miscellaneous-and-other-fees/' . session()->get('category') . '/' . session()->get('category_id'));
-        
+        $students_classes = DB::table('students_classes')
+            ->join('students', 'students.id', '=', 'students_classes.student_id')
+            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+            ->where('class_id', session()->get('present_class_id'))
+            ->where('students.student_active_status', 1)
+            ->get();
+
+        foreach ($students_classes as $student_class) {
+            $payment = Payment::where('student_id', $student_class->student_id)->get();
+            if(isset($payment[0]) != '') {
+                $payment[0]->amount_payable = $payment[0]->amount_payable + $request['item_price'];
+                $payment[0]->amount_due = $payment[0]->amount_due + $request['item_price'];
+                $payment[0]->save();
+            }
+        }
+
+        return redirect('/miscellaneous-and-other-fees/classes/' . session()->get('present_class_id'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        return view('miscellaneous-and-other-fees.show');
+        $miscellaneous_and_other_fees = MiscellaneousAndOtherFees::where('id', $id)->get();
+        return view('miscellaneous-and-other-fees.show', compact('miscellaneous_and_other_fees'));
     }
 
     /**
@@ -142,29 +109,74 @@ class MiscellaneousAndOtherFeesController extends Controller
      */
     public function edit($id)
     {
-        return view('miscellaneous-and-other-fees.edit');
+        $miscellaneous_and_other_fees = MiscellaneousAndOtherFees::where('id', $id)->get();
+        return view('miscellaneous-and-other-fees.edit', compact('miscellaneous_and_other_fees'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'item_code'          =>  'required',
+            'item_description'   =>  'required',
+            'item_price'         =>  'required',
+            'item_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $miscellaneous_and_other_fee = MiscellaneousAndOtherFees::find($id);
         
+        $miscellaneous_and_other_fee->item_code = $request['item_code'];
+        $miscellaneous_and_other_fee->item_description = $request['item_description'];
+        $miscellaneous_and_other_fee->item_price = doubleval($request['item_price']);
+
+        if ($request->hasFile('item_image')) {
+            $image = $request->file('item_image');
+            $name = $image->getClientOriginalName();
+            $destinationPath = public_path('/images/items');
+            $image->move($destinationPath, $name);
+            $miscellaneous_and_other_fee->item_image = $name;
+        } 
+
+        $miscellaneous_and_other_fee->save();   
+
+        $fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
+        $payable = 0;
+        foreach($fees as $fee) {
+            $payable += $fee->item_price;
+        }
+
+        $students_classes = DB::table('students_classes')
+            ->join('students', 'students.id', '=', 'students_classes.student_id')
+            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+            ->where('class_id', session()->get('present_class_id'))
+            ->get();
+
+        foreach ($students_classes as $student_class) {
+            $payment = Payment::where('student_id', $student_class->student_id)->get();
+            $payment[0]->amount_payable = $payable;
+            $payment[0]->amount_due = $payable - $payment[0]->amount_paid;
+            $payment[0]->save();
+        }
+        
+        return redirect('/miscellaneous-and-other-fees/classes/' . session()->get('present_class_id'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $data = MiscellaneousAndOtherFees::findOrFail($id);
+
+        $students_classes = DB::table('students_classes')
+            ->join('students', 'students.id', '=', 'students_classes.student_id')
+            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+            ->where('class_id', session()->get('present_class_id'))
+            ->get();
+
+        foreach ($students_classes as $student_class) {
+            $payment = Payment::where('student_id', $student_class->student_id)->get();
+            $payment[0]->amount_payable = $payment[0]->amount_payable - $data->item_price;
+            $payment[0]->amount_due = $payment[0]->amount_payable - $payment[0]->amount_paid;
+            $payment[0]->save();
+        }
+
+        $data->delete();
     }
 }

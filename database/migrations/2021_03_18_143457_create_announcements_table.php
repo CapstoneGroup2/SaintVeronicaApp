@@ -13,6 +13,7 @@ class CreateAnnouncementsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('announcements');
         Schema::create('announcements', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('announcement_title');
@@ -20,7 +21,6 @@ class CreateAnnouncementsTable extends Migration
             $table->integer('is_approved');
             $table->timestamp('date_approved');
             $table->timestamps();
-            
         });
     }
 

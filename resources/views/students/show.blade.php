@@ -1,125 +1,161 @@
 @extends('layouts.app')
 
 @section('title')
-Students
+{{ session()->get('present_class_name') }} Students
 @endsection
 
 @section('content')
-  @foreach($students as $student)
-    <form id="enrollment-form" action="" method="">
-        <div class="row">
-            <div class="col">
-                <label>Student Full Name : <span>{{ $student->student_first_name . ' ' . $student->student_last_name }}</span></label><br>
-                <label>Student ID Number : <span>{{ $student->id }}</span></label>
-            </div>
-        </div>
-    <hr>
+<h2 style="text-align: left">{{ session()->get('present_class_name') }} Student</h2>
+<div class="triangle-right" style="width:300px;"></div>
+<hr>
+<form id="enrollment-form" action="/payments/{{ $student->id }}" method="POST">
+    {{method_field('PATCH')}}
     @csrf
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="email">Email Address:
-                        <span style = "color:white; font-size:15px;"> {{ $student->student_email}}</span>
-                    </label>
-                </div>
-            </div>
-            <div class="col-5">    
-                <div class="form-group">
-                    <label for="contact">Home Contact Number</label>
-                    <label for="email">Email Address:
-                        <span style = "color:white; font-size:15px;"> {{ $student->student_email}}</span>
-                    </label>
-                    <input type="text" class="form-control" name="contact" value="{{ $student->student_home_contact }}" readonly>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="address">Home Address</label>
-            <input type="text" class="form-control" name="address" value="{{ $student->student_address }}" readonly>
-        </div>
-        <div class="row">
-            <div class="col">    
-                <div class="form-group">
-                    <label for="birthdate">Birthdate</label>
-                    <input type="date" class="form-control" name="birthdate" value="{{ $student->student_birth_date }}" readonly>
-                </div>
-            </div>  
-            <div class="col-2">    
-                <div class="form-group">
-                    <label for="age">Age</label>
-                    <input type="number" class="form-control" name="age" value="{{ $student->student_age }}" readonly>
-                </div>
-            </div>
-            <div class="col-3">    
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <input type="text" class="form-control" value="{{ $student->student_gender }}" readonly>
-                </div>
-            </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <input type="text" class="form-control" name="age" value="{{ $student->student_status }}" readonly>
-                </div>
-            </div>
-        </div>
-        <hr>
-  @endforeach
-  
-  <h1>Miscellaneous and Other Fees</h1> 
-    <?php
-        if (session()->get('category') == 'grade-levels') {
-            echo '<h5>for ' . session()->get("gradeLevelName") . ' Students</h5>';
-        } else if (session()->get('category') == 'tutorials') {
-            echo '<h5>for ' . session()->get("tutorialName") . ' Students</h5>';
-        }
-    ?>
+    <h1 class="text-warning">Student Profile Information</h1> 
     <hr>
-    <div style="color: white">
-        <div class="row">
-            <div class="col-4">
-                <h3>Name</h3>
-            </div>
-            <div class="col">
-                <h3>Description</h3>
-            </div>
-            <div class="col-2">
-                <h3>Price</h3>
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group center">
+                <img src='/images/students/{{ $student->student_image }}' height="243px" width="220px">
             </div>
         </div>
-        <?php $total = 0; ?>
-        @foreach($miscellaneous_and_other_fees as $miscellaneous_and_other_fee)
-        <div class="row">
-            <div class="col-4">
-                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_name }}</p>
+        <div class="col-3">
+            <div class="form-group">
+                <h3>Full Name : </h3>
             </div>
-            <div class="col">
-                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_description }}</p>
+            <div class="form-group">
+                <h3>Email Address : </h3>
             </div>
-            <div class="col-2">
-                <p>{{ $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price }}</p>
-                <?php $total += $miscellaneous_and_other_fee->miscellaneous_and_other_fee_price; ?>
+            <div class="form-group">
+                <h3>Address : </h3>
+            </div>
+            <div class="form-group">
+                <h3>Contact : </h3>
+            </div>
+            <div class="form-group">
+                <h3>Birthdate : </h3>
+            </div>
+            <div class="form-group">
+                <h3>Age : </h3>
+            </div>
+            <div class="form-group">
+                <h3>Gender : </h3>
+            </div>
+            <div class="form-group">
+                <h3>Status : </h3>
             </div>
         </div>
-        @endforeach
-        <div class="row">
-            <div class="col">
-                <h3 style="letter-spacing: 5px;">T O T A L - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</h3>
+        <div class="col">
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $student->student_first_name }} {{ $student->student_last_name }}</i></h3>
             </div>
-            <div class="col-2">
-                <h3 style="color:orange;"> {{ $total }}</h3>
-                <script>$total = {{ $total }}</script>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $student->student_email }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $student->student_address }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $student->student_home_contact }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ date('F d Y', strtotime($student->student_birth_date)) }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $student->student_age }} yrs. old</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $student->student_gender }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $student->student_status }}</i></h3>
             </div>
         </div>
     </div>
     <hr>
-    <div class="right">
-        <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
-        <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
+    @if(Auth::user()->role_id == 2)
+        <div class="right">
+            <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
+            <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
+        </div>
+    @endif
+    <br><br><br>
+    <h1 class="text-warning">Miscellaneous and Other Fees</h1> 
+    <hr>
+    <table class="table table-default table-bordered">
+        <thead>
+            <th width="20%">Item Code</th>
+            <th width="65%">Item Description</th>
+            <th>Item Price</th>
+        </thead>
+        <tbody>
+            @foreach($miscellaneous_and_other_fees as $miscellaneous_and_other_fee)
+                <tr>
+                    <td class="text-white">{{ $miscellaneous_and_other_fee->item_code }}</td>
+                    <td class="text-white">{{ $miscellaneous_and_other_fee->item_description }}</td>
+                    <td class="text-white">{{ number_format($miscellaneous_and_other_fee->item_price, 2, '.', '') }}</td>
+                </tr>
+            @endforeach
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td colspan="2" style="text-align: center">T O T A L  &emsp; P A Y M E N T</th>
+                <td>{{ number_format($payments[0]->amount_payable, 2, '.', '') }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center">A M O U N T &emsp; P A I D</th>
+                <td>{{ number_format($payments[0]->amount_paid, 2, '.', '') }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center">A M O U N T &emsp; D U E</th>
+                <td class="text-warning" style="font-size: 20px !important;">{{ number_format($payments[0]->amount_due, 2, '.', '') }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    @if(Auth::user()->role_id == 2)
+        <div class="right">
+            <button type="button" class="btn btn-lg btn-warning btn-payment">Pay Bill</button>
+        </div>
+    @endif
+
+    <div id="paymentModal" class="modal fade" role="dialog" style="margin-top: 130px;">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #3f704d;">
+                <div class="modal-header">
+                    <h2 class="modal-title">Payment</h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <br>    
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="amount_paid">Paid Amount</label>
+                        <input type="number" class="form-control" name="amount_paid" required>
+                    </div>
+                </div>
+                <br>    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                </div>
+        </div>
     </div>
+    </div>
+
 </form>
 @endsection
 
 @section('script')  
-  <script type="text/javascript" src="{{ URL::to('/js/student.js') }}"></script>
+<script>
+$(document).ready(function() {
+    $(document).on('click', '.btn-payment', function() {
+        $('#paymentModal').modal('show');
+    });
+});
+</script>
 @endsection

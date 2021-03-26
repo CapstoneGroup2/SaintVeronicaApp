@@ -1,88 +1,34 @@
 @extends('layouts.app')
 
+@section('title')
+Miscellaneous & Other Fees
+@endsection
+
 @section('content')
-  @foreach($students as $student)
-    <form id="enrollment-form" action="" method="">
-      <div class="title-id">
-        <label>Student ID Number : <span>{{ $student->id }}</span></label>
-      </div>
-    <hr>
-    @csrf
-        <div class="row">
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">First Name</label>
-                    <input type="text" class="form-control" name="first_name" value="{{ $student->student_first_name }}" readonly>
-                </div>
-            </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">Middle Name</label>
-                    <input type="text" class="form-control" name="middle_name" value="{{ $student->student_middle_name }}" readonly>
-                </div>
-            </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" value="{{ $student->student_last_name }}" readonly>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" name="email" value="{{ $student->student_email}}" readonly>
-                </div>
-            </div>
-            <div class="col-5">    
-                <div class="form-group">
-                    <label for="contact">Home Contact Number</label>
-                    <input type="text" class="form-control" name="contact" value="{{ $student->student_home_contact }}" readonly>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="address">Home Address</label>
-            <input type="text" class="form-control" name="address" value="{{ $student->student_address }}" readonly>
-        </div>
-        <div class="row">
-            <div class="col">    
-                <div class="form-group">
-                    <label for="birthdate">Birthdate</label>
-                    <input type="date" class="form-control" name="birthdate" value="{{ $student->student_birth_date }}" readonly>
-                </div>
-            </div>  
-            <div class="col-2">    
-                <div class="form-group">
-                    <label for="age">Age</label>
-                    <input type="number" class="form-control" name="age" value="{{ $student->student_age }}" readonly>
-                </div>
-            </div>
-            <div class="col-3">    
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select class="form-control" name="gender" readonly>
-                        <option selected>{{ $student->student_gender }}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select class="form-control" name="status" readonly>
-                        <option selected>{{ $student->student_status }}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="right">
-            <a href="/students" class="btn btn-lg btn-danger btn-close" role="button">Cancel</a>
-            <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
-        </div>
-    </form>
-  @endforeach
+<h2 style="text-align: left">Miscellaneous and Other Fee : {{ $miscellaneous_and_other_fees[0]->item_code }}</h2> 
+<hr>
+<form id="enrollment-form" style="text-align:center;">
+    <div class="form-group">
+        <img src='/images/items/{{ $miscellaneous_and_other_fees[0]->item_image }}' height="200px">
+    </div>
+    <br>
+    <div class="form-group">
+        <h3>Item Code: <u style="letter-spacing: 2px;">{{ $miscellaneous_and_other_fees[0]->item_code }}</u></h3>
+    </div>
+    <br>
+    <div class="form-group">
+        <h3>Item Description: <u style="letter-spacing: 2px;">{{ $miscellaneous_and_other_fees[0]->item_description }}</u></h3>
+    </div>
+    <br>
+    <div class="form-group">
+        <h3>Item Price: <u style="letter-spacing: 2px;">{{ number_format($miscellaneous_and_other_fees[0]->item_price, 2, '.', 0) }}</u></h3>
+    </div>
+    <br>
+    <div class="center">
+        <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>    
+        <a href="/miscellaneous-and-other-fees/{{ $miscellaneous_and_other_fees[0]->id }}/edit" role="button" class="btn btn-lg btn-warning">Edit</a>
+    </div>
+</form>
 @endsection
 
 @section('script')  

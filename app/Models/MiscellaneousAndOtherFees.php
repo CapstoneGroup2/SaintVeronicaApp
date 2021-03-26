@@ -7,23 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class MiscellaneousAndOtherFees extends Model
 {
     protected $fillable = [
-        'grade_level_id',
-        'tutorial_id',
-        'miscellaneous_and_other_fee_name',
-        'miscellaneous_and_other_fee_description',
-        'miscellaneous_and_other_fee_price',
-        'miscellaneous_and_other_fee_image',
+        'class_id',
+        'item_code',
+        'item_description',
+        'item_price',
+        'item_image',
         'created_at',
         'updated_at'
         ];
     
-        protected function gradeLevel() 
+        protected function class() 
         {
-            return $this->hasOne(GradeLevel::class, 'id', 'grade_level_id');
-        }
-    
-        protected function tutorial()
-        {
-            return $this->hasOne(Tutorial::class, 'id', 'tutorial_id');
+            return $this->hasOne(Classes::class, 'id', 'classes_id');
         }
 }

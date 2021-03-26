@@ -4,92 +4,86 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\StudentsClasses;
+use App\Models\Classes;
+use App\Models\Payment;
+use App\Models\MiscellaneousAndOtherFees;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 class StudentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showGradeLevelStudents($id)
-    {
-        $gradeLevel = DB::select('select `grade_level_name` from grade_levels where id = ' . $id);
-        session()->put('category', 'grade-levels');
-        session()->put('category_id', $id);
-        session()->put('gradeLevelName', $gradeLevel[0]->grade_level_name);
-        $students = DB::select('select * from students where grade_level_id = ' . $id);
-        if (request()->ajax())
-        {
-            return datatables()->of($students)
+    public function index() {
+        $students_classes = DB::table('students_classes')
+            ->join('students', 'students.id', '=', 'students_classes.student_id')
+            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+            ->where('students.student_active_status', 1)
+            ->get();
+    
+            if (request()->ajax())
+            {
+                return datatables()->of($students_classes)
                 ->addColumn('full_name', function($data) {
                     $full_name = $data->student_first_name . ' ' . $data->student_middle_name . ' ' . $data->student_last_name;
                     return $full_name;
                 })
                 ->addColumn('action', function($data) {
-                    $button = '<a href="/students/'. $data->id . '" class="btn btn-md btn-primary" role="button" style="margin: 0 3%">View</a>';
-                    $button .= '<a href="/students/'. $data->id .'/edit" class="btn btn-md btn-warning" role="button" style="margin: 0 3%">Edit</a>';
-                    $button .= '<button id="'. $data->id .'" class="btn btn-md btn-danger btn-remove" style="margin: 0 3%">Remove</button>';
+                    $button = '<a href="/students/'. $data->student_id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
                     return $button;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['full_name', 'action'])
                 ->make(true);
-        }
-        return view('students.index', compact('students'));
+            }
+        return view('students.index', compact('students_classes'));
+    }
+
+    public function showMiscellaneousAndOtherFeesAfterEnroll($id) {
+        $miscellaneous_and_other_fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
+        $payments = Payment::where('student_id', session()->get('new_student_id'))->get();
+        return view('students.show_after_enroll', compact('miscellaneous_and_other_fees', 'payments'));
     }
     
-    public function showTutorialStudents($id) {
-        
-        $tutorial = DB::select('select `tutorial_name` from tutorials where id = ' . $id);
-        session()->put('category', 'tutorials');
-        session()->put('category_id', $id);
-        session()->put('tutorialName', $tutorial[0]->tutorial_name);
-        $students = DB::select('select * from students where tutorial_id = ' . $id);
+    public function showStudentsByClass($id) {
+        $students_classes = DB::table('students_classes')
+            ->join('students', 'students.id', '=', 'students_classes.student_id')
+            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+            ->where('students_classes.class_id', $id)
+            ->where('students.student_active_status', 1)
+            ->get();
+
+        $classes = Classes::where('id' , $id)->get();
+        session()->put('present_class_id', $id);
+        session()->put('present_class_name', $classes[0]->class_name);
+
         if (request()->ajax())
         {
-            return datatables()->of($students)
+            return datatables()->of($students_classes)
             ->addColumn('full_name', function($data) {
                 $full_name = $data->student_first_name . ' ' . $data->student_middle_name . ' ' . $data->student_last_name;
                 return $full_name;
             })
             ->addColumn('action', function($data) {
-                $button = '<a href="/students/'. $data->id . '" class="btn btn-md btn-primary" role="button" style="margin: 0 3%">View</a>';
-                $button .= '<a href="/students/'. $data->id .'/
-                " class="btn btn-md btn-warning" role="button" style="margin: 0 3%">Edit</a>';
-                $button .= '<button id="'. $data->id .'" class="btn btn-md btn-danger btn-remove" style="margin: 0 3%">Remove</button>';
+                $button = '<a href="/students/'. $data->student_id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                $button .= '<a href="/students/'. $data->student_id .'/edit
+                " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
+                $button .= '<button type="button" id="'. $data->student_id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
                 return $button;
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['full_name', 'action'])
             ->make(true);
         }
-        return view('students.index', compact('students'));
+        return view('students.show-students-by-class', compact('students_classes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('students.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'grade_level_id'        =>  'required',
-            'tutorial_id'           =>  'required',
             'student_first_name'    =>  'required',
-            'student_middle_name'   =>  'required',
             'student_last_name'     =>  'required',
             'student_email'         =>  'required',
             'student_home_contact'  =>  'required',
@@ -98,12 +92,10 @@ class StudentsController extends Controller
             'student_age'           =>  'required',
             'student_gender'        =>  'required',
             'student_status'        =>  'required',
+            'student_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
         $student = new Student();
-        
-        $student->grade_level_id = $request['grade_level_id'];
-        $student->tutorial_id = $request['tutorial_id'];
         $student->student_first_name = $request['student_first_name'];
         $student->student_middle_name = $request['student_middle_name'];
         $student->student_last_name = $request['student_last_name'];
@@ -117,54 +109,61 @@ class StudentsController extends Controller
         $student->student_active_status = 1;
         $student->created_at = date('Y-m-d');
 
-        $student->save();   
-        
-        return redirect('/miscellaneous-and-other-fees/' . rtrim(session()->get('category'), "s") . '/' . session()->get('category_id'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {        
-        $students = DB::select('select * from students where id = ' . $id);
-
-        if(session()->get('category') == 'grade-levels') {
-            $miscellaneous_and_other_fees = DB::select('select * from miscellaneous_and_other_fees where grade_level_id = ' . session()->get('category_id'));
-        } else if(session()->get('category') == 'tutorials') {
-            $miscellaneous_and_other_fees = DB::select('select * from miscellaneous_and_other_fees where tutorial_id = ' . session()->get('category_id'));
+        if ($request->hasFile('item_image')) {
+            $image = $request->file('item_image');
+            $name = $image->getClientOriginalName();
+            $destinationPath = public_path('/images/students');
+            $image->move($destinationPath, $name);
+        } else {
+            $name = 'default.png';
         }
 
-        return view('students.show', ['students' => $students, 'miscellaneous_and_other_fees' => $miscellaneous_and_other_fees]);
+        $student->student_image = $name;
+        $student->save();   
+
+        $student_id = Student::where('student_email', $request['student_email'])->get();
+
+        $student_class = new StudentsClasses();
+        $student_class->student_id = $student_id[0]->id;
+        $student_class->class_id = session()->get('present_class_id');
+        $student_class->save();
+
+        $fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
+        $payable = 0;
+        foreach($fees as $fee) {
+            $payable += $fee->item_price;
+        }
+        
+        $payment = new Payment();
+        $payment->student_id = $student_id[0]->id;
+        $payment->amount_payable = $payable;
+        $payment->amount_paid = 0;
+        $payment->amount_due = $payable;
+        $payment->save();
+
+        session()->put('new_student_name', $request['student_first_name'] . ' ' . $request['student_last_name']);
+        session()->put('new_student_id', $student_id[0]->id);
+        
+        return redirect('/students/miscellaneous-and-other-fees/classes/' . session()->get('present_class_id'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function show($id)
+    {        
+        $student = Student::find($id);
+        $miscellaneous_and_other_fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
+        $payments = Payment::where('student_id', $id)->get();
+        return view('students.show', compact('student', 'miscellaneous_and_other_fees', 'payments'));
+    }
+
     public function edit($id)
     {
         $students = DB::select('select * from students where id = ' . $id);
         return view('students.edit', ['students' => $students]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'grade_level_id'        =>  'required',
-            'tutorial_id'           =>  'required',
             'student_first_name'    =>  'required',
             'student_middle_name'   =>  'required',
             'student_last_name'     =>  'required',
@@ -175,12 +174,11 @@ class StudentsController extends Controller
             'student_age'           =>  'required',
             'student_gender'        =>  'required',
             'student_status'        =>  'required',
+            'student_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
         $student = Student::find($id);
         
-        $student->grade_level_id = $request['grade_level_id'];
-        $student->tutorial_id = $request['tutorial_id'];
         $student->student_first_name = $request['student_first_name'];
         $student->student_middle_name = $request['student_middle_name'];
         $student->student_last_name = $request['student_last_name'];
@@ -191,24 +189,25 @@ class StudentsController extends Controller
         $student->student_age = $request['student_age'];
         $student->student_birth_date = date('Y-m-d', strtotime($request['student_birth_date']));
         $student->student_status = $request['student_status'];
-        $student->student_active_status = 1;
         $student->updated_at = date('Y-m-d');
+
+        if ($request->hasFile('student_image')) {
+            $image = $request->file('student_image');
+            $name = $image->getClientOriginalName();
+            $destinationPath = public_path('/images/students');
+            $image->move($destinationPath, $name);
+            $student->student_image = $name;
+        } 
 
         $student->save();
 
-        return redirect('/students')->with('status', 'Student information successfully updated!');;
+        return redirect('/students/classes/' . session()->get('present_class_id'))->with('status', 'Student information successfully updated!');;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        DB::delete('delete from students where id = ' . $id);
-
-        return redirect('/students'); 
+        $student = Student::find($id);
+        $student->student_active_status = 0;
+        $student->save();
     }
 }

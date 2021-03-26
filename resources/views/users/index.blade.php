@@ -5,62 +5,90 @@ Users
 @endsection
 
 @section('content')
-<h2>Table of Users</h2> 
-  <table id="dataTable-students" class="table table-striped table-enrollment">
-    <hr>
-    <div class="row">
-      <div class="col">
-        <a href="/users/create" role="button" class="btn btn-lg btn-add">Add User</a>
-      </div>
-      <div class="col-7">
-        <label class="search" for="search">Search/Filter:</label>
-        <input id="search-input" name="search" type="text" class="btn btn-lg">
-      </div>
-      <div class="col">
-        <label for="" class="entries">Entries per page</label>
-        <select name="" id="filter-length" class="btn btn-lg" data-target="#dataTable-students">
-          <option value="10">5</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-      </div>
-    </div>
-    <hr>
-    <thead>
-        <tr>
-        <th scope="col">User Role</th>
-        <th scope="col">Full Name</th>
-        <th scope="col">Email Address</th>
-        <th scope="col">Home Address</th>
-        <th scope="col">Contact Number</th>
-        <th scope="col" class="center"></th>
-        </tr>
-    </thead>
-    <tbody>
-      @foreach($users as $user)
-        <tr id='{{ $user->id }}'>
-        <?php
-        if ($user->user_role_id == 1) 
-          echo '<td>Administrator</td>';
-        else
-          echo '<td>Registrar</td>';
-        ?>
-        <td>{{ $user->user_first_name . ' ' . $user->user_last_name }}</td>
-        <td>{{ $user->user_email }}</td>
-        <td>{{ $user->user_address }}</td>
-        <td>{{ $user->user_contact }}</td>
-        <td>
-            <a href="/users/{{ $user->id }}" class="btn btn-md btn-primary" role="button">View</a>
-            <a href="/users/{{ $user->id }}/edit" class="btn btn-md btn-warning" role="button">Edit</a>
-            <button class="btn btn-md btn-danger btn-remove">Remove</button>
-        </td>
-        </tr>
-      @endforeach
-    </tbody>
-    </table>
+<h2 style="text-align: left;">Users</h2>
+<div class="triangle-right" style="width:100px;"></div>
+<br>
+<button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add User</button> 
+<hr>
+<table id="dataTable" class="table table-striped table-enrollment table-default">
+<thead>
+  <th scope="col">User Role</th>
+  <th scope="col">Full Name</th>
+  <th scope="col">Email Address</th>
+  <th scope="col">Home Address</th>
+  <th scope="col">Contact Number</th>
+  <th scope="col">Action</th>
+  </tr>
+</thead>
+</table>
 @endsection
 
-@section('script')  
-  <script type="text/javascript" src="{{ URL::to('/js/student.js') }}"></script>
+@section('script')    
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script>
+var pathname = window.location.pathname;
+var num = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1);
+
+function setTable() {
+  $('#dataTable').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax:{
+      url: '/users',
+      type: 'GET'
+    },
+    columns:[
+      {
+        data: 'role_name',
+        name: 'role_name'
+      },
+      {
+        data: 'full_name',
+        name: 'full_name'
+      },
+      {
+        data: 'user_email',
+        name: 'user_email'
+      },
+      {
+        data: 'user_address',
+        name: 'user_address'
+      },
+      {
+        data: 'user_contact',
+        name: 'user_contact'
+      },
+      {
+        data: 'action',
+        name: 'action',
+        orderable: false,
+      }
+    ]
+  })
+}
+$(document).ready(function() {
+  setTable();
+  $('.btn-add').click(function () {
+    window.location = "/users/create";
+  });
+  $('[data-toggle="tooltip"]').tooltip();   
+  $('.btn-remove').click(function() {
+    var id = $(this).parent().parent('tr').attr('id');
+    var token = $("meta[name='csrf-token']").attr("content");
+    $.ajax({
+      url: '/users/' + id,
+            type: 'DELETE',
+            data: {
+                "id": id,
+                "_token": token
+            },
+      success: function(dataResult){
+                console.log("succcess");
+                location.reload(true);
+      }
+    });
+  })
+});
+
+</script>
 @endsection

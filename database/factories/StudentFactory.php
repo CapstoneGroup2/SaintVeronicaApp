@@ -8,8 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Student::class, function (Faker $faker) {
     return [
-        'grade_level_id'        => $faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
-        'tutorial_id'           => 1,
+        'student_image'         => 'default.png',
         'student_first_name'    => $faker->firstName,
         'student_middle_name'   => $faker->lastName,
         'student_last_name'     => $faker->lastName,

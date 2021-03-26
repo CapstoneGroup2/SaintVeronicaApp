@@ -5,14 +5,10 @@ Announcements
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-3">
-            <h2 style="margin: 15px 0px 0px 10px;">Announcements</h2> 
-        </div>
-        <div class="col-3   ">
-            <button role="button" class="btn btn-lg btn-add" style= "margin:15px 0px 7px 675px;">Add Announcements</button>
-        </div>
-    </div>
+<h2 style="text-align: left;">Announcements</h2> 
+<div class="triangle-right" style="width:260px;"></div>
+<br>
+<button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Announcements</button>
     <hr>
     @foreach($announcements as $announcements)
     <div class= "row">
@@ -28,6 +24,7 @@ Announcements
         </div>
     </div>
     @endforeach
+@endsection
 
 @section('script')  
   <script type="text/javascript" src="{{ URL::to('/js/student.js') }}"></script>

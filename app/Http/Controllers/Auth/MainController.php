@@ -23,17 +23,25 @@ class MainController extends Controller
 
         $user_data = array(
             'user_email'     =>  $request->get('email'),
-            'password'  =>  $request->get('password')
+            'password'       =>  $request->get('password')
         );
 
         if(Auth::attempt($user_data))
         {
-            error_log(print_r(Auth::user()->user_email, true));
-            return redirect('/index');
+            switch (Auth::user()->role_id) {
+                case 1;
+                    return redirect('/dashboard');
+                    break;
+                case 2:
+                    return redirect('/home');
+                    break;
+                default:
+                    return redirect('/login');
+                    break;
+            }
         }
         else
         {
-            error_log(print_r('wala', true));
             return back()->with('error', 'Wrong Login Details')->withInput($request->except('password'));
         }
     }

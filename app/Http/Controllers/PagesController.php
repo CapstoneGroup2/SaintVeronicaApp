@@ -3,36 +3,76 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\StudentsClasses;
+use App\Models\MiscellaneousAndOtherFees;
+use App\Models\Payment;
+use App\Models\Classes;
 use App\Models\Student;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
-    public function index() {
-        $students = [];
-        $students['nursery'] = Student::where('grade_level_id', 2)->get();
-        $students['nursery2'] = Student::where('grade_level_id', 3)->get();
-        $students['kinder1'] = Student::where('grade_level_id', 4)->get();
-        $students['kinder2'] = Student::where('grade_level_id', 5)->get();
-        $students['grade1'] = Student::where('grade_level_id', 6)->get();
-        $students['grade2'] = Student::where('grade_level_id', 7)->get();
-        $students['grade3'] = Student::where('grade_level_id', 8)->get();
-        $students['grade4'] = Student::where('grade_level_id', 9)->get();
-        $students['grade5'] = Student::where('grade_level_id', 10)->get();
-        $students['grade6'] = Student::where('grade_level_id', 11)->get();
-        $students['musicTutees'] = Student::where('tutorial_id', 2)->get();
-        $students['pianoTutees'] = Student::where('tutorial_id', 3)->get();
-        // dd($students);
-        return view('pages.index', compact('students'));
-    }
-    
-    public function students() {
-        return view('pages.students');
-    }
-    
-    public function payments() {
-        return view('pages.payments');
+    public function dashboard() {
+        $students_classes = StudentsClasses::all();
+        $classes = Classes::all();
+        $students = Student::all();
+
+        $students_count = [];
+        $put_sessions = [];
+
+        foreach($classes as $class) {
+            $student_count = [];
+            $student_count['class_id'] = $class->id;
+            $student_count['class_name'] = $class->class_name;
+
+            $count = 0;
+            foreach ($students_classes as $student_class) {
+                if ($student_class->class_id == $class->id) {
+                    ++$count;
+                }
+            }
+
+            $student_count['class_count'] = $count;
+            array_push($students_count, $student_count);
+            array_push($put_sessions, [$class->class_name, $class->id]);
+        }
+
+        session()->put('classes', $put_sessions);
+        return view('pages.dashboard', compact('students_classes', 'classes'));
     }
 
+    public function home() {
+        $students_classes = StudentsClasses::all();
+        $classes = Classes::all();
+        $students = Student::all();
+
+        $students_count = [];
+        $put_sessions = [];
+
+        foreach($classes as $class) {
+            $student_count = [];
+            $student_count['class_id'] = $class->id;
+            $student_count['class_name'] = $class->class_name;
+
+            $count = 0;
+            foreach ($students_classes as $student_class) {
+                if ($student_class->class_id == $class->id) {
+                    ++$count;
+                }
+            }
+
+            $student_count['class_count'] = $count;
+            array_push($students_count, $student_count);
+            array_push($put_sessions, [$class->class_name, $class->id]);
+        }
+
+        session()->put('classes', $put_sessions);
+
+        return view('pages.home', compact('students_count'));
+    }
+
+    public function reports() {
+        return view('pages.reports');
+    }
 }

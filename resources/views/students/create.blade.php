@@ -1,19 +1,14 @@
 @extends('layouts.app')
 
 @section('title')
-Students
+{{ session()->get('present_class_name') }} Students
 @endsection
 
 @section('content')
-<form id="enrollment-form" action="/students" method="post">
+<h2 style="text-align: left">{{ session()->get('present_class_name') }} Students</h2> 
+<hr>
+<form id="enrollment-form" action="/students" method="post" enctype="multipart/form-data">
     <h1>Enrollment Form</h1> 
-    <?php
-        if (session()->get('category') == 'grade-levels') {
-            echo '<h5>for ' . session()->get("gradeLevelName") . ' Students</h5>';
-        } else if (session()->get('category') == 'tutorials') {
-            echo '<h5>for ' . session()->get("tutorialName") . ' Students</h5>';
-        }
-    ?>
     <hr>
     @csrf
         <div class="row">
@@ -43,10 +38,16 @@ Students
                     <input type="email" class="form-control" name="student_email" placeholder="name@example.com">
                 </div>
             </div>
-            <div class="col-5">    
+            <div class="col-3">    
                 <div class="form-group">
                     <label for="contact">Home Contact Number</label>
                     <input type="text" class="form-control" name="student_home_contact" placeholder="+639">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="image">Profile Picture</label>
+                    <input type="file" name="student_image" class="form-control">
                 </div>
             </div>
         </div>
@@ -85,25 +86,6 @@ Students
                     </select>
                 </div>
             </div>
-        </div>
-        
-        <div class="row" style="display: none">
-            @if(session()->get('category') == 'grade-levels')
-                <select class="form-control" name="grade_level_id">
-                    <option value="{{session()->get('category_id')}}" selected>{{session()->get('category_id')}}</option>
-                </select>
-                <label for="status">Tutorial</label>
-                <select class="form-control" name="tutorial_id">
-                    <option value="1" selected>1</option>
-                </select>
-            @elseif(session()->get('category') == 'tutorials')
-                <select class="form-control" name="grade_level_id">
-                    <option value="1" selected>1</option>
-                </select> 
-                <select class="form-control" name="tutorial_id">
-                    <option value="{{session()->get('category_id')}}" selected>{{session()->get('category_id')}}</option>
-                </select>
-            @endif
         </div>
         <hr>
         <div class="right">

@@ -9,8 +9,6 @@ class Student extends Model
     protected $primaryKey= 'id';
     
     protected $fillable = [
-    'grade_level_id',
-    'tutorial_id'.
     'student_first_name',
     'student_middle_name',
     'student_last_name',
@@ -26,13 +24,7 @@ class Student extends Model
     'updated_at'
     ];
 
-    protected function gradeLevel() 
-    {
-        return $this->hasOne(GradeLevel::class, 'id', 'grade_level_id');
-    }
-
-    protected function tutorial()
-    {
-        return $this->hasOne(Tutorial::class, 'id', 'tutorial_id');
+    public function classes() {
+        return $this->belongsToMany(Classes::class, 'students_classes', 'student_id', 'class_id');
     }
 }

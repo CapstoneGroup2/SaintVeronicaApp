@@ -6,17 +6,18 @@ body {
 
 .sidenav {
   border: 1px #3f704d;
-  height: 90%;
-  width: 0;
+  height: 100%;
+  width: 250px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #FCF4A3;
   color: #74d890;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 120px;
+  background-color: white;
+  box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%);
 }
 
 .sidenav a, .dropdown-btn  {
@@ -49,13 +50,11 @@ body {
 .sidenav .closebtn {
   width: 0 !important;
   position: absolute;
-  top: 0;
+  top: 60px;
   right: 25px;
   font-size: 36px;
-  margin-left: 50px;
 }
 
-/* Add an active class to the active dropdown button */
 .active {
   background-color: #3f704d;
   color: #FCF4A3;
@@ -68,17 +67,12 @@ body {
 }
 
 .dropdown-container a {
-  font-size: 14px;
-  font-weight: 500;
-  background-color: #3f704d;
-  color: #FCF4A3;
+  font-size: 15px;
   padding-top: 8px;
   padding-bottom: 8px;
-}
-
-.dropdown-container a:hover {
-  background-color: #FCF4A3;
-  color: #3f704d;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-left: 15px;
 }
 
 /* Optional: Style the caret down icon */
@@ -88,7 +82,7 @@ body {
 }
 
 #main {
-  transition: margin-left .5s;
+  transition: padding-left .5s;
 }
 
 @media screen and (max-height: 450px) {
@@ -112,6 +106,7 @@ nav {
   background-color: #3f704d !important;
   min-height: 80px !important;
   margin-bottom: 0 !important;
+  border-radius: 0 !important;
 }
 
 .navbar-brand {
@@ -159,7 +154,7 @@ div.login {
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
-  font-size: 17px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -219,8 +214,8 @@ img#logo-navbar {
 img#profile {
   width: 50px;
   border-radius: 50%;
-  height: 40px;
-  padding: 5px;
+  height: 30px;
+  padding: 1px 5px;
 }
 
 img#logo-login {
@@ -357,8 +352,7 @@ div.right {
 }
 
 #enrollment-form {
-  /* margin: 0 15%; */
-  padding: 5%;
+  padding: 3% 3% 5% 3%;
   background-color: #3f704d;
   color: #FCF4A3;
   font-size: 12px;
@@ -397,12 +391,16 @@ div.title-id {
 }
 
 .btn-add {
-  font-size: 18px !important;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
   padding: 5px 20px !important;
   background-color: #3f704d;
   color: #FCF4A3;
   font-weight: 700 !important;
+}
+
+.btn-add:hover {
+  background-color: #315a3d !important;
+  color: white !important;
 }
 
 .card-body {
@@ -411,4 +409,32 @@ div.title-id {
 
 td a, td button {
   padding: 5px 10px !important;
+}
+
+table#dataTable {
+  width: 100% !important;
+}
+
+.btn-group button {
+  font-size: 12px !important;
+  letter-spacing: 1px;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.triangle-right {
+  height: 5px;
+  clip-path: polygon(0% 0%, 75% 0%, 80% 50%, 75% 100%, 0% 100%);
+  background-color: black;
+  letter-spacing: 2px;
+}
+
+.hover {
+  background: #3f704d3a !important;
+}
+
+.btn-group .btn {
+  border-radius: 2.25rem;
 }

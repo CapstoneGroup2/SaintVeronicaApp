@@ -1,94 +1,47 @@
 @extends('layouts.app')
 
+@section('title')
+Miscellaneous & Other Fees
+@endsection
+
 @section('content')
-  @foreach($students as $student)
-    <form id="enrollment-form" action="/students/{{ $student->id }}" method="POST">
-      {{method_field('PATCH')}}
-      <div class="title-id">
-        <label>Student ID Number : <span>{{ $student->id }}</span></label>
-      </div>
-      <hr>
-      @csrf
-        <div class="row">
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">First Name</label>
-                    <input type="text" class="form-control" name="first_name" value="{{ $student->student_first_name }}" >
-                </div>
+<h2 style="text-align: left">Miscellaneous and Other Fee : {{ $miscellaneous_and_other_fees[0]->item_code }}</h2> 
+<hr>
+<form id="enrollment-form" action="/miscellaneous-and-other-fees/{{ $miscellaneous_and_other_fees[0]->id }}" method="POST" enctype="multipart/form-data">
+    {{method_field('PATCH')}}
+    @csrf
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="status">Item Code</label>
+                <input type="text" class="form-control" name="item_code" placeholder="code of item" value="{{ $miscellaneous_and_other_fees[0]->item_code }}">
             </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">Middle Name</label>
-                    <input type="text" class="form-control" name="middle_name" value="{{ $student->student_middle_name }}" >
-                </div>
+            <div class="form-group">
+                <label for="status">Item Description</label>
+                <input type="text" class="form-control" name="item_description" placeholder="description of item" value="{{ $miscellaneous_and_other_fees[0]->item_description }}">
             </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" value="{{ $student->student_last_name }}" >
-                </div>
+            <div class="form-group">
+                <label for="status">Item Price</label>
+                <input type="text" class="form-control" name="item_price" placeholder="price of item" value="{{ $miscellaneous_and_other_fees[0]->item_price }}">
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" name="email" value="{{ $student->student_email}}" >
-                </div>
-            </div>
-            <div class="col-5">    
-                <div class="form-group">
-                    <label for="contact">Home Contact Number</label>
-                    <input type="text" class="form-control" name="contact" value="{{ $student->student_home_contact }}" >
-                </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label for="status">Item Image</label>
+                <br>
+                <img src='/images/items/{{ $miscellaneous_and_other_fees[0]->item_image }}' height="163px">
+                <input type="file" class="form-control" name="item_image" placeholder="image of item" style="width:200px">
             </div>
         </div>
-        <div class="form-group">
-            <label for="address">Home Address</label>
-            <input type="text" class="form-control" name="address" value="{{ $student->student_address }}" >
-        </div>
-        <div class="row">
-            <div class="col">    
-                <div class="form-group">
-                    <label for="birthdate">Birthdate</label>
-                    <input type="date" class="form-control" name="birthdate" value="{{ $student->student_birth_date }}" >
-                </div>
-            </div>  
-            <div class="col-2">    
-                <div class="form-group">
-                    <label for="age">Age</label>
-                    <input type="number" class="form-control" name="age" value="{{ $student->student_age }}" >
-                </div>
-            </div>
-            <div class="col-3">    
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select class="form-control" name="gender" >
-                        <option value="Female">Female</option>
-                        <option value="Male">Male</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select class="form-control" name="status" >
-                        <option value="Single">Single</option>
-                        <option value="Married">Married</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="right">
-            <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>    
-            <button type="submit" class="btn btn-lg btn-success">Update</button>
-        </div>
-    </form>
-  @endforeach
+    </div>
+    
+    <div class="right">
+        <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>    
+        <button type="submit" class="btn btn-lg btn-success">Update</button>
+    </div>
+</form>
 @endsection
 
 @section('script')  
-  <script type="text/javascript" src="{{ URL::to('/js/student.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::to('/js/student.js') }}"></script>
 @endsection

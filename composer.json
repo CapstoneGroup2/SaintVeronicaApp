@@ -39,11 +39,12 @@
         "classmap": [
             "tests/TestCase.php",
             "database/seeds",
-            "database/seeds/UserRolesTableSeeder.php",
-            "database/seeds/GradeLevelsTableSeeder.php",
+            "database/seeds/RolesTableSeeder.php",
+            "database/seeds/ClassesTableSeeder.php",
             "database/seeds/StudentsTableSeeder.php",
             "database/seeds/UserTableSeeder.php",
-            "database/seeds/TutorialsTableSeeder.php",
+            "database/seeds/StudentsClassesTableSeeder.php",
+            "database/seeds/PaymentsTableSeeder.php",
             "database/factories"
         ]
     },

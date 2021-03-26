@@ -1,24 +1,9 @@
-var $  = require( 'jquery' );
-var dt = require( 'datatables.net' )();
-
 $(document).ready(function(){
-    $('table').DataTable({
-        paging: false,
-        scrollY: 400
-    });
-
-    $("#search-input").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("tbody tr").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        }); 
-    });
-
     $('.btn-remove').click(function() {
         var id = $(this).parent().parent('tr').attr('id');
         var token = $("meta[name='csrf-token']").attr("content");
         $.ajax({
-			url: 'students/' + id,
+			url: '/students/' + id,
             type: 'DELETE',
             data: {
                 "id": id,
@@ -30,6 +15,4 @@ $(document).ready(function(){
 			}
 		});
     })
-
-    $('#tutorial').select2();
 });

@@ -5,88 +5,75 @@ Users
 @endsection
 
 @section('content')
-  @foreach($users as $user)
-    <form id="enrollment-form" action="" method="">
-    <h1>{{ $user->user_first_name . ' ' . $user->user_last_name }}</h1> 
-    <p>{{ $user->user_email }}</p>
+<h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
+<div class="triangle-right" style="width:230px;"></div>
+<hr>
+<form id="enrollment-form">
+    <h1 class="text-warning">User Profile Information</h1> 
     <hr>
-    @csrf
-        <div class="row">
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">First Name</label>
-                    <input type="text" class="form-control" name="user_first_name" placeholder="first name" value="{{ $user->user_first_name }}" readOnly>
-                </div>
-            </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">Middle Name</label>
-                    <input type="text" class="form-control" name="user_middle_name" placeholder="middle name" value="{{ $user->user_middle_name }}" readOnly>
-                </div>
-            </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="First Name">Last Name</label>
-                    <input type="text" class="form-control" name="user_last_name" placeholder="last name" value="{{ $user->user_last_name }}" readOnly>
-                </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group center">
+                <img src='/images/users/{{ $users[0]->user_image }}' height="200px" width="200px">
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" name="user_email" placeholder="name@example.com" value="{{ $user->user_email }}" readOnly>
-                </div>
+        <div class="col-3">
+            <div class="form-group">
+                <h3>Full Name : </h3>
             </div>
-            <div class="col-5">    
-                <div class="form-group">
-                    <label for="contact">Contact Number</label>
-                    <input type="text" class="form-control" name="user_contact" placeholder="+639" value="{{ $user->user_contact }}" readOnly>
-                </div>
+            <div class="form-group">
+                <h3>Email Address : </h3>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="address">Home Address</label>
-            <input type="text" class="form-control" name="user_address" placeholder="present address" value="{{ $user->user_address }}" readOnly>
-        </div>
-        <div class="row">
-            
-        <div class="col">    
-                <div class="form-group">
-                    <label for="user_role_id">User Role</label>
-                    <select class="form-control" name="user_role_id">
-                        @foreach($userRoles as $userRole)
-                        <option selected>{{ $userRole->user_role_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+            <div class="form-group">
+                <h3>Address : </h3>
             </div>
-            <div class="col-3">    
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select class="form-control" name="user_gender">
-                        <option selected>{{ $user->user_gender }}</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <h3>Contact : </h3>
             </div>
-            <div class="col">    
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select class="form-control" name="user_status">
-                        <option selected>{{ $user->user_status }}</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <h3>Gender : </h3>
+            </div>
+            <div class="form-group">
+                <h3>Status : </h3>
             </div>
         </div>
-        <hr>
-        <div class="right">
-            <a href="/users" class="btn btn-lg btn-danger" role="button">Cancel</a>
-            <a href="/users/{{ $user->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
+        <div class="col">
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $users[0]->user_first_name }} {{ $users[0]->user_last_name }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $users[0]->user_email }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $users[0]->user_address }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $users[0]->user_contact }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $users[0]->user_gender }}</i></h3>
+            </div>
+            <div class="form-group">
+                <h3 class="text-white"><i>{{ $users[0]->user_status }}</i></h3>
+            </div>
         </div>
-    </form>
-  @endforeach
+    </div>
+    <hr>
+    
+    <div class="right">
+        <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
+        <a href="/users/{{ $users[0]->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
+    </div>
+
+</form>
 @endsection
 
 @section('script')  
-  <script type="text/javascript" src="{{ URL::to('/js/student.js') }}"></script>
+<script>
+$(document).ready(function() {
+    $(document).on('click', '.btn-payment', function() {
+        $('#paymentModal').modal('show');
+    });
+});
+</script>
 @endsection

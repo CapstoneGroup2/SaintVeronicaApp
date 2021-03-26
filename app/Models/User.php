@@ -12,12 +12,13 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'user_role_id',
+        'role_id',
         'user_first_name',
         'user_middle_name',
         'user_last_name',
         'user_email',
         'password',
+        'user_image',
         'user_contact',
         'user_address',
         'user_gender',
@@ -27,8 +28,8 @@ class User extends Authenticatable
         'updated_at'
         ];
 
-    public function userRole() 
-    {
-        return $this->hasOne(UserRole::class, 'id', 'user_role_id');
+    public function role() {
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
+    
 }

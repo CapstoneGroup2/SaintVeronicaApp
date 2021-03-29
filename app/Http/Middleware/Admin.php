@@ -27,7 +27,7 @@ class Admin
 
         //registrar
         if(Auth::user()->role_id == 2) {
-            return response()->json('Unauthorized',401);
+            return redirect('/home');
         }
         
     }

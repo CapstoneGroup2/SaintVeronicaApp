@@ -393,8 +393,8 @@ div.title-id {
 .btn-add {
   letter-spacing: 3px;
   padding: 5px 20px !important;
-  background-color: #3f704d;
-  color: #FCF4A3;
+  background-color: #3f704d !important;
+  color: #FCF4A3 !important;
   font-weight: 700 !important;
 }
 

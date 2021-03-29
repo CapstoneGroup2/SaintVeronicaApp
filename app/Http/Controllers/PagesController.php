@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     public function dashboard() {
-        $students_classes = StudentsClasses::all();
+        $students_classes = DB::table('students_classes')
+            ->join('students', 'students.id', '=', 'students_classes.student_id')
+            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+            ->where('students.student_active_status', 1)
+            ->get();
+            
         $classes = Classes::all();
         $students = Student::all();
 
@@ -43,7 +48,12 @@ class PagesController extends Controller
     }
 
     public function home() {
-        $students_classes = StudentsClasses::all();
+        $students_classes = DB::table('students_classes')
+            ->join('students', 'students.id', '=', 'students_classes.student_id')
+            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+            ->where('students.student_active_status', 1)
+            ->get();
+
         $classes = Classes::all();
         $students = Student::all();
 
@@ -57,7 +67,7 @@ class PagesController extends Controller
 
             $count = 0;
             foreach ($students_classes as $student_class) {
-                if ($student_class->class_id == $class->id) {
+                if ($student_class->class_id == $class->id && $student_class->student_active_status == 1) {
                     ++$count;
                 }
             }

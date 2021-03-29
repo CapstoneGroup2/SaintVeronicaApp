@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+    <nav class="header navbar fixed-top navbar-expand-lg">
+        <a class="navbar-brand logo" href=""><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
+    </nav>
         <div class="container content">
         <div class="login-container">
                 <div class="login-form-1">

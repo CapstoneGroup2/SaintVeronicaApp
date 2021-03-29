@@ -23,7 +23,6 @@
 
                 @if(Auth::user()->role_id == 1)
                     <a href="/dashboard"><i class="fa fa-fw fa-home"></i> Dashboard</a>
-                    <a href="/students"><i class="fa fa-fw fa-user"></i> Students</a>
                     <button class="dropdown-btn"><i class="fa fa-fw fa-wrench"></i> Management
                         <i class="fa fa-caret-down"></i>
                     </button>
@@ -31,6 +30,14 @@
                         <a href="/users"><i class="fa fa-check-square"></i> Users</a>
                         <a href="/classes"><i class="fa fa-check-square"></i> Classes</a>
                         <a href="/announcements"><i class="fa fa-check-square"></i> Announcements</a>
+                    </div>
+                    <button class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        @foreach(session()->get('classes') as $class)
+                            <a href="/students/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
+                        @endforeach
                     </div>
                     <button class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
                         <i class="fa fa-caret-down"></i>
@@ -40,7 +47,7 @@
                             <a href="/miscellaneous-and-other-fees/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
                         @endforeach
                     </div>
-                    <a href="/payments"><i class="fa fa-fw fas fa-bullhorn"></i> Payments</a>
+                    <!-- <a href="/payments"><i class="fa fa-fw fas fa-bullhorn"></i> Payments</a> -->
                     <a href="/payments-history"><i class="fa fa-fw fas fa-bullhorn"></i> History of Payments</a>
                     <a href="/announcements"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>
                     <a href="/reports"><i class="fa fa-fw fa fa-area-chart"></i> Reports</a>
@@ -53,6 +60,14 @@
                     <div class="dropdown-container">
                         @foreach(session()->get('classes') as $class)
                             <a href="/students/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
+                        @endforeach
+                    </div>
+                    <button class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        @foreach(session()->get('classes') as $class)
+                            <a href="/miscellaneous-and-other-fees/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
                         @endforeach
                     </div>
                     <a href="/payments-history"><i class="fa fa-fw fas fa-bullhorn"></i> History of Payments</a>

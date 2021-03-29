@@ -16,11 +16,16 @@ class PaymentsController extends Controller
         $histories = DB::table('payments_histories')
             ->leftJoin('students', 'students.id', '=', 'payments_histories.student_id')
             ->leftJoin('users', 'users.id', '=', 'payments_histories.user_id')
+            ->where('students.student_active_status', 1)
+            ->orderBy('payments_histories.created_at')
             ->get();
         
         if (request()->ajax())
         {
             return datatables()->of($histories)
+            ->addColumn('date_paid', function($data) {
+                return date("M jS, Y", strtotime($data->date_paid));
+            })
             ->addColumn('student_name', function($data) {
                 $full_name = $data->student_first_name . ' ' . $data->student_last_name;
                 return $full_name;
@@ -29,7 +34,7 @@ class PaymentsController extends Controller
                 $full_name = $data->user_first_name . ' ' . $data->user_last_name;
                 return $full_name;
             })
-            ->rawColumns(['student_name', 'user_name'])
+            ->rawColumns(['date_paid', 'student_name', 'user_name'])
             ->make(true);
         }
 

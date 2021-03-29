@@ -22,7 +22,7 @@ class Registrar
 
         // admin
         if(Auth::user()->role_id == 1) { 
-            return response()->json('Unauthorized',401);
+            return redirect('/dashboard');
         }
 
         //registrar

@@ -11,16 +11,38 @@ Users
 <button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add User</button> 
 <hr>
 <table id="dataTable" class="table table-striped table-enrollment table-default">
-<thead>
-  <th scope="col">User Role</th>
-  <th scope="col">Full Name</th>
-  <th scope="col">Email Address</th>
-  <th scope="col">Home Address</th>
-  <th scope="col">Contact Number</th>
-  <th scope="col">Action</th>
-  </tr>
-</thead>
+  <thead>
+    <th scope="col">User Role</th>
+    <th scope="col">Full Name</th>
+    <th scope="col">Email Address</th>
+    <th scope="col">Home Address</th>
+    <th scope="col">Contact Number</th>
+    <th scope="col">Action</th>
+    </tr>
+  </thead>
 </table>
+<div id="loader" class="text-center">
+  <div class="spinner-border" style="width: 5rem; height: 5rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div id="confirmModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirmation</h2>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4 align="center" style="margin:0;">Are you sure you want to remove this user?</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
+        <button type="button" id="btn-ok" class="btn btn-lg btn-danger">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('script')    
@@ -68,26 +90,43 @@ function setTable() {
 }
 $(document).ready(function() {
   setTable();
+  
+  $("#loader").hide();
+  
   $('.btn-add').click(function () {
     window.location = "/users/create";
   });
+
   $('[data-toggle="tooltip"]').tooltip();   
-  $('.btn-remove').click(function() {
-    var id = $(this).parent().parent('tr').attr('id');
+
+  var id;
+
+  $(document).on('click', '.btn-remove', function() {
+    id= $(this).attr('id');
+    $('#confirmModal').modal('show');
+  });
+
+  $('#btn-ok').click(function() {
     var token = $("meta[name='csrf-token']").attr("content");
     $.ajax({
       url: '/users/' + id,
-            type: 'DELETE',
-            data: {
-                "id": id,
-                "_token": token
-            },
+      type: 'DELETE',
+      data: {
+          "id": id,
+          "_token": token
+      },
+      beforeSend: function(){
+        $('#confirmModal').modal('hide');
+        $("#loader").show();
+        $('table').hide();
+      },
       success: function(dataResult){
-                console.log("succcess");
-                location.reload(true);
+        console.log("succcess");
+        location.reload(true);
       }
     });
-  })
+  });
+  
 });
 
 </script>

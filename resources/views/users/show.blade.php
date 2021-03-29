@@ -48,13 +48,34 @@ Users
                 <h3 class="text-white"><i>{{ $users[0]->user_address }}</i></h3>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $users[0]->user_contact }}</i></h3>
+                <h3 class="text-white"><i>
+                    <?php 
+                    if($users[0]->user_contact != '') {
+                        echo $users[0]->user_contact;
+                    }else{
+                        echo 'null';
+                    } ?>
+                </i></h3>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $users[0]->user_gender }}</i></h3>
+                <h3 class="text-white"><i>
+                <?php 
+                    if($users[0]->user_gender != '') {
+                        echo $users[0]->user_gender;
+                    }else{
+                        echo 'null';
+                    } ?>
+                </i></h3>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $users[0]->user_status }}</i></h3>
+                <h3 class="text-white"><i>
+                    <?php 
+                    if($users[0]->user_status != '') {
+                        echo $users[0]->user_status;
+                    }else{
+                        echo 'null';
+                    } ?>
+                    </i></h3>
             </div>
         </div>
     </div>

@@ -85,7 +85,7 @@ class StudentsController extends Controller
         $this->validate($request, [
             'student_first_name'    =>  'required',
             'student_last_name'     =>  'required',
-            'student_email'         =>  'required',
+            'student_email'         =>  'required|unique:students',
             'student_home_contact'  =>  'required',
             'student_address'       =>  'required',
             'student_birth_date'    =>  'required',
@@ -121,12 +121,12 @@ class StudentsController extends Controller
         $student->student_image = $name;
         $student->save();   
 
-        $student_id = Student::where('student_email', $request['student_email'])->get();
-
         $student_class = new StudentsClasses();
-        $student_class->student_id = $student_id[0]->id;
+        $student_class->student_id = $student->id;
         $student_class->class_id = session()->get('present_class_id');
-        $student_class->save();
+        // $student_class->save();
+
+        $students = Student::where('student_email', $request['student_email'])->get();
 
         $fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
         $payable = 0;
@@ -135,7 +135,7 @@ class StudentsController extends Controller
         }
         
         $payment = new Payment();
-        $payment->student_id = $student_id[0]->id;
+        $payment->student_id = $students[0]->id;
         $payment->amount_payable = $payable;
         $payment->amount_paid = 0;
         $payment->amount_due = $payable;

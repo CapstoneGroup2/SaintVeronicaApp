@@ -15,7 +15,7 @@ Students
       <th scope="col">Full Name</th>
       <th scope="col">Email Address</th>
       <th scope="col">Address</th>
-      <th scope="col">Contact</th>
+      <th scope="col">Class</th>
       <th scope="col">Action</th>
       </tr>
   </thead>
@@ -54,8 +54,8 @@ function setTable() {
         name: 'student_address'
       },
       {
-        data: 'student_home_contact',
-        name: 'student_home_contact'
+        data: 'class_name',
+        name: 'class_name'
       },
       {
         data: 'action',

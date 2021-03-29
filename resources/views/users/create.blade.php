@@ -54,9 +54,9 @@ Users
             <div class="form-group">
                 <label for="user_role_id">User Role</label>
                 <select class="form-control" name="user_role_id">
-                    <option value="" selected>select user role</option>
-                   @foreach($userRoles as $userRole)
-                        <option value="{{ $userRole->id }}">{{ $userRole->user_role_name }}</option> 
+                    <option selected>select user role</option>
+                   @foreach($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->role_name }}</option> 
                    @endforeach
                 </select>
             </div>
@@ -65,7 +65,7 @@ Users
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select class="form-control" name="user_gender">
-                    <option value="" selected>select gender</option>
+                    <option selected>select gender</option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
                 </select>

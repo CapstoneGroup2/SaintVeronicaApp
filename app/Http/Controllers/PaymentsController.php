@@ -75,7 +75,7 @@ class PaymentsController extends Controller
         $history->date_paid = new DateTime('now');
         $history->save();
 
-        return redirect('/students/classes/' . session()->get('present_class_id'));
+        return redirect('/students/' . $student_id);
     }
 
     public function destroy($id)

@@ -32,8 +32,6 @@ Route::middleware(['registrar'])->group(function () {
     });
 
     Route::get('/home', 'PagesController@home');
-    
-    Route::patch('/payments/{id}', 'PaymentsController@update');
 
     Route::resource('/announcements', 'AnnouncementsController')->only([
         'delete', 'create'
@@ -48,6 +46,8 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('/students/classes/{id}', 'StudentsController@showStudentsByClass');
 
+    Route::get('/students/payments/{id}/edit', 'StudentsController@showMiscellaneousAndOtherFeesAfterEnroll');
+
     Route::delete('/students/{id}', 'StudentsController@destroy');
 
     Route::resource('/students', 'StudentsController');
@@ -55,6 +55,8 @@ Route::middleware(['web'])->group(function () {
     Route::get('/miscellaneous-and-other-fees/classes/{id}', 'MiscellaneousAndOtherFeesController@showMiscellaneousAndOtherFees');
     
     Route::get('/payments-history', 'PaymentsController@history');
+    
+    Route::patch('/payments/{id}', 'PaymentsController@update');
 
     Route::resource('/announcements', 'AnnouncementsController')->only([
         'update', 'index'

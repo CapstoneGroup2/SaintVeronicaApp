@@ -12,6 +12,8 @@ Students
     <form id="enrollment-form" action="/students/{{ $student->id }}" method="POST" enctype="multipart/form-data">
         {{method_field('PATCH')}}
         @csrf
+        <h2 class="text-warning">Student Profile Information</h2> 
+        <hr>
         <div class="row">
             <div class="col">
                 <div class="row">
@@ -90,8 +92,8 @@ Students
             <div class="form-group center">
                 <label for="status">Student Profile Picture</label>
                 <br>
-                <img src='/images/students/{{ $student->student_image }}' height="243px" width="250px">
-                <input type="file" class="form-control" name="student_image" style="width:250px">
+                <img src='/images/students/{{ $student->student_image }}' height="200px" width="92%">
+                <input type="file" class="form-control" name="student_image" style="width:92%">
             </div>
         </div>
     </div>

@@ -72,7 +72,7 @@ class StudentsController extends Controller
             ->rawColumns(['full_name', 'action'])
             ->make(true);
         }
-        return view('students.show-students-by-class', compact('students_classes'));
+        return view('students.index', compact('students_classes'));
     }
 
     public function create()
@@ -121,12 +121,12 @@ class StudentsController extends Controller
         $student->student_image = $name;
         $student->save();   
 
-        $student_class = new StudentsClasses();
-        $student_class->student_id = $student->id;
-        $student_class->class_id = session()->get('present_class_id');
-        // $student_class->save();
-
         $students = Student::where('student_email', $request['student_email'])->get();
+
+        $student_class = new StudentsClasses();
+        $student_class->student_id = $students[0]->id;
+        $student_class->class_id = session()->get('present_class_id');
+        $student_class->save();
 
         $fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
         $payable = 0;
@@ -142,9 +142,9 @@ class StudentsController extends Controller
         $payment->save();
 
         session()->put('new_student_name', $request['student_first_name'] . ' ' . $request['student_last_name']);
-        session()->put('new_student_id', $student_id[0]->id);
+        session()->put('new_student_id', $students[0]->id);
         
-        return redirect('/students/miscellaneous-and-other-fees/classes/' . session()->get('present_class_id'));
+        return redirect('/students/payments/' . session()->get('present_class_id') . '/edit');
     }
 
     public function show($id)
@@ -198,6 +198,7 @@ class StudentsController extends Controller
             $image->move($destinationPath, $name);
             $student->student_image = $name;
         } 
+        dd($student);
 
         $student->save();
 

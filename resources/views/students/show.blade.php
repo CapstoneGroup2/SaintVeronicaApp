@@ -11,65 +11,39 @@
 <form id="enrollment-form" action="/payments/{{ $student->id }}" method="POST">
     {{method_field('PATCH')}}
     @csrf
-    <h1 class="text-warning">Student Profile Information</h1> 
+    <h2 class="text-warning">Student Profile Information</h2> 
     <hr>
     
     <div class="row">
-        <div class="col-3">
+        <div class="col-4">
             <div class="form-group center">
                 <img src='/images/students/{{ $student->student_image }}' height="243px" width="220px">
             </div>
         </div>
-        <div class="col-3">
-            <div class="form-group">
-                <h3>Full Name : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Email Address : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Address : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Contact : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Birthdate : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Age : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Gender : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Status : </h3>
-            </div>
-        </div>
         <div class="col">
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $student->student_first_name }} {{ $student->student_last_name }}</i></h3>
+                <p style="font-size:13px;">Full Name : <span class="text-white">{{ $student->student_first_name }} {{ $student->student_last_name }}</span></p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $student->student_email }}</i></h3>
+                <p style="font-size:13px;">Email Address : <span class="text-white">{{ $student->student_email }}</span></p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $student->student_address }}</i></h3>
+                <p style="font-size:13px;">Address : <span class="text-white">{{ $student->student_address }}</span></p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $student->student_home_contact }}</i></h3>
+                <p style="font-size:13px;">Contact : <span class="text-white">{{ $student->student_home_contact }}</span></p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ date('F d Y', strtotime($student->student_birth_date)) }}</i></h3>
+                <p style="font-size:13px;">Birthdate : <span class="text-white">{{ $student->student_birth_date }}</span></p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $student->student_age }} yrs. old</i></h3>
+                <p style="font-size:13px;">Age : <span class="text-white">{{ $student->student_age }} yrs. old</span></p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $student->student_gender }}</i></h3>
+                <p style="font-size:13px;">Gender : <span class="text-white">{{ $student->student_gender }}</span></p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $student->student_status }}</i></h3>
+                <p style="font-size:13px;">Status : <span class="text-white">{{ $student->student_status }}</span></p>
             </div>
         </div>
     </div>
@@ -77,18 +51,14 @@
     <hr>
 
     <div class="right">
-        @if(Auth::user()->role_id == 2)
-                <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
-                <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
-        @else
-        <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Back</a>
-        @endif
+        <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
+        <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
     </div>
 
     <br><br><br>
 
     <div id="toPrint">
-        <h1 class="text-warning">Miscellaneous and Other Fees</h1> 
+        <h2 class="text-warning">Miscellaneous and Other Fees</h2> 
         <hr>
         <table class="table table-default table-bordered" style="width: 100%; border: 1px solid white;border-collapse:collapse;">
             <thead>
@@ -99,9 +69,9 @@
             <tbody>
                 @foreach($miscellaneous_and_other_fees as $miscellaneous_and_other_fee)
                     <tr>
-                        <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 6px;">{{ $miscellaneous_and_other_fee->item_code }}</td>
-                        <td class="text-white" style="text-align:left;border: 1px solid white;padding: 6px;">{{ $miscellaneous_and_other_fee->item_description }}</td>
-                        <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 6px;">{{ number_format($miscellaneous_and_other_fee->item_price, 2, '.', '') }}</td>
+                        <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 6px;font-size: 13px !important;">{{ $miscellaneous_and_other_fee->item_code }}</td>
+                        <td class="text-white" style="text-align:left;border: 1px solid white;padding: 6px;font-size: 13px !important;">{{ $miscellaneous_and_other_fee->item_description }}</td>
+                        <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 6px;font-size: 13px !important;">{{ number_format($miscellaneous_and_other_fee->item_price, 2, '.', '') }}</td>
                     </tr>
                 @endforeach
                 <tr>
@@ -112,15 +82,15 @@
             </tbody>
             <tbody>
                 <tr>
-                    <td colspan="2" style="text-align: center;border: 1px solid white;padding: 6px;padding: 6px;">T O T A L  &emsp; P A Y M E N T</th>
-                    <td style="border: 1px solid white;padding: 6px;">{{ number_format($payments[0]->amount_payable, 2, '.', '') }}</td>
+                    <td class="text-white" colspan="2" style="text-align: center;border: 1px solid white;padding: 6px;padding: 6px;">T O T A L  &emsp; P A Y M E N T</th>
+                    <td class="text-white" style="border: 1px solid white;padding: 6px;">{{ number_format($payments[0]->amount_payable, 2, '.', '') }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center;border: 1px solid white;padding: 6px;padding: 6px;">A M O U N T &emsp; P A I D</th>
-                    <td style="border: 1px solid white;padding: 6px;">{{ number_format($payments[0]->amount_paid, 2, '.', '') }}</td>
+                    <td class="text-white" colspan="2" style="text-align: center;border: 1px solid white;padding: 6px;padding: 6px;">A M O U N T &emsp; P A I D</th>
+                    <td class="text-white" style="border: 1px solid white;padding: 6px;">{{ number_format($payments[0]->amount_paid, 2, '.', '') }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center;border: 1px solid white;padding: 6px;padding: 6px;">A M O U N T &emsp; D U E</th>
+                    <td class="text-white" colspan="2" style="text-align: center;border: 1px solid white;padding: 6px;padding: 6px;">A M O U N T &emsp; D U E</th>
                     <td class="text-warning" style="font-size: 20px !important;border: 1px solid white;padding: 6px;">{{ number_format($payments[0]->amount_due, 2, '.', '') }}</td>
                 </tr>
             </tbody>
@@ -132,20 +102,18 @@
                 <h4>{{ Auth::user()->user_first_name }} {{ Auth::user()->user_last_name }} (Registrar)</h4>
             </div>
             <div class="col" style="text-align: center;">
-                <h4 style="text-align: left;">{{ session()->get('present_class_name') }} Student:</h4>
+                <h4 style="text-align: left;">Given to:</h4>
                 <h4>_____________________________________________</h4>
-                <h4>{{ $student->student_first_name }} {{ $student->student_last_name }}</h4>
+                <h4>{{ $student->student_first_name }} {{ $student->student_last_name }} ({{ session()->get('present_class_name') }} Student)</h4>
             </div>
         </div>
     </div>
 
     <hr>
-    @if(Auth::user()->role_id == 2)
-        <div class="right">
-            <button type="button" class="btn btn-lg btn-warning btn-payment">Pay Bill</button> 
-            <button type="button" class="btn btn-lg btn-success btn-print">Print Bill</button> 
-        </div>
-    @endif
+    <div class="right">
+        <button type="button" class="btn btn-lg btn-warning btn-payment">Pay Bill</button> 
+        <button type="button" class="btn btn-lg btn-success btn-print">Print Bill</button> 
+    </div>
 
     <div id="paymentModal" class="modal fade" role="dialog" style="padding-top: 130px;">
         <div class="modal-dialog">

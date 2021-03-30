@@ -98,11 +98,11 @@ Students
         </div>
     </div>
         
-        <hr>
-        <div class="right">
-            <a href="/students/classes/{{ session()->get('present_class_id') }}" class="btn btn-lg btn-danger">Cancel</a>
-            <button type="submit" class="btn btn-lg btn-success">Update</button>
-        </div>
+    <hr>
+    <div class="right">
+        <a href="/students/classes/{{ session()->get('present_class_id') }}" class="btn btn-lg btn-danger">Cancel</a>
+        <button type="submit" class="btn btn-lg btn-success">Update</button>
+    </div>
     </form>
   @endforeach
 @endsection

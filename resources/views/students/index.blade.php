@@ -22,6 +22,11 @@
       </tr>
   </thead>
 </table>
+<div id="loader" class="text-center" style="margin-top: 50px;">
+  <div class="spinner-border" style="width: 10rem; height: 10rem;font-size: 25px;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
 <div id="confirmModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -86,6 +91,8 @@ function setTable() {
 }
 $(document).ready(function() {
   setTable();
+  
+  $("#loader").hide();
 
   $('.btn-add').click(function () {
     window.location = "/students/create";
@@ -109,14 +116,14 @@ $(document).ready(function() {
           "id": id,
           "_token": token
       },
-      beforeSend:function() {
-        $('#btn-ok').text('Deleting...');
-      },
-      success: function(data) {
-        console.log('im here');
+      beforeSend: function(){
         $('#confirmModal').modal('hide');
-        $('#btn-ok').text('OK');
-        $('#dataTable').DataTable().ajax.reload();
+        $("#loader").show();
+        $('table').hide();
+      },
+      success: function(dataResult){
+        console.log("succcess");
+        location.reload(true);
       }
     });
   });

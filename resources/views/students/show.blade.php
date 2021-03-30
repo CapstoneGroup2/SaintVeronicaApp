@@ -99,7 +99,11 @@
             <div class="col" style="text-align: center;">
                 <h4 style="text-align: left;">Printed By :</h4>
                 <h4>_____________________________________________</h4>
-                <h4>{{ Auth::user()->user_first_name }} {{ Auth::user()->user_last_name }} (Registrar)</h4>
+                <h4>{{ Auth::user()->user_first_name }} {{ Auth::user()->user_last_name }}
+                    <?php
+                        echo (Auth::user()->role_id == 1) ? '(Administrator)' : '(Registrar)';
+                    ?>
+                </h4>
             </div>
             <div class="col" style="text-align: center;">
                 <h4 style="text-align: left;">Given to:</h4>

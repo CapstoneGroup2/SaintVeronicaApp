@@ -17,7 +17,7 @@ class CreateMiscellaneousAndOtherFeesTable extends Migration
         Schema::create('miscellaneous_and_other_fees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('class_id');
-            $table->foreign('class_id')->references('id')->on('classes');
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->string('item_code');
             $table->string('item_description');
             $table->double('item_price');

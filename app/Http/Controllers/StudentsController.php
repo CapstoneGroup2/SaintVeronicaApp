@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\StudentsClasses;
 use App\Models\Classes;
 use App\Models\Payment;
+use App\Models\PaymentsHistory;
 use App\Models\MiscellaneousAndOtherFees;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -109,8 +110,8 @@ class StudentsController extends Controller
         $student->student_active_status = 1;
         $student->created_at = date('Y-m-d');
 
-        if ($request->hasFile('item_image')) {
-            $image = $request->file('item_image');
+        if ($request->hasFile('student_image')) {
+            $image = $request->file('student_image');
             $name = $image->getClientOriginalName();
             $destinationPath = public_path('/images/students');
             $image->move($destinationPath, $name);
@@ -165,7 +166,6 @@ class StudentsController extends Controller
     {
         $this->validate($request, [
             'student_first_name'    =>  'required',
-            'student_middle_name'   =>  'required',
             'student_last_name'     =>  'required',
             'student_email'         =>  'required',
             'student_home_contact'  =>  'required',
@@ -198,7 +198,6 @@ class StudentsController extends Controller
             $image->move($destinationPath, $name);
             $student->student_image = $name;
         } 
-        dd($student);
 
         $student->save();
 
@@ -207,8 +206,20 @@ class StudentsController extends Controller
 
     public function destroy($id)
     {
+        dd($id);
         $student = Student::find($id);
-        $student->student_active_status = 0;
+        $student_class = StudentsClasses::where('student_id', $id)->get();
+        $student_payment = Payment::where('student_id', $id)->get();
+        $student_payment_history = PaymentsHistory::where('student_id', $id)->get();
+        dd($student_payment_history[0]);
+        $student_payment_history[0]->delete();
+        $student_payment[0]->delete();
+        $student_class[0]->delete();
+        $student->delete();
+
+        $student_payment_history[0]->save();
+        $student_payment[0]->save();
+        $student_class[0]->save();
         $student->save();
     }
 }

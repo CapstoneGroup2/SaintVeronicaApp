@@ -13,7 +13,7 @@ class CreatePaymentsHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('payments_histories');
+        Schema::dropIfExists('payments_histories')->onDelete('cascade');
         Schema::create('payments_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('student_id');

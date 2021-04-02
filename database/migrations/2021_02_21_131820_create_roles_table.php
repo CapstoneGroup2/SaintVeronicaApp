@@ -13,7 +13,7 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('roles')->onDelete('cascade');
         Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('role_name');

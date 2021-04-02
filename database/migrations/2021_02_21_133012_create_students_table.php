@@ -13,7 +13,7 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('students')->onDelete('cascade');
+        Schema::dropIfExists('students');
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('student_image')->nullable();

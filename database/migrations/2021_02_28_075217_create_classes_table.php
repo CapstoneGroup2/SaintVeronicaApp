@@ -13,7 +13,7 @@ class CreateClassesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('classes')->onDelete('cascade');
+        Schema::dropIfExists('classes');
         Schema::create('classes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('class_name');

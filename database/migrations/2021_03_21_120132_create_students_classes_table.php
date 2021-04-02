@@ -13,7 +13,7 @@ class CreateStudentsClassesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('students_classes')->onDelete('cascade');
+        Schema::dropIfExists('students_classes');
         Schema::create('students_classes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('student_id');

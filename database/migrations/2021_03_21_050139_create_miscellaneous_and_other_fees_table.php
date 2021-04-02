@@ -13,7 +13,7 @@ class CreateMiscellaneousAndOtherFeesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('miscellaneous_and_other_fees')->onDelete('cascade');
+        Schema::dropIfExists('miscellaneous_and_other_fees');
         Schema::create('miscellaneous_and_other_fees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('class_id');

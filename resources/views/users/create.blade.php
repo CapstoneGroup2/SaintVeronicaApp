@@ -5,9 +5,10 @@ Users
 @endsection
 
 @section('content')
+<h2 style="text-align: left">Add User</h2> 
+<hr>
 <form id="enrollment-form" action="/users" method="post">
-<h1>Add User</h1> 
-<p>User can be administrator or registrar</p>
+<h2 class="text-warning">User Information</h2>
 <hr>
 @csrf
     <div class="row">
@@ -30,6 +31,9 @@ Users
             </div>
         </div>
     </div>
+
+    <br>
+
     <div class="row">
         <div class="col">
             <div class="form-group">
@@ -44,13 +48,18 @@ Users
             </div>
         </div>
     </div>
+
+    <br>
+
     <div class="form-group">
         <label for="address">Home Address</label>
         <input type="text" class="form-control" name="user_address" placeholder="present address">
     </div>
+
+    <br>
+
     <div class="row">
-        
-    <div class="col">    
+        <div class="col">    
             <div class="form-group">
                 <label for="user_role_id">User Role</label>
                 <select class="form-control" name="user_role_id">
@@ -82,7 +91,9 @@ Users
             </div>
         </div>
     </div>
+
     <hr>
+
     <div class="right">
         <a href="/users" class="btn btn-lg btn-danger" role="button">Cancel</a>
         <button type="submit" class="btn btn-lg btn-success">Submit</button>

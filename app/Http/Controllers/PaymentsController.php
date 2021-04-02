@@ -17,7 +17,6 @@ class PaymentsController extends Controller
             ->leftJoin('students', 'students.id', '=', 'payments_histories.student_id')
             ->leftJoin('users', 'users.id', '=', 'payments_histories.user_id')
             ->where('students.student_active_status', 1)
-            ->orderBy('payments_histories.id', 'desc')
             ->get();
         
         if (request()->ajax())

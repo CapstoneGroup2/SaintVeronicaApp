@@ -30,21 +30,23 @@
         <a class="navbar-brand logo" href=""><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
     </nav>
         <div class="container content">
-        <div class="login-container">
+            <div class="login-container">
                 <div class="login-form-1">
-                    <img id="logo-login" src="{{ URL::to('/images/logo.jpg') }}" alt="logo">
                     
                     <form method="POST" action="{{ url('/login') }}">
                         @csrf
+
                         @if(isset(Auth::user()->user_email))
                             <script>window.location="/index";</script>
                         @endif
+
                         @if($message = Session::get('error'))
                             <div class="alert alert-danger alert-block" style="font-size: 13px;">
                                 <button class="close" type="button" data-dismiss="alert">x</button>
                                 <strong>{{ $message }}</strong>
                             </div>
                         @endif
+
                         @if(count($errors) > 0)
                             <div class="alert alert-danger" style="font-size: 13px;">
                                 <ul>
@@ -54,8 +56,9 @@
                                 </ul>
                             </div>
                         @endif
+
                         <div class="form-group">
-                            <label for="email">Email:</label>
+                            <label for="email" style="margin-bottom: 1rem; letter-spacing: 1px;">Email:</label>
                             <input type="email" class="form-control" id="name" name="email" placeholder="Your Email *" value="{{ old('email') }}" />
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -63,8 +66,9 @@
                                 </span>
                             @enderror
                         </div>
+                        
                         <div class="form-group">
-                            <label for="password">Password:</label>
+                            <label for="password" style="margin-bottom: 1rem; letter-spacing: 1px;">Password:</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" value="{{ old('password') }}" />
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -72,13 +76,15 @@
                                 </span>
                             @enderror
                         </div>
-                    <br>
+
+                        <br>
+
                         <div class="form-group">
                             <button type="submit" class="btn btn-lg btnSubmit">Login</button>
                         </div>
                     </form>
                 </div>
-        </div>
+            </div>
         </div>
     </body>
 </html>

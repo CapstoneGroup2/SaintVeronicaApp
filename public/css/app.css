@@ -237,12 +237,12 @@ div.container {
 .row.content {height: 450px}
 
 .login-container{
-  margin: 10px auto;
-  width: 50%;
+  margin: 5% auto;
+  width: 40%;
   padding: 10px;
 }
 .login-form-1{
-  padding-top: 6%;
+  background-color: #fff !important;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 .login-form-1 h3{
@@ -250,7 +250,7 @@ div.container {
   color: #333;
 }
 .login-container form{
-  padding: 2% 15% 5% 15%;
+  padding: 10%;
 }
 .btnSubmit
 { 
@@ -331,6 +331,8 @@ h2 {
 
 label {
   font-size: 15px;
+  /* margin-bottom: 1rem !important;
+  letter-spacing: 1px !important; */
 }
 
 label.search {

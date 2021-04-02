@@ -71,7 +71,6 @@
                         @endforeach
                     </div>
                     <a href="/payments-history"><i class="fa fa-fw fas fa-bullhorn"></i> History of Payments</a>
-                    <a href="/announcements"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>
                     <a href="/reports"><i class="fa fa-fw fa fa-area-chart"></i> Reports</a>
                 @endif
                 
@@ -82,8 +81,7 @@
         </div>
         
         @yield('script')
-
-        <script src="{{ URL::to('/js/app.js') }}"></script>
+        <!-- <script src="{{ URL::to('/js/app.js') }}"></script> -->
         <script>
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
@@ -100,11 +98,11 @@
         }
         function openNav() {
         document.getElementById("mySidenav").style.display = "block";
-        document.getElementById("main").style.paddingLeft = "250px";
+        document.getElementById("main").style.paddingLeft = "260px";
         }
         function closeNav() {
         document.getElementById("mySidenav").style.display = "none";
-        document.getElementById("main").style.paddingLeft= "0";
+        document.getElementById("main").style.paddingLeft= "10px";
         }
         </script>
     @else

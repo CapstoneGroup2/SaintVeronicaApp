@@ -12,7 +12,7 @@ Miscellaneous & Other Fees
     @csrf
     <h1>Miscellaneous and Other Fees</h1> 
     <hr>
-    <table class="table table-default table-bordered">
+    <table class="table table-default table-bordered text-white">
         <thead>
             <th width="20%">Item Code</th>
             <th width="65%">Item Description</th>

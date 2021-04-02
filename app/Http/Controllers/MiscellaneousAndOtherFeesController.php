@@ -22,24 +22,43 @@ class MiscellaneousAndOtherFeesController extends Controller
 
         if (request()->ajax())
         {
-            return datatables()->of($miscellaneous_and_other_fees)
-                ->addColumn('item_price', function($data){
-                    return number_format($data->item_price, 2, '.', '');
-                }) 
-                ->addColumn('item_image', function($data){
-                    if ($data->item_image != '') {
-                        return '<a href="/images/items/'. $data->item_image . ' " target="_blank"><img src="/images/items/'. $data->item_image . ' "height="100px" style="margin-left: 10px;margin-right: auto;"></a>';
-                    }
-                    return '<img src="/images/default.png" height="100px" alt="default">';
-                })  
-                ->addColumn('action', function($data) {
-                    $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
-                    $button .= '<a href="/miscellaneous-and-other-fees/'. $data->id .'/edit" data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
-                    $button .= '<button type="button" id="'. $data->id . '" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
-                    return $button;
-                })
-                ->rawColumns(['item_price', 'item_image', 'action'])
-                ->make(true);
+            if (Auth::user()->role_id == 1) {
+                return datatables()->of($miscellaneous_and_other_fees)
+                    ->addColumn('item_price', function($data){
+                        return number_format($data->item_price, 2, '.', '');
+                    }) 
+                    ->addColumn('item_image', function($data){
+                        if ($data->item_image != '') {
+                            return '<a href="/images/items/'. $data->item_image . ' " target="_blank"><img src="/images/items/'. $data->item_image . ' "height="100px" style="margin-left: 10px;margin-right: auto;"></a>';
+                        }
+                        return '<img src="/images/default.png" height="100px" alt="default">';
+                    })  
+                    ->addColumn('action', function($data) {
+                        $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                        $button .= '<a href="/miscellaneous-and-other-fees/'. $data->id .'/edit" data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
+                        $button .= '<button type="button" id="'. $data->id . '" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
+                        return $button;
+                    })
+                    ->rawColumns(['item_price', 'item_image', 'action'])
+                    ->make(true);
+            } else {
+                return datatables()->of($miscellaneous_and_other_fees)
+                    ->addColumn('item_price', function($data){
+                        return number_format($data->item_price, 2, '.', '');
+                    }) 
+                    ->addColumn('item_image', function($data){
+                        if ($data->item_image != '') {
+                            return '<a href="/images/items/'. $data->item_image . ' " target="_blank"><img src="/images/items/'. $data->item_image . ' "height="100px" style="margin-left: 10px;margin-right: auto;"></a>';
+                        }
+                        return '<img src="/images/default.png" height="100px" alt="default">';
+                    })  
+                    ->addColumn('action', function($data) {
+                        $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                        return $button;
+                    })
+                    ->rawColumns(['item_price', 'item_image', 'action'])
+                    ->make(true);
+            }
         }
 
         return view('miscellaneous-and-other-fees.index', compact('miscellaneous-and-other-fees'));

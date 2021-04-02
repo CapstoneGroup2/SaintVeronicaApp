@@ -14,7 +14,9 @@ Route::middleware(['admin'])->group(function () {
 
     Route::delete('/miscellaneous-and-other-fees/{id}', 'MiscellaneousAndOtherFeesController@destroy');
     
-    Route::resource('/miscellaneous-and-other-fees', 'MiscellaneousAndOtherFeesController');
+    Route::resource('/miscellaneous-and-other-fees', 'MiscellaneousAndOtherFeesController')->only([
+        'edit', 'update', 'create', 'store'
+    ]);
 
     Route::delete('/users/{id}', 'UsersController@destroy');
     
@@ -23,6 +25,10 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('/classes', 'ClassesController')->only([
         'create', 'store', 'edit', 'update'
     ]);
+
+    Route::resource('/announcements', 'AnnouncementsController');
+
+    Route::get('/reports', 'PagesController@chartjs');
 });
 
 Route::middleware(['registrar'])->group(function () {
@@ -32,17 +38,13 @@ Route::middleware(['registrar'])->group(function () {
     });
 
     Route::get('/home', 'PagesController@home');
-
-    Route::resource('/announcements', 'AnnouncementsController')->only([
-        'delete', 'create'
-    ]);
 });
 
 Route::middleware(['web'])->group(function () {
     
     Route::get('/logout', 'Auth\MainController@logout');
 
-    Route::get('/reports', 'PagesController@reports');
+    // Route::get('/reports', 'PagesController@reports');
 
     Route::get('/students/classes/{id}', 'StudentsController@showStudentsByClass');
 
@@ -54,13 +56,11 @@ Route::middleware(['web'])->group(function () {
     
     Route::get('/miscellaneous-and-other-fees/classes/{id}', 'MiscellaneousAndOtherFeesController@showMiscellaneousAndOtherFees');
     
+    Route::get('/miscellaneous-and-other-fees/{id}', 'MiscellaneousAndOtherFeesController@show');
+    
     Route::get('/payments-history', 'PaymentsController@history');
     
     Route::patch('/payments/{id}', 'PaymentsController@update');
-
-    Route::resource('/announcements', 'AnnouncementsController')->only([
-        'update', 'index'
-    ]);
 
     Route::resource('/classes', 'ClassesController')->only([
         'index'

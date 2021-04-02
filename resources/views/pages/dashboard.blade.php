@@ -5,49 +5,99 @@ Dashboard
 @endsection
 
 @section('content')
+
 <h2 style="text-align: left">Dashboard</h2>
-<div class="triangle-right" style="width:180px;">
-</div>
+<div class="triangle-right" style="width:180px;"></div>
 <hr>
-<div class="row">
-    <div class="col">
-        <div class="card card-home" style="border-radius: 50%;">
-                <a href="/students">
-                <br>
-                    <img class="card-img-top" src="{{ URL::to('/images/students.jpg') }}" width="100px" height="150px" alt="Card image cap" style="border-radius: 50%;">
+
+<?php $count = 1; ?>
+@foreach($students_count as $student_count)
+    @if($count%5 == 0 || $count==1)
+        <div class="row">
+    @endif
+        <div class="col">
+            <div class="card card-home">
+                <a[p] href="/students/classes/{{ $student_count['class_id'] }}">
                      <div class="card-body">
-                        <h2 class="card-text text-success">Students</h2>
-                        <h3 class="card-text text-danger">{{ count($students_classes) }} students</h3>
+                        <h2 class="card-text text-success">{{ $student_count['class_name'] }}</h2>
+                        <h3 class="card-text text-danger">{{ $student_count['class_count'] }} students</h3>
                     </div>
                 </a>
+            </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="card card-home" style="border-radius: 50%;">
-                <a href="/classes">
-                    <br>
-                    <img class="card-img-top" src="{{ URL::to('/images/classroom.jfif') }}" width="100px" height="150px" alt="Card image cap" style="border-radius: 50%;">
-                     <div class="card-body">
-                        <h2 class="card-text text-success">Classes</h2>
-                        <h3 class="card-text text-danger">{{ count($classes) }} classes</h3>
-                    </div>
-                </a>
+        @if($count >= 5 && $count == count($students_count))
+            <?php
+                $remainingColumn = 4 - count($students_count)%4;
+                for($i = 1; $i <= $remainingColumn; $i++) {
+                    echo '<div class="col"></div>';
+                    ++$count;
+                }
+            ?>            
+        @endif
+    @if($count%4 == 0)
         </div>
+    @endif
+    <?php $count++; ?>
+@endforeach
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Charts</h3>
     </div>
-    <div class="col">
-        <div class="card card-home" style="border-radius: 50%;">
-                <a href="">
-                    <br>
-                    <img class="card-img-top" src="{{ URL::to('/images/payments.png') }}" width="70px" height="125px" alt="Card image cap" style="border-radius: 50%;">
-                     <div class="card-body">
-                        <h2 class="card-text text-success">Complete<br>Payment</h2>
-                        <h3 class="card-text text-danger">100 students</h3>
-                    </div>
-                </a>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col">
+                <div id="gender-pie-chart">
+                
+                </div>
+            </div>
+            <div class="col">
+                <div id="classes-pie-chart">
+                
+                </div>
+            </div>
+        </div>
+        <div id="enrollees-per-month-pie-chart">
+        
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    var analytics_gender = <?php echo $gender; ?>;
+    var analytics_classes = <?php echo $classes; ?>;
+    var analytics_enrollees = <?php echo $enrollees; ?>;
+
+    google.charts.load('current', {'packages':['corechart']});
+
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart()
+    {
+        var data = google.visualization.arrayToDataTable(analytics_gender);
+        var options = {title: 'Percentage of Male and Female Student'};
+        var chart = new google.visualization.PieChart(document.getElementById('gender-pie-chart'));
+        chart.draw(data, options);
+
+        var data = google.visualization.arrayToDataTable(analytics_classes);
+        var options = {title: 'Percentage of Different Classes Student'};
+        var chart = new google.visualization.PieChart(document.getElementById('classes-pie-chart'));
+        chart.draw(data, options);
+
+        var data = google.visualization.arrayToDataTable(analytics_enrollees);
+        var options = 
+        {
+            title: 'Percentage of Different Classes Student',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('enrollees-per-month-pie-chart'));
+        chart.draw(data, options);
+    }
+</script>
 @endsection

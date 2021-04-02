@@ -17,9 +17,9 @@ $factory->define(Student::class, function (Faker $faker) {
         'student_address'       => $faker->address,
         'student_age'           => $faker->numberBetween($min = 3, $max = 20),
         'student_birth_date'    => $faker->dateTimeBetween('-10 years', 'now'),
-        'student_gender'        => $faker->randomElement(['M', 'F']),
+        'student_gender'        => $faker->randomElement(['Male', 'Female']),
         'student_status'        => $faker->randomElement(['Single', 'Married ']),
-        'student_active_status' => $faker->randomElement([1, 0]),
+        'student_active_status' => 1,
         'created_at'            => $faker->dateTime('now'),
         'updated_at'            => $faker->dateTime('now')
     ];

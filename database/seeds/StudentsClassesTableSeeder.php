@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class StudentsClassesTableSeeder extends Seeder
 {
@@ -11,9 +12,12 @@ class StudentsClassesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('students_classes')->insert([ 
-            'student_id'    => 10000000,
-            'class_id'      => 1,
-        ]);
+        for ($i = 10000005; $i < 10000105; $i++) 
+        {
+            DB::table('students_classes')->insert([ 
+                'student_id'    => $i,
+                'class_id'      => rand(1, 4),
+            ]);
+        }
     }
 }

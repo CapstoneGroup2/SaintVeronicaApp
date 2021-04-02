@@ -22,7 +22,7 @@
         </div>
         <div class="col">
             <div class="form-group">
-                <p style="font-size:13px;">Full Name : <span class="text-white">{{ $student->student_first_name }} {{ $student->student_last_name }}</span></p>
+                <p style="font-size:13px;">Full Name : <span class="text-white">{{ $student->student_first_name }} {{($student->student_middle_name != "") ? $student->student_middle_name . " " : ""}}{{ $student->student_last_name }}</span></p>
             </div>
             <div class="form-group">
                 <p style="font-size:13px;">Email Address : <span class="text-white">{{ $student->student_email }}</span></p>

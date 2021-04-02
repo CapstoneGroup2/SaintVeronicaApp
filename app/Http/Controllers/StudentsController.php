@@ -15,27 +15,6 @@ use Illuminate\Support\Facades\DB;
 class StudentsController extends Controller
 {
     public function index() {
-        $students_classes = DB::table('students_classes')
-            ->join('students', 'students.id', '=', 'students_classes.student_id')
-            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
-            ->where('students.student_active_status', 1)
-            ->get();
-    
-            if (request()->ajax())
-            {
-                return datatables()->of($students_classes)
-                ->addColumn('full_name', function($data) {
-                    $full_name = $data->student_first_name . ' ' . $data->student_middle_name . ' ' . $data->student_last_name;
-                    return $full_name;
-                })
-                ->addColumn('action', function($data) {
-                    $button = '<a href="/students/'. $data->student_id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
-                    return $button;
-                })
-                ->rawColumns(['full_name', 'action'])
-                ->make(true);
-            }
-        return view('students.index', compact('students_classes'));
     }
 
     public function showMiscellaneousAndOtherFeesAfterEnroll($id) {
@@ -59,19 +38,19 @@ class StudentsController extends Controller
         if (request()->ajax())
         {
             return datatables()->of($students_classes)
-            ->addColumn('full_name', function($data) {
-                $full_name = $data->student_first_name . ' ' . $data->student_middle_name . ' ' . $data->student_last_name;
-                return $full_name;
-            })
-            ->addColumn('action', function($data) {
-                $button = '<a href="/students/'. $data->student_id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
-                $button .= '<a href="/students/'. $data->student_id .'/edit
-                " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
-                $button .= '<button type="button" id="'. $data->student_id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
-                return $button;
-            })
-            ->rawColumns(['full_name', 'action'])
-            ->make(true);
+                ->addColumn('full_name', function($data) {
+                    $full_name = $data->student_middle_name != "" ? $data->student_first_name . ' ' . $data->student_middle_name . ' '. $data->student_last_name : $data->student_first_name . ' ' . $data->student_last_name;
+                    return $full_name;
+                })
+                ->addColumn('action', function($data) {
+                    $button = '<a href="/students/'. $data->student_id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                    $button .= '<a href="/students/'. $data->student_id .'/edit
+                    " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
+                    $button .= '<button type="button" id="'. $data->student_id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
+                    return $button;
+                })
+                ->rawColumns(['full_name', 'action'])
+                ->make(true);
         }
         return view('students.index', compact('students_classes'));
     }
@@ -206,20 +185,23 @@ class StudentsController extends Controller
 
     public function destroy($id)
     {
-        dd($id);
         $student = Student::find($id);
         $student_class = StudentsClasses::where('student_id', $id)->get();
         $student_payment = Payment::where('student_id', $id)->get();
-        $student_payment_history = PaymentsHistory::where('student_id', $id)->get();
-        dd($student_payment_history[0]);
-        $student_payment_history[0]->delete();
-        $student_payment[0]->delete();
-        $student_class[0]->delete();
-        $student->delete();
+        $student_payment_history = PaymentsHistory::where('student_id', $id)->get(); 
 
-        $student_payment_history[0]->save();
-        $student_payment[0]->save();
-        $student_class[0]->save();
-        $student->save();
+        try {
+            $student_payment_history[0]->delete();
+            $student_payment[0]->delete();
+            $student_class[0]->delete();
+            $student->delete();
+
+            $student_payment_history[0]->save();
+            $student_payment[0]->save();
+            $student_class[0]->save();
+            $student->save();
+        } catch (\Exception $exception) {
+
+        }
     }
 }

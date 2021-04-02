@@ -9,7 +9,7 @@ Classes
 <div class="triangle-right" style="width:120px;"></div>
 <hr> 
 <?php $count = 1; ?>
-@foreach($classes as $class)
+@foreach($students_count as $student_count)
     @if($count%5 == 0 || $count==1)
         <div class="row">
     @endif
@@ -18,25 +18,29 @@ Classes
                 <div class="card card-home btn-addClass">
                     <img class="card-img-top" src="{{ URL::to('/images/students.jpg') }}" alt="Card image cap">
                     <div class="card-body">
-                        <h3 class="card-text text-danger" style=""><span class="glyphicon glyphicon-plus"></span> Add Class</h3>
+                        <br>
+                        <h2 class="card-text text-danger" style=""><span class="glyphicon glyphicon-plus"></span> Add Class</h2>
                     </div>
                 </div>
             </div>
             <?php $count++; ?>
         @endif
-            <div class="col">
-                <div class="card card-home">
+        <div class="col">
+            <div class="card card-home">
+                <a href="/students/classes/{{ $student_count['class_id'] }}">
                     <img class="card-img-top" src="{{ URL::to('/images/students.jpg') }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h3 class="card-text text-success">{{ $class->class_name }}</h3>
+                     <div class="card-body">
+                        <h2 class="card-text text-success">{{ $student_count['class_name'] }}</h2>
+                        <h3 class="card-text text-danger">{{ $student_count['class_count'] }} students</h3>
                     </div>
-                </div>
+                </a>
             </div>
+        </div>
             
-        @if($count >= 5 && $count == count($classes) + 1)
+        @if($count >= 5 && $count == count($students_count) + 1)
             <?php
-                $remainingColumn = 4 - (count($classes) + 1)%4;
-                for($i = 1; $i <= $remainingColumn; $i++) {
+                $remainingColumn = 4 - count($students_count)%4;
+                for($i = 1; $i < $remainingColumn; $i++) {
                     echo '<div class="col"></div>';
                     ++$count;
                 }

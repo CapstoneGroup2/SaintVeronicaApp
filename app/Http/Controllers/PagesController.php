@@ -19,7 +19,7 @@ class PagesController extends Controller
             ->join('classes', 'classes.id', '=', 'students_classes.class_id')
             ->where('students.student_active_status', 1)
             ->get();
-            
+
         $classes = Classes::all();
         $students = Student::all();
 
@@ -33,7 +33,7 @@ class PagesController extends Controller
 
             $count = 0;
             foreach ($students_classes as $student_class) {
-                if ($student_class->class_id == $class->id) {
+                if ($student_class->class_id == $class->id && $student_class->student_active_status == 1) {
                     ++$count;
                 }
             }
@@ -44,7 +44,57 @@ class PagesController extends Controller
         }
 
         session()->put('classes', $put_sessions);
-        return view('pages.dashboard', compact('students_classes', 'classes'));
+
+        $data_gender = DB::table('students')
+                            ->select(
+                                DB::raw('student_gender as gender'),
+                                DB::raw('count(*) as number'))
+                            ->groupBy('student_gender')
+                            ->get();
+
+        $array_gender[] = ['Gender', 'Number'];
+
+        foreach($data_gender as $key => $value) 
+        {
+            $array_gender[++$key] = [$value->gender, $value->number];
+        }
+
+        $data_students_classes = DB::table('students_classes')
+                                    ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+                                    ->select(
+                                        DB::raw('classes.class_name as classes'),
+                                        DB::raw('count(*) as number'))
+                                    ->groupBy('classes.class_name')
+                                    ->get();
+
+        $array_students_classes[] = ['Classes', 'Number'];
+
+        foreach($data_students_classes as $key => $value) 
+        {
+            $array_students_classes[++$key] = [$value->classes, $value->number];
+        }
+
+        $data_enrollees_per_month = DB::table('students')
+                                        ->select(
+                                            DB::raw("MONTHNAME(created_at) as month_name"),
+                                            DB::raw('max(created_at) as createdAt'),
+                                            DB::raw('count(*) as number'))
+                                        ->whereYear('created_at', date('Y'))
+                                        ->groupBy('month_name')
+                                        ->orderBy('createdAt')
+                                        ->get();
+
+        $array_enrollees_per_month[] = ['Month', 'Number'];
+
+        foreach($data_enrollees_per_month as $key => $value) 
+        {
+            $array_enrollees_per_month[++$key] = [$value->month_name, $value->number];
+        }
+
+        return view('pages.dashboard', compact('students_count'))
+                ->with('gender', json_encode($array_gender))
+                ->with('classes', json_encode($array_students_classes))
+                ->with('enrollees', json_encode($array_enrollees_per_month));
     }
 
     public function home() {

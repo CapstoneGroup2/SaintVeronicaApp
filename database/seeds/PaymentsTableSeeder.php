@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class PaymentsTableSeeder extends Seeder
 {
@@ -11,11 +12,14 @@ class PaymentsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('payments')->insert([ 
-            'student_id' => 10000000, 
-            'amount_payable' => '0',
-            'amount_paid' => '0',
-            'amount_due' => '0',
-        ]);
+        for ($i = 10000005; $i < 10000105; $i++) 
+        {
+            DB::table('payments')->insert([ 
+                'student_id' => $i, 
+                'amount_payable' => '0',
+                'amount_paid' => '0',
+                'amount_due' => '0',
+            ]);
+        }
     }
 }

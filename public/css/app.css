@@ -176,31 +176,15 @@ div.login {
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-/* @media screen and (max-width: 500px) {
-  .header a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  .header-right {
-    float: none;
-  }
-} */
-@media only screen and (min-width:1500px) {
-  /* For mobile phones: */
+@media screen and (max-width: 500px) {
   body {
-    flex-direction: column;
-  }
-}
-@media (orientation: landscape) {
-  body {
-    flex-direction: row;
+    width: 100%;
   }
 }
 
-@media (orientation: portrait) {
-  body {
-    flex-direction: column;
+@media (min-width: 300px){
+  nav {
+      min-width: 730px !important;
   }
 }
 
@@ -229,7 +213,7 @@ img#logo-navbar {
 }
 
 img#profile {
-  width: 50px;
+  width: 40px;
   border-radius: 50%;
   height: 30px;
   padding: 1px 5px;
@@ -245,8 +229,8 @@ img#logo-login {
 }
 
 div.container {
-  max-width: 95% !important;
-  padding: 10px 0;
+  max-width: 98% !important;
+  padding: 10px;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */

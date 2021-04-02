@@ -12,7 +12,7 @@ class PaymentsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 10000005; $i < 10000105; $i++) 
+        for ($i = 10000000; $i <= 10000100; $i++) 
         {
             DB::table('payments')->insert([ 
                 'student_id' => $i, 

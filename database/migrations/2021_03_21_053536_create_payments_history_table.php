@@ -21,6 +21,7 @@ class CreatePaymentsHistoryTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->double('amount_paid');
+            $table->date('date_paid');
             $table->timestamps();
         });
     }

@@ -29,7 +29,5 @@ class StudentsTableSeeder extends Seeder
             'updated_at' => date('Y-m-d'),
         ]);
 
-        factory(App\Models\Student::class, 100)->create();
-
     }
 }

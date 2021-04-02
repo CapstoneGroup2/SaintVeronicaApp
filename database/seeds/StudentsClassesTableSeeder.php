@@ -12,12 +12,9 @@ class StudentsClassesTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 10000000; $i <= 10000100; $i++) 
-        {
-            DB::table('students_classes')->insert([ 
-                'student_id'    => $i,
-                'class_id'      => rand(1, 4),
-            ]);
-        }
+        DB::table('students_classes')->insert([ 
+            'student_id'    => 10000000,
+            'class_id'      => rand(1, 4),
+        ]);
     }
 }

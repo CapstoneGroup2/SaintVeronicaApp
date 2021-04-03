@@ -59,20 +59,20 @@ class PagesController extends Controller
             $array_gender[++$key] = [$value->gender, $value->number];
         }
 
-        // $data_students_classes = DB::table('students_classes')
-        //                             ->join('classes', 'classes.id', '=', 'students_classes.class_id')
-        //                             ->select(
-        //                                 DB::raw('classes.class_name as classes'),
-        //                                 DB::raw('count(*) as number'))
-        //                             ->groupBy('classes.class_name')
-        //                             ->get();
+        $data_students_classes = DB::table('students_classes')
+                                    ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+                                    ->select(
+                                        DB::raw('classes.class_name as classes'),
+                                        DB::raw('count(*) as number'))
+                                    ->groupBy('classes.class_name')
+                                    ->get();
 
-        // $array_students_classes[] = ['Classes', 'Number'];
+        $array_students_classes[] = ['Classes', 'Number'];
 
-        // foreach($data_students_classes as $key => $value) 
-        // {
-        //     $array_students_classes[++$key] = [$value->classes, $value->number];
-        // }
+        foreach($data_students_classes as $key => $value) 
+        {
+            $array_students_classes[++$key] = [$value->classes, $value->number];
+        }
 
         // $data_enrollees_per_month = DB::table('students')
         //                                 ->select(

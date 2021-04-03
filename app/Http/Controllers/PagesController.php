@@ -52,12 +52,12 @@ class PagesController extends Controller
                             ->groupBy('student_gender')
                             ->get();
 
-        // $array_gender[] = ['Gender', 'Number'];
+        $array_gender[] = ['Gender', 'Number'];
 
-        // foreach($data_gender as $key => $value) 
-        // {
-        //     $array_gender[++$key] = [$value->gender, $value->number];
-        // }
+        foreach($data_gender as $key => $value) 
+        {
+            $array_gender[++$key] = [$value->gender, $value->number];
+        }
 
         // $data_students_classes = DB::table('students_classes')
         //                             ->join('classes', 'classes.id', '=', 'students_classes.class_id')

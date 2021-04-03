@@ -45,6 +45,7 @@
             "database/seeds/UserTableSeeder.php",
             "database/seeds/StudentsClassesTableSeeder.php",
             "database/seeds/PaymentsTableSeeder.php",
+            "database/seeds/MiscellaneousAndOtherFeesTableSeeder.php",
             "database/factories"
         ]
     },

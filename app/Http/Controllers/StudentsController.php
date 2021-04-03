@@ -24,6 +24,7 @@ class StudentsController extends Controller
     }
     
     public function showStudentsByClass($id) {
+
         $students_classes = DB::table('students_classes')
             ->join('students', 'students.id', '=', 'students_classes.student_id')
             ->join('classes', 'classes.id', '=', 'students_classes.class_id')
@@ -76,6 +77,7 @@ class StudentsController extends Controller
         ]);
         
         $student = new Student();
+        $student->id = Student::latest('id')->first()->id + 1;
         $student->student_first_name = $request['student_first_name'];
         $student->student_middle_name = $request['student_middle_name'];
         $student->student_last_name = $request['student_last_name'];

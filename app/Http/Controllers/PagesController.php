@@ -45,12 +45,12 @@ class PagesController extends Controller
 
         session()->put('classes', $put_sessions);
 
-        // $data_gender = DB::table('students')
-        //                     ->select(
-        //                         DB::raw('student_gender as gender'),
-        //                         DB::raw('count(*) as number'))
-        //                     ->groupBy('student_gender')
-        //                     ->get();
+        $data_gender = DB::table('students')
+                            ->select(
+                                DB::raw('student_gender as gender'),
+                                DB::raw('count(*) as number'))
+                            ->groupBy('student_gender')
+                            ->get();
 
         // $array_gender[] = ['Gender', 'Number'];
 

@@ -84,12 +84,12 @@ class PagesController extends Controller
                                         ->orderBy('createdAt')
                                         ->get();
 
-        $array_enrollees_per_month[] = ['Month', 'Number'];
+        // $array_enrollees_per_month[] = ['Month', 'Number'];
 
-        foreach($data_enrollees_per_month as $key => $value) 
-        {
-            $array_enrollees_per_month[++$key] = [$value->month_name, $value->number];
-        }
+        // foreach($data_enrollees_per_month as $key => $value) 
+        // {
+        //     $array_enrollees_per_month[++$key] = [$value->month_name, $value->number];
+        // }
 
         return view('pages.home', compact('students_count'));
         //         ->with('gender', json_encode($array_gender))

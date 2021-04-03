@@ -91,10 +91,10 @@ class PagesController extends Controller
             $array_enrollees_per_month[++$key] = [$value->month_name, $value->number];
         }
 
-        return view('pages.home', compact('students_count'))
-                ->with('gender', json_encode($array_gender))
-                ->with('classes', json_encode($array_students_classes))
-                ->with('enrollees', json_encode($array_enrollees_per_month));
+        return view('pages.home', compact('students_count'));
+        //         ->with('gender', json_encode($array_gender))
+        //         ->with('classes', json_encode($array_students_classes))
+        //         ->with('enrollees', json_encode($array_enrollees_per_month));
     }
 
     public function home() {

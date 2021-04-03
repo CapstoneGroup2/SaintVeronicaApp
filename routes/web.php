@@ -15,7 +15,7 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/miscellaneous-and-other-fees/{id}', 'MiscellaneousAndOtherFeesController@destroy');
     
     Route::resource('/miscellaneous-and-other-fees', 'MiscellaneousAndOtherFeesController')->only([
-        'edit', 'update', 'create', 'store'
+        'create', 'store', 'edit', 'update', 
     ]);
 
     Route::delete('/users/{id}', 'UsersController@destroy');

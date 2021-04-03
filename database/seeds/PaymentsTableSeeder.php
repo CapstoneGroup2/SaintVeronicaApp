@@ -16,7 +16,7 @@ class PaymentsTableSeeder extends Seeder
             'student_id' => 10000000, 
             'amount_payable' => '5400',
             'amount_paid' => '0',
-            'amount_due' => '5400',
+            'amount_due' => '5400       ',
         ]);
     }
 }

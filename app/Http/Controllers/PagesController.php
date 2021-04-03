@@ -78,7 +78,7 @@ class PagesController extends Controller
                                                             DB::raw('count(*) as number'),
                                                             DB::raw('MONTHNAME(created_at) as month_name'))
                                                             // DB::raw('max(created_at) as created_at'),
-                                                        ->whereYear('created_at', date('Y'))
+                                                        ->whereYear('created_at', '=', 2021)
                                                         ->groupBy('month_name')
                                                         ->orderBy('number')
                                                         ->get();

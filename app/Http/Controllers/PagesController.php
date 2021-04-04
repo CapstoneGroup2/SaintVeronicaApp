@@ -59,20 +59,6 @@ class PagesController extends Controller
             $array_gender[++$key] = [$value->gender, $value->number];
         }
 
-        $data_gender = DB::table('students')
-                            ->select(
-                                DB::raw('student_gender as gender'),
-                                DB::raw('count(*) as number'))
-                            ->groupBy('student_gender')
-                            ->get();
-
-        $array_gender[] = ['Gender', 'Number'];
-
-        foreach($data_gender as $key => $value) 
-        {
-            $array_gender[++$key] = [$value->gender, $value->number];
-        }
-
         $data_students_classes = DB::table('students_classes')
                                     ->join('classes', 'classes.id', '=', 'students_classes.class_id')
                                     ->select(
@@ -88,17 +74,17 @@ class PagesController extends Controller
             $array_students_classes[++$key] = [$value->classes, $value->number];
         }
 
-        // $data_enrollees_per_month = DB::table('students')
-        //                                 ->select(
-        //                                     DB::raw("COUNT(*) as count"),
-        //                                     DB::raw("MONTHNAME(created_at) as month_name"),
-        //                                     DB::raw('max(created_at) as createdAt'))
-        //                                 ->whereYear('created_at', date('Y'))
-        //                                 ->groupBy('month_name')
-        //                                 ->orderBy('createdAt')
-        //                                 ->get(); 
+        $data_enrollees_per_month = DB::table('students')
+                                        ->select(
+                                            DB::raw("COUNT(*) as count"),
+                                            DB::raw("MONTHNAME(created_at) as month_name"),
+                                            DB::raw('max(created_at) as createdAt'))
+                                        ->whereYear('students.created_at', date('Y'))
+                                        ->groupBy('month_name')
+                                        ->orderBy('createdAt')
+                                        ->get(); 
 
-        // dd($data_enrollees_per_month);
+        dd($data_enrollees_per_month);
 
         // $array_enrollees_per_month[] = ['Month', 'Number'];
 

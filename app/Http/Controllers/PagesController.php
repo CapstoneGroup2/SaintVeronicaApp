@@ -88,17 +88,17 @@ class PagesController extends Controller
             $array_students_classes[++$key] = [$value->classes, $value->number];
         }
 
-        $data_enrollees_per_month = DB::table('students')
-                                        ->select(
-                                            DB::raw("COUNT(*) as count"),
-                                            DB::raw("MONTHNAME(created_at) as month_name"),
-                                            DB::raw('max(created_at) as createdAt'))
-                                        ->whereYear('created_at', date('Y'))
-                                        ->groupBy('month_name')
-                                        ->orderBy('createdAt')
-                                        ->get(); 
+        // $data_enrollees_per_month = DB::table('students')
+        //                                 ->select(
+        //                                     DB::raw("COUNT(*) as count"),
+        //                                     DB::raw("MONTHNAME(created_at) as month_name"),
+        //                                     DB::raw('max(created_at) as createdAt'))
+        //                                 ->whereYear('created_at', date('Y'))
+        //                                 ->groupBy('month_name')
+        //                                 ->orderBy('createdAt')
+        //                                 ->get(); 
 
-        dd($data_enrollees_per_month);
+        // dd($data_enrollees_per_month);
 
         // $array_enrollees_per_month[] = ['Month', 'Number'];
 

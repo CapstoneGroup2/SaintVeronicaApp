@@ -83,7 +83,7 @@ Miscellaneous & Other Fees
   }
   $(document).ready(function() {
     
-    setTable();
+    // setTable();
 
     $('.btn-add').click(function () {
       window.location = "/miscellaneous-and-other-fees/create";

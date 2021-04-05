@@ -20,7 +20,7 @@ class StudentsTableSeeder extends Seeder
             'student_email' => 'josephine.morre@gmail.com',
             'student_home_contact' => '+639123456789',
             'student_address' => 'Cogon, Compostela, Cebu',
-            'student_gender' => 'F',
+            'student_gender' => 'Female',
             'student_age' => 10,
             'student_birth_date' => date('Y-m-d', strtotime('11/13/2010')),
             'student_status' => 'Single',

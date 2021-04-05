@@ -78,7 +78,7 @@ class PagesController extends Controller
                                         ->select(
                                             DB::raw('year(created_at) as year'),
                                             DB::raw('count(*) as number'))
-                                        ->groupBy(DB::raw('year(created_at)'))
+                                        ->groupBy('year')
                                         ->get();
 
         // dd($data_enrollees_per_month);

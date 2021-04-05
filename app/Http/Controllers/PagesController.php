@@ -76,11 +76,11 @@ class PagesController extends Controller
 
         $data_enrollees_per_month = DB::table('students')
                                         ->select(
-                                            DB::raw("COUNT(*) as number"),
-                                            DB::raw("MONTHNAME(created_at) as month_name"),
+                                            DB::raw("count(*) as number"),
+                                            DB::raw("monthname(created_at) as monthName"),
                                             DB::raw('max(created_at) as createdAt'))
                                         ->whereYear('students.created_at', date('Y'))
-                                        ->groupBy('month_name')
+                                        ->groupBy('monthName')
                                         ->orderBy('createdAt')
                                         ->get(); 
 

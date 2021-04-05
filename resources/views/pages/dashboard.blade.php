@@ -57,7 +57,7 @@ Dashboard
                 </div>
             </div>
         </div>
-        <div id="enrollees-per-month-pie-chart">
+        <div id="enrollees-per-year-pie-chart">
         
         </div>
     </div>
@@ -96,7 +96,7 @@ Dashboard
             curveType: 'function',
             legend: { position: 'bottom' }
         };
-        var chart = new google.visualization.LineChart(document.getElementById('enrollees-per-month-pie-chart'));
+        var chart = new google.visualization.LineChart(document.getElementById('enrollees-per-year-pie-chart'));
         chart.draw(data, options);
     }
 </script>

@@ -76,27 +76,24 @@ class PagesController extends Controller
 
         $data_enrollees_per_month = DB::table('students')
                                         ->select(
-                                            DB::raw("count(*) as number"),
-                                            DB::raw("monthname(created_at) as monthName"),
-                                            DB::raw('max(created_at) as createdAt'))
-                                        // ->whereYear('students.created_at', date('Y'))
-                                        ->groupBy(DB::raw("monthname(created_at)"))
-                                        // ->orderBy(DB::raw("max(created_at)"))
-                                        ->get(); 
+                                            DB::raw("year(created_at) as year"),
+                                            DB::raw("count(*) as number"))
+                                        ->groupBy(DB::raw("year(created_at)"))
+                                        ->get();
 
         // dd($data_enrollees_per_month);
 
-        // $array_enrollees_per_month[] = ['Month', 'Number'];
+        $array_enrollees_per_month[] = ['Year', 'Number'];
 
-        // foreach($data_enrollees_per_month as $key => $value) 
-        // {
-        //     $array_enrollees_per_month[++$key] = [$value->month_name, $value->number];
-        // }
+        foreach($data_enrollees_per_month as $key => $value) 
+        {
+            $array_enrollees_per_month[++$key] = [$value->year, $value->number];
+        }
 
-        return view('pages.home', compact('students_count'));
-        //         ->with('gender', json_encode($array_gender))
-        //         ->with('classes', json_encode($array_students_classes))
-        //         ->with('enrollees', json_encode($array_enrollees_per_month));
+        return view('pages.dashboard', compact('students_count'))
+                ->with('gender', json_encode($array_gender))
+                ->with('classes', json_encode($array_students_classes))
+                ->with('enrollees', json_encode($array_enrollees_per_month));
     }
 
     public function home() {

@@ -17,7 +17,7 @@ class Registrar
     public function handle($request, Closure $next)
     {
         if(!Auth::check()) {
-            return redirect('/login');
+            return redirect('/welcome');
         }
 
         // admin

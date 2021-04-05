@@ -18,7 +18,7 @@ class MiscellaneousAndOtherFeesController extends Controller
         session()->put('present_class_id', $id);
         session()->put('present_class_name', $classes[0]->class_name);
 
-        $miscellaneous_and_other_fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
+        $miscellaneous_and_other_fees = MiscellaneousAndOtherFees::where('class_id', $id)->get();
 
         if (request()->ajax())
         {
@@ -29,7 +29,7 @@ class MiscellaneousAndOtherFeesController extends Controller
                     }) 
                     ->addColumn('item_image', function($data){
                         if ($data->item_image != '') {
-                            return '<a href="/images/items/'. $data->item_image . ' " target="_blank"><img src="/images/items/'. $data->item_image . ' "height="100px" style="margin-left: 10px;margin-right: auto;"></a>';
+                            return '<img src="/images/items/'. $data->item_image . '"height="100px" style="margin-left: 10px;margin-right: auto;">';
                         }
                         return '<img src="/images/default.png" height="100px" alt="default">';
                     })  

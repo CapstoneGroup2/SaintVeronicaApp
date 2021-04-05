@@ -100,7 +100,7 @@ Miscellaneous & Other Fees
     $('#btn-ok').click(function() {
       var token = $("meta[name='csrf-token']").attr("content");
       $.ajax({
-        url: '/miscellaneous-and-other-fees/classes' + id,
+        url: '/miscellaneous-and-other-fees/' + id,
         type: 'DELETE',
         data: {
             "id": id,

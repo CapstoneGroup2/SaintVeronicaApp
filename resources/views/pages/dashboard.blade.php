@@ -40,7 +40,27 @@ Dashboard
     <?php $count++; ?>
 @endforeach
 
-<div class="panel panel-default">
+<div class="row">
+    <div class="col">
+        <div class="card card-home">
+            <div class="card-body">
+                <div id="gender-pie-chart">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card card-home">
+            <div class="card-body">
+                <div id="classes-pie-chart">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Charts</h3>
     </div>
@@ -61,7 +81,7 @@ Dashboard
         
         </div> -->
     </div>
-</div>
+</div> -->
 
 @endsection
 

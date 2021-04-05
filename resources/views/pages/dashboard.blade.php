@@ -57,9 +57,9 @@ Dashboard
                 </div>
             </div>
         </div>
-        <div id="enrollees-per-year-pie-chart">
+        <!-- <div id="enrollees-per-year-pie-chart">
         
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -71,7 +71,7 @@ Dashboard
 <script type="text/javascript">
     var analytics_gender = <?php echo $gender; ?>;
     var analytics_classes = <?php echo $classes; ?>;
-    var analytics_enrollees = <?php echo $enrollees; ?>;
+    // var analytics_enrollees = <?php //echo $enrollees; ?>;
 
     google.charts.load('current', {'packages':['corechart']});
 
@@ -89,15 +89,15 @@ Dashboard
         var chart = new google.visualization.PieChart(document.getElementById('classes-pie-chart'));
         chart.draw(data, options);
 
-        var data = google.visualization.arrayToDataTable(analytics_enrollees);
-        var options = 
-        {
-            title: 'Percentage of Different Classes Student',
-            curveType: 'function',
-            legend: { position: 'bottom' }
-        };
-        var chart = new google.visualization.LineChart(document.getElementById('enrollees-per-year-pie-chart'));
-        chart.draw(data, options);
+        // var data = google.visualization.arrayToDataTable(analytics_enrollees);
+        // var options = 
+        // {
+        //     title: 'Percentage of Different Classes Student',
+        //     curveType: 'function',
+        //     legend: { position: 'bottom' }
+        // };
+        // var chart = new google.visualization.LineChart(document.getElementById('enrollees-per-year-pie-chart'));
+        // chart.draw(data, options);
     }
 </script>
 @endsection

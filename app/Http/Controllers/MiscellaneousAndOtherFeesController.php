@@ -61,7 +61,7 @@ class MiscellaneousAndOtherFeesController extends Controller
             // }
         // }
 
-        return view('miscellaneous-and-other-fees.index', compact('miscellaneous-and-other-fees'));
+        return view('miscellaneous-and-other-fees.index', compact('miscellaneous_and_other_fees'));
     }
 
     public function create()

@@ -77,9 +77,9 @@ Dashboard
                 </div>
             </div>
         </div>
-        <!-- <div id="enrollees-per-year-pie-chart">
+        <div id="enrollees-per-year-pie-chart">
         
-        </div> -->
+        </div>
     </div>
 </div> -->
 

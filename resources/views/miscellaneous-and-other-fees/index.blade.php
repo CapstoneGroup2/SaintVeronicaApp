@@ -7,7 +7,7 @@ Miscellaneous & Other Fees
 @section('content')
 <h2 style="text-align: left">{{ session()->get('present_class_name') }} Class</h2>
 <div class="triangle-right" style="width:220px;"></div>
-@if(Auth::user()->role_id == 1):
+@if(Auth::user()->role_id == 1)
   <br>
   <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Miscellaneous</button> 
 @endif
@@ -100,7 +100,7 @@ Miscellaneous & Other Fees
     $('#btn-ok').click(function() {
       var token = $("meta[name='csrf-token']").attr("content");
       $.ajax({
-        url: '/miscellaneous-and-other-fees/' + id,
+        url: '/miscellaneous-and-other-fees/classes' + id,
         type: 'DELETE',
         data: {
             "id": id,

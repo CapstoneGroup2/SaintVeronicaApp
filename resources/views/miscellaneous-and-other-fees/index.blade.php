@@ -15,6 +15,7 @@ Miscellaneous & Other Fees
 @endif
 
 <hr>
+
 <div>
   <table id="dataTable" class="table table-striped table-miscellaneous-and-other-fees table-default">
     <thead>
@@ -46,6 +47,47 @@ Miscellaneous & Other Fees
     </div>
   </div>
 </div>
+
+<div id="addModal" class="modal fade" role="dialog" style="margin-top: 130px;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="enrollment-form" action="/miscellaneous-and-other-fees" method="post" enctype="multipart/form-data" style="padding: 50px">
+        @csrf
+
+        <h2 class="text-warning">Add Item</h2> 
+
+        <hr>
+        
+        <div class="form-group">
+            <label for="status">Item Code</label>
+            <input type="text" class="form-control" name="item_code" placeholder="Code of item is required.">
+        </div>
+
+        <div class="form-group">
+            <label for="status">Item Description</label>
+            <input type="text" class="form-control" name="item_description" placeholder="Description of item is not required.">
+        </div>
+
+        <div class="form-group">
+            <label for="status">Item Price</label>
+            <input type="text" class="form-control" name="item_price" placeholder="Price of item is required.">
+        </div>
+
+        <div class="form-group">
+            <label for="status">Item Image</label>
+            <input type="file" class="form-control image" name="item_image" placeholder="image of item">
+        </div>
+
+        <div class="right">
+            <a href="{{url()->previous()}}" class="btn btn-lg btn-danger" role="button">Cancel</a>
+            <button type="submit" class="btn btn-lg btn-success">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @section('script')    
@@ -91,13 +133,18 @@ Miscellaneous & Other Fees
     
     setTable();
 
-    $('.btn-add').click(function () {
-      window.location = "/miscellaneous-and-other-fees/create";
+    // $('.btn-add').click(function () {
+    //   window.location = "/miscellaneous-and-other-fees/create";
+    // });
+    
+    $(document).on('click', '.btn-add', function() {
+        $('#addModal').modal('show');
     });
 
     $('[data-toggle="tooltip"]').tooltip();  
 
     var id;
+
     $(document).on('click', '.btn-remove', function() {
       id= $(this).attr('id');
       $('#confirmModal').modal('show');

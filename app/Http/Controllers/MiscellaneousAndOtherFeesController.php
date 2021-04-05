@@ -84,7 +84,7 @@ class MiscellaneousAndOtherFeesController extends Controller
             $destinationPath = public_path('/images/items');
             $image->move($destinationPath, $name);
         } else {
-            $name = 'default.png';
+            $name = 'default.jfif';
         }
         
         $miscellaneous_and_other_fee = new MiscellaneousAndOtherFees();

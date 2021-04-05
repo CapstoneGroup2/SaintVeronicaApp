@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
+
+    public function landingPage()
+    {
+        return view('landing-page');
+    }
+
     public function dashboard() 
     {
         $students_classes = DB::table('students_classes')

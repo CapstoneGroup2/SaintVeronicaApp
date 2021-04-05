@@ -7,15 +7,7 @@
 
     <title>{{config('app.name', 'St.Veronica System')}}</title>
 
-    <!-- <link href="{{ asset('css/app_old.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-     <!-- Bootstrap core CSS -->
-     <!-- <link href = {{ asset("bootstrap/css/bootstrap.css") }} rel="stylesheet" /> -->
-
-    <!-- Custom styles for this template -->
-    <!-- <link href = {{ asset("bootstrap/css/sticky-footer-navbar.css") }} rel="stylesheet" /> -->
-
-    <!-- Optional theme -->
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.min.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -27,7 +19,10 @@
 </head>
 <body>
     <nav class="header navbar fixed-top navbar-expand-lg">
-        <a class="navbar-brand logo" href=""><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
+        <a class="navbar-brand logo" href="/welcome"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
+        <div class="btn-group" style="margin: 0 20px 0 auto;">
+            <a href="/login" role="button" class="btn btn-success btn-login" style="color: white !important; letter-spacing: 2px;"><span class="glyphicon glyphicon-log-in" style="font-size: 15px; color: white !important;"></span> Login</a>
+        </div>
     </nav>
         <div class="container content">
             <div class="login-container">
@@ -82,6 +77,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-lg btn-success btnSubmit">Login</button>
                         </div>
+
                     </form>
                 </div>
             </div>

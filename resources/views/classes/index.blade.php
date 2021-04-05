@@ -85,11 +85,15 @@ Classes
 @endsection
 
 @section('script')
+
 <script>
+
 $(document).ready(function() {
     $(document).on('click', '.btn-addClass', function() {
         $('#addClassModal').modal('show');
     });
 });
+
 </script>
+
 @endsection

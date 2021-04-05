@@ -11,7 +11,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('layouts.login');
+        return view('login');
     }
 
     public function checklogin(Request $request)
@@ -54,6 +54,6 @@ class MainController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect('/welcome');
     }
 }

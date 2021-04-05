@@ -6,23 +6,29 @@ Miscellaneous & Other Fees
 
 @section('content')
 <h2 style="text-align: left">{{ session()->get('present_class_name') }} Class</h2>
+
 <div class="triangle-right" style="width:220px;"></div>
+
 @if(Auth::user()->role_id == 1)
   <br>
   <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Miscellaneous</button> 
 @endif
+
 <hr>
-<table id="dataTable" class="table table-striped table-miscellaneous-and-other-fees table-default">
-  <thead>
-      <tr>
-        <th scope="col">Item Image</th>
-        <th scope="col">Item Name</th>
-        <th scope="col">Item Description</th>
-        <th scope="col">Item Price</th>
-        <th scope="col">Action</th>
-      </tr>
-  </thead>
-</table>
+<div>
+  <table id="dataTable" class="table table-striped table-miscellaneous-and-other-fees table-default">
+    <thead>
+        <tr>
+          <th scope="col">Item Image</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Item Description</th>
+          <th scope="col">Item Price</th>
+          <th scope="col">Action</th>
+        </tr>
+    </thead>
+  </table>
+</div>
+
 <div id="confirmModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">

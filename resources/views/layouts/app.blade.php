@@ -50,7 +50,6 @@
                     <!-- <a href="/payments"><i class="fa fa-fw fas fa-bullhorn"></i> Payments</a> -->
                     <a href="/payments-history"><i class="fa fa-fw fas fa-bullhorn"></i> History of Payments</a>
                     <a href="/announcements"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>
-                    <a href="/reports"><i class="fa fa-fw fa fa-area-chart"></i> Reports</a>
 
                 @elseif(Auth::user()->role_id == 2)
                     <a href="/home"><i class="fa fa-fw fa-home"></i> Home</a>

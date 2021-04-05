@@ -27,8 +27,6 @@ Route::middleware(['admin'])->group(function () {
     ]);
 
     Route::resource('/announcements', 'AnnouncementsController');
-
-    Route::get('/reports', 'PagesController@chartjs');
 });
 
 Route::middleware(['registrar'])->group(function () {
@@ -38,13 +36,13 @@ Route::middleware(['registrar'])->group(function () {
     });
 
     Route::get('/home', 'PagesController@home');
+
+    Route::get('/reports', 'PagesController@reports');
 });
 
 Route::middleware(['web'])->group(function () {
     
     Route::get('/logout', 'Auth\MainController@logout');
-
-    // Route::get('/reports', 'PagesController@reports');
 
     Route::get('/students/classes/{id}', 'StudentsController@showStudentsByClass');
 

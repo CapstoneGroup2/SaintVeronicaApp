@@ -79,12 +79,12 @@ class PagesController extends Controller
                                             DB::raw("count(*) as number"),
                                             DB::raw("monthname(created_at) as monthName"),
                                             DB::raw('max(created_at) as createdAt'))
-                                        ->whereYear('students.created_at', date('Y'))
+                                        // ->whereYear('students.created_at', date('Y'))
                                         ->groupBy(DB::raw("monthname(created_at)"))
-                                        ->orderBy(DB::raw("max(created_at)"))
+                                        // ->orderBy(DB::raw("max(created_at)"))
                                         ->get(); 
 
-        dd($data_enrollees_per_month);
+        // dd($data_enrollees_per_month);
 
         // $array_enrollees_per_month[] = ['Month', 'Number'];
 

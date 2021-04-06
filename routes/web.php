@@ -12,6 +12,10 @@ Route::middleware(['admin'])->group(function () {
         return redirect('/dashboard');
     });
 
+    Route::get('/index', function() {
+        return redirect('/dashboard');
+    });
+
     Route::get('/dashboard', 'PagesController@dashboard');
 
     Route::delete('/miscellaneous-and-other-fees/{id}', 'MiscellaneousAndOtherFeesController@destroy');
@@ -34,6 +38,10 @@ Route::middleware(['admin'])->group(function () {
 Route::middleware(['registrar'])->group(function () {
 
     Route::get('/', function() {
+        return redirect('/home');
+    });
+
+    Route::get('/index', function() {
         return redirect('/home');
     });
 

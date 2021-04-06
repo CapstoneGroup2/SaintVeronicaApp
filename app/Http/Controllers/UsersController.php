@@ -20,6 +20,7 @@ class UsersController extends Controller
         $users = DB::table('users')
             ->join('roles', 'roles.id', '=', 'users.role_id')
             ->select('users.id', 'users.user_first_name', 'users.user_last_name', 'users.user_address', 'users.user_email', 'users.user_contact', 'roles.role_name')
+            ->where('user_active_status', 1)
             ->get();
 
         // dd($users);
@@ -192,8 +193,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-
-        $user = User::findorFail($id);
-        $user->delete();
+        error_log(print_r($id));
+        $user = User::find($id);
+        $user->user_active_status = 0;
+        $user->save();
     }
 }

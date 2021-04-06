@@ -4,9 +4,11 @@
     @include('layouts.head')
 </head>
 <body>
-    @if(isset(Auth::user()->user_email))
+
+    @if(isset(Auth::user()->user_email) && Auth::user()->user_active_status == 1)
+
         <nav class="header navbar fixed-top navbar-expand-lg">
-        <span style="font-size:30px;cursor:pointer; margin: 0 10px;color:white;" onclick="openNav()">&#9776;</span>
+            <span id="toggle" style="font-size:30px; cursor: pointer; margin: 0 10px; color: white; display: none;" onclick="openNav()">&#9776;</span>
             <a class="navbar-brand logo" href=""><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
             <div class="btn-group" style="margin: 0 20px 0 auto">
                 <a href="" role="button" class="btn btn-success" style="color: white !important">
@@ -16,9 +18,9 @@
             </div>
         </nav>
         
-        <div class="container content" id="main">
+        <div class="container content" id="main" style="padding-left: 260px;">
             
-            <div id="mySidenav" class="sidenav" style="display: none;">
+            <div id="mySidenav" class="sidenav" style="display: block;">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
                 @if(Auth::user()->role_id == 1)
@@ -82,6 +84,7 @@
         @yield('script')
         <!-- <script src="{{ URL::to('/js/app.js') }}"></script> -->
         <script>
+
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
         for (i = 0; i < dropdown.length; i++) {
@@ -95,17 +98,26 @@
                 }
             });
         }
-        function openNav() {
-        document.getElementById("mySidenav").style.display = "block";
-        document.getElementById("main").style.paddingLeft = "260px";
+        function openNav() 
+        {
+            document.getElementById("mySidenav").style.display = "block";
+            document.getElementById("main").style.paddingLeft = "260px";
+            document.getElementById("toggle").style.display = "none";
         }
-        function closeNav() {
-        document.getElementById("mySidenav").style.display = "none";
-        document.getElementById("main").style.paddingLeft= "10px";
+
+        function closeNav() 
+        {
+            document.getElementById("mySidenav").style.display = "none";
+            document.getElementById("main").style.paddingLeft= "10px";
+            document.getElementById("toggle").style.display = "block";
         }
+
         </script>
     @else
-        <script>window.location = "/login";</script>
+
+        <script>window.location = "/logout";</script>
+
     @endif
+
     </body>
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Validator;
 use Auth;
 
@@ -28,16 +29,23 @@ class MainController extends Controller
 
         if(Auth::attempt($user_data))
         {
-            switch (Auth::user()->role_id) {
-                case 1;
-                    return redirect('/dashboard');
-                    break;
-                case 2:
-                    return redirect('/home');
-                    break;
-                default:
-                    return redirect('/login');
-                    break;
+            if(Auth::user()->user_active_status == 1) 
+            {
+                switch (Auth::user()->role_id) {
+                    case 1;
+                        return redirect('/dashboard');
+                        break;
+                    case 2:
+                        return redirect('/home');
+                        break;
+                    default:
+                        return redirect('/login');
+                        break;
+                }
+            }
+            else
+            {
+                return back()->with('error', 'Credentials are unavailable.')->withInput($request->except('password'));
             }
         }
         else

@@ -24,63 +24,64 @@
             <a href="/login" role="button" class="btn btn-success btn-login" style="color: white !important; letter-spacing: 2px;"><span class="glyphicon glyphicon-log-in" style="font-size: 15px; color: white !important;"></span> Login</a>
         </div>
     </nav>
-        <div class="container content">
-            <div class="login-container">
-                <div class="login-form-1">
-                    
-                    <form method="POST" action="{{ url('/login') }}">
-                        @csrf
 
-                        @if(isset(Auth::user()->user_email))
-                            <script>window.location="/index";</script>
-                        @endif
+    <div class="container content">
+        <div class="login-container">
+            <div class="login-form-1">
+                
+                <form method="POST" action="{{ url('/login') }}">
+                    @csrf
 
-                        @if($message = Session::get('error'))
-                            <div class="alert alert-danger alert-block" style="font-size: 13px;">
-                                <button class="close" type="button" data-dismiss="alert">x</button>
+                    @if(isset(Auth::user()->user_email))
+                        <script>window.location="/index";</script>
+                    @endif
+
+                    @if($message = Session::get('error'))
+                        <div class="alert alert-danger alert-block" style="font-size: 13px;">
+                            <button class="close" type="button" data-dismiss="alert">x</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
+
+                    @if(count($errors) > 0)
+                        <div class="alert alert-danger" style="font-size: 13px;">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <div class="form-group">
+                        <label for="email" style="margin-bottom: 1rem; letter-spacing: 1px;">Email:</label>
+                        <input type="email" class="form-control" id="name" name="email" placeholder="Your Email *" value="{{ old('email') }}" />
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
-                            </div>
-                        @endif
+                            </span>
+                        @enderror
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" style="margin-bottom: 1rem; letter-spacing: 1px;">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" value="{{ old('password') }}" />
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-                        @if(count($errors) > 0)
-                            <div class="alert alert-danger" style="font-size: 13px;">
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                    <br>
 
-                        <div class="form-group">
-                            <label for="email" style="margin-bottom: 1rem; letter-spacing: 1px;">Email:</label>
-                            <input type="email" class="form-control" id="name" name="email" placeholder="Your Email *" value="{{ old('email') }}" />
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="password" style="margin-bottom: 1rem; letter-spacing: 1px;">Password:</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" value="{{ old('password') }}" />
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-success btnSubmit">Login</button>
+                    </div>
 
-                        <br>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-lg btn-success btnSubmit">Login</button>
-                        </div>
-
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
     </body>
 </html>

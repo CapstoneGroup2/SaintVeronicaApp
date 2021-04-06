@@ -106,6 +106,6 @@ composer install
 
       <!-- Your Chat Plugin code -->
       <div class="fb-customerchat"
-        attribution="setup_tool"
-        page_id="101771081449711">
+        attribution="page_inbox"
+        page_id="103971228472620">
       </div>

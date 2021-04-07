@@ -6,7 +6,6 @@
 
 @section('content')
 <h2 style="text-align: left">{{ session()->get('present_class_name') }} Students</h2>
-<div class="triangle-right" style="width:300px;"></div>
 <br>
 <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Enroll Student</button> 
 <hr>

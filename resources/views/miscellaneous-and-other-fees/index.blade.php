@@ -48,7 +48,7 @@ Miscellaneous & Other Fees
   </div>
 </div>
 
-<div id="addModal" class="modal fade" role="dialog" style="margin-top: 130px;">
+<div id="addModal" class="modal fade" role="dialog" style="margin-top: 70px;">
   <div class="modal-dialog">
     <div class="modal-content">
       <form id="enrollment-form" action="/miscellaneous-and-other-fees" method="post" enctype="multipart/form-data" style="padding: 50px">
@@ -79,7 +79,7 @@ Miscellaneous & Other Fees
         </div>
 
         <div class="right">
-            <a href="{{url()->previous()}}" class="btn btn-lg btn-danger" role="button">Cancel</a>
+            <a href="/miscellaneous-and-other-fees/classes/{{ session()->get('present_class_id') }}" class="btn btn-lg btn-danger" role="button">Cancel</a>
             <button type="submit" class="btn btn-lg btn-success">Submit</button>
         </div>
 

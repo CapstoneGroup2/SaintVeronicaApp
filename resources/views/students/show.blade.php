@@ -6,7 +6,6 @@
 
 @section('content')
 <h2 style="text-align: left">{{ session()->get('present_class_name') }} Student</h2>
-<div class="triangle-right" style="width:300px;"></div>
 <hr>
 <form id="enrollment-form" action="/payments/{{ $student->id }}" method="POST">
     {{method_field('PATCH')}}

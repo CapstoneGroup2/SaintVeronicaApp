@@ -352,12 +352,12 @@ label.entries {
 }
 
 div.right {
-  float: right;
-  margin: 5px;
+  text-align: right;
+  margin: 0;
 }
 
 #enrollment-form {
-  padding: 3% 3% 5% 3%;
+  padding: 3%;
   background-color: #3f704d;
   color: #FCF4A3;
   font-size: 12px;
@@ -368,7 +368,7 @@ div.right {
 #enrollment-form .form-control {
   font-size: 13px;
   border-radius: 5px;
-  margin: 10px 0;
+  margin: 5px 0;
   letter-spacing: 1px;
 }
 

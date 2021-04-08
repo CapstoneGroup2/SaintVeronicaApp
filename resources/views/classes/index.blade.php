@@ -15,11 +15,11 @@ Classes
     @endif
         @if($count == 1)
             <div class="col">
-                <div class="card card-home btn-addClass">
+                <div class="card card-home btn-addClass" style="height: 120px !imporant;">
                     <img class="card-img-top" src="{{ URL::to('/images/students.jpg') }}" alt="Card image cap">
                     <div class="card-body">
-                        <br>
-                        <h2 class="card-text text-danger" style=""><span class="glyphicon glyphicon-plus"></span> Add Class</h2>
+                        <h2 class="card-text text-danger" style="font-size: 21px !important;"><span class="glyphicon glyphicon-plus"></span> Add Class</h2>
+                        <h3>----------------</h3>
                     </div>
                 </div>
             </div>

@@ -14,11 +14,11 @@ class PaymentsController extends Controller
     public function history()
     {
         $histories = DB::table('payments_histories')
-            ->leftJoin('students', 'students.id', '=', 'payments_histories.student_id')
-            ->leftJoin('users', 'users.id', '=', 'payments_histories.user_id')
+            ->join('students', 'students.id', '=', 'payments_histories.student_id')
+            ->join('users', 'users.id', '=', 'payments_histories.user_id')
             ->where('students.student_active_status', 1)
             ->get();
-        
+            
         if (request()->ajax())
         {
             return datatables()->of($histories)

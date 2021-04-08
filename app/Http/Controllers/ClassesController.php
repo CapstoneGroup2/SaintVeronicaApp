@@ -69,7 +69,7 @@ class ClassesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'class_name'          =>  'required',
+            'class_name'          =>  'required|unique:classes',
         ]);
 
         $class = new Classes();
@@ -77,7 +77,13 @@ class ClassesController extends Controller
         $class->class_description = $request['class_description'];
         $class->save();
 
-        return redirect('/dashboard');
+        $class = Classes::where('class_name', $request['class_name'])->get();
+        $classes = session()->get('classes');
+        array_push($classes, [$request['class_name'], $class[0]->id]);
+
+        session()->put('classes', $classes);
+        
+        return redirect('/miscellaneous-and-other-fees/classes/' . $class[0]->id);
     }
 
     /**

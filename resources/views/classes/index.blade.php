@@ -65,11 +65,21 @@ Classes
             <div class="modal-body">
                 <div class="form-group">
                     <label for="class_name">Class Name</label>
-                    <input type="text" class="form-control" name="class_name">
+                    <input type="text" class="form-control" name="class_name" placeholder="Class Name">
+                    @if ($errors->has('class_name'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('class_name')}}</p>
+                    </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="class_description">Class Description</label>
-                    <input type="text" class="form-control" name="class_description">
+                    <input type="text" class="form-control" name="class_description" placeholder="Class Description">
+                    @if ($errors->has('class_description'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('class_description')}}</p>
+                    </span>
+                    @endif
                 </div>
             </div>
             <br>    

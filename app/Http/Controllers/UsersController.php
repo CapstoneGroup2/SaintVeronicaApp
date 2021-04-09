@@ -151,11 +151,11 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->validate($request, [
-            'user_first_name'    =>  'required',
-            'user_last_name'     =>  'required',
-            'password'           =>  'nullable|required_with:password_confirmation|string|confirmed',
-            'role_id'            =>  'required',
-            'user_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'user_first_name'       =>  'required',
+            'user_last_name'        =>  'required',
+            'password'              =>  'nullable|required_with:password_confirmation|string|confirmed',
+            'role_id'               =>  'required',
+            'user_image'            =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
         $user = User::find($id);

@@ -26,7 +26,9 @@ Route::middleware(['admin'])->group(function () {
 
     Route::delete('/users/{id}', 'UsersController@destroy');
     
-    Route::resource('/users', 'UsersController');
+    Route::resource('/users', 'UsersController')->only([
+        'index', 'store', 'show', 'delete'
+    ]);;
 
     Route::resource('/classes', 'ClassesController')->only([
         'create', 'store', 'edit', 'update'
@@ -78,5 +80,9 @@ Route::middleware(['web'])->group(function () {
     
     Route::resource('/announcements', 'AnnouncementsController')->only([
         'index'
+    ]);;
+    
+    Route::resource('/users', 'UsersController')->only([
+        'edit', 'update'
     ]);;
 });

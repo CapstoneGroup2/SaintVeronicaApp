@@ -15,19 +15,29 @@ Users
         <div class="col">    
             <div class="form-group">
                 <label for="First Name">First Name</label>
-                <input type="text" class="form-control" name="user_first_name" placeholder="first name" value="{{ old('first_name') }}">
+                <input type="text" class="form-control" name="user_first_name" placeholder="first name" value="{{ old('user_first_name') }}">
+                @if ($errors->has('user_first_name'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('user_first_name')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
         <div class="col">    
             <div class="form-group">
                 <label for="First Name">Middle Name</label>
-                <input type="text" class="form-control" name="user_middle_name" placeholder="middle name" value="{{ old('middle_name') }}">
+                <input type="text" class="form-control" name="user_middle_name" placeholder="middle name" value="{{ old('user_middle_name') }}">
             </div>
         </div>
         <div class="col">    
             <div class="form-group">
                 <label for="First Name">Last Name</label>
-                <input type="text" class="form-control" name="user_last_name" placeholder="last name">
+                <input type="text" class="form-control" name="user_last_name" placeholder="last name" value="{{ old('user_last_name') }}">
+                @if ($errors->has('user_last_name'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('user_last_name')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
     </div>
@@ -38,13 +48,18 @@ Users
         <div class="col">
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" class="form-control" name="user_email" placeholder="name@example.com">
+                <input type="email" class="form-control" name="user_email" placeholder="name@example.com" value="{{ old('user_email') }}">
+                @if ($errors->has('user_email'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('user_email')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
         <div class="col-5">    
             <div class="form-group">
                 <label for="contact">Contact Number</label>
-                <input type="text" class="form-control" name="user_contact" placeholder="+639">
+                <input type="text" class="form-control" name="user_contact" placeholder="+639" value="{{ old('user_contact') }}">
             </div>
         </div>
     </div>
@@ -53,7 +68,7 @@ Users
 
     <div class="form-group">
         <label for="address">Home Address</label>
-        <input type="text" class="form-control" name="user_address" placeholder="present address">
+        <input type="text" class="form-control" name="user_address" placeholder="present address" value="{{ old('user_address') }}">
     </div>
 
     <br>
@@ -63,11 +78,16 @@ Users
             <div class="form-group">
                 <label for="user_role_id">User Role</label>
                 <select class="form-control" name="user_role_id">
-                    <option selected>select user role</option>
-                   @foreach($roles as $role)
-                        <option value="{{ $role->id }}">{{ $role->role_name }}</option> 
-                   @endforeach
+                    <option value="" selected>select user role</option>
+                    @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->role_name }}</option> 
+                    @endforeach
                 </select>
+                @if ($errors->has('user_role_id'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('user_role_id')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
         <div class="col-3">    

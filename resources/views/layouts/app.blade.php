@@ -11,7 +11,7 @@
             <span id="toggle" style="font-size:30px; cursor: pointer; margin: 0 10px; color: white; display: none;" onclick="openNav()">&#9776;</span>
             <a class="navbar-brand logo" href=""><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
             <div class="btn-group" style="margin: 0 20px 0 auto">
-                <a href="" role="button" class="btn btn-success" style="color: white !important">
+                <a href="/users/{{ Auth::user()->id }}/edit" role="button" class="btn btn-success" style="color: white !important">
                     <img id="profile" src="/images/users/{{ Auth::user()->user_image }}">{{ Auth::user()->user_email }}
                 </a>
                 <a href="/logout" role="button" class="btn btn-danger" style="color: white !important"><span class="glyphicon glyphicon-log-out"></span> Logout</a>

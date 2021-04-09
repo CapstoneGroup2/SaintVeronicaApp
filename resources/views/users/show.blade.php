@@ -12,70 +12,32 @@ Users
     <h1 class="text-warning">User Profile Information</h1> 
     <hr>
     <div class="row">
-        <div class="col-3">
+        <div class="col-4">
             <div class="form-group center">
-                <img src='/images/users/{{ $users[0]->user_image }}' height="200px" width="200px">
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="form-group">
-                <h3>Full Name : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Email Address : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Address : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Contact : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Gender : </h3>
-            </div>
-            <div class="form-group">
-                <h3>Status : </h3>
+                <img src='/images/users/{{ $users[0]->user_image }}' height="243px" width="220px">
             </div>
         </div>
         <div class="col">
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $users[0]->user_first_name }} {{ $users[0]->user_last_name }}</i></h3>
+                <p style="font-size:13px;">Full Name : <span class="text-white">{{ $users[0]->user_first_name }} {{($users[0]->user_middle_name != "") ? $users[0]->user_middle_name . " " : ""}}{{ $users[0]->user_last_name }}</span><p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $users[0]->user_email }}</i></h3>
+                <p style="font-size:13px;">Role Name : <span class="text-white">{{ $users[0]->role_name }}</span><p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>{{ $users[0]->user_address }}</i></h3>
+                <p style="font-size:13px;">Email Address : <span class="text-white">{{ $users[0]->user_email }}</span><p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>
-                    <?php 
-                    if($users[0]->user_contact != '') {
-                        echo $users[0]->user_contact;
-                    }else{
-                        echo 'null';
-                    } ?>
-                </i></h3>
+                <p style="font-size:13px;">Address : <span class="text-white">{{ $users[0]->user_address }}</span><p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>
-                <?php 
-                    if($users[0]->user_gender != '') {
-                        echo $users[0]->user_gender;
-                    }else{
-                        echo 'null';
-                    } ?>
-                </i></h3>
+                <p style="font-size:13px;">Contact : <span class="text-white">{{ $users[0]->user_contact }}</span><p>
             </div>
             <div class="form-group">
-                <h3 class="text-white"><i>
-                    <?php 
-                    if($users[0]->user_status != '') {
-                        echo $users[0]->user_status;
-                    }else{
-                        echo 'null';
-                    } ?>
-                    </i></h3>
+                <p style="font-size:13px;">Gender : <span class="text-white">{{ $users[0]->user_gender }}</span><p>
+            </div>
+            <div class="form-group">
+                <p style="font-size:13px;">Status : <span class="text-white">{{ $users[0]->user_status }}</span><p>
             </div>
         </div>
     </div>

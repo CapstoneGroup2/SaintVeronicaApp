@@ -7,11 +7,19 @@ Users
 @section('content')
   @foreach($users as $user)
     <h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
-    <div class="triangle-right" style="width:230px;"></div>
+    @if($users[0]->role_id == 1)
+        <div class="triangle-right" style="width:230px;"></div>
+    @else
+        <div class="triangle-right" style="width:160px;"></div>
+    @endif
     <hr>
     <form id="enrollment-form" action="/users/{{ $user->id }}" method="POST" enctype="multipart/form-data">
         {{method_field('PATCH')}}
         @csrf
+
+        <h2 class="text-warning">User Information</h2>
+        <hr>
+
         <div class="row">
             <div class="col">
                 <div class="row">
@@ -19,6 +27,11 @@ Users
                         <div class="form-group">
                             <label for="First Name">First Name</label>
                             <input type="text" class="form-control" name="user_first_name" placeholder="first name" value="{{ $user->user_first_name }}" >
+                            @if ($errors->has('user_first_name'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{$errors->first('user_first_name')}}</p>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="col">    
@@ -31,22 +44,40 @@ Users
                         <div class="form-group">
                             <label for="First Name">Last Name</label>
                             <input type="text" class="form-control" name="user_last_name" placeholder="last name" value="{{ $user->user_last_name }}" >
+                            @if ($errors->has('user_last_name'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{$errors->first('user_last_name')}}</p>
+                                </span>
+                            @endif
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="password">
+                    @if(isset(Auth::user()->user_email) && Auth::user()->id == $user->id)
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="password">
+                                @if ($errors->has('password'))
+                                    <span class="invalid feedback" role="alert">
+                                        <p style="color:tomato;">{{$errors->first('password')}}</p>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="password">Confirm Password</label>
-                            <input type="password" class="form-control" name="password_confirmation" placeholder="confirm password">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="password">Confirm Password</label>
+                                <input type="password" class="form-control" name="password_confirmation" placeholder="confirm password">
+                                @if ($errors->has('password_confirmation'))
+                                    <span class="invalid feedback" role="alert">
+                                        <p style="color:tomato;">{{$errors->first('password_confirmation')}}</p>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="col-5">    
                         <div class="form-group">
                             <label for="contact">Contact Number</label>
@@ -54,36 +85,39 @@ Users
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="form-group">
                     <label for="address">Home Address</label>
                     <input type="text" class="form-control" name="user_address" placeholder="present address" value="{{ $user->user_address }}" >
                 </div>
+                <br>
                 <div class="row">
-                    
-                <div class="col">    
-                        <div class="form-group">
-                            <label for="user_role_id">User Role</label>
-                            <select class="form-control" name="role_id">
-                                @foreach($roles as $role)
-                                    @if($role->id == $user->role_id)
-                                        <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
-                                    @else
-                                        <option value="{{ $role->id }}">{{ $role->role_name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
+                    @if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
+                        <div class="col">    
+                            <div class="form-group">
+                                <label for="user_role_id">User Role</label>
+                                <select class="form-control" name="role_id">
+                                    @foreach($roles as $role)
+                                        @if($role->id == $user->role_id)
+                                            <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
+                                        @else
+                                            <option value="{{ $role->id }}">{{ $role->role_name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-3">    
+                    @endif
+                    <div class="col">    
                         <div class="form-group">
                             <label for="gender">Gender</label>
                             <select class="form-control" name="user_gender">
-                                @if($user->user_gender == 'F')
-                                    <option value="F" selected>Female</option>
-                                    <option value="M">Male</option>
+                                @if($user->user_gender == 'Female')
+                                    <option value="Female" selected>Female</option>
+                                    <option value="Male">Male</option>
                                 @else
-                                    <option value="M" selected>Male</option>
-                                    <option value="F">Female</option>
+                                    <option value="Male" selected>Male</option>
+                                    <option value="Female">Female</option>
                                 @endif
                             </select>
                         </div>
@@ -106,17 +140,18 @@ Users
             </div>
             <div class="col-3">
                 <div class="form-group center">
-                    <label for="status">User Profile Picture</label>
                     <br>
-                    <img src='/images/users/{{ $user->user_image }}' height="243px" width="250px">
-                    <input type="file" class="form-control" name="user_image" style="width:250px">
+                    <img src='/images/users/{{ $user->user_image }}' height="200px" width="92%">
+                    <br><br>
+                    <label for="status">User Profile Picture</label>
+                    <input type="file" class="form-control image" name="user_image" style="width:92%">
                 </div>
             </div>
         </div>
         
         <hr>
         <div class="right">
-            <a href="{{url()->previous()}}" class="btn btn-lg btn-danger ">Cancel</a>
+            <a href="/users" class="btn btn-lg btn-danger ">Cancel</a>
             <button type="submit" class="btn btn-lg btn-success">Update</button>
         </div>
     </form>
@@ -124,5 +159,4 @@ Users
 @endsection
 
 @section('script')  
-  <script type="text/javascript" src="{{ URL::to('/js/student.js') }}"></script>
 @endsection

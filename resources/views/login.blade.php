@@ -76,7 +76,14 @@
                     <br>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-lg btn-success btnSubmit">Login</button>
+                        <div class="row">
+                            <div class="col">
+                                <a href="/welcome" class="btn btn-lg btn-danger btn-cancel" role="button">Cancel</a>
+                            </div>
+                            <div class="col" style="text-align: right;">
+                                <button type="submit" class="btn btn-lg btn-success btn-login">Login</button>
+                            </div>
+                        </div>
                     </div>
 
                 </form>

@@ -89,6 +89,7 @@ body {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 16px;}
 }
+
 div.card {
   padding: 10px;
   margin: 30px 20px;
@@ -442,4 +443,24 @@ a:hover {
 
 .btn-group .btn {
   border-radius: 2.25rem;
+}
+
+.btn-login, .btn-cancel {
+  width: 100%;
+}
+
+.btn-login {
+  background-color: #3f704d !important;
+}
+
+.btn-login:hover {
+  background-color: #315a3d !important;
+}
+
+#myModal .modal-content{
+  background-color: #3f704d !important;
+}
+
+#myModal .modal-title{
+  color: #FCF4A3 !important;
 }

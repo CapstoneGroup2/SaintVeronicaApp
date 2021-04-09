@@ -32,7 +32,9 @@ Route::middleware(['admin'])->group(function () {
         'create', 'store', 'edit', 'update'
     ]);
 
-    Route::resource('/announcements', 'AnnouncementsController');
+    Route::resource('/announcements', 'AnnouncementsController')->only([
+        'store', 'show', 'edit', 'update', 'delete'
+    ]);;
 });
 
 Route::middleware(['registrar'])->group(function () {
@@ -73,4 +75,8 @@ Route::middleware(['web'])->group(function () {
     Route::resource('/classes', 'ClassesController')->only([
         'index'
     ]);
+    
+    Route::resource('/announcements', 'AnnouncementsController')->only([
+        'index'
+    ]);;
 });

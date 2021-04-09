@@ -18,6 +18,8 @@ class CreateAnnouncementsTable extends Migration
             $table->bigIncrements('id');
             $table->string('announcement_title');
             $table->string('announcement_message');
+            $table->integer('is_approved');
+            $table->timestamp('date_approved');
             $table->timestamps();
         });
     }

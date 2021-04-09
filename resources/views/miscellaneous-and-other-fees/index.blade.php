@@ -9,7 +9,7 @@ Miscellaneous & Other Fees
 
 <div class="triangle-right" style="width:220px;"></div>
 
-@if(Auth::user()->role_id == 1)
+@if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
   <br>
   <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Miscellaneous</button> 
 @endif
@@ -54,6 +54,8 @@ Miscellaneous & Other Fees
       <form id="enrollment-form" action="/miscellaneous-and-other-fees" method="post" enctype="multipart/form-data" style="padding: 50px">
         @csrf
 
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <br><br>
         <h2 class="text-warning">Add Item</h2> 
 
         <hr>

@@ -59,10 +59,9 @@ Classes
             @csrf
             <div class="modal-header">
                 <h2 class="modal-title">Add Class</h2>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <br>    
             <div class="modal-body">
+                <br>
                 <div class="form-group">
                     <label for="class_name">Class Name</label>
                     <input type="text" class="form-control" name="class_name" placeholder="Class Name">
@@ -72,6 +71,7 @@ Classes
                     </span>
                     @endif
                 </div>
+                <br>
                 <div class="form-group">
                     <label for="class_description">Class Description</label>
                     <input type="text" class="form-control" name="class_description" placeholder="Class Description">
@@ -81,8 +81,8 @@ Classes
                     </span>
                     @endif
                 </div>
+                <br>
             </div>
-            <br>    
             <div class="modal-footer">
                 <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-lg btn-success">Submit</button>

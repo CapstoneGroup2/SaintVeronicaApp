@@ -10,60 +10,33 @@ use Illuminate\Support\Facades\DB;
 
 class AnnouncementsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $announcements = Announcement::all();
+        $announcements = Announcement::orderBy('updated_at', 'desc')->get();
         return view('announcements.index', compact('announcements'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $announcements = Announcement::all();
-        return view('announcement.create', ['announcements' => $announcements]);
-    }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'announcement_title'          =>  'required',
+            'announcement_message'        =>  'required',
+        ]);
+
+        $announcement = new Announcement();
+        $announcement->announcement_title = $request['announcement_title'];
+        $announcement->announcement_message = $request['announcement_message'];
+        $announcement->is_approved = 1;
+        $announcement->date_approved = date('Y-m-d H:i:s');
+        $announcement->save();
+
+        return redirect('/announcements');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)    
     {
-        $users = DB::select('select * from announcements where id = ' . $id);
-        // $userRoles = UserRole::all();  
-        return view('announcements.edit', compact('announcements'));
+        $announcement = Announcement::find($id);
+        return view('announcements.edit', compact('announcement'));
     }
     /**
      * Update the specified resource in storage.
@@ -74,7 +47,17 @@ class AnnouncementsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'announcement_title'          =>  'required',
+            'announcement_message'        =>  'required',
+        ]);
+
+        $announcement = Announcement::find($id);
+        $announcement->announcement_title = $request['announcement_title'];
+        $announcement->announcement_message = $request['announcement_message'];
+        $announcement->save();
+
+        return redirect('/announcements');
     }
 
     /**

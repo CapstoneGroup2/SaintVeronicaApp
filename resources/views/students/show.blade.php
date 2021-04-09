@@ -145,30 +145,34 @@
 @endsection
 
 @section('script')  
+
 <script>
-$(document).ready(function() {
-    $(document).on('click', '.btn-payment', function() {
-        $('#paymentModal').modal('show');
+
+    $(document).ready(function() {
+        $(document).on('click', '.btn-payment', function() {
+            $('#paymentModal').modal('show');
+        });
     });
-});
 
-$('.btn-print').on('click', function(){
-    $('#signArea').show();
-    var html="<html>";
-    html+= document.getElementById('toPrint').innerHTML;
-    html+="</html>";
+    $('.btn-print').on('click', function(){
+        $('#signArea').show();
+        var html="<html>";
+        html+= document.getElementById('toPrint').innerHTML;
+        html+="</html>";
 
-    while(html.includes("white")) {
-        html = html.replace('white', 'black');
-    }
+        while(html.includes("white")) {
+            html = html.replace('white', 'black');
+        }
 
-    console.log(html);
-    var printWin = window.open();
-    printWin.document.write(html);
-    printWin.document.close();
-    printWin.focus();
-    printWin.print();
-    printWin.close();
-});
+        console.log(html);
+        var printWin = window.open();
+        printWin.document.write(html);
+        printWin.document.close();
+        printWin.focus();
+        printWin.print();
+        printWin.close();
+    });
+    
 </script>
+
 @endsection

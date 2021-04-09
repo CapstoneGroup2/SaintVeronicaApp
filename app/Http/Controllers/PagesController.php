@@ -8,6 +8,7 @@ use App\Models\MiscellaneousAndOtherFees;
 use App\Models\Payment;
 use App\Models\Classes;
 use App\Models\Student;
+use App\Models\Announcement;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,8 @@ class PagesController extends Controller
 
     public function landingPage()
     {
-        return view('landing-page');
+        $announcements = Announcement::orderBy('updated_at', 'desc')->get();
+        return view('landing-page', compact('announcements'));   
     }
 
     public function dashboard() 

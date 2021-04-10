@@ -282,12 +282,12 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    @foreach($announcements as $announcements)
+                    @foreach($announcements as $announcement)
                         <div class="card card-home">
                             <div class="card-body">
-                                <h2 class="card-text text-danger" style="font-size: 2rem !important;">{{ $announcements -> announcement_title }}</h2>
-                                <p style="font-size: 1.2rem;">Date Posted: {{ date("M jS, Y", strtotime($announcements -> updated_at)) }}</p>
-                                <h4 class="card-text text-info" style="margin: 5px;font-size: 1.5rem !important;">{{ $announcements -> announcement_message}}</h4>
+                                <h2 class="card-text text-danger" style="font-size: 2rem !important;">{{ $announcement -> announcement_title }}</h2>
+                                <p style="font-size: 1.2rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> updated_at)) }}</p>
+                                <h4 class="card-text text-info" style="margin: 5px;font-size: 1.5rem !important;">{{ $announcement -> announcement_message}}</h4>
                             </div>
                         </div>
                     @endforeach

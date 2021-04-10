@@ -329,8 +329,8 @@
 
         <p><b>Contact Us</b></p>
         <p>Facebook Page: Saint Veronica Learning Center</p>
-        <p>Phone Number: +639-3213-2132</p>
-        <p>Email: saintVeronicalearningCenter@gmail.com</p>
+        <p>Phone Number: +639178780506</p>
+        <p>Location: Jarabe Bldg., Bantug St., Tagnipa Maasin City, Southern Leyte</p>
 
     </footer>
 

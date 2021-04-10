@@ -111,7 +111,7 @@ class MiscellaneousAndOtherFeesController extends Controller
             }
         }
 
-        return redirect('/miscellaneous-and-other-fees/classes/' . session()->get('present_class_id'));
+        return redirect('/miscellaneous-and-other-fees/classes/' . session()->get('present_class_id'))->with('success', 'Item has successfully created!');
     }
 
     public function show($id)
@@ -176,7 +176,7 @@ class MiscellaneousAndOtherFeesController extends Controller
             $payment[0]->save();
         }
         
-        return redirect('/miscellaneous-and-other-fees/classes/' . session()->get('present_class_id'));
+        return redirect('/miscellaneous-and-other-fees/classes/' . session()->get('present_class_id'))->with('success', 'Item has successfully updated!');
     }
 
     public function destroy($id)

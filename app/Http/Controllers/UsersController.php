@@ -97,7 +97,7 @@ class UsersController extends Controller
         $user->user_image = $name;
         $user->save();   
 
-        return redirect('/users');
+        return redirect('/users')->with('success', 'User has successfully created!');
     }
 
     /**
@@ -138,7 +138,7 @@ class UsersController extends Controller
 
         $roles = Role::all();
             
-        return view('users.edit', compact('users', 'roles'));
+        return view('users.edit', compact('users', 'roles'))->with('success', 'User information has successfully updated!');
     }
 
     /**

@@ -30,7 +30,7 @@ class AnnouncementsController extends Controller
         $announcement->date_approved = date('Y-m-d H:i:s');
         $announcement->save();
 
-        return redirect('/announcements');
+        return redirect('/announcements')->with('success', 'Announcement has successfully added!');
     }
 
     public function edit($id)    
@@ -57,7 +57,7 @@ class AnnouncementsController extends Controller
         $announcement->announcement_message = $request['announcement_message'];
         $announcement->save();
 
-        return redirect('/announcements');
+        return redirect('/announcements')->with('success', 'Announcement information has successfully updated!');
     }
 
     /**
@@ -68,6 +68,8 @@ class AnnouncementsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $announcement = Announcement::find($id);
+        $announcement->delete();
+        $announcement->save();
     }
 }

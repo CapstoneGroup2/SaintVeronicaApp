@@ -8,6 +8,13 @@ Classes
 <h2 style="text-align: left;">Classes</h2>
 <div class="triangle-right" style="width:120px;"></div>
 <hr> 
+
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{session()->get('success')}}
+    </div>
+@endif
+
 <?php $count = 1; ?>
 @foreach($students_count as $student_count)
     @if($count%5 == 0 || $count==1)

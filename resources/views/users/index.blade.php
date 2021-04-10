@@ -10,6 +10,13 @@ Users
 <br>
 <button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add User</button> 
 <hr>
+
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{session()->get('success')}}
+    </div>
+@endif
+
 <table id="dataTable" class="table table-striped table-enrollment table-default">
   <thead>
     <th scope="col">User Role</th>

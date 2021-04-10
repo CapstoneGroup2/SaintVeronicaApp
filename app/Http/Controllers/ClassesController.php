@@ -83,7 +83,7 @@ class ClassesController extends Controller
 
         session()->put('classes', $classes);
         
-        return redirect('/miscellaneous-and-other-fees/classes/' . $class[0]->id);
+        return redirect('/miscellaneous-and-other-fees/classes/' . $class[0]->id)->with('success', 'Class has successfully created!');
     }
 
     /**

@@ -19,6 +19,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard', 'PagesController@dashboard');
 
     Route::delete('/miscellaneous-and-other-fees/{id}', 'MiscellaneousAndOtherFeesController@destroy');
+
+    Route::delete('/announcements/{id}', 'AnnouncementsController@destroy');
     
     Route::resource('/miscellaneous-and-other-fees', 'MiscellaneousAndOtherFeesController')->only([
         'create', 'store', 'edit', 'update', 

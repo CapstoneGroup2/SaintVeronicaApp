@@ -5,10 +5,18 @@
 @endsection
 
 @section('content')
+
 <h2 style="text-align: left">{{ session()->get('present_class_name') }} Students</h2>
 <br>
 <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Enroll Student</button> 
 <hr>
+
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{session()->get('success')}}
+    </div>
+@endif
+
 <table id="dataTable" class="table table-striped table-enrollment table-default">
   <thead>
       <tr>
@@ -21,11 +29,13 @@
       </tr>
   </thead>
 </table>
+
 <div id="loader" class="text-center" style="margin-top: 50px;">
   <div class="spinner-border" style="width: 10rem; height: 10rem;font-size: 25px;" role="status">
     <span class="sr-only">Loading...</span>
   </div>
 </div>
+
 <div id="confirmModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -43,10 +53,11 @@
     </div>
   </div>
 </div>
+
 @endsection
 
 @section('script')    
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 <script>
 var pathname = window.location.pathname;
 var num = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1);

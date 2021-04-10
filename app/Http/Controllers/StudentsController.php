@@ -182,7 +182,7 @@ class StudentsController extends Controller
 
         $student->save();
 
-        return redirect('/students/classes/' . session()->get('present_class_id'))->with('status', 'Student information successfully updated!');;
+        return redirect('/students/classes/' . session()->get('present_class_id'))->with('success', 'Student information has successfully updated!');
     }
 
     public function destroy($id)

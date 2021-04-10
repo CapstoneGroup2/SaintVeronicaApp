@@ -16,6 +16,12 @@ Miscellaneous & Other Fees
 
 <hr>
 
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{session()->get('success')}}
+    </div>
+@endif
+
 <div>
   <table id="dataTable" class="table table-striped table-miscellaneous-and-other-fees table-default">
     <thead>

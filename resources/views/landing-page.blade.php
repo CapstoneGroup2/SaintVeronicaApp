@@ -212,14 +212,14 @@
             data-target="#myModal"><b><i
                     class="glyphicon glyphicon-bullhorn"></i></i><br />Announcements</b></button>
     </div>
-    <div>
+    <div id="aboutUs">
         <br/><br/><br/><br/>
         <table style="table-layout: fixed; width:100%;">
             <tr>
                 <td colspan="6" align="center"><img src="{{ URL::to('/images/clipart.png')}}" alt="logo" width="300"
                         height="250"></td>
                 <td colspan="6">
-                    <h1 class="display-4" id="aboutUs">About us!</h1><br />
+                    <h1 class="display-4">About us!</h1><br />
                     <p id="aboutUsText">We have created a fictional band website. Lorem ipsum dolor sit amet,
                         consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation ullamc</p>

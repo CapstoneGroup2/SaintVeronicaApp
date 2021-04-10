@@ -18,6 +18,7 @@ Miscellaneous & Other Fees
 
 @if(session()->has('success'))
     <div class="alert alert-success">
+        <button class="close" type="button" data-dismiss="alert">x</button>
         {{session()->get('success')}}
     </div>
 @endif

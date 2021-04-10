@@ -78,7 +78,7 @@
 
     footer {
         width: 100%;
-        padding: 15px;
+        padding: 20px !important;
         background-color: #3f704d;
         color: #FCF4A3;
         text-align: center;
@@ -327,10 +327,10 @@
             page_id="103971228472620">
         </div>
 
-        <p><b>Contact Us</b></p>
+        <!-- <p><b>Contact Us</b></p> -->
         <p>Facebook Page: Saint Veronica Learning Center</p>
         <p>Phone Number: +639178780506</p>
-        <p>Location: Jarabe Bldg., Bantug St., Tagnipa Maasin City, Southern Leyte</p>
+        <p>Location: Jarabe Bldg., Bantug St., Tagnipa Maasin City, Southern Leyte</p>  
 
     </footer>
 

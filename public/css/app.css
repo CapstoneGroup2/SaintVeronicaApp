@@ -447,6 +447,7 @@ a:hover {
 
 .btn-login, .btn-cancel {
   width: 100%;
+  font-size: 2rem !important;
 }
 
 .btn-login {

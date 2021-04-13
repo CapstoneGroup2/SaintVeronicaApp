@@ -21,7 +21,7 @@ Users
 <table id="dataTable" class="table table-striped table-enrollment table-default">
   <thead>
     <th scope="col">User Role</th>
-    <th scope="col">Full Name</th>
+    <th scope="col">Full Name</th>`
     <th scope="col">Email Address</th>
     <th scope="col">Home Address</th>
     <th scope="col">Contact Number</th>

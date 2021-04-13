@@ -43,35 +43,24 @@
                         </div>
                     @endif
 
-                    @if(count($errors) > 0)
-                        <div class="alert alert-danger" style="font-size: 13px;">
-                            <button class="close" type="button" data-dismiss="alert">x</button>
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                     <div class="form-group">
                         <label for="email" style="margin-bottom: 1rem; letter-spacing: 1px;">Email:</label>
                         <input type="email" class="form-control" id="name" name="email" placeholder="Your Email *" value="{{ old('email') }}" />
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                        @if ($errors->has('email'))
+                            <span class="invalid feedback" role="alert">
+                                <p style="color:tomato;">{{$errors->first('email')}}</p>
                             </span>
-                        @enderror
+                        @endif
                     </div>
                     
                     <div class="form-group">
                         <label for="password" style="margin-bottom: 1rem; letter-spacing: 1px;">Password:</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" value="{{ old('password') }}" />
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                        @if ($errors->has('password'))
+                            <span class="invalid feedback" role="alert">
+                                <p style="color:tomato;">{{$errors->first('password')}}</p>
                             </span>
-                        @enderror
+                        @endif
                     </div>
 
                     <br>

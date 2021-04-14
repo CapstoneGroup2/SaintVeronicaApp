@@ -21,7 +21,7 @@
     <nav class="header navbar fixed-top navbar-expand-lg">
         <a class="navbar-brand logo" href="/welcome"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
         <div class="btn-group" style="margin: 0 20px 0 auto;">
-            <a href="/login" role="button" class="btn btn-success btn-login" style="color: white !important; letter-spacing: 2px;"><span class="glyphicon glyphicon-log-in" style="font-size: 15px; color: white !important;"></span> Login</a>
+            <a href="/login" role="button" class="btn btn-success" style="color: white !important; letter-spacing: 2px;"><span class="glyphicon glyphicon-log-in" style="font-size: 15px; color: white !important;"></span> Login</a>
         </div>
     </nav>
 

@@ -50,7 +50,7 @@ class MainController extends Controller
         }
         else
         {
-            return back()->with('error', 'Wrong Login Details')->withInput($request->except('password'));
+            return back()->with('error', 'Invalid email or password!')->withInput($request->except('password'));
         }
     }
 

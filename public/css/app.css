@@ -50,9 +50,10 @@ body {
 .sidenav .closebtn {
   width: 0 !important;
   position: absolute;
-  top: 60px;
-  right: 25px;
-  font-size: 36px;
+  top: 84px;
+  right: 30px;
+  font-size: 30px;
+  padding: 0;
 }
 
 .active {
@@ -324,6 +325,17 @@ tfoot input {
 td.center{
   text-align: center;
   width: 20%;
+}
+
+table#paymentTable th {
+  font-size: 15px !important;
+  padding: 5px !important;
+}
+
+table#paymentTable td {
+  color: #FCF4A3 !important;
+  font-size: 14px !important;
+  padding: 5px !important;
 }
 
 h2 {

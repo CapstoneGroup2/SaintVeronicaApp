@@ -134,7 +134,16 @@ class StudentsController extends Controller
         $student = Student::find($id);
         $miscellaneous_and_other_fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
         $payments = Payment::where('student_id', $id)->get();
-        return view('students.show', compact('student', 'miscellaneous_and_other_fees', 'payments'));
+        
+        $histories = DB::table('payments_histories')
+            ->join('students', 'students.id', '=', 'payments_histories.student_id')
+            ->join('users', 'users.id', '=', 'payments_histories.user_id')
+            ->where('students.student_active_status', 1)
+            ->where('students.id', $id)
+            ->orderBy('payments_histories.id', 'desc')
+            ->get();
+
+        return view('students.show', compact('student', 'miscellaneous_and_other_fees', 'payments', 'histories'));
     }
 
     public function edit($id)

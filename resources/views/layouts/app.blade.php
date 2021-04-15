@@ -84,8 +84,8 @@
         <!-- <script src="{{ URL::to('/js/app.js') }}"></script> -->
         <script>
 
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
+        var dropdown = document.getElementsByClassName("dropdown-btn")
+
         for (i = 0; i < dropdown.length; i++) {
             dropdown[i].addEventListener("click", function() {
                 this.classList.toggle("active");

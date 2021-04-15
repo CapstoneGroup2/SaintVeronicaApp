@@ -23,7 +23,6 @@ Users
     <th scope="col">User Role</th>
     <th scope="col">Full Name</th>`
     <th scope="col">Email Address</th>
-    <th scope="col">Home Address</th>
     <th scope="col">Contact Number</th>
     <th scope="col">Action</th>
     </tr>
@@ -79,10 +78,6 @@ function setTable() {
       {
         data: 'user_email',
         name: 'user_email'
-      },
-      {
-        data: 'user_address',
-        name: 'user_address'
       },
       {
         data: 'user_contact',

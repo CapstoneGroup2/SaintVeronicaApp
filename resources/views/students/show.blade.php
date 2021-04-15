@@ -57,86 +57,114 @@
     <br><br><br>
 
     <div id="toPrint">
-        <h2 class="text-warning">Miscellaneous and Other Fees</h2> 
-        <hr>
-        <table class="table table-default table-bordered" style="width: 100%; border: 1px solid white;border-collapse:collapse;">
+        <div class="row show shownArea">
+            <h2 class="text-warning">Miscellaneous and Other Fees</h2> 
+            <hr>
+        </div>
+        <div class="row hide hiddenArea">
+            <p>ST. VERONICA LEARNING CENTER</p>
+            <p>Bantug St., Maasin City, Southern Leyte</p>
+            <br>
+            <p style="font-weight: bold">PAYMENT RECEIPT</p>
+            <br>
+            <p>ID No.: __{{ $student->id }}__</p>
+            <p>
+                Pupil Name: _____{{ $student->student_first_name }} {{($student->student_middle_name != "") ? $student->student_middle_name . " " : ""}}{{ $student->student_last_name }}_____
+                &emsp;&emsp;&emsp;&emsp;&emsp;Date: _____{{ date('jS \of F Y') }}_____
+            </p>
+            <br>
+        </div>
+        <table id="paymentTable" class="table table-default table-bordered" style="width: 100%; border: 1px solid white;border-collapse:collapse;">
             <thead>
-                <th width="20%" style="text-align:left;border: 1px solid white;padding: 6px;">Item Code</th>
-                <th style="text-align:left;border: 1px solid white;padding: 6px;">Item Description</th>
-                <th width="20%" style="text-align:left;border: 1px solid white;padding: 6px;">Item Price</th>
+                <th width="20%" style="text-align:center;border: 1px solid white;padding: 3px;">Payment Code</th>
+                <th style="text-align:center;border: 1px solid white;padding: 3px;">Description</th>
+                <th width="20%" style="text-align:center;border: 1px solid white;padding: 3px;">Amount</th>
             </thead>
             <tbody>
                 @foreach($miscellaneous_and_other_fees as $miscellaneous_and_other_fee)
                     <tr>
-                        <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 6px;font-size: 13px !important;">{{ $miscellaneous_and_other_fee->item_code }}</td>
-                        <td class="text-white" style="text-align:left;border: 1px solid white;padding: 6px;font-size: 13px !important;">{{ $miscellaneous_and_other_fee->item_description }}</td>
-                        <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 6px;font-size: 13px !important;">{{ number_format($miscellaneous_and_other_fee->item_price, 2, '.', '') }}</td>
+                        <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 3px;">{{ $miscellaneous_and_other_fee->item_code }}</td>
+                        <td class="text-white" style="text-align:left;border: 1px solid white;padding: 3px;">{{ $miscellaneous_and_other_fee->item_description }}</td>
+                        <td width="20%" class="text-white" style="text-align:right;border: 1px solid white;padding: 3px;">{{ number_format($miscellaneous_and_other_fee->item_price, 2) }}</td>
                     </tr>
                 @endforeach
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td class="text-white" colspan="2" style="text-align: center;border: 1px solid white;padding: 6px;padding: 6px;">T O T A L  &emsp; P A Y M E N T</th>
-                    <td class="text-white" style="border: 1px solid white;padding: 6px;">{{ number_format($payments[0]->amount_payable, 2, '.', '') }}</td>
+                    <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
+                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">TOTAL PAYABLES</th>
+                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">{{ number_format($payments[0]->amount_payable, 2) }}</td>
                 </tr>
                 <tr>
-                    <td class="text-white" colspan="2" style="text-align: center;border: 1px solid white;padding: 6px;padding: 6px;">A M O U N T &emsp; P A I D</th>
-                    <td class="text-white" style="border: 1px solid white;padding: 6px;">{{ number_format($payments[0]->amount_paid, 2, '.', '') }}</td>
+                    <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
+                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">AMOUNT PAID</th>
+                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">{{ number_format($payments[0]->amount_paid, 2) }}</td>
                 </tr>
                 <tr>
-                    <td class="text-white" colspan="2" style="text-align: center;border: 1px solid white;padding: 6px;padding: 6px;">A M O U N T &emsp; D U E</th>
-                    <td class="text-warning" style="font-size: 20px !important;border: 1px solid white;padding: 6px;">{{ number_format($payments[0]->amount_due, 2, '.', '') }}</td>
+                    <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
+                    <td style="text-align: right;border: 1px solid white;padding: 3px; font-weight: bold; color: white !important;">BALANCE DUE</th>
+                    <td style="text-align: right;border: 1px solid white;padding: 3px; font-weight: bold; color: white !important;">{{ number_format($payments[0]->amount_due, 2) }}</td>
                 </tr>
             </tbody>
         </table>
-        <div class="row hide" id="signArea">
-            <div class="col" style="text-align: center;">
-                <h4 style="text-align: left;">Printed By :</h4>
-                <h4>_____________________________________________</h4>
-                <h4>{{ Auth::user()->user_first_name }} {{ Auth::user()->user_last_name }}
-                    <?php
-                        echo (Auth::user()->role_id == 1) ? '(Administrator)' : '(Registrar)';
-                    ?>
-                </h4>
+        <div class="row hide hiddenArea">
+            <br>
+            <br>
+            <div>
+                <p>___________________________</p>
+                <p>&emsp;&emsp;&emsp;Cashier Signature</p>
             </div>
-            <div class="col" style="text-align: center;">
-                <h4 style="text-align: left;">Given to:</h4>
-                <h4>_____________________________________________</h4>
-                <h4>{{ $student->student_first_name }} {{ $student->student_last_name }} ({{ session()->get('present_class_name') }} Student)</h4>
+            <p>Received by:</p>
+            <div>
+                <p>_______{{ Auth::user()->user_first_name }} {{ Auth::user()->user_last_name }}________</p>
+                <p>&emsp;&emsp;&emsp;&emsp;{{ (Auth::user()->role_id == 1) ? 'Administrator' : 'Registrar' }}</p>
             </div>
+        </div>
+    </div>
+
+    <div id="printHistory">
+        <div class="row hide hiddenArea">
+            <p>ST. VERONICA LEARNING CENTER</p>
+            <p>Bantug St., Maasin City, Southern Leyte</p>
+            <br>
+            <p style="font-weight: bold">PAYMENT HiSTORY</p>
+            <br>
+            <p>ID No.: __{{ $student->id }}__</p>
+            <p>
+                Pupil Name: _____{{ $student->student_first_name }} {{($student->student_middle_name != "") ? $student->student_middle_name . " " : ""}}{{ $student->student_last_name }}_____
+                &emsp;&emsp;&emsp;&emsp;&emsp;Date: _____{{ date('jS \of F Y') }}_____
+            </p>
+            <br>
+            @foreach($histories as $history)
+                <p>{{ date('jS \of F Y', strtotime($history->date_paid)) }} - {{ number_format($history->amount_paid, 2) }} - Received by {{ $history->user_first_name }} {{ $history->user_last_name }}</p>
+            @endforeach
         </div>
     </div>
 
     <hr>
     <div class="right">
+        <button type="button" class="btn btn-lg btn-success btn-printReceipt">Print Receipt</button> 
+        <button type="button" class="btn btn-lg btn-primary btn-printHistory">Print Payments</button> 
         <button type="button" class="btn btn-lg btn-warning btn-payment">Pay Bill</button> 
-        <button type="button" class="btn btn-lg btn-success btn-print">Print Bill</button> 
     </div>
 
     <div id="paymentModal" class="modal fade" role="dialog" style="padding-top: 130px;">
         <div class="modal-dialog">
             <div class="modal-content" style="background-color: #3f704d;">
-                    <div class="modal-header">
-                        <h2 class="modal-title">Payment</h2>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-header">
+                    <h2 class="modal-title">Payment</h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <br>    
+                <div class="modal-body" style="padding: 0 25%;">
+                    <div class="form-group">
+                        <label for="amount_paid">Paid Amount</label>
+                        <input type="number" class="form-control" name="amount_paid" required>
                     </div>
-                    <br>    
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="amount_paid">Paid Amount</label>
-                            <input type="number" class="form-control" name="amount_paid" required>
-                        </div>
-                    </div>
-                    <br>    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-lg btn-success">Submit</button>
-                    </div>
+                </div>
+                <br>    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                </div>
             </div>
         </div>
     </div>
@@ -154,10 +182,30 @@
         });
     });
 
-    $('.btn-print').on('click', function(){
-        $('#signArea').show();
+    $('.btn-printReceipt').on('click', function(){
+        $('.hiddenArea').show();
+        $('.shownArea').hide();
         var html="<html>";
         html+= document.getElementById('toPrint').innerHTML;
+        html+="</html>";
+
+        while(html.includes("white")) {
+            html = html.replace('white', 'black');
+        }
+
+        console.log(html);
+        var printWin = window.open();
+        printWin.document.write(html);
+        printWin.document.close();
+        printWin.focus();
+        printWin.print();
+        printWin.close();
+    });
+
+    $('.btn-printHistory').on('click', function(){
+        $('.hiddenArea').show();
+        var html="<html>";
+        html+= document.getElementById('printHistory').innerHTML;
         html+="</html>";
 
         while(html.includes("white")) {

@@ -5,7 +5,7 @@
 </head>
 <body>
 
-    @if(isset(Auth::user()->user_email) && Auth::user()->user_active_status == 1)
+    @if(Auth::check() && Auth::user()->user_active_status == 1)
 
         <nav class="header navbar fixed-top navbar-expand-lg">
             <span id="toggle" style="font-size:30px; cursor: pointer; margin: 0 10px; color: white; display: none;" onclick="openNav()">&#9776;</span>

@@ -14,7 +14,7 @@ class StudentsClassesTableSeeder extends Seeder
     {
         DB::table('students_classes')->insert([ 
             'student_id'    => 10000000,
-            'class_id'      => rand(1, 4),
+            'class_id'      => 1,
         ]);
     }
 }

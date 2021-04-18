@@ -14,9 +14,11 @@ class PaymentsTableSeeder extends Seeder
     {
         DB::table('payments')->insert([ 
             'student_id' => 10000000, 
-            'amount_payable' => '5400',
+            'total_payables' => '5400',
             'amount_paid' => '0',
-            'amount_due' => '5400       ',
+            'balance_due' => '5400',
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d'),
         ]);
     }
 }

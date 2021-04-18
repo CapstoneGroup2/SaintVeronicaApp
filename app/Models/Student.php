@@ -19,7 +19,12 @@ class Student extends Model
     'student_age',
     'student_birth_date',
     'student_status',
-    'student_active_status',
+    'student_mother_name',
+    'student_mother_contact_number',
+    'student_father_name',
+    'student_father_contact_number',
+    'student_guardian_name',
+    'student_guardian_contact_number',
     'created_at',
     'updated_at'
     ];

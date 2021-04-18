@@ -6,8 +6,9 @@
 
 @section('content')
 
-<h2 style="text-align: left">{{ session()->get('present_class_name') }} Students</h2>
-<br>
+<div class="sticky">
+  <h2 style="text-align: left">{{ session()->get('present_class_name') }} Students</h2>
+</div>
 <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Enroll Student</button> 
 <hr>
 
@@ -21,12 +22,12 @@
 <table id="dataTable" class="table table-striped table-enrollment table-default">
   <thead>
       <tr>
-      <th scope="col">ID No.</th>
-      <th scope="col">Full Name</th>
-      <th scope="col">Email Address</th>
-      <th scope="col">Address</th>
-      <th scope="col">Contact</th>
-      <th scope="col">Action</th>
+        <th class="sticky" scope="col" style="top: 120px !important;">ID No.</th>
+        <th class="sticky" scope="col" style="top: 120px !important;">Full Name</th>
+        <th class="sticky" scope="col" style="top: 120px !important;">Email Address</th>
+        <th class="sticky" scope="col" style="top: 120px !important;">Address</th>
+        <th class="sticky" scope="col" style="top: 120px !important;">Contact</th>
+        <th class="sticky" scope="col" style="top: 120px !important;">Action</th>
       </tr>
   </thead>
 </table>

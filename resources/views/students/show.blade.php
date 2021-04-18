@@ -5,7 +5,10 @@
 @endsection
 
 @section('content')
-<h2 style="text-align: left">{{ session()->get('present_class_name') }} Student</h2>
+
+<div class="sticky">
+    <h2 style="text-align: left">ID Number: {{ $student->id }}</h2>
+</div>
 <hr>
 <form id="enrollment-form" action="/payments/{{ $student->id }}" method="POST">
     {{method_field('PATCH')}}
@@ -15,7 +18,7 @@
     
     <div class="row">
         <div class="col-4">
-            <div class="form-group center">
+            <div class="form-group center" style="padding:10px;">
                 <img src='/images/students/{{ $student->student_image }}' height="243px" width="220px">
             </div>
         </div>
@@ -33,7 +36,7 @@
                 <p style="font-size:13px;">Contact : <span class="text-white">{{ $student->student_home_contact }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Birthdate : <span class="text-white">{{ $student->student_birth_date }}</span></p>
+                <p style="font-size:13px;">Birthdate : <span class="text-white">{{ date('jS \of F Y', strtotime($student->student_birth_date)) }}</span></p>
             </div>
             <div class="form-group">
                 <p style="font-size:13px;">Age : <span class="text-white">{{ $student->student_age }} yrs. old</span></p>
@@ -42,7 +45,22 @@
                 <p style="font-size:13px;">Gender : <span class="text-white">{{ $student->student_gender }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Status : <span class="text-white">{{ $student->student_status }}</span></p>
+                <p style="font-size:13px;">Mother's Name : <span class="text-white">{{ $student->student_mother_name }}</span></p>
+            </div>
+            <div class="form-group">
+                <p style="font-size:13px;">Mother's Contact Number : <span class="text-white">{{ $student->student_mother_contact_number }}</span></p>
+            </div>
+            <div class="form-group">
+                <p style="font-size:13px;">Father's Name : <span class="text-white">{{ $student->student_father_name }}</span></p>
+            </div>
+            <div class="form-group">
+                <p style="font-size:13px;">Father's Name : <span class="text-white">{{ $student->student_father_contact_number }}</span></p>
+            </div>
+            <div class="form-group">
+                <p style="font-size:13px;">Guardian's Name : <span class="text-white">{{ $student->student_guardian_name }}</span></p>
+            </div>
+            <div class="form-group">
+                <p style="font-size:13px;">Guardian's Contact Number : <span class="text-white">{{ $student->student_guardian_contact_number }}</span></p>
             </div>
         </div>
     </div>
@@ -51,6 +69,7 @@
 
     <div class="right">
         <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
+        <button class="btn btn-lg btn-primary">For Admission</button>
         <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
     </div>
 
@@ -133,9 +152,13 @@
                 &emsp;&emsp;&emsp;&emsp;&emsp;Date: _____{{ date('jS \of F Y') }}_____
             </p>
             <br>
-            @foreach($histories as $history)
-                <p>{{ date('jS \of F Y', strtotime($history->date_paid)) }} - {{ number_format($history->amount_paid, 2) }} - Received by {{ $history->user_first_name }} {{ $history->user_last_name }}</p>
-            @endforeach
+            @if(!empty($histories->items))
+                @foreach($histories as $history)
+                    <p>{{ date('jS \of F Y', strtotime($history->date_paid)) }} - {{ number_format($history->amount_paid, 2) }} - Received by {{ $history->user_first_name }} {{ $history->user_last_name }}</p>
+                @endforeach
+            @else
+                <p>No history of payments found.</p>
+            @endif
         </div>
     </div>
 

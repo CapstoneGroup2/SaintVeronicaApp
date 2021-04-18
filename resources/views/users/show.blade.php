@@ -5,16 +5,19 @@ Users
 @endsection
 
 @section('content')
-<h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
-<div class="triangle-right" style="width:230px;"></div>
+
+<div class="sticky">
+    <h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
+    <div class="triangle-right" style="width:230px;"></div>
+</div>
 <hr>
 <form id="enrollment-form">
-    <h1 class="text-warning">User Profile Information</h1> 
+    <h2 class="text-warning">User Profile Information</h2> 
     <hr>
     <div class="row">
         <div class="col-4">
             <div class="form-group center">
-                <img src='/images/users/{{ $users[0]->user_image }}' height="243px" width="220px">
+                <img src='/images/users/{{ $users[0]->user_image }}' height="200px" width="200px">
             </div>
         </div>
         <div class="col">

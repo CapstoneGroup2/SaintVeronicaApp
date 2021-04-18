@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('user_address')->nullable();
             $table->string('user_gender')->nullable();
             $table->string('user_status')->nullable();
-            $table->integer('user_active_status')->nullable();
+            $table->integer('user_active_status');
             $table->timestamps();
         });
     }

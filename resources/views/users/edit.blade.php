@@ -6,6 +6,9 @@ Users
 
 @section('content')
   @foreach($users as $user)
+  <div class="sticky">
+  
+  </div>
     <h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
     @if($users[0]->role_id == 1)
         <div class="triangle-right" style="width:230px;"></div>
@@ -26,7 +29,7 @@ Users
                     <div class="col">    
                         <div class="form-group">
                             <label for="First Name">First Name</label>
-                            <input type="text" class="form-control" name="user_first_name" placeholder="first name" value="{{ $user->user_first_name }}" >
+                            <input type="text" class="form-control" name="user_first_name" value="{{ $user->user_first_name }}" >
                             @if ($errors->has('user_first_name'))
                                 <span class="invalid feedback" role="alert">
                                     <p style="color:tomato;">{{$errors->first('user_first_name')}}</p>
@@ -37,7 +40,7 @@ Users
                     <div class="col">    
                         <div class="form-group">
                             <label for="First Name">Middle Name</label>
-                            <input type="text" class="form-control" name="user_middle_name" placeholder="middle name" value="{{ $user->user_middle_name }}" >
+                            <input type="text" class="form-control" name="user_middle_name" value="{{ $user->user_middle_name }}" >
                         </div>
                     </div>
                     <div class="col">    

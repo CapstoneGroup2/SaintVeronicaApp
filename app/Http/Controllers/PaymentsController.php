@@ -16,7 +16,6 @@ class PaymentsController extends Controller
         $histories = DB::table('payments_histories')
             ->join('students', 'students.id', '=', 'payments_histories.student_id')
             ->join('users', 'users.id', '=', 'payments_histories.user_id')
-            ->where('students.student_active_status', 1)
             ->orderBy('payments_histories.id', 'desc')
             ->get();
             

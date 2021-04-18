@@ -18,9 +18,9 @@ class CreatePaymentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->double('amount_payable');
-            $table->double('amount_due');
+            $table->double('total_payables');
             $table->double('amount_paid');
+            $table->double('balance_due');
             $table->timestamps();
         });
     }

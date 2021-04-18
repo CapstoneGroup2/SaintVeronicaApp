@@ -50,7 +50,7 @@ body {
 .sidenav .closebtn {
   width: 0 !important;
   position: absolute;
-  top: 84px;
+  top: 75px;
   right: 30px;
   font-size: 30px;
   padding: 0;
@@ -96,6 +96,12 @@ div.card {
   margin: 30px 20px;
   font-size: 16px;
   box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%);
+  border: 1px solid #28a745 !important;
+  position: unset !important;
+}
+
+button:focus {
+  outline: none !important;
 }
 
 .list{
@@ -189,6 +195,19 @@ div.login {
   nav {
       min-width: 730px !important;
   }
+}
+
+.col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11 {
+  position: unset !important;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+  padding: 5px 0;
+  background-color:#FCF4A3;
+  font-size: 20px;
 }
 
 a.dropdown-item {
@@ -476,4 +495,12 @@ a:hover {
 
 #myModal .modal-title{
   color: #FCF4A3 !important;
+}
+
+.dataTables_wrapper {
+  position: unset !important;
+}
+
+.glyphicon {
+  position: unset !important;
 }

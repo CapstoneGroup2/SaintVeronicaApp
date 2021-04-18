@@ -5,9 +5,9 @@ Users
 @endsection
 
 @section('content')
-<h2 style="text-align: left;">Users</h2>
-<div class="triangle-right" style="width:100px;"></div>
-<br>
+<div class="sticky">
+  <h2 style="text-align: left;">Users</h2>
+</div>
 <button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add User</button> 
 <hr>
 
@@ -20,11 +20,11 @@ Users
 
 <table id="dataTable" class="table table-striped table-enrollment table-default">
   <thead>
-    <th scope="col">User Role</th>
-    <th scope="col">Full Name</th>`
-    <th scope="col">Email Address</th>
-    <th scope="col">Contact Number</th>
-    <th scope="col">Action</th>
+    <th scope="col" class="sticky" style="top: 120px !important;">User Role</th>
+    <th scope="col" class="sticky" style="top: 120px !important;">Full Name</th>`
+    <th scope="col" class="sticky" style="top: 120px !important;">Email Address</th>
+    <th scope="col" class="sticky" style="top: 120px !important;">Contact Number</th>
+    <th scope="col" class="sticky" style="top: 120px !important;">Action</th>
     </tr>
   </thead>
 </table>

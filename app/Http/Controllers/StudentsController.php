@@ -29,7 +29,6 @@ class StudentsController extends Controller
             ->join('students', 'students.id', '=', 'students_classes.student_id')
             ->join('classes', 'classes.id', '=', 'students_classes.class_id')
             ->where('students_classes.class_id', $id)
-            ->where('students.student_active_status', 1)
             ->get();
 
         $classes = Classes::where('id' , $id)->get();
@@ -88,8 +87,6 @@ class StudentsController extends Controller
         $student->student_age = $request['student_age'];
         $student->student_birth_date = date('Y-m-d', strtotime($request['student_birth_date']));
         $student->student_status = $request['student_status'];
-        $student->student_active_status = 1;
-        $student->created_at = date('Y-m-d');
 
         if ($request->hasFile('student_image')) {
             $image = $request->file('student_image');
@@ -138,11 +135,10 @@ class StudentsController extends Controller
         $histories = DB::table('payments_histories')
             ->join('students', 'students.id', '=', 'payments_histories.student_id')
             ->join('users', 'users.id', '=', 'payments_histories.user_id')
-            ->where('students.student_active_status', 1)
             ->where('students.id', $id)
             ->orderBy('payments_histories.id', 'desc')
             ->get();
-
+        
         return view('students.show', compact('student', 'miscellaneous_and_other_fees', 'payments', 'histories'));
     }
 
@@ -178,7 +174,6 @@ class StudentsController extends Controller
         $student->student_gender = $request['student_gender'];
         $student->student_age = $request['student_age'];
         $student->student_birth_date = date('Y-m-d', strtotime($request['student_birth_date']));
-        $student->student_status = $request['student_status'];
         $student->updated_at = date('Y-m-d');
 
         if ($request->hasFile('student_image')) {

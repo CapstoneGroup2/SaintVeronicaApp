@@ -19,7 +19,6 @@ class ClassesController extends Controller
         $students_classes = DB::table('students_classes')
             ->join('students', 'students.id', '=', 'students_classes.student_id')
             ->join('classes', 'classes.id', '=', 'students_classes.class_id')
-            ->where('students.student_active_status', 1)
             ->get();
 
         $classes = Classes::all();

@@ -5,7 +5,9 @@ Students
 @endsection
 
 @section('content')
-  <h2 style="text-align: left">{{ session()->get('present_class_name') }} Student</h2>
+    <div class="sticky">
+    <h2 style="text-align: left">{{ session()->get('present_class_name') }} Student</h2>
+    </div>
   <br>
   @foreach($students as $student)
     <form id="enrollment-form" action="/students/{{ $student->id }}" method="POST" enctype="multipart/form-data">

@@ -23,11 +23,15 @@ class CreateStudentsTable extends Migration
             $table->string('student_email')->unique();
             $table->string('student_home_contact');
             $table->string('student_address');
-            $table->string('student_gender');
             $table->integer('student_age');
             $table->date('student_birth_date');
-            $table->string('student_status');
-            $table->integer('student_active_status');
+            $table->string('student_gender');
+            $table->string('student_mother_name')->nullable();
+            $table->string('student_mother_contact_number')->nullable();
+            $table->string('student_father_name')->nullable();
+            $table->string('student_father_contact_number')->nullable();
+            $table->string('student_guardian_name');
+            $table->string('student_guardian_contact_number');
             $table->timestamps();
         });
     }

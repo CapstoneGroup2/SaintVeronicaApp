@@ -19,33 +19,27 @@ class MainController extends Controller
     {
         $this->validate($request, [
             'email' =>  'required|email',
-            'password'  => 'required|min:8'
+            'password'  => 'required'
         ]);
 
         $user_data = array(
             'user_email'     =>  $request->get('email'),
-            'password'       =>  $request->get('password')
+            'password'       =>  $request->get('password'),
+            'user_active_status' => 1
         );
 
         if(Auth::attempt($user_data))
         {
-            if(Auth::user()->user_active_status == 1) 
-            {
-                switch (Auth::user()->role_id) {
-                    case 1;
-                        return redirect('/dashboard');
-                        break;
-                    case 2:
-                        return redirect('/home');
-                        break;
-                    default:
-                        return redirect('/login');
-                        break;
-                }
-            }
-            else
-            {
-                return back()->with('error', 'Credentials are unavailable.')->withInput($request->except('password'));
+            switch (Auth::user()->role_id) {
+                case 1;
+                    return redirect('/dashboard');
+                    break;
+                case 2:
+                    return redirect('/home');
+                    break;
+                default:
+                    return redirect('/login');
+                    break;
             }
         }
         else

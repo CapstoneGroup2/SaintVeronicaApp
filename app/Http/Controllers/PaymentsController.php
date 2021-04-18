@@ -43,31 +43,11 @@ class PaymentsController extends Controller
         return view('pages.history', compact('histories'));
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        
-    }
-
-    public function edit($id)
-    {
-        
-    }
-
     public function update(Request $request, $student_id)
     {
         $payment = Payment::where('student_id', $student_id)->get();
         $payment[0]->amount_paid = $payment[0]->amount_paid + $request['amount_paid'];
-        $payment[0]->amount_due = $payment[0]->amount_due - $request['amount_paid'];
+        $payment[0]->balance_due = $payment[0]->balance_due - $request['amount_paid'];
         $payment[0]->save();
 
         $history = new PaymentsHistory();
@@ -80,8 +60,4 @@ class PaymentsController extends Controller
         return redirect('/students/' . $student_id);
     }
 
-    public function destroy($id)
-    {
-        //
-    }
 }

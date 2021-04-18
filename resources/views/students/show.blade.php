@@ -54,7 +54,7 @@
                 <p style="font-size:13px;">Father's Name : <span class="text-white">{{ $student->student_father_name }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Father's Name : <span class="text-white">{{ $student->student_father_contact_number }}</span></p>
+                <p style="font-size:13px;">Father's Contact Number : <span class="text-white">{{ $student->student_father_contact_number }}</span></p>
             </div>
             <div class="form-group">
                 <p style="font-size:13px;">Guardian's Name : <span class="text-white">{{ $student->student_guardian_name }}</span></p>
@@ -110,7 +110,7 @@
                 <tr>
                     <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
                     <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">TOTAL PAYABLES</th>
-                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">{{ number_format($payments[0]->amount_payable, 2) }}</td>
+                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">{{ number_format($payments[0]->total_payables, 2) }}</td>
                 </tr>
                 <tr>
                     <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
@@ -120,7 +120,7 @@
                 <tr>
                     <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
                     <td style="text-align: right;border: 1px solid white;padding: 3px; font-weight: bold; color: white !important;">BALANCE DUE</th>
-                    <td style="text-align: right;border: 1px solid white;padding: 3px; font-weight: bold; color: white !important;">{{ number_format($payments[0]->amount_due, 2) }}</td>
+                    <td style="text-align: right;border: 1px solid white;padding: 3px; font-weight: bold; color: white !important;">{{ number_format($payments[0]->balance_due, 2) }}</td>
                 </tr>
             </tbody>
         </table>

@@ -5,11 +5,11 @@ Students
 @endsection
 
 @section('content')
+@foreach($students as $student)
     <div class="sticky">
-    <h2 style="text-align: left">{{ session()->get('present_class_name') }} Student</h2>
+        <h2 style="text-align: left">ID Number: {{ $student->id }}</h2>
     </div>
-  <br>
-  @foreach($students as $student)
+    <br>  
     <form id="enrollment-form" action="/students/{{ $student->id }}" method="POST" enctype="multipart/form-data">
         {{method_field('PATCH')}}
         @csrf
@@ -29,14 +29,12 @@ Students
                             @endif
                         </div>
                     </div>
-
                     <div class="col">    
                         <div class="form-group">
                             <label for="First Name">Middle Name</label>
                             <input type="text" class="form-control" name="student_middle_name" value="{{ $student->student_middle_name }}" >
                         </div>
                     </div>
-
                     <div class="col">    
                         <div class="form-group">
                             <label for="First Name">Last Name</label>
@@ -49,9 +47,7 @@ Students
                         </div>
                     </div>
                 </div>
-
                 <br>
-                
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
@@ -59,7 +55,6 @@ Students
                             <input type="email" class="form-control" name="student_email" value="{{ $student->student_email}}" readonly>
                         </div>
                     </div>
-
                     <div class="col-5">    
                         <div class="form-group">
                             <label for="contact">Home Contact Number</label>
@@ -72,9 +67,7 @@ Students
                         </div>
                     </div>
                 </div>
-
                 <br>
-
                 <div class="form-group">
                     <label for="address">Home Address</label>
                     <input type="text" class="form-control" name="student_address" value="{{ $student->student_address }}" >
@@ -84,9 +77,7 @@ Students
                     </span>
                     @endif
                 </div>
-
                 <br>
-
                 <div class="row">
                     <div class="col">    
                         <div class="form-group">
@@ -99,14 +90,12 @@ Students
                             @endif
                         </div>
                     </div>  
-
                     <div class="col-2">    
                         <div class="form-group">
                             <label for="age">Age</label>
                             <input type="number" class="form-control" name="student_age" value="{{ $student->student_age }}" >
                         </div>
                     </div>
-
                     <div class="col-3">    
                         <div class="form-group">
                             <label for="gender">Gender</label>
@@ -121,36 +110,90 @@ Students
                             @endif
                         </div>
                     </div>
-
-                    <div class="col">    
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col"> 
                         <div class="form-group">
-                            <label for="status">Status</label>
-                            <select class="form-control" name="student_status" >
-                                <option value="Single">Single</option>
-                                <option value="Married">Married</option>
-                            </select>
-                            @if ($errors->has('student_status'))
+                            <label for="mother">Mother's Name</label>
+                            <input type="text" class="form-control" name="student_mother_name" value="{{ old('student_mother_name') }}" >
+                            @if ($errors->has('student_mother_name'))
                             <span class="invalid feedback" role="alert">
-                                <p style="color:tomato;">{{$errors->first('student_status')}}</p>
+                                <p style="color:tomato;">{{$errors->first('student_mother_name')}}</p>
                             </span>
                             @endif
                         </div>
                     </div>
-
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="mother">Mother's Contact Number</label>
+                            <input type="text" class="form-control" name="student_mother_contact_number" value="{{ old('student_mother_contact_number') }}">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col"> 
+                        <div class="form-group">
+                            <label for="student_father_name">Father's Name</label>
+                            <input type="text" class="form-control" name="student_father_name" value="{{ old('student_father_name') }}" >
+                            @if ($errors->has('student_father_name'))
+                            <span class="invalid feedback" role="alert">
+                                <p style="color:tomato;">{{$errors->first('student_father_name')}}</p>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="student_father_contact_number">Father's Contact Number</label>
+                            <input type="text" class="form-control" name="student_father_contact_number" value="{{ old('student_father_contact_number') }}">
+                            @if ($errors->has('student_father_contact_number'))
+                            <span class="invalid feedback" role="alert">
+                                <p style="color:tomato;">{{$errors->first('student_father_contact_number')}}</p>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col"> 
+                        <div class="form-group">
+                            <label for="student_guardian_name">Guardian's Name</label>
+                            <input type="text" class="form-control" name="student_guardian_name" value="{{ old('student_guardian_name') }}" >
+                            @if ($errors->has('student_guardian_name'))
+                            <span class="invalid feedback" role="alert">
+                                <p style="color:tomato;">{{$errors->first('student_guardian_name')}}</p>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="student_guardian_contact_number">Guardian's Contact Number</label>
+                            <input type="text" class="form-control" name="student_guardian_contact_number" value="{{ old('student_guardian_contact_number') }}">
+                            @if ($errors->has('student_guardian_contact_number'))
+                            <span class="invalid feedback" role="alert">
+                                <p style="color:tomato;">{{$errors->first('student_guardian_contact_number')}}</p>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
             
-        <div class="col-3">
-            <div class="form-group center">
-                <br>
-                <label for="status">Student Profile Picture</label>
-                <br><br>
-                <img src='/images/students/{{ $student->student_image }}' height="200px" width="92%">
-                <br><br>
-                <input type="file" class="form-control image" name="student_image" style="width:92%">
+            <div class="col-3">
+                <div class="form-group center">
+                    <br>
+                    <label for="status">Student Profile Picture</label>
+                    <br><br>
+                    <img src='/images/students/{{ $student->student_image }}' height="200px" width="92%">
+                    <br><br>
+                    <input type="file" class="form-control image" name="student_image" style="width:92%">
+                </div>
             </div>
         </div>
-    </div>
         
     <hr>
 
@@ -161,7 +204,7 @@ Students
 
     </form>
 
-  @endforeach
+@endforeach
 
 @endsection
 

@@ -71,7 +71,8 @@ class StudentsController extends Controller
             'student_birth_date'    =>  'required',
             'student_age'           =>  'required',
             'student_gender'        =>  'required',
-            'student_status'        =>  'required',
+            'student_guardian_name' =>  'required',
+            'student_guardian_contact_number' =>  'required',
             'student_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
@@ -159,7 +160,8 @@ class StudentsController extends Controller
             'student_birth_date'    =>  'required',
             'student_age'           =>  'required',
             'student_gender'        =>  'required',
-            'student_status'        =>  'required',
+            'student_guardian_name' =>  'required',
+            'student_guardian_contact_number' =>  'required',
             'student_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         

@@ -13,7 +13,7 @@ class PaymentsTableSeeder extends Seeder
     public function run()
     {
         DB::table('payments')->insert([ 
-            'student_id' => 10000000, 
+            'student_id' => 10000, 
             'total_payables' => '5400',
             'amount_paid' => '0',
             'balance_due' => '5400',

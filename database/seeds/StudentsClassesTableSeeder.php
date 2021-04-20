@@ -13,7 +13,7 @@ class StudentsClassesTableSeeder extends Seeder
     public function run()
     {
         DB::table('students_classes')->insert([ 
-            'student_id'    => 10000000,
+            'student_id'    => 10000,
             'class_id'      => 1,
         ]);
     }

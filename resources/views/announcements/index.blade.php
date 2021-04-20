@@ -15,11 +15,11 @@ Announcements
     </script>
 @endif
 
-<h2 style="text-align: left;">Announcements</h2> 
-<div class="triangle-right" style="width:260px;"></div>
+<div class="sticky">
+  <h2 style="text-align: left;">Announcements</h2> 
+</div>
 
 @if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
-    <br>
     <button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Announcements</button>
 @endif
 

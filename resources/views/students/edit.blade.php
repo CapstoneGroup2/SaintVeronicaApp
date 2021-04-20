@@ -8,6 +8,7 @@ Students
 @foreach($students as $student)
     <div class="sticky">
         <h2 style="text-align: left">ID Number: {{ $student->id }}</h2>
+        <div class="triangle-right" style="width:340px;"></div>
     </div>
     <br>  
     <form id="enrollment-form" action="/students/{{ $student->id }}" method="POST" enctype="multipart/form-data">
@@ -116,7 +117,7 @@ Students
                     <div class="col"> 
                         <div class="form-group">
                             <label for="mother">Mother's Name</label>
-                            <input type="text" class="form-control" name="student_mother_name" value="{{ old('student_mother_name') }}" >
+                            <input type="text" class="form-control" name="student_mother_name" value="{{  $student->student_mother_name }}" >
                             @if ($errors->has('student_mother_name'))
                             <span class="invalid feedback" role="alert">
                                 <p style="color:tomato;">{{$errors->first('student_mother_name')}}</p>
@@ -127,7 +128,7 @@ Students
                     <div class="col-5">
                         <div class="form-group">
                             <label for="mother">Mother's Contact Number</label>
-                            <input type="text" class="form-control" name="student_mother_contact_number" value="{{ old('student_mother_contact_number') }}">
+                            <input type="text" class="form-control" name="student_mother_contact_number" value="{{  $student->student_mother_contact_number }}">
                         </div>
                     </div>
                 </div>
@@ -136,7 +137,7 @@ Students
                     <div class="col"> 
                         <div class="form-group">
                             <label for="student_father_name">Father's Name</label>
-                            <input type="text" class="form-control" name="student_father_name" value="{{ old('student_father_name') }}" >
+                            <input type="text" class="form-control" name="student_father_name" value="{{  $student->student_father_name }}" >
                             @if ($errors->has('student_father_name'))
                             <span class="invalid feedback" role="alert">
                                 <p style="color:tomato;">{{$errors->first('student_father_name')}}</p>
@@ -147,7 +148,7 @@ Students
                     <div class="col-5">
                         <div class="form-group">
                             <label for="student_father_contact_number">Father's Contact Number</label>
-                            <input type="text" class="form-control" name="student_father_contact_number" value="{{ old('student_father_contact_number') }}">
+                            <input type="text" class="form-control" name="student_father_contact_number" value="{{  $student->student_father_contact_number }}">
                             @if ($errors->has('student_father_contact_number'))
                             <span class="invalid feedback" role="alert">
                                 <p style="color:tomato;">{{$errors->first('student_father_contact_number')}}</p>
@@ -161,7 +162,7 @@ Students
                     <div class="col"> 
                         <div class="form-group">
                             <label for="student_guardian_name">Guardian's Name</label>
-                            <input type="text" class="form-control" name="student_guardian_name" value="{{ old('student_guardian_name') }}" >
+                            <input type="text" class="form-control" name="student_guardian_name" value="{{ $student->student_guardian_name }}" >
                             @if ($errors->has('student_guardian_name'))
                             <span class="invalid feedback" role="alert">
                                 <p style="color:tomato;">{{$errors->first('student_guardian_name')}}</p>
@@ -172,7 +173,7 @@ Students
                     <div class="col-5">
                         <div class="form-group">
                             <label for="student_guardian_contact_number">Guardian's Contact Number</label>
-                            <input type="text" class="form-control" name="student_guardian_contact_number" value="{{ old('student_guardian_contact_number') }}">
+                            <input type="text" class="form-control" name="student_guardian_contact_number" value="{{ $student->student_guardian_contact_number }}">
                             @if ($errors->has('student_guardian_contact_number'))
                             <span class="invalid feedback" role="alert">
                                 <p style="color:tomato;">{{$errors->first('student_guardian_contact_number')}}</p>

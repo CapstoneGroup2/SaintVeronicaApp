@@ -7,6 +7,7 @@ Miscellaneous & Other Fees
 @section('content')
 <div class="sticky">
     <h2 style="text-align: left">ID Number: {{ session()->get('student_id') }}</h2>
+    <div class="triangle-right" style="width:340px;"></div>
 </div>
 <hr>
 <form id="enrollment-form" action="/payments/{{ session()->get('student_id') }}" method="POST">

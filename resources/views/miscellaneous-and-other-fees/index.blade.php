@@ -5,12 +5,10 @@ Miscellaneous & Other Fees
 @endsection
 
 @section('content')
-<h2 style="text-align: left">{{ session()->get('present_class_name') }} Class</h2>
-
-<div class="triangle-right" style="width:220px;"></div>
-
+<div class="sticky">
+  <h2 style="text-align: left">{{ session()->get('present_class_name') }} Class</h2>
+</div>
 @if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
-  <br>
   <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Miscellaneous</button> 
 @endif
 
@@ -60,36 +58,35 @@ Miscellaneous & Other Fees
     <div class="modal-content">
       <form id="enrollment-form" action="/miscellaneous-and-other-fees" method="post" enctype="multipart/form-data" style="padding: 50px">
         @csrf
-
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <br><br>
-        <h2 class="text-warning">Add Item</h2> 
-
-        <hr>
-        
-        <div class="form-group">
-            <label for="status">Item Code</label>
-            <input type="text" class="form-control" name="item_code" placeholder="Code of item is required.">
+        <div class="header">
+          <h2 class="text-warning">Add Item</h2> 
         </div>
+        <div class="body">
+          <div class="form-group">
+              <label for="status">Item Code</label>
+              <input type="text" class="form-control" name="item_code" required>
+          </div>
 
-        <div class="form-group">
-            <label for="status">Item Description</label>
-            <input type="text" class="form-control" name="item_description" placeholder="Description of item is not required.">
+          <div class="form-group">
+              <label for="status">Item Description</label>
+              <input type="text" class="form-control" name="item_description" required>
+          </div>
+
+          <div class="form-group">
+              <label for="status">Item Price</label>
+              <input type="text" class="form-control" name="item_price" required>
+          </div>
+
+          <div class="form-group">
+              <label for="status">Item Image</label>
+              <input type="file" class="form-control image" name="item_image" required>
+          </div>
         </div>
-
-        <div class="form-group">
-            <label for="status">Item Price</label>
-            <input type="text" class="form-control" name="item_price" placeholder="Price of item is required.">
-        </div>
-
-        <div class="form-group">
-            <label for="status">Item Image</label>
-            <input type="file" class="form-control image" name="item_image" placeholder="image of item">
-        </div>
-
-        <div class="right">
-            <a href="/miscellaneous-and-other-fees/classes/{{ session()->get('present_class_id') }}" class="btn btn-lg btn-danger" role="button">Cancel</a>
-            <button type="submit" class="btn btn-lg btn-success">Submit</button>
+        <div class="footer">
+          <div class="right">
+              <a href="/miscellaneous-and-other-fees/classes/{{ session()->get('present_class_id') }}" class="btn btn-lg btn-danger" role="button">Cancel</a>
+              <button type="submit" class="btn btn-lg btn-success">Submit</button>
+          </div>
         </div>
 
       </form>

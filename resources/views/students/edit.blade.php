@@ -192,6 +192,11 @@ Students
                     <img src='/images/students/{{ $student->student_image }}' height="200px" width="92%">
                     <br><br>
                     <input type="file" class="form-control image" name="student_image" style="width:92%">
+                    @if ($errors->has('student_image'))
+                        <span class="invalid feedback" role="alert">
+                            <p style="color:tomato;">{{$errors->first('student_image')}}</p>
+                        </span>
+                    @endif
                 </div>
             </div>
         </div>

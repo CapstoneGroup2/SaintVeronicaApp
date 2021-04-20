@@ -82,26 +82,9 @@ class PagesController extends Controller
             $array_students_classes[++$key] = [$value->classes, $value->number];
         }
 
-        // $data_enrollees_per_month = DB::table('students')
-        //                                 ->select(
-        //                                     DB::raw('year(created_at) as year'),
-        //                                     DB::raw('count(*) as number'))
-        //                                 ->groupBy('year')
-        //                                 ->get();
-
-        // dd($data_enrollees_per_month);
-
-        // $array_enrollees_per_month[] = ['Year', 'Number'];
-
-        // foreach($data_enrollees_per_month as $key => $value) 
-        // {
-        //     $array_enrollees_per_month[++$key] = [$value->year, $value->number];
-        // }
-
         return view('pages.dashboard', compact('students_count'))
                 ->with('gender', json_encode($array_gender))
                 ->with('classes', json_encode($array_students_classes));
-                // ->with('enrollees', json_encode($array_enrollees_per_month));
     }
 
     public function home() 

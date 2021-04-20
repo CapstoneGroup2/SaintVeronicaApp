@@ -29,7 +29,7 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/users/{id}', 'UsersController@destroy');
     
     Route::resource('/users', 'UsersController')->only([
-        'index', 'store', 'show', 'delete'
+        'create', 'index', 'store', 'show', 'delete'
     ]);;
 
     Route::resource('/classes', 'ClassesController')->only([

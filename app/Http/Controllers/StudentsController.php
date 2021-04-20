@@ -186,7 +186,12 @@ class StudentsController extends Controller
         $student->student_gender = $request['student_gender'];
         $student->student_age = $request['student_age'];
         $student->student_birth_date = date('Y-m-d', strtotime($request['student_birth_date']));
-        $student->updated_at = date('Y-m-d');
+        $student->student_mother_name = $request['student_mother_name'];
+        $student->student_mother_contact_number = $request['student_mother_contact_number'];
+        $student->student_father_name = $request['student_father_name'];
+        $student->student_father_contact_number = $request['student_father_contact_number'];
+        $student->student_guardian_name = $request['student_guardian_name'];
+        $student->student_guardian_contact_number = $request['student_guardian_contact_number'];
 
         if ($request->hasFile('student_image')) {
             $image = $request->file('student_image');

@@ -132,6 +132,11 @@
             <div class="form-group">
                 <label for="image">Profile Picture</label>
                 <input type="file" name="student_image" class="form-control image">
+                @if ($errors->has('student_image'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('student_image')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
     </div>

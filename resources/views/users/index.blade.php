@@ -6,7 +6,7 @@ Users
 
 @section('content')
 <div class="sticky">
-  <h2 style="text-align: left;">Users</h2>
+  <h2 style="text-align: left;">List of Users</h2>
 </div>
 <button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add User</button> 
 <hr>

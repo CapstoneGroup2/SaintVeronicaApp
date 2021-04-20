@@ -147,6 +147,11 @@ Users
                     <br><br>
                     <label for="status">User Profile Picture</label>
                     <input type="file" class="form-control image" name="user_image" style="width:92%">
+                    @if ($errors->has('user_image'))
+                        <span class="invalid feedback" role="alert">
+                            <p style="color:tomato;">{{$errors->first('user_image')}}</p>
+                        </span>
+                    @endif
                 </div>
             </div>
         </div>

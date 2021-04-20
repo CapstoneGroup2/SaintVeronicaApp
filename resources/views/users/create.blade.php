@@ -5,7 +5,10 @@ Users
 @endsection
 
 @section('content')
-<h2 style="text-align: left">Add User</h2> 
+<div class="sticky">
+    <h2 style="text-align: left">Add User</h2> 
+    <div class="triangle-right" style="width:150px;"></div>
+</div>
 <hr>
 <form id="enrollment-form" action="/users" method="post">
 <h2 class="text-warning">User Information</h2>
@@ -15,7 +18,7 @@ Users
         <div class="col">    
             <div class="form-group">
                 <label for="First Name">First Name</label>
-                <input type="text" class="form-control" name="user_first_name" placeholder="first name" value="{{ old('user_first_name') }}">
+                <input type="text" class="form-control" name="user_first_name" value="{{ old('user_first_name') }}">
                 @if ($errors->has('user_first_name'))
                     <span class="invalid feedback" role="alert">
                         <p style="color:tomato;">{{$errors->first('user_first_name')}}</p>
@@ -26,13 +29,13 @@ Users
         <div class="col">    
             <div class="form-group">
                 <label for="First Name">Middle Name</label>
-                <input type="text" class="form-control" name="user_middle_name" placeholder="middle name" value="{{ old('user_middle_name') }}">
+                <input type="text" class="form-control" name="user_middle_name" value="{{ old('user_middle_name') }}">
             </div>
         </div>
         <div class="col">    
             <div class="form-group">
                 <label for="First Name">Last Name</label>
-                <input type="text" class="form-control" name="user_last_name" placeholder="last name" value="{{ old('user_last_name') }}">
+                <input type="text" class="form-control" name="user_last_name" value="{{ old('user_last_name') }}">
                 @if ($errors->has('user_last_name'))
                     <span class="invalid feedback" role="alert">
                         <p style="color:tomato;">{{$errors->first('user_last_name')}}</p>
@@ -48,7 +51,7 @@ Users
         <div class="col">
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" class="form-control" name="user_email" placeholder="name@example.com" value="{{ old('user_email') }}">
+                <input type="email" class="form-control" name="user_email" value="{{ old('user_email') }}">
                 @if ($errors->has('user_email'))
                     <span class="invalid feedback" role="alert">
                         <p style="color:tomato;">{{$errors->first('user_email')}}</p>
@@ -59,7 +62,7 @@ Users
         <div class="col-5">    
             <div class="form-group">
                 <label for="contact">Contact Number</label>
-                <input type="text" class="form-control" name="user_contact" placeholder="+639" value="{{ old('user_contact') }}">
+                <input type="text" class="form-control" name="user_contact" value="{{ old('user_contact') }}">
             </div>
         </div>
     </div>
@@ -68,7 +71,7 @@ Users
 
     <div class="form-group">
         <label for="address">Home Address</label>
-        <input type="text" class="form-control" name="user_address" placeholder="present address" value="{{ old('user_address') }}">
+        <input type="text" class="form-control" name="user_address" value="{{ old('user_address') }}">
     </div>
 
     <br>
@@ -78,7 +81,7 @@ Users
             <div class="form-group">
                 <label for="user_role_id">User Role</label>
                 <select class="form-control" name="user_role_id">
-                    <option value="" selected>select user role</option>
+                    <option value="" selected>Select Role</option>
                     @foreach($roles as $role)
                             <option value="{{ $role->id }}">{{ $role->role_name }}</option> 
                     @endforeach
@@ -94,7 +97,7 @@ Users
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select class="form-control" name="user_gender">
-                    <option selected>select gender</option>
+                    <option selected>Select Gender</option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
                 </select>
@@ -104,10 +107,21 @@ Users
             <div class="form-group">
                 <label for="status">Status</label>
                 <select class="form-control" name="user_status">
-                    <option value="" selected>select status</option>
+                    <option value="" selected>Select Status</option>
                     <option value="Single">Single</option>
                     <option value="Married">Married</option>
                 </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="image">Profile Picture</label>
+                <input type="file" name="user_image" class="form-control image">
+                @if ($errors->has('user_image'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('user_image')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
     </div>

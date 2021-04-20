@@ -38,13 +38,7 @@ class AnnouncementsController extends Controller
         $announcement = Announcement::find($id);
         return view('announcements.edit', compact('announcement'));
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -60,12 +54,6 @@ class AnnouncementsController extends Controller
         return redirect('/announcements')->with('success', 'Announcement information has successfully updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $announcement = Announcement::find($id);

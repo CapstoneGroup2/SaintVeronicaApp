@@ -5,16 +5,15 @@ Users
 @endsection
 
 @section('content')
-  @foreach($users as $user)
-  <div class="sticky">
-  
-  </div>
+@foreach($users as $user)
+<div class="sticky">
     <h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
     @if($users[0]->role_id == 1)
         <div class="triangle-right" style="width:230px;"></div>
     @else
         <div class="triangle-right" style="width:160px;"></div>
     @endif
+</div>
     <hr>
     <form id="enrollment-form" action="/users/{{ $user->id }}" method="POST" enctype="multipart/form-data">
         {{method_field('PATCH')}}

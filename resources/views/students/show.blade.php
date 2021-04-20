@@ -8,6 +8,7 @@
 
 <div class="sticky">
     <h2 style="text-align: left">ID Number: {{ $student->id }}</h2>
+    <div class="triangle-right" style="width:340px;"></div>
 </div>
 <hr>
 <form id="enrollment-form" action="/payments/{{ $student->id }}" method="POST">
@@ -68,8 +69,7 @@
     <hr>
 
     <div class="right">
-        <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
-        <button class="btn btn-lg btn-primary">For Admission</button>
+        <a href="/students/classes/{{ session()->get('present_class_id') }}" class="btn btn-lg btn-danger">Cancel</a>
         <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
     </div>
 
@@ -172,27 +172,34 @@
     <div id="paymentModal" class="modal fade" role="dialog" style="padding-top: 130px;">
         <div class="modal-dialog">
             <div class="modal-content" style="background-color: #3f704d;">
-                <div class="modal-header">
-                    <h2 class="modal-title">Payment</h2>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <br>    
-                <div class="modal-body" style="padding: 0 25%;">
-                    <div class="form-group">
-                        <label for="amount_paid">Paid Amount</label>
-                        <input type="number" class="form-control" name="amount_paid" required>
+                <form id="enrollment-form" action="/payments/{{ $student->id }}" method="POST">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Payment</h2>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                </div>
+                    <br>
                 <br>    
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-lg btn-success">Submit</button>
-                </div>
+                    <br>
+                    <div class="modal-body" style="padding: 0 25%;">
+                        <div class="form-group">
+                            <label for="amount_paid">Paid Amount</label>
+                            <input type="number" class="form-control" name="amount_paid" required>
+                        </div>
+                    </div>
+                    <br>
+                <br>    
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
+    
 </form>
+
 @endsection
 
 @section('script')  
@@ -203,45 +210,44 @@
         $(document).on('click', '.btn-payment', function() {
             $('#paymentModal').modal('show');
         });
-    });
 
-    $('.btn-printReceipt').on('click', function(){
-        $('.hiddenArea').show();
-        $('.shownArea').hide();
-        var html="<html>";
-        html+= document.getElementById('toPrint').innerHTML;
-        html+="</html>";
+        $('.btn-printReceipt').on('click', function(){
+            $('.hiddenArea').show();
+            $('.shownArea').hide();
+            var html="<html>";
+            html+= document.getElementById('toPrint').innerHTML;
+            html+="</html>";
 
-        while(html.includes("white")) {
-            html = html.replace('white', 'black');
-        }
+            while(html.includes("white")) {
+                html = html.replace('white', 'black');
+            }
 
-        console.log(html);
-        var printWin = window.open();
-        printWin.document.write(html);
-        printWin.document.close();
-        printWin.focus();
-        printWin.print();
-        printWin.close();
-    });
+            var printWin = window.open();
+            printWin.document.write(html);
+            printWin.document.close();
+            printWin.focus();
+            printWin.print();
+            printWin.close();
+        });
 
-    $('.btn-printHistory').on('click', function(){
-        $('.hiddenArea').show();
-        var html="<html>";
-        html+= document.getElementById('printHistory').innerHTML;
-        html+="</html>";
+        $('.btn-printHistory').on('click', function(){
+            $('.hiddenArea').show();
+            var html="<html>";
+            html+= document.getElementById('printHistory').innerHTML;
+            html+="</html>";
 
-        while(html.includes("white")) {
-            html = html.replace('white', 'black');
-        }
+            while(html.includes("white")) {
+                html = html.replace('white', 'black');
+            }
 
-        console.log(html);
-        var printWin = window.open();
-        printWin.document.write(html);
-        printWin.document.close();
-        printWin.focus();
-        printWin.print();
-        printWin.close();
+            console.log(html);
+            var printWin = window.open();
+            printWin.document.write(html);
+            printWin.document.close();
+            printWin.focus();
+            printWin.print();
+            printWin.close();
+        });
     });
     
 </script>

@@ -6,6 +6,8 @@
 
 @section('content')
 
+<?php echo '<script>var payments = ' . $payments . ';</script>'; ?>
+
 <div class="sticky">
   <h2 style="text-align: left">{{ session()->get('present_class_name') }} Students</h2>
 </div>
@@ -52,6 +54,46 @@
         <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
         <button type="button" id="btn-ok" class="btn btn-lg btn-danger">OK</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div id="admissionModal" class="modal fade" role="dialog" style="padding-top: 130px;">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: #3f704d;">
+      <form id="enrollment-form" method="POST">
+        {{method_field('PATCH')}}
+        @csrf
+        <div class="modal-header">
+          <h2 class="modal-title">For Admission</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <br>
+        <div class="modal-body" style="padding: 0 25%;">
+          <input id="student_id" name="student_id" type="int" style="display: none;">
+          <div class="form-group">
+            <br>
+            <label for="class_id" style="font-size: 1.8rem !important;">Admission to:</label>
+            <select class="form-control" name="class_id" style="font-size: 1.8rem !important;">
+              <option value="">Select class</option>
+              @foreach($classes as $class)
+                <option value="{{ $class->id }}">{{ $class->class_name }}</option>
+              @endforeach
+            </select>
+            @if ($errors->has('class_id'))
+              <span class="invalid feedback" role="alert">
+                  <p style="color:tomato;">{{$errors->first('class_id')}}</p>
+              </span>
+            @endif
+            <br>
+          </div>
+        </div>
+        <br>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-lg btn-success">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -117,6 +159,21 @@ $(document).ready(function() {
   $(document).on('click', '.btn-remove', function() {
     id= $(this).attr('id');
     $('#confirmModal').modal('show');
+  });
+        
+  $(document).on('click', '.btn-admission', function() {
+    for (var i = 0; i < Object.keys(payments).length; i++) {
+      console.log(payments[i].student_id);
+      if (payments[i].student_id == $(this).attr('id')) {
+        if(payments[i].balance_due <= 0) {
+          $('#enrollment-form').attr('action', '/admission/' + $(this).attr('id'));
+          $('#student_id').val($(this).attr('id'));
+          $('#admissionModal').modal('show');
+        } else {
+          alert('Student is not yet allowed for admission!');
+        }
+      }
+    }
   });
 
   $('#btn-ok').click(function() {

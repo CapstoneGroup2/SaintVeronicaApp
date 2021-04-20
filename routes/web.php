@@ -67,6 +67,8 @@ Route::middleware(['web'])->group(function () {
     Route::delete('/students/{id}', 'StudentsController@destroy');
 
     Route::resource('/students', 'StudentsController');
+
+    Route::patch('/admission/{id}', 'StudentsController@admission');
     
     Route::get('/miscellaneous-and-other-fees/classes/{id}', 'MiscellaneousAndOtherFeesController@showMiscellaneousAndOtherFees');
     

@@ -6,10 +6,8 @@ Dashboard
 
 @section('content')
 
-<div class="sticky">
-    <h2 style="text-align: left">Dashboard</h2>
-    <div class="triangle-right" style="width:180px;"></div>
-</div>
+<h2 style="text-align: left">Dashboard</h2>
+<div class="triangle-right" style="width:180px;"></div>
 <hr>
 
 <?php $count = 1; ?>
@@ -19,7 +17,7 @@ Dashboard
     @endif
         <div class="col">
             <div class="card card-home">
-                <a[p] href="/students/classes/{{ $student_count['class_id'] }}">
+                <a href="/students/classes/{{ $student_count['class_id'] }}">
                      <div class="card-body">
                         <h2 class="card-text text-success">{{ $student_count['class_name'] }}</h2>
                         <h3 class="card-text text-danger">{{ $student_count['class_count'] }} students</h3>

@@ -47,12 +47,17 @@ class StudentsController extends Controller
                     $button .= '<a href="/students/'. $data->student_id .'/edit
                     " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
                     $button .= '<button type="button" id="'. $data->student_id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
+                    $button .= '<button id="'. $data->student_id .'" class="btn btn-lg btn-success btn-admission">For Admission</button>';
                     return $button;
                 })
                 ->rawColumns(['full_name', 'action'])
                 ->make(true);
         }
-        return view('students.index', compact('students_classes'));
+        
+        $classes = Classes::all();
+        $payments = Payment::all();
+
+        return view('students.index', compact('students_classes', 'classes', 'payments'));
     }
 
     public function create()
@@ -116,9 +121,9 @@ class StudentsController extends Controller
         
         $payment = new Payment();
         $payment->student_id = $students[0]->id;
-        $payment->amount_payable = $payable;
+        $payment->total_payables = $payable;
         $payment->amount_paid = 0;
-        $payment->amount_due = $payable;
+        $payment->balance_due = $payable;
         $payment->save();
 
         session()->put('new_student_name', $request['student_first_name'] . ' ' . $request['student_last_name']);
@@ -211,5 +216,66 @@ class StudentsController extends Controller
         } catch (\Exception $exception) {
 
         }
+    }
+
+    public function admission(Request $request, $id)
+    {
+        $this->validate($request, [
+            'class_id'    =>    'required',
+        ]);
+
+        $student_payment = Payment::where('student_id', $id)->get();
+        $student_payment_history = PaymentsHistory::where('student_id', $id)->delete(); 
+
+        $student_class = StudentsClasses::where('student_id', $id)->get();
+        $student_class[0]->class_id = $request->class_id;
+        $student_class[0]->save();
+        
+        $students_classes = DB::table('students_classes')
+            ->join('students', 'students.id', '=', 'students_classes.student_id')
+            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+            ->get();
+
+        $classes = Classes::all();
+        $students = Student::all();
+
+        $students_count = [];
+        $put_sessions = [];
+
+        foreach($classes as $class) {
+            $student_count = [];
+            $student_count['class_id'] = $class->id;
+            $student_count['class_name'] = $class->class_name;
+
+            $count = 0;
+            foreach ($students_classes as $student_class) {
+                if ($student_class->class_id == $class->id) {
+                    ++$count;
+                }
+            }
+
+            $student_count['class_count'] = $count;
+            array_push($students_count, $student_count);
+            array_push($put_sessions, [$class->class_name, $class->id]);
+        }
+
+        session()->put('classes', $put_sessions);
+
+        $fees = MiscellaneousAndOtherFees::where('class_id', $request->class_id)->get();
+        $payable = 0;
+        foreach($fees as $fee) {
+            $payable += $fee->item_price;
+        }
+        
+        $student_payment[0]->total_payables = $payable;
+        $student_payment[0]->amount_paid = 0;
+        $student_payment[0]->balance_due = $payable;
+        $student_payment[0]->save();
+
+        session()->put('student_id', $id);
+        session()->put('present_class_id', $request->class_id);
+        
+        return redirect('/students/payments/' . $request->class_id . '/edit');
+
     }
 }

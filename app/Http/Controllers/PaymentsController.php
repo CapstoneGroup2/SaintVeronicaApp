@@ -45,6 +45,10 @@ class PaymentsController extends Controller
 
     public function update(Request $request, $student_id)
     {
+        $this->validate($request, [
+            'amount_paid'    =>  'required',
+        ]);
+
         $payment = Payment::where('student_id', $student_id)->get();
         $payment[0]->amount_paid = $payment[0]->amount_paid + $request['amount_paid'];
         $payment[0]->balance_due = $payment[0]->balance_due - $request['amount_paid'];

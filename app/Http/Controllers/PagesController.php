@@ -124,7 +124,7 @@ class PagesController extends Controller
 
             $count = 0;
             foreach ($students_classes as $student_class) {
-                if ($student_class->class_id == $class->id && $student_class->student_active_status == 1) {
+                if ($student_class->class_id == $class->id) {
                     ++$count;
                 }
             }

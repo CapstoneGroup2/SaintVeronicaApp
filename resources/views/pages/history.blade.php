@@ -5,16 +5,18 @@ History of Payments
 @endsection
 
 @section('content')
-<h2 style="text-align: left">History of Payments</h2>
-<div class="triangle-right" style="width:320px;"></div>
+<div class="sticky">
+  <h2 style="text-align: left">History of Payments</h2>
+  <div class="triangle-right" style="width:320px;"></div>
+</div>
 <hr>
 <table id="dataTable" class="table table-striped table-enrollment table-default">
   <thead>
       <tr>
-      <th scope="col">Date Paid</th>
-      <th scope="col">Student Name</th>
-      <th scope="col">Amount Paid</th>
-      <th scope="col">Received By</th>
+      <th scope="col" class="sticky" style="top: 120px !important;">Date Paid</th>
+      <th scope="col" class="sticky" style="top: 120px !important;">Student Name</th>
+      <th scope="col" class="sticky" style="top: 120px !important;">Amount Paid</th>
+      <th scope="col" class="sticky" style="top: 120px !important;">Received By</th>
       </tr>
   </thead>
 </table>

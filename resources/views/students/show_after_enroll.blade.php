@@ -5,43 +5,39 @@ Miscellaneous & Other Fees
 @endsection
 
 @section('content')
-<h2 style="text-align: left">{{ session()->get('new_student_name') }} ({{ session()->get('present_class_name') }} Student)</h2>
+<div class="sticky">
+    <h2 style="text-align: left">ID Number: {{ session()->get('student_id') }}</h2>
+</div>
 <hr>
-<form id="enrollment-form" action="/payments/{{ session()->get('new_student_id') }}" method="POST">
+<form id="enrollment-form" action="/payments/{{ session()->get('student_id') }}" method="POST">
     {{method_field('PATCH')}}
     @csrf
-    <h1>Miscellaneous and Other Fees</h1> 
+    <h2 class="text-warning">Miscellaneous and Other Fees</h1> 
     <hr>
     <table class="table table-default table-bordered text-white">
         <thead>
-            <th width="20%">Item Code</th>
-            <th width="65%">Item Description</th>
-            <th>Item Price</th>
+            <th width="20%" style="text-align:center;border: 1px solid white;padding: 3px;">Payment Code</th>
+            <th style="text-align:center;border: 1px solid white;padding: 3px;">Description</th>
+            <th width="20%" style="text-align:center;border: 1px solid white;padding: 3px;">Amount</th>
         </thead>
         <tbody>
             @foreach($miscellaneous_and_other_fees as $miscellaneous_and_other_fee)
                 <tr>
-                    <td>{{ $miscellaneous_and_other_fee->item_code }}</td>
-                    <td>{{ $miscellaneous_and_other_fee->item_description }}</td>
-                    <td>{{ number_format($miscellaneous_and_other_fee->item_price, 2, '.', '') }}</td>
+                    <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 3px;">{{ $miscellaneous_and_other_fee->item_code }}</td>
+                    <td class="text-white" style="text-align:left;border: 1px solid white;padding: 3px;">{{ $miscellaneous_and_other_fee->item_description }}</td>
+                    <td width="20%" class="text-white" style="text-align:right;border: 1px solid white;padding: 3px;">{{ number_format($miscellaneous_and_other_fee->item_price, 2) }}</td>
                 </tr>
             @endforeach
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-        <tbody>
-            <tr>
-                <td colspan="2" style="text-align: center">T O T A L  &emsp; P A Y M E N T</th>
-                <td>{{ number_format($payments[0]->amount_payable, 2, '.', '') }}</td>
+                <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
+                <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">TOTAL PAYABLES</th>
+                <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">{{ number_format($payments[0]->total_payables, 2) }}</td>
             </tr>
         </tbody>
     </table>
     <hr>
     <div class="right">
-        <a href="/students/{{ session()->get('new_student_id') }}" class="btn btn-lg btn-danger" role="button">Not now</a>
+        <a href="/students/{{ session()->get('student_id') }}" class="btn btn-lg btn-danger" role="button">Not now</a>
         <button type="button" class="btn btn-lg btn-warning btn-payment">Pay Bill</button>
     </div>
 

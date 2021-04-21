@@ -36,7 +36,7 @@
     <div class="jumbotron">
         <h1 class="display-4" id="demo"></h1>
         <!-- <p class="lead">Enroll your kids now and be part of the growing family!</p> -->
-        <hr class="my-4">
+        <hr class="my-4" style="width: 500px;">
         <p style="font-style:italic;">Preparing children for future success in life.</p>
         <p class="lead">
             <a class="btn btn-primary btn-lg" onclick="location.href='#div-aboutUs'" role="button">About Us <br/><i

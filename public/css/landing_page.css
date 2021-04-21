@@ -190,8 +190,8 @@ ol.carousel-indicators li.active {
     content: "\e080";
     color: black;
 }   
-div.container {
-    margin-top: 10%;
+div.container-carousel {
+    margin: 10% 5px 0 5px;
     max-width: 100% !important;
     padding: 10px 0;
 }

@@ -35,7 +35,6 @@
     
     <div class="jumbotron">
         <h1 class="display-4" id="demo"></h1>
-        <!-- <p class="lead">Enroll your kids now and be part of the growing family!</p> -->
         <hr class="style-one">
         <p style="font-style:italic;">Preparing children for future success in life.</p>
         <p class="lead">
@@ -66,16 +65,14 @@
             </tr>
         </table>
     </div>
-    <div class="container">
+    <div class="container-carousel">
         
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
             <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
-            <!-- Wrapper for slides -->
             <div class="carousel-inner">
             <div class="item active">
                 <div class="row">
@@ -198,7 +195,6 @@
             </div>
             </div>
 
-            <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
             <span class="sr-only">Previous</span>
@@ -270,26 +266,27 @@
         </table>
     </div>
 
-    <!-- The Modal -->
     <div class="modal fade" id="announcementModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- Modal Header -->
                 <div class="modal-header">
                     <h3 class="modal-title">ANNOUNCEMENTS</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <!-- Modal body -->
                 <div class="modal-body">
-                    @foreach($announcements as $announcement)
-                        <div class="card card-home">
-                            <div class="card-body">
-                                <h2 class="card-text text-danger" style="font-size: 2rem !important;">{{ $announcement -> announcement_title }}</h2>
-                                <p style="font-size: 1.2rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> updated_at)) }}</p>
-                                <h4 class="card-text text-info" style="margin: 5px;font-size: 1.5rem !important;">{{ $announcement -> announcement_message}}</h4>
+                    @if(!empty($announcements->items))
+                        @foreach($announcements as $announcement)
+                            <div class="card card-home">
+                                <div class="card-body">
+                                    <h2 class="card-text text-danger" style="font-size: 2rem !important;">{{ $announcement -> announcement_title }}</h2>
+                                    <p style="font-size: 1.2rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> updated_at)) }}</p>
+                                    <h4 class="card-text text-info" style="margin: 5px;font-size: 1.5rem !important;">{{ $announcement -> announcement_message}}</h4>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @else
+                        <p style="text-align: center;">No history of payments found.</p>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-md btn-danger" data-dismiss="modal">Close</button>
@@ -300,33 +297,13 @@
 
     <footer class="footer">
 
-        <!-- Messenger Chat Plugin Code -->
         <div id="fb-root"></div>
-        
-        <script>
-            window.fbAsyncInit = function() {
-            FB.init({
-                xfbml            : true,
-                version          : 'v10.0'
-            });
-            };
 
-            (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>
-
-        <!-- Your Chat Plugin code -->
         <div class="fb-customerchat"
             attribution="page_inbox"
             page_id="103971228472620">
         </div>
 
-        <!-- <p><b>Contact Us</b></p> -->
         <p>Facebook Page: Saint Veronica Learning Center</p>
         <p>Phone Number: +639178780506</p>
         <p>Location: Jarabe Bldg., Bantug St., Tagnipa Maasin City, Southern Leyte</p>  

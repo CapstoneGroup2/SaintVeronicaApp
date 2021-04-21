@@ -8,7 +8,7 @@
 
 <div class="sticky">
     <h2 style="text-align: left">ID Number: {{ $student->id }}</h2>
-    <div class="triangle-right" style="width:340px;"></div>
+    <div class="triangle-right" style="width:290px;"></div>
 </div>
 <hr>
 <form id="enrollment-form" action="/payments/{{ $student->id }}" method="POST">

@@ -24,7 +24,7 @@
 <table id="dataTable" class="table table-striped table-enrollment table-default">
   <thead>
       <tr>
-        <th class="sticky" scope="col" style="top: 120px !important;">ID No.</th>
+        <th class="sticky" scope="col" style="top: 120px !important;" width="10%">ID No.</th>
         <th class="sticky" scope="col" style="top: 120px !important;">Full Name</th>
         <th class="sticky" scope="col" style="top: 120px !important;">Email Address</th>
         <th class="sticky" scope="col" style="top: 120px !important;">Address</th>

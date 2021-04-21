@@ -14,7 +14,7 @@ body {
 footer {
     left: 0;
     width: 100%;
-    padding: 3px;
+    padding: 30px;
     background-color: #3f704d;
     color: #FCF4A3;
     text-align: center;
@@ -63,8 +63,10 @@ footer {
     height: 50px;
 }
 .jumbotron { 
-        background: url("/images/kid.jpg") center center / cover no-repeat;
-        color: white;
+    background: url("/images/kid.jpg") center center / cover no-repeat;
+    color: white;
+    height: 55rem;
+    padding: 240px 2rem 0 2rem !important;
 }
 #info p ,h2{
     font-size: 20px; 
@@ -85,17 +87,27 @@ html {
     scroll-behavior: smooth;
 }
 .btn-primary {
-    border-color: #FCF4A3;
+    border-color: #FCF4A3 !important;
     cursor: pointer;
-    background-color: #3f704d;
-    color: #FCF4A3;
-    padding: 1em 2.1em 1.1em;
-    border-radius: 3px;
-    margin: 8px 8px 8px 8px;
-    font-size: 3vw;
+    background-color: #3f704d !important;
+    color: #FCF4A3 !important;
+    padding: 1em 2.1em 1.1em !important;
+    border-radius: 3px !important;
+    margin: 8px 8px 8px 8px !important;
 }
 .btn-primary:hover {
-    background-color: #;
+    background-color: #315a3d !important;
+}
+
+.glyphicon {
+    margin: 5px;
+}
+
+.glyphicon:hover {
+    color: #FCF4A3 !important;
+}
+.glyphicon-chevron-right, .glyphicon-chevron-left {
+    margin-top: 230px !important;
 }
 .lead{
     color: white;   

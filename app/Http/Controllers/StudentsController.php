@@ -19,7 +19,7 @@ class StudentsController extends Controller
 
     public function showMiscellaneousAndOtherFeesAfterEnroll($id) {
         $miscellaneous_and_other_fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
-        $payments = Payment::where('student_id', session()->get('new_student_id'))->get();
+        $payments = Payment::where('student_id', session()->get('student_id'))->get();
         return view('students.show_after_enroll', compact('miscellaneous_and_other_fees', 'payments'));
     }
     
@@ -131,7 +131,6 @@ class StudentsController extends Controller
         $payment->balance_due = $payable;
         $payment->save();
 
-        session()->put('new_student_name', $request['student_first_name'] . ' ' . $request['student_last_name']);
         session()->put('student_id', $students[0]->id);
         
         return redirect('/students/payments/' . session()->get('present_class_id') . '/edit');

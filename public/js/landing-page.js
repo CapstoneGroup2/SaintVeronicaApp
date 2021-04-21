@@ -31,3 +31,9 @@ function changeActiveState(value) {
     }
     el.classList.add('active');  
 }
+
+$(document).ready(function () {
+    $(document).on('click', '.btn-showModal', function() {
+        $('#announcementModal').modal('show');
+    });
+});

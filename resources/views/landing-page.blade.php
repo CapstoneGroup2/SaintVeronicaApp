@@ -36,14 +36,14 @@
     <div class="jumbotron">
         <h1 class="display-4" id="demo"></h1>
         <!-- <p class="lead">Enroll your kids now and be part of the growing family!</p> -->
-        <hr class="my-4" style="width: 500px;">
+        <hr class="style-one">
         <p style="font-style:italic;">Preparing children for future success in life.</p>
         <p class="lead">
             <a class="btn btn-primary btn-lg" onclick="location.href='#div-aboutUs'" role="button">About Us <br/><i
                         class="glyphicon glyphicon-info-sign"></i></a>
             <a class="btn btn-primary btn-lg" onclick="location.href='#div-info'" role="button">Mission and Vision<br/><i
                         class="glyphicon glyphicon-education"></i></a>
-            <a class="btn btn-primary btn-lg" role="button">Announcements <br/><i
+            <a class="btn btn-primary btn-lg btn-showModal" role="button">Announcements <br/><i
                         class="glyphicon glyphicon-bullhorn"></i></a>
         </p>
         <p style="font-size: 10px; float: right; color: black;">Photo taken from Pinterest.</p>
@@ -271,7 +271,7 @@
     </div>
 
     <!-- The Modal -->
-    <div class="modal fade" id="myModal">
+    <div class="modal fade" id="announcementModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->

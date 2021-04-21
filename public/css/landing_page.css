@@ -217,3 +217,12 @@ div.container {
 .btn-group .btn-login:hover {
     background-color: #28a745 !important;
 }
+hr.style-one {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    background-image: -webkit-linear-gradient(left, #ccc, rgb(126, 126, 126), #ccc);
+    background-image: -moz-linear-gradient(left, #ccc, #333, #ccc);
+    background-image: -ms-linear-gradient(left, #ccc, #333, #ccc);
+    background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
+}

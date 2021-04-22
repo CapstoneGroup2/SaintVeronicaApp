@@ -38,6 +38,9 @@ class StudentsController extends Controller
         if (request()->ajax())
         {
             return datatables()->of($students_classes)
+                ->addColumn('student_id', function($data) {
+                    return '<span style="font-weight: bold; font-size: 17px;">' . $data->student_id . '</span>';
+                })
                 ->addColumn('full_name', function($data) {
                     $full_name = $data->student_middle_name != "" ? $data->student_first_name . ' ' . $data->student_middle_name . ' '. $data->student_last_name : $data->student_first_name . ' ' . $data->student_last_name;
                     return $full_name;
@@ -50,7 +53,7 @@ class StudentsController extends Controller
                     $button .= '<button id="'. $data->student_id .'" class="btn btn-lg btn-success btn-admission">For Admission</button>';
                     return $button;
                 })
-                ->rawColumns(['full_name', 'action'])
+                ->rawColumns(['student_id', 'full_name', 'action'])
                 ->make(true);
         }
         

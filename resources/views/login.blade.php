@@ -18,6 +18,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+    @if(isset(Auth::user()->user_email))
+        @if(Auth::user()->role_id == 1)
+            <script>window.location="/dashboard";</script>
+        @else
+            <script>window.location="/home";</script>
+        @endif
+    @endif
     <nav class="header navbar fixed-top navbar-expand-lg">
         <a class="navbar-brand logo" href="/welcome"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
         <div class="btn-group" style="margin: 0 20px 0 auto;">
@@ -32,9 +39,6 @@
                 <form method="POST" action="{{ url('/login') }}">
                     @csrf
 
-                    @if(isset(Auth::user()->user_email))
-                        <script>window.location="/index";</script>
-                    @endif
 
                     @if($message = Session::get('error'))
                         <div class="alert alert-danger alert-block" style="font-size: 13px;">

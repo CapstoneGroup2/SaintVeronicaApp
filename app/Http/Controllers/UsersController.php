@@ -23,19 +23,22 @@ class UsersController extends Controller
         if (request()->ajax())
         {
             return datatables()->of($users)
-            ->addColumn('full_name', function($data) {
-                $full_name = $data->user_first_name . ' ' . $data->user_last_name;
-                return $full_name;
-            })
-            ->addColumn('action', function($data) {
-                $button = '<a href="/users/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
-                $button .= '<a href="/users/'. $data->id .'/edit
-                " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
-                $button .= '<button type="button" id="'. $data->id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
-                return $button;
-            })
-            ->rawColumns(['full_name', 'action'])
-            ->make(true);
+                ->addColumn('role_name', function($data) {
+                    return '<span style="font-weight: bold; font-size: 17px;">' . $data->role_name . '</span>';
+                })
+                ->addColumn('full_name', function($data) {
+                    $full_name = $data->user_first_name . ' ' . $data->user_last_name;
+                    return $full_name;
+                })
+                ->addColumn('action', function($data) {
+                    $button = '<a href="/users/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                    $button .= '<a href="/users/'. $data->id .'/edit
+                    " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
+                    $button .= '<button type="button" id="'. $data->id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
+                    return $button;
+                })
+                ->rawColumns(['role_name', 'full_name', 'action'])
+                ->make(true);
         }
         
         return view('users.index', compact('users'));

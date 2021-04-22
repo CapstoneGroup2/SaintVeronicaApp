@@ -26,6 +26,13 @@
 </head>
 
 <body onload="onload()">
+    @if(isset(Auth::user()->user_email))
+        @if(Auth::user()->role_id == 1)
+            <script>window.location="/dashboard";</script>
+        @else
+            <script>window.location="/home";</script>
+        @endif
+    @endif
     <nav class="header navbar fixed-top navbar-expand-lg">
         <a href="/welcome" class="navbar-brand logo"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
         <div class="btn-group" style="margin: 0 20px 0 auto;">
@@ -274,7 +281,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    @if(!empty($announcements->items))
+                    @if(isset($announcements[0]))
                         @foreach($announcements as $announcement)
                             <div class="card card-home">
                                 <div class="card-body">

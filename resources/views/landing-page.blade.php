@@ -77,7 +77,7 @@
             <div class="item active">
                 <div class="row">
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/tutorial3.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/tutorial3.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="column">
-                        <div class="card card-block card-2"><img class="card-img-top" src="/images/tutorial2.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-2"><img class="card-img-top" src="/images/tutorial2.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -95,7 +95,7 @@
                     </div>
                     
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/tutorial1.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/tutorial1.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -104,7 +104,7 @@
                     </div>
                     
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic1.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic1.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -117,7 +117,7 @@
             <div class="item">
                 <div class="row">
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic2.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic2.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -126,7 +126,7 @@
                     </div>
 
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic3.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic3.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -135,7 +135,7 @@
                     </div>
                     
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic4.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic4.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -144,7 +144,7 @@
                     </div>
                     
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic5.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic5.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -157,7 +157,7 @@
             <div class="item">
                 <div class="row">
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic6.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic6.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -166,7 +166,7 @@
                     </div>
 
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic7.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic7.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -175,7 +175,7 @@
                     </div>
                     
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic8.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/pic8.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>
@@ -184,7 +184,7 @@
                     </div>
                     
                     <div class="column">
-                        <div class="card card-block card-1"><img class="card-img-top" src="/images/logo.jpg" alt="Card image cap" style="width: 100%; height: 400px;">
+                        <div class="card card-block card-1"><img class="card-img-top" src="/images/logo.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
                             <div class="overlay">
                                 <div class="text">We offer Piano tutorials to students from our school or not.</div>

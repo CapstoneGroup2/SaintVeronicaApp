@@ -10,6 +10,7 @@ Miscellaneous & Other Fees
 <form id="enrollment-form" action="/miscellaneous-and-other-fees/{{ $miscellaneous_and_other_fees[0]->id }}" method="POST" enctype="multipart/form-data">
     {{method_field('PATCH')}}
     @csrf
+    <h2 class="text-warning">Edit Item</h2>
     <div class="row">
         <div class="col">
             <div class="form-group">

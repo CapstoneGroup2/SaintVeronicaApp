@@ -35,7 +35,7 @@ Announcements
 @endif
 
 @foreach($announcements as $announcement)
-  <div class="card text-center card-home" style="padding: 0;">
+  <div id="{{ $announcement -> announcement_title }}" class="card text-center card-home" style="padding: 0;">
     <div class="card-header" style="padding: 10px;">
       <h2 class="card-text text-success">{{ $announcement -> announcement_title }}</h2>
     </div>
@@ -100,7 +100,7 @@ Announcements
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <h4 align="center" style="margin:0;">Are you sure you want to remove this announcement?</h4>
+        <h4 align="center" style="margin:0;">Are you sure you want to remove <br><span id="title" class="text-success"></span> announcement?</h4>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>

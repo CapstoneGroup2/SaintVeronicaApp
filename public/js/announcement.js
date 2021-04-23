@@ -10,6 +10,8 @@ $(document).ready(function() {
 
     $(document).on('click', '.btn-remove', function() {
         id= $(this).attr('id');
+        title = $(this).parent('div').parent('div').attr('id');
+        $('#title').html(title);
         $('#confirmModal').modal('show');
     });
 

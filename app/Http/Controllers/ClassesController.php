@@ -48,6 +48,7 @@ class ClassesController extends Controller
     {
         $this->validate($request, [
             'class_name'          =>  'required|unique:classes',
+            'class_description'   =>  'nullable'
         ]);
 
         $class = new Classes();

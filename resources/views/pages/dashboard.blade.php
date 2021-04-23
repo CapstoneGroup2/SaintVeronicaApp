@@ -19,12 +19,12 @@ Dashboard
         <div class="col">
             <div class="card card-home">
                 <div class="card-body">
-                    <h2 class="card-text text-success">All Classes</h2>
+                    <h3 class="card-text text-success" style="font-weight: bold;">All Classes</h3>
                 </div>
                 <div class="card-footer text-muted">
-                    <p>Total Students: <span class="text-secondary" style="font-weight: bold;">{{ $total_count['total_students'] }}</span></p>
-                    <p>Male Students: <span class="text-primary" style="font-weight: bold;">{{ $total_count['total_female_students'] }}</span></p>
-                    <p>Female Students: <span class="text-danger" style="font-weight: bold;">{{ $total_count['total_male_students'] }}</span></p>
+                    <p style="font-size: 1.5rem;">Total Students: <span class="text-secondary" style="font-weight: bold;">{{ $total_count['total_students'] }}</span></p>
+                    <p style="font-size: 1.5rem;">Male Students: <span class="text-primary" style="font-weight: bold;">{{ $total_count['total_male_students'] }}</span></p>
+                    <p style="font-size: 1.5rem;">Female Students: <span class="text-danger" style="font-weight: bold;">{{ $total_count['total_female_students'] }}</span></p>
                 </div>
             </div>
         </div>
@@ -34,12 +34,12 @@ Dashboard
         <div class="card card-home">
             <a href="/students/classes/{{ $student_count['class_id'] }}">
                 <div class="card-body">
-                    <h2 class="card-text text-success">{{ $student_count['class_name'] }}</h2>
+                    <h3 class="card-text text-success" style="font-weight: bold;">{{ $student_count['class_name'] }}</h3>
                 </div>
                 <div class="card-footer text-muted">
-                    <p>Total Students: <span class="text-secondary" style="font-weight: bold;">{{ $student_count['class_count'] }}</span></p>
-                    <p>Male Students: <span class="text-primary" style="font-weight: bold;">{{ $student_count['class_male'] }}</span></p>
-                    <p>Female Students: <span class="text-danger" style="font-weight: bold;">{{ $student_count['class_female'] }}</span></p>
+                    <p style="font-size: 1.5rem;">Total Students: <span class="text-secondary" style="font-weight: bold;">{{ $student_count['class_count'] }}</span></p>
+                    <p style="font-size: 1.5rem;">Male Students: <span class="text-primary" style="font-weight: bold;">{{ $student_count['class_male'] }}</span></p>
+                    <p style="font-size: 1.5rem;">Female Students: <span class="text-danger" style="font-weight: bold;">{{ $student_count['class_female'] }}</span></p>
                 </div>
             </a>
         </div>

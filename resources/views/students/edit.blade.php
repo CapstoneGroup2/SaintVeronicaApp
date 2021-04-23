@@ -53,7 +53,7 @@ Students
                     <div class="col">
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" class="form-control" name="student_email" value="{{ $student->student_email}}" readonly>
+                            <input type="email" class="form-control" name="student_email" value="{{ $student->student_email}}">
                         </div>
                     </div>
                     <div class="col-5">    

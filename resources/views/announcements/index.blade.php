@@ -8,7 +8,6 @@ Announcements
 
 @if ($errors->has('announcement_title') || $errors->has('announcement_message'))
     <script>
-        console.log('sdkjbsjbhf');
         $(document).ready(function() {
             $('#addModal').modal('show');
         });
@@ -17,10 +16,13 @@ Announcements
 
 <div class="sticky">
   <h2 style="text-align: left;">Announcements</h2> 
-</div>
 
 @if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
-    <button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Announcements</button>
+</div>
+  <button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Announcements</button>
+@else
+  <div class="triangle-right" style="width:250px;"></div>
+</div>
 @endif
 
 <hr>

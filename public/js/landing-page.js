@@ -16,7 +16,7 @@ window.fbAsyncInit = function() {
     js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-
+    
 function onload() {
     if (i < txt.length) {
         document.getElementById("demo").innerHTML += txt.charAt(i);
@@ -27,7 +27,6 @@ function onload() {
         // }
     }
 }
-// Image Functions
 function showImage(imgPath, imgText, galleryId) { 
     var curImage = document.getElementById('currentImg-' + galleryId);      
     curImage.src = imgPath;

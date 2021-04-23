@@ -71,17 +71,22 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'student_first_name'    =>  'required',
-            'student_last_name'     =>  'required',
-            'student_email'         =>  'required|unique:students',
-            'student_home_contact'  =>  'required',
-            'student_address'       =>  'required',
-            'student_birth_date'    =>  'required',
-            'student_age'           =>  'required',
-            'student_gender'        =>  'required',
-            'student_guardian_name' =>  'required',
+            'student_first_name'              =>  'required|alpha',
+            'student_middle_name'             =>  'nullable|alpha',
+            'student_last_name'               =>  'required|alpha',
+            'student_email'                   =>  'required|unique:students',
+            'student_home_contact'            =>  'required',
+            'student_address'                 =>  'required',
+            'student_birth_date'              =>  'required',
+            'student_age'                     =>  'required|numeric|min:2|max:100',
+            'student_gender'                  =>  'required|alpha',
+            'student_mother_name'             =>  'nullable|alpha',
+            'student_mother_contact_number'   =>  'nullable',
+            'student_father_name'             =>  'nullable|alpha',
+            'student_father_contact_number'   =>  'nullable',
+            'student_guardian_name'           =>  'required|alpha',
             'student_guardian_contact_number' =>  'required',
-            'student_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
         $student = new Student();
@@ -164,17 +169,22 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'student_first_name'    =>  'required',
-            'student_last_name'     =>  'required',
-            'student_email'         =>  'required',
-            'student_home_contact'  =>  'required',
-            'student_address'       =>  'required',
-            'student_birth_date'    =>  'required',
-            'student_age'           =>  'required',
-            'student_gender'        =>  'required',
-            'student_guardian_name' =>  'required',
+            'student_first_name'              =>  'required|alpha',
+            'student_middle_name'             =>  'nullable|alpha',
+            'student_last_name'               =>  'required|alpha',
+            'student_email'                   =>  'required|unique:students',
+            'student_home_contact'            =>  'required',
+            'student_address'                 =>  'required',
+            'student_birth_date'              =>  'required',
+            'student_age'                     =>  'required|numeric|min:2|max:100',
+            'student_gender'                  =>  'required|alpha',
+            'student_mother_name'             =>  'nullable|alpha',
+            'student_mother_contact_number'   =>  'nullable',
+            'student_father_name'             =>  'nullable|alpha',
+            'student_father_contact_number'   =>  'nullable',
+            'student_guardian_name'           =>  'required|alpha',
             'student_guardian_contact_number' =>  'required',
-            'student_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         
         $student = Student::find($id);

@@ -53,7 +53,8 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'user_first_name'    =>  'required',
+            'user_first_name'    =>  'required|alpha',
+            'user_middle_name'   =>  'alpha',
             'user_last_name'     =>  'required',
             'user_email'         =>  'required|email|unique:users',
             'user_role_id'       =>  'required',

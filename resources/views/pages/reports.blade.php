@@ -7,7 +7,7 @@ Reports
 @section('content')
 
 <h2 style="text-align: left">Reports</h2>
-<div class="triangle-right" style="width:180px;"></div>
+<div class="triangle-right" style="width:120px;"></div>
 <hr>
 
 <?php $count = 1; ?>

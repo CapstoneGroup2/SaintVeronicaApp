@@ -140,6 +140,7 @@
                     </tr>
                 </tbody>
             </table>
+        <p>*This receipt is not valid as an official receipt.</p>
         </div>
         <div class="row hide hiddenArea">
             <table>

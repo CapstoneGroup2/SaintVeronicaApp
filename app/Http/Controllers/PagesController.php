@@ -33,20 +33,33 @@ class PagesController extends Controller
 
         $students_count = [];
         $put_sessions = [];
+        $total_count = [];
+        $total_count['total_students'] = 0;
+        $total_count['total_female_students'] = 0;
+        $total_count['total_male_students'] = 0;
 
         foreach($classes as $class) {
             $student_count = [];
             $student_count['class_id'] = $class->id;
             $student_count['class_name'] = $class->class_name;
+            $student_count['class_count'] = 0;
+            $student_count['class_female'] = 0;
+            $student_count['class_male'] = 0;
 
-            $count = 0;
             foreach ($students_classes as $student_class) {
                 if ($student_class->class_id == $class->id) {
-                    ++$count;
+                    ++$student_count['class_count'];
+                    ++$total_count['total_students'];
+                    if ($student_class->student_gender == 'Female') {
+                        ++$student_count['class_female'];
+                        ++$total_count['total_female_students'];
+                    } else{
+                        ++$student_count['class_male'];
+                        ++$total_count['total_male_students'];
+                    } 
                 }
             }
 
-            $student_count['class_count'] = $count;
             array_push($students_count, $student_count);
             array_push($put_sessions, [$class->class_name, $class->id]);
         }
@@ -82,7 +95,7 @@ class PagesController extends Controller
             $array_students_classes[++$key] = [$value->classes, $value->number];
         }
 
-        return view('pages.dashboard', compact('students_count'))
+        return view('pages.dashboard', compact('students_count', 'total_count'))
                 ->with('gender', json_encode($array_gender))
                 ->with('classes', json_encode($array_students_classes));
     }
@@ -134,20 +147,33 @@ class PagesController extends Controller
 
         $students_count = [];
         $put_sessions = [];
+        $total_count = [];
+        $total_count['total_students'] = 0;
+        $total_count['total_female_students'] = 0;
+        $total_count['total_male_students'] = 0;
 
         foreach($classes as $class) {
             $student_count = [];
             $student_count['class_id'] = $class->id;
             $student_count['class_name'] = $class->class_name;
+            $student_count['class_count'] = 0;
+            $student_count['class_female'] = 0;
+            $student_count['class_male'] = 0;
 
-            $count = 0;
             foreach ($students_classes as $student_class) {
                 if ($student_class->class_id == $class->id) {
-                    ++$count;
+                    ++$student_count['class_count'];
+                    ++$total_count['total_students'];
+                    if ($student_class->student_gender == 'Female') {
+                        ++$student_count['class_female'];
+                        ++$total_count['total_female_students'];
+                    } else{
+                        ++$student_count['class_male'];
+                        ++$total_count['total_male_students'];
+                    } 
                 }
             }
 
-            $student_count['class_count'] = $count;
             array_push($students_count, $student_count);
             array_push($put_sessions, [$class->class_name, $class->id]);
         }
@@ -183,25 +209,8 @@ class PagesController extends Controller
             $array_students_classes[++$key] = [$value->classes, $value->number];
         }
 
-        // $data_enrollees_per_month = DB::table('students')
-        //                                 ->select(
-        //                                     DB::raw('year(created_at) as year'),
-        //                                     DB::raw('count(*) as number'))
-        //                                 ->groupBy('year')
-        //                                 ->get();
-
-        // dd($data_enrollees_per_month);
-
-        // $array_enrollees_per_month[] = ['Year', 'Number'];
-
-        // foreach($data_enrollees_per_month as $key => $value) 
-        // {
-        //     $array_enrollees_per_month[++$key] = [$value->year, $value->number];
-        // }
-
-        return view('pages.reports', compact('students_count'))
+        return view('pages.reports', compact('students_count', 'total_count'))
                 ->with('gender', json_encode($array_gender))
                 ->with('classes', json_encode($array_students_classes));
-                // ->with('enrollees', json_encode($array_enrollees_per_month));
     }
 }

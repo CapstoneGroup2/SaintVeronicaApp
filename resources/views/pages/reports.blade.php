@@ -15,25 +15,44 @@ Reports
     @if($count%5 == 0 || $count==1)
         <div class="row">
     @endif
+    @if($count == 1)
         <div class="col">
             <div class="card card-home">
-                <a[p] href="/students/classes/{{ $student_count['class_id'] }}">
-                     <div class="card-body">
-                        <h2 class="card-text text-success">{{ $student_count['class_name'] }}</h2>
-                        <h3 class="card-text text-danger">{{ $student_count['class_count'] }} students</h3>
-                    </div>
-                </a>
+                <div class="card-body">
+                    <h2 class="card-text text-success">All Classes</h2>
+                </div>
+                <div class="card-footer text-muted">
+                    <p>Total Students: <span class="text-secondary" style="font-weight: bold;">{{ $total_count['total_students'] }}</span></p>
+                    <p>Male Students: <span class="text-primary" style="font-weight: bold;">{{ $total_count['total_female_students'] }}</span></p>
+                    <p>Female Students: <span class="text-danger" style="font-weight: bold;">{{ $total_count['total_male_students'] }}</span></p>
+                </div>
             </div>
         </div>
-        @if($count >= 5 && $count == count($students_count))
-            <?php
-                $remainingColumn = 4 - count($students_count)%4;
-                for($i = 1; $i <= $remainingColumn; $i++) {
-                    echo '<div class="col"></div>';
-                    ++$count;
-                }
-            ?>            
-        @endif
+        <?php $count++; ?>
+    @endif
+    <div class="col">
+        <div class="card card-home">
+            <a href="/students/classes/{{ $student_count['class_id'] }}">
+                <div class="card-body">
+                    <h2 class="card-text text-success">{{ $student_count['class_name'] }}</h2>
+                </div>
+                <div class="card-footer text-muted">
+                    <p>Total Students: <span class="text-secondary" style="font-weight: bold;">{{ $student_count['class_count'] }}</span></p>
+                    <p>Male Students: <span class="text-primary" style="font-weight: bold;">{{ $student_count['class_male'] }}</span></p>
+                    <p>Female Students: <span class="text-danger" style="font-weight: bold;">{{ $student_count['class_female'] }}</span></p>
+                </div>
+            </a>
+        </div>
+    </div>
+    @if($count >= 5 && $count == count($students_count) + 1)
+        <?php
+            $remainingColumn = 4 - count($students_count)%4;
+            for($i = 1; $i < $remainingColumn; $i++) {
+                echo '<div class="col"></div>';
+                ++$count;
+            }
+        ?>            
+    @endif
     @if($count%4 == 0)
         </div>
     @endif
@@ -57,29 +76,6 @@ Reports
     </div>
 </div>
 
-<!-- <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Charts</h3>
-    </div>
-    <div class="panel-body">
-        <div class="row">
-            <div class="col">
-                <div id="gender-pie-chart">
-                
-                </div>
-            </div>
-            <div class="col">
-                <div id="classes-pie-chart">
-                
-                </div>
-            </div>
-        </div>
-        <div id="enrollees-per-year-pie-chart">
-        
-        </div>
-    </div>
-</div> -->
-
 @endsection
 
 @section('script')
@@ -89,7 +85,6 @@ Reports
 <script type="text/javascript">
     var analytics_gender = <?php echo $gender; ?>;
     var analytics_classes = <?php echo $classes; ?>;
-    // var analytics_enrollees = <?php //echo $enrollees; ?>;
 
     google.charts.load('current', {'packages':['corechart']});
 
@@ -106,16 +101,6 @@ Reports
         var options = {title: 'Percentage of Different Classes Student'};
         var chart = new google.visualization.PieChart(document.getElementById('classes-pie-chart'));
         chart.draw(data, options);
-
-        // var data = google.visualization.arrayToDataTable(analytics_enrollees);
-        // var options = 
-        // {
-        //     title: 'Percentage of Different Classes Student',
-        //     curveType: 'function',
-        //     legend: { position: 'bottom' }
-        // };
-        // var chart = new google.visualization.LineChart(document.getElementById('enrollees-per-year-pie-chart'));
-        // chart.draw(data, options);
     }
 </script>
 

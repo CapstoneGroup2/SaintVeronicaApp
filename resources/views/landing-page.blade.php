@@ -356,21 +356,25 @@
 
     <div class="modal fade" id="announcementModal">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style="background-color: #3f704d;">
                 <div class="modal-header">
-                    <h3 class="modal-title">ANNOUNCEMENTS</h3>
+                    <h2 class="modal-title text-warning">ANNOUNCEMENTS</h2>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     @if(isset($announcements[0]))
                         @foreach($announcements as $announcement)
-                            <div class="card card-home">
-                                <div class="card-body">
-                                    <h2 class="card-text text-danger" style="font-size: 2rem !important;">{{ $announcement -> announcement_title }}</h2>
-                                    <p style="font-size: 1.2rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> updated_at)) }}</p>
-                                    <h4 class="card-text text-info" style="margin: 5px;font-size: 1.5rem !important;">{{ $announcement -> announcement_message}}</h4>
-                                </div>
+                        <div class="card text-center card-home" style="padding: 0;">
+                            <div class="card-header" style="padding: 10px;">
+                                <h3 class="card-text text-success">{{ $announcement -> announcement_title }}</h3>
                             </div>
+                            <div class="card-body" style="padding: 20px 30px;">
+                                <p class="card-text text-info">{{ $announcement -> announcement_message}}</p>
+                            </div>
+                            <div class="card-footer text-muted" style="padding: 10px;">
+                                <p style="font-size: 1.3rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> updated_at)) }}</p>
+                            </div>
+                        </div>
                         @endforeach
                     @else
                         <p style="text-align: center;">No history of payments found.</p>

@@ -81,7 +81,6 @@
         </div>
         
         @yield('script')
-        <!-- <script src="{{ URL::to('/js/app.js') }}"></script> -->
         <script>
 
         var dropdown = document.getElementsByClassName("dropdown-btn")

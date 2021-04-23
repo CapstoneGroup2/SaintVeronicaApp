@@ -5,15 +5,24 @@ Miscellaneous & Other Fees
 @endsection
 
 @section('content')
+
+@if ($errors->has('item_code') || $errors->has('item_description') || $errors->has('item_price') || $errors->has('item_image'))
+  <script>
+    $(document).ready(function() {
+      $('#addModal').modal('show');
+    });
+  </script>
+@endif
+
 <div class="sticky">
   <h2 style="text-align: left">{{ session()->get('present_class_name') }} Class</h2>
-@if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
+  @if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
 </div>
-  <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Miscellaneous</button> 
-@else
-  <div class="triangle-right" style="width:210px; "></div>
+    <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Miscellaneous</button> 
+  @else
+    <div class="triangle-right" style="width:210px; "></div>
 </div>
-@endif
+  @endif
 
 <hr>
 
@@ -29,7 +38,7 @@ Miscellaneous & Other Fees
     <thead>
         <tr>
           <th scope="col">Item Image</th>
-          <th scope="col">Item Name</th>
+          <th scope="col">Item Code</th>
           <th scope="col">Item Description</th>
           <th scope="col">Item Price</th>
           <th scope="col">Action</th>
@@ -46,7 +55,7 @@ Miscellaneous & Other Fees
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <h4 align="center" style="margin:0;">Are you sure you want to remove this item?</h4>
+        <h4 align="center" style="margin:0;">Are you sure you want to remove <span id="itemCode" class="text-dark" style="font-weight: bold;"></span> item code?</h4>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
@@ -59,35 +68,52 @@ Miscellaneous & Other Fees
 <div id="addModal" class="modal fade" role="dialog" style="margin-top: 70px;">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="enrollment-form" action="/miscellaneous-and-other-fees" method="post" enctype="multipart/form-data" style="padding: 50px">
+      <form id="enrollment-form" action="/miscellaneous-and-other-fees" method="post" enctype="multipart/form-data" style="padding: 20px 50px">
         @csrf
-        <div class="header">
+        <div class="modal-header">
           <h2 class="text-warning">Add Item</h2> 
         </div>
-        <div class="body">
+        <div class="modal-body">
           <div class="form-group">
               <label for="status">Item Code</label>
-              <input type="text" class="form-control" name="item_code" required>
+              <input type="text" class="form-control" name="item_code">
+              @if ($errors->has('item_code'))
+                <span class="invalid feedback" role="alert">
+                  <p style="color:tomato;">{{$errors->first('item_code')}}</p>
+                </span>
+              @endif
           </div>
-
           <div class="form-group">
               <label for="status">Item Description</label>
-              <input type="text" class="form-control" name="item_description" required>
+              <input type="text" class="form-control" name="item_description">
+              @if ($errors->has('item_description'))
+                <span class="invalid feedback" role="alert">
+                  <p style="color:tomato;">{{$errors->first('item_description')}}</p>
+                </span>
+              @endif
           </div>
-
           <div class="form-group">
               <label for="status">Item Price</label>
-              <input type="text" class="form-control" name="item_price" required>
+              <input type="text" class="form-control" name="item_price">
+              @if ($errors->has('item_price'))
+                <span class="invalid feedback" role="alert">
+                  <p style="color:tomato;">{{$errors->first('item_price')}}</p>
+                </span>
+              @endif
           </div>
-
           <div class="form-group">
               <label for="status">Item Image</label>
-              <input type="file" class="form-control image" name="item_image" required>
+              <input type="file" class="form-control image" name="item_image">
+              @if ($errors->has('item_image'))
+                <span class="invalid feedback" role="alert">
+                  <p style="color:tomato;">{{$errors->first('item_image')}}</p>
+                </span>
+              @endif
           </div>
         </div>
-        <div class="footer">
+        <div class="modal-footer">
           <div class="right">
-              <a href="/miscellaneous-and-other-fees/classes/{{ session()->get('present_class_id') }}" class="btn btn-lg btn-danger" role="button">Cancel</a>
+              <button class="btn btn-lg btn-danger" role="button" data-dismiss="modal">Cancel</button>
               <button type="submit" class="btn btn-lg btn-success">Submit</button>
           </div>
         </div>
@@ -101,85 +127,5 @@ Miscellaneous & Other Fees
 
 @section('script')    
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
-  <script>
-  var pathname = window.location.pathname;
-  var num = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1);
-  function setTable() {
-    $('#dataTable').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax:{
-        url: '/miscellaneous-and-other-fees/classes/' + num,
-        type: 'GET'
-      },
-      columns:[
-        {
-          data: 'item_image',
-          name: 'item_image',
-          orderable: false
-        },
-        {
-          data: 'item_code',
-          name: 'item_code'
-        },
-        {
-          data: 'item_description',
-          name: 'item_description'
-        },
-        {
-          data: 'item_price',
-          name: 'item_price'
-        },
-        {
-          data: 'action',
-          name: 'action',
-          orderable: false
-        }
-      ]
-    })
-  }
-  $(document).ready(function() {
-    
-    setTable();
-
-    // $('.btn-add').click(function () {
-    //   window.location = "/miscellaneous-and-other-fees/create";
-    // });
-    
-    $(document).on('click', '.btn-add', function() {
-        $('#addModal').modal('show');
-    });
-
-    $('[data-toggle="tooltip"]').tooltip();  
-
-    var id;
-
-    $(document).on('click', '.btn-remove', function() {
-      id= $(this).attr('id');
-      $('#confirmModal').modal('show');
-    });
-
-    $('#btn-ok').click(function() {
-      var token = $("meta[name='csrf-token']").attr("content");
-      $.ajax({
-        url: '/miscellaneous-and-other-fees/' + id,
-        type: 'DELETE',
-        data: {
-            "id": id,
-            "_token": token
-        },
-        beforeSend:function() {
-          $('#btn-ok').text('Deleting...');
-        },
-        success: function(data) {
-          console.log('im here');
-          $('#confirmModal').modal('hide');
-          $('#btn-ok').text('OK');
-          $('#dataTable').DataTable().ajax.reload();
-        }
-      });
-    });
-  });
-  
-  </script>
+  <script src="/js/item.js"></script>
 @endsection

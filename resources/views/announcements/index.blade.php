@@ -7,11 +7,11 @@ Announcements
 @section('content')
 
 @if ($errors->has('announcement_title') || $errors->has('announcement_message'))
-    <script>
-        $(document).ready(function() {
-            $('#addModal').modal('show');
-        });
-    </script>
+  <script>
+    $(document).ready(function() {
+      $('#addModal').modal('show');
+    });
+  </script>
 @endif
 
 <div class="sticky">

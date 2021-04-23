@@ -34,9 +34,9 @@ class MiscellaneousAndOtherFeesController extends Controller
                         return '<img src="/images/default.png" height="100px" alt="default">';
                     })  
                     ->addColumn('action', function($data) {
-                        $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                        $button = '<div id="'. $data->item_code .'"><a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
                         $button .= '<a href="/miscellaneous-and-other-fees/'. $data->id .'/edit" data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
-                        $button .= '<button type="button" id="'. $data->id . '" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
+                        $button .= '<button type="button" id="'. $data->id . '" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button></div>';
                         return $button;
                     })
                     ->rawColumns(['item_price', 'item_image', 'action'])
@@ -74,7 +74,7 @@ class MiscellaneousAndOtherFeesController extends Controller
         $this->validate($request, [
             'item_code'          =>  'required',
             'item_description'   =>  'required',
-            'item_price'         =>  'required',
+            'item_price'         =>  'required|numeric',
             'item_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -137,7 +137,7 @@ class MiscellaneousAndOtherFeesController extends Controller
         $this->validate($request, [
             'item_code'          =>  'required',
             'item_description'   =>  'required',
-            'item_price'         =>  'required',
+            'item_price'         =>  'required|numeric',
             'item_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 

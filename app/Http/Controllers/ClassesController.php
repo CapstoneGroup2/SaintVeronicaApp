@@ -65,4 +65,32 @@ class ClassesController extends Controller
         return redirect('/miscellaneous-and-other-fees/classes/' . $class[0]->id)->with('success', 'Class has successfully created!');
     }
 
+    public function edit($id)    
+    {
+        $class = Classes::find($id);
+        return view('classes.edit', compact('class'));
+    }
+    
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'class_name'          =>  'required|unique:classes',
+            'class_description'   =>  'nullable'
+        ]);
+
+        $class = Classes::find($id);
+        $class->class_name = $request['class_name'];
+        $class->class_description = $request['class_description'];
+        $class->save();
+
+        return redirect('/announcements')->with('success', 'Class information has successfully updated!');
+    }
+
+    public function destroy($id)
+    {
+        $class = Classes::find($id);
+        $class->delete();
+        $class->save();
+    }
+
 }

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class UsersController extends Controller
 {
@@ -31,7 +32,7 @@ class UsersController extends Controller
                     return $full_name;
                 })
                 ->addColumn('action', function($data) {
-                    $button = '<a href="/users/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                    $button = '<a href="/users/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-eye-open"></span></a>';
                     $button .= '<a href="/users/'. $data->id .'/edit
                     " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
                     $button .= '<button type="button" id="'. $data->id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
@@ -52,14 +53,21 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+        Validator::extend('alpha_spaces', function($attribute, $value)
+        {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
+
         $data = $this->validate($request, [
-            'user_first_name'    =>  'required|alpha',
-            'user_middle_name'   =>  'alpha',
-            'user_last_name'     =>  'required',
+            'user_first_name'    =>  'required|alpha_spaces',
+            'user_middle_name'   =>  'nullable|alpha_spaces',
+            'user_last_name'     =>  'required|alpha_spaces',
             'user_email'         =>  'required|email|unique:users',
-            'user_role_id'       =>  'required',
+            'user_role_id'       =>  'required|numeric|min:1|max:2',
+        ], [
+            "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
-        
+
         $user = new User();
         $user->role_id = $request['user_role_id'];
         $user->user_first_name = $request['user_first_name'];
@@ -70,7 +78,7 @@ class UsersController extends Controller
         $user->user_contact = $request['user_contact'];
         $user->user_address = $request['user_address'];
         $user->user_gender = $request['user_gender'];
-        $user->user_status = $request['user_userstatus'];
+        $user->user_status = $request['user_status'];
         $user->user_active_status = 1;
 
         if ($request->hasFile('user_image')) {
@@ -119,12 +127,20 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
+        Validator::extend('alpha_spaces', function($attribute, $value)
+        {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
+
+        dd($request);
+
         $data = $this->validate($request, [
-            'user_first_name'       =>  'required',
-            'user_last_name'        =>  'required',
-            'password'              =>  'nullable|required_with:password_confirmation|string|confirmed',
-            'role_id'               =>  'required',
-            'user_image'            =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'user_first_name'    =>  'required|alpha_spaces',
+            'user_middle_name'   =>  'nullable|alpha_spaces',
+            'user_last_name'     =>  'required|alpha_spaces',
+            'user_role_id'       =>  'required|numeric|min:1|max:2',
+        ], [
+            "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
         
         $user = User::find($id);

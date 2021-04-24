@@ -13,4 +13,19 @@ $(document).ready(function() {
             $('#confirmModal').modal('show');
         }
     });
+    
+    $('#btn-ok').click(function() {
+        var token = $("meta[name='csrf-token']").attr("content");
+        $.ajax({
+            url: '/classes/' + id,
+            type: 'DELETE',
+            data: {
+                "id": id,
+                "_token": token
+            },
+            success: function(dataResult){
+                location.reload(true);
+            }
+        });
+    });
 });

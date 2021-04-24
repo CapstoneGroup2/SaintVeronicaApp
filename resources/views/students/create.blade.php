@@ -105,7 +105,7 @@
         <div class="col-2">    
             <div class="form-group">
                 <label for="age">Age</label>
-                <input type="number" class="form-control" name="student_age" value="{{ old('student_age') }}" >
+                <input type="number" class="form-control" name="student_age" value="{{ old('student_age') }}" readOnly>
                 @if ($errors->has('student_age'))
                 <span class="invalid feedback" role="alert">
                     <p style="color:tomato;">{{$errors->first('student_age')}}</p>
@@ -222,5 +222,12 @@
 @endsection
 
 @section('script')
-  <script src="{{ URL::to('/js/student.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('input[name="student_birth_date"]').change(function () {  
+                var setDate = $('input[name="student_birth_date"]').val().split("-");
+                $('input[name="student_age"]').val(Math.abs(parseInt(new Date().getFullYear(), 10) - parseInt(setDate, 10)));
+            });  
+        });
+    </script>
 @endsection

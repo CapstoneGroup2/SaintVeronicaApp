@@ -32,6 +32,8 @@ Route::middleware(['admin'])->group(function () {
         'create', 'index', 'store', 'show', 'delete'
     ]);;
 
+    Route::delete('/classes/{id}', 'ClassesController@destroy');
+
     Route::resource('/classes', 'ClassesController')->only([
         'create', 'store', 'edit', 'update'
     ]);

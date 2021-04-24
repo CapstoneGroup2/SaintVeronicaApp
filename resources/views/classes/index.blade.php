@@ -35,10 +35,9 @@ Classes
             <div class="card card-home btn-addClass" style="height: 120px !imporant;">
                 <img class="card-img-top" src="{{ URL::to('/images/students.jpg') }}" alt="Card image cap">
                 <div class="card-body">
-                    <br>
-                    <h2 class="card-text text-danger" style="font-size: 25px !important;"><span class="glyphicon glyphicon-plus"></span> Add Class</h2>
                     <hr>
-                    <br>
+                    <h2 class="card-text text-danger" style="font-size: 21px !important;"><span class="glyphicon glyphicon-plus"></span> Add Class</h2>
+                    <hr>
                 </div>
             </div>
         </div>
@@ -78,7 +77,7 @@ Classes
 <div id="addClassModal" class="modal fade" role="dialog" style="margin-top: 130px;">
   <div class="modal-dialog">
     <div class="modal-content">
-        <form id="enrollment-form" action="/classes" method="post">
+        <form id="enrollment-form" action="/classes" method="post" style="padding: 10px 50px;">
             @csrf
             <div class="modal-header">
                 <h2 class="modal-title">Add Class</h2>

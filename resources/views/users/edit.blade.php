@@ -40,12 +40,17 @@ Users
                         <div class="form-group">
                             <label for="First Name">Middle Name</label>
                             <input type="text" class="form-control" name="user_middle_name" value="{{ $user->user_middle_name }}" >
+                            @if ($errors->has('user_middle_name'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{$errors->first('user_middle_name')}}</p>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="col">    
                         <div class="form-group">
                             <label for="First Name">Last Name</label>
-                            <input type="text" class="form-control" name="user_last_name" placeholder="last name" value="{{ $user->user_last_name }}" >
+                            <input type="text" class="form-control" name="user_last_name" value="{{ $user->user_last_name }}" >
                             @if ($errors->has('user_last_name'))
                                 <span class="invalid feedback" role="alert">
                                     <p style="color:tomato;">{{$errors->first('user_last_name')}}</p>
@@ -60,7 +65,7 @@ Users
                         <div class="col">
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="password">
+                                <input type="password" class="form-control" name="password" >
                                 @if ($errors->has('password'))
                                     <span class="invalid feedback" role="alert">
                                         <p style="color:tomato;">{{$errors->first('password')}}</p>
@@ -71,7 +76,7 @@ Users
                         <div class="col">
                             <div class="form-group">
                                 <label for="password">Confirm Password</label>
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="confirm password">
+                                <input type="password" class="form-control" name="password_confirmation" >
                                 @if ($errors->has('password_confirmation'))
                                     <span class="invalid feedback" role="alert">
                                         <p style="color:tomato;">{{$errors->first('password_confirmation')}}</p>
@@ -83,14 +88,24 @@ Users
                     <div class="col-5">    
                         <div class="form-group">
                             <label for="contact">Contact Number</label>
-                            <input type="text" class="form-control" name="user_contact" placeholder="+639" value="{{ $user->user_contact }}" >
+                            <input type="text" class="form-control" name="user_contact" value="{{ $user->user_contact }}" >
+                            @if ($errors->has('user_contact'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{$errors->first('user_contact')}}</p>
+                                </span>
+                            @endif
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="address">Home Address</label>
-                    <input type="text" class="form-control" name="user_address" placeholder="present address" value="{{ $user->user_address }}" >
+                    <input type="text" class="form-control" name="user_address" value="{{ $user->user_address }}" >
+                    @if ($errors->has('user_address'))
+                        <span class="invalid feedback" role="alert">
+                            <p style="color:tomato;">{{$errors->first('user_address')}}</p>
+                        </span>
+                    @endif
                 </div>
                 <br>
                 <div class="row">

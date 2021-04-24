@@ -87,7 +87,6 @@ $(document).ready(function() {
             $('table').hide();
         },
         success: function(dataResult){
-            console.log("succcess");
             location.reload(true);
         }
         });

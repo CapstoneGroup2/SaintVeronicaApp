@@ -11,6 +11,7 @@ use App\Models\PaymentsHistory;
 use App\Models\MiscellaneousAndOtherFees;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class StudentsController extends Controller
 {
@@ -46,7 +47,7 @@ class StudentsController extends Controller
                     return $full_name;
                 })
                 ->addColumn('action', function($data) {
-                    $button = '<a href="/students/'. $data->student_id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                    $button = '<a href="/students/'. $data->student_id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-eye-open"></span></a>';
                     $button .= '<a href="/students/'. $data->student_id .'/edit
                     " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
                     $button .= '<button type="button" id="'. $data->student_id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
@@ -70,23 +71,30 @@ class StudentsController extends Controller
 
     public function store(Request $request)
     {
+        Validator::extend('alpha_spaces', function($attribute, $value)
+        {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
+
         $this->validate($request, [
-            'student_first_name'              =>  'required|alpha',
-            'student_middle_name'             =>  'nullable|alpha',
-            'student_last_name'               =>  'required|alpha',
-            'student_email'                   =>  'required|unique:students',
+            'student_first_name'              =>  'required|alpha_spaces',
+            'student_middle_name'             =>  'nullable|alpha_spaces',
+            'student_last_name'               =>  'required|alpha_spaces',
+            'student_email'                   =>  'required',
             'student_home_contact'            =>  'required',
             'student_address'                 =>  'required',
-            'student_birth_date'              =>  'required',
+            'student_birth_date'              =>  'required|before:now',
             'student_age'                     =>  'required|numeric|min:2|max:100',
-            'student_gender'                  =>  'required|alpha',
-            'student_mother_name'             =>  'nullable|alpha',
+            'student_gender'                  =>  'required|alpha_spaces',
+            'student_mother_name'             =>  'nullable|alpha_spaces',
             'student_mother_contact_number'   =>  'nullable',
-            'student_father_name'             =>  'nullable|alpha',
+            'student_father_name'             =>  'nullable|alpha_spaces',
             'student_father_contact_number'   =>  'nullable',
-            'student_guardian_name'           =>  'required|alpha',
+            'student_guardian_name'           =>  'required|alpha_spaces',
             'student_guardian_contact_number' =>  'required',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            "alpha_spaces"     => "The field may only contain letters and spaces.",
         ]);
         
         $student = new Student();
@@ -168,23 +176,30 @@ class StudentsController extends Controller
 
     public function update(Request $request, $id)
     {
+        Validator::extend('alpha_spaces', function($attribute, $value)
+        {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
+
         $this->validate($request, [
-            'student_first_name'              =>  'required|alpha',
-            'student_middle_name'             =>  'nullable|alpha',
-            'student_last_name'               =>  'required|alpha',
-            'student_email'                   =>  'required|unique:students',
+            'student_first_name'              =>  'required|alpha_spaces',
+            'student_middle_name'             =>  'nullable|alpha_spaces',
+            'student_last_name'               =>  'required|alpha_spaces',
+            'student_email'                   =>  'required',
             'student_home_contact'            =>  'required',
             'student_address'                 =>  'required',
-            'student_birth_date'              =>  'required',
+            'student_birth_date'              =>  'required|before:now',
             'student_age'                     =>  'required|numeric|min:2|max:100',
-            'student_gender'                  =>  'required|alpha',
-            'student_mother_name'             =>  'nullable|alpha',
+            'student_gender'                  =>  'required|alpha_spaces',
+            'student_mother_name'             =>  'nullable|alpha_spaces',
             'student_mother_contact_number'   =>  'nullable',
-            'student_father_name'             =>  'nullable|alpha',
+            'student_father_name'             =>  'nullable|alpha_spaces',
             'student_father_contact_number'   =>  'nullable',
-            'student_guardian_name'           =>  'required|alpha',
+            'student_guardian_name'           =>  'required',
             'student_guardian_contact_number' =>  'required',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
         
         $student = Student::find($id);
@@ -210,9 +225,11 @@ class StudentsController extends Controller
             $name = $image->getClientOriginalName();
             $destinationPath = public_path('/images/students');
             $image->move($destinationPath, $name);
-            $student->student_image = $name;
-        } 
+        } else {
+            $name = 'default.png';
+        }
 
+        $student->student_image = $name;
         $student->save();
 
         return redirect('/students/classes/' . session()->get('present_class_id'))->with('success', 'Student information has successfully updated!');

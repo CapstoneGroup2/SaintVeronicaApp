@@ -30,6 +30,11 @@ Users
             <div class="form-group">
                 <label for="First Name">Middle Name</label>
                 <input type="text" class="form-control" name="user_middle_name" value="{{ old('user_middle_name') }}">
+                @if ($errors->has('user_middle_name'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('user_middle_name')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
         <div class="col">    
@@ -63,6 +68,11 @@ Users
             <div class="form-group">
                 <label for="contact">Contact Number</label>
                 <input type="text" class="form-control" name="user_contact" value="{{ old('user_contact') }}">
+                @if ($errors->has('user_contact'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('user_contact')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
     </div>
@@ -72,6 +82,11 @@ Users
     <div class="form-group">
         <label for="address">Home Address</label>
         <input type="text" class="form-control" name="user_address" value="{{ old('user_address') }}">
+        @if ($errors->has('user_address'))
+            <span class="invalid feedback" role="alert">
+                <p style="color:tomato;">{{$errors->first('user_address')}}</p>
+            </span>
+        @endif
     </div>
 
     <br>
@@ -97,10 +112,15 @@ Users
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select class="form-control" name="user_gender">
-                    <option selected>Select Gender</option>
+                    <option value="" selected>Select Gender</option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
                 </select>
+                @if ($errors->has('user_gender'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('user_gender')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
         <div class="col">    
@@ -111,6 +131,11 @@ Users
                     <option value="Single">Single</option>
                     <option value="Married">Married</option>
                 </select>
+                @if ($errors->has('user_status'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('user_status')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
         <div class="col">

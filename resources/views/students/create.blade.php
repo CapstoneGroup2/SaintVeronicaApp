@@ -94,7 +94,7 @@
         <div class="col-3">    
             <div class="form-group">
                 <label for="birthdate">Birthdate</label>
-                <input type="date" class="form-control" name="student_birth_date" value="{{ old('student_birth_date') }}" >
+                <input type="date" class="form-control" name="student_birth_date" id="birthDate" value="{{ old('student_birth_date') }}" >
                 @if ( $errors->has('student_birth_date'))
                 <span class="invalid feedback" role="alert">
                     <p style=color:tomato;>{{ $errors->first('student_birth_date') }}</p>

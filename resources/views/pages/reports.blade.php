@@ -17,7 +17,7 @@ Reports
     @endif
     @if($count == 1)
         <div class="col">
-            <div class="card card-home" style="margin: 10px 5px;">
+            <div class="card card-home">
                 <div class="card-body">
                     <h3 class="card-text text-success">All Students
                         <button id="btn-export" class="btn btn-md btn-secondary"><span class="glyphicon glyphicon-export"></span> Export Students</button></h3>
@@ -32,7 +32,7 @@ Reports
         <?php $count++; ?>
     @endif
     <div class="col">
-        <div class="card card-home" style="margin: 10px 5px;">
+        <div class="card card-home">
             <a href="/students/classes/{{ $student_count['class_id'] }}">
                 <div class="card-body">
                     <h3 class="card-text text-success">{{ $student_count['class_name'] }} Students</h3>
@@ -62,14 +62,14 @@ Reports
 
 <div class="row">
     <div class="col">
-        <div class="card card-home" style="margin: 10px 5px;">
+        <div class="card card-home">
             <div id="gender-pie-chart">
             
             </div>
         </div>
     </div>
     <div class="col">
-        <div class="card card-home" style="margin: 10px 5px;"   >
+        <div class="card card-home"   >
             <div id="classes-pie-chart">
             
             </div>

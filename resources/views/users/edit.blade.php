@@ -109,7 +109,7 @@ Users
                 </div>
                 <br>
                 <div class="row">
-                    @if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
+                    @if(isset(Auth::user()->user_email) && Auth::user()->user_email != $user->user_email)
                         <div class="col">    
                             <div class="form-group">
                                 <label for="role_id">User Role</label>

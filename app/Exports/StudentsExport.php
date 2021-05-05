@@ -17,6 +17,7 @@ class StudentsExport implements FromCollection, WithHeadings
         $students = DB::table('students_classes')
             ->join('students', 'students.id', '=', 'students_classes.student_id')
             ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+            ->join('payments', 'payments.student_id', '=', 'students.id')
             ->select(
                 'students.id',
                 'classes.class_name',
@@ -36,7 +37,10 @@ class StudentsExport implements FromCollection, WithHeadings
                 'students.student_guardian_name',
                 'students.student_guardian_contact_number',
                 'students.student_image',
-                'students.created_at')
+                'students.created_at',
+                'payments.total_payables',
+                'payments.amount_paid',
+                'payments.balance_due')
             ->get();
 
         return $students;
@@ -63,7 +67,10 @@ class StudentsExport implements FromCollection, WithHeadings
             "Guardian's Name",
             "Guardian's Contact #",
             "Image",
-            'Created At'
+            'Created At',
+            'Total Payables',
+            'Amount Paid',
+            'Balance Due'
         ];
     }
 }

@@ -32,12 +32,9 @@ Classes
     @endif
     @if($count == 1)
         <div class="col">
-            <div class="card card-home btn-addClass" style="height: 120px !important;">
-                <img class="card-img-top" src="{{ URL::to('/images/students.jpg') }}" alt="Card image cap">
+            <div class="card card-home btn-addClass">
                 <div class="card-body">
-                    <hr>
                     <h2 class="card-text text-danger" style="font-size: 21px !important;"><span class="glyphicon glyphicon-plus"></span> Add Class</h2>
-                    <hr>
                 </div>
             </div>
         </div>
@@ -46,7 +43,6 @@ Classes
     <div class="col">
         <div id="{{ $student_count['class_count'] }}" class="card card-home">
             <a href="/students/classes/{{ $student_count['class_id'] }}">
-                <img class="card-img-top" src="{{ URL::to('/images/students.jpg') }}" alt="Card image cap">
                     <div class="card-body">
                         <h2 class="card-text text-success">{{ $student_count['class_name'] }}</h2>
                         <h3 class="card-text text-danger">{{ $student_count['class_count'] }} students</h3>

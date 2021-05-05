@@ -65,14 +65,14 @@ Dashboard
 
     <div class="row">
         <div class="col">
-            <div class="card" style="margin: 10px 5px;">
+            <div class="card card-home" style="margin: 10px 5px;">
                 <div id="gender-pie-chart">
                 
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card" style="margin: 10px 5px;">
+            <div class="card card-home" style="margin: 10px 5px;">
                 <div id="classes-pie-chart">
                 
                 </div>

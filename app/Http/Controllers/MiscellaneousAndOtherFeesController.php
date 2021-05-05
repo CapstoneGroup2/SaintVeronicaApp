@@ -74,7 +74,7 @@ class MiscellaneousAndOtherFeesController extends Controller
         $this->validate($request, [
             'item_code'          =>  'required',
             'item_description'   =>  'required',
-            'item_price'         =>  'required|numeric',
+            'item_price'         =>  'required|numeric|min:0',
             'item_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -136,7 +136,7 @@ class MiscellaneousAndOtherFeesController extends Controller
         $this->validate($request, [
             'item_code'          =>  'required',
             'item_description'   =>  'required',
-            'item_price'         =>  'required|numeric',
+            'item_price'         =>  'required|numeric|min:0',
             'item_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -193,7 +193,7 @@ class MiscellaneousAndOtherFeesController extends Controller
             $payment[0]->total_payables = $payment[0]->total_payables - $data->item_price;
             $payment[0]->balance_due = $payment[0]->total_payables - $payment[0]->amount_paid;
             $payment[0]->save();
-        }
+        }s
 
         $data->delete();
     }

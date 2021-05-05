@@ -5,7 +5,7 @@ Miscellaneous & Other Fees
 @endsection
 
 @section('content')
-<h2 style="text-align: left">Miscellaneous and Other Fee : {{ $miscellaneous_and_other_fees[0]->item_code }}</h2> 
+<h2 style="text-align: left">Item Code : {{ $miscellaneous_and_other_fees[0]->item_code }}</h2> 
 <hr>
 <form id="enrollment-form" action="/miscellaneous-and-other-fees/{{ $miscellaneous_and_other_fees[0]->id }}" method="POST" enctype="multipart/form-data">
     {{method_field('PATCH')}}

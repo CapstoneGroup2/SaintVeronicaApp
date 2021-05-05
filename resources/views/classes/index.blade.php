@@ -32,7 +32,7 @@ Classes
     @endif
     @if($count == 1)
         <div class="col">
-            <div class="card card-home btn-addClass" style="height: 120px !imporant;">
+            <div class="card card-home btn-addClass" style="height: 120px !important;">
                 <img class="card-img-top" src="{{ URL::to('/images/students.jpg') }}" alt="Card image cap">
                 <div class="card-body">
                     <hr>

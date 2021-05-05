@@ -112,7 +112,7 @@ Users
                     @if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
                         <div class="col">    
                             <div class="form-group">
-                                <label for="user_role_id">User Role</label>
+                                <label for="role_id">User Role</label>
                                 <select class="form-control" name="role_id">
                                     @foreach($roles as $role)
                                         @if($role->id == $user->role_id)
@@ -122,6 +122,11 @@ Users
                                         @endif
                                     @endforeach
                                 </select>
+                                @if ($errors->has('role_id'))
+                                    <span class="invalid feedback" role="alert">
+                                        <p style="color:tomato;">{{$errors->first('role_id')}}</p>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     @endif
@@ -181,4 +186,5 @@ Users
 @endsection
 
 @section('script')  
+    <script src="{{URL::to('/js/user.js')}}"></script> 
 @endsection

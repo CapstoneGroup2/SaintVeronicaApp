@@ -5,7 +5,9 @@ Miscellaneous & Other Fees
 @endsection
 
 @section('content')
-<h2 style="text-align: left">Miscellaneous and Other Fee : {{ $miscellaneous_and_other_fees[0]->item_code }}</h2> 
+<div class="sticky">
+    <h2 style="text-align: left">Item Code : {{ $miscellaneous_and_other_fees[0]->item_code }}</h2> 
+</div>
 <hr>
 <form id="enrollment-form" style="text-align:center;">
     <h2 class="text-warning">Miscellaneous And Other Fee Information</h2>
@@ -23,7 +25,7 @@ Miscellaneous & Other Fees
     </div>
     <br>
     <div class="form-group">
-        <p class="text-warning" style="font-size: 1.5rem;">Item Price: <span class="text-white">{{ number_format($miscellaneous_and_other_fees[0]->item_price, 2, '.', 0) }}</span></h3>
+        <p class="text-warning" style="font-size: 1.5rem;">Item Price: <span class="text-white">{{ number_format($miscellaneous_and_other_fees[0]->item_price, 2) }}</span></h3>
     </div>
     <br>
     <div class="center">

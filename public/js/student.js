@@ -43,8 +43,16 @@ $(document).ready(function() {
     
     $("#loader").hide();
 
-    $('.btn-add').click(function () {
-        window.location = "/students/create";
+    $('#btn-add').click(function () {
+        window.location = "/students/classes/create";
+    });
+
+    $('#btn-import').click(function () {
+        window.location = "/students/classes/import";
+    });
+
+    $('#btn-export').click(function () {
+        window.location = "/students/classes/export";
     });
 
     $('[data-toggle="tooltip"]').tooltip(); 
@@ -90,5 +98,29 @@ $(document).ready(function() {
             location.reload(true);
         }
         });
-    });
+
+
+    
+        //to disable the date of the next day and ahead
+        $(document).ready(function(){
+        let date = new Date()
+
+        year = date.getFullYear();
+        month = date.getMonth()+1;
+        day = date.getDate();
+
+        if (day < 10){
+        day = '0' + day;
+        }
+        if (month < 10) {
+            day = '0' + month;
+        }
+
+        let today = year+"-"+month+"-"+day
+
+        $('#birthDate').attr({max:today})
+        })
+        
+    })
+
 });

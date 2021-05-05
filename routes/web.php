@@ -62,6 +62,14 @@ Route::middleware(['web'])->group(function () {
     
     Route::get('/logout', 'Auth\MainController@logout');
 
+    Route::get('/students/classes/import', 'StudentsController@toImport');
+
+    Route::post('/students/classes/import', 'StudentsController@import');
+
+    Route::get('/students/classes/export', 'StudentsController@export');
+
+    Route::get('/students/export', 'StudentsController@exportAll');
+
     Route::get('/students/classes/{id}', 'StudentsController@showStudentsByClass');
 
     Route::get('/students/payments/{id}/edit', 'StudentsController@showMiscellaneousAndOtherFeesAfterEnroll');

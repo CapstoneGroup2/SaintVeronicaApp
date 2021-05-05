@@ -11,13 +11,22 @@
 <div class="sticky">
   <h2 style="text-align: left">{{ session()->get('present_class_name') }} Students</h2>
 </div>
-<button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Enroll Student</button> 
+<button id="btn-add" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-plus"></span> Enroll Student</button> 
+<button id="btn-import" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-import"></span> Import Students</button> 
+<button id="btn-export" class="btn btn-lg btn-secondary"><span class="glyphicon glyphicon-export"></span> Export Students</button> 
 <hr>
 
 @if(session()->has('success'))
     <div class="alert alert-success">
         <button class="close" type="button" data-dismiss="alert">x</button>
         {{session()->get('success')}}
+    </div>
+@endif
+
+@if(session()->has('error_message'))
+    <div class="alert alert-danger">
+        <button class="close" type="button" data-dismiss="alert">x</button>
+        {{session()->get('error_message')}}
     </div>
 @endif
 

@@ -156,7 +156,7 @@
     </div>
     <div class="container-carousel">
         
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -167,37 +167,25 @@
                 <div class="row">
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/tutorial3.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">Academic Tutorial</h5>
                         </div>
                     </div>
 
                     <div class="column">
                         <div class="card card-block card-2"><img class="card-img-top" src="/images/tutorial2.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">Morning Classes</h5>
                         </div>
                     </div>
                     
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/tutorial1.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/pic1.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">School Event</h5>
                         </div>
                     </div>
                 </div>
@@ -207,37 +195,25 @@
                 <div class="row">
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/pic2.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">Christmas Party</h5>
                         </div>
                     </div>
 
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/pic3.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">Tutees</h5>
                         </div>
                     </div>
                     
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/pic4.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">Christmas Party</h5>
                         </div>
                     </div>
                     
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/pic5.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">Academic Tutorial</h5>
                         </div>
                     </div>
                 </div>
@@ -248,36 +224,24 @@
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/pic6.jpg" alt="Card image cap">
                             <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
                         </div>
                     </div>
 
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/pic7.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">One-on-one Tutorial</h5>
                         </div>
                     </div>
                     
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/pic8.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">Tutorial Sessions</h5>
                         </div>
                     </div>
                     
                     <div class="column">
                         <div class="card card-block card-1"><img class="card-img-top" src="/images/logo.jpg" alt="Card image cap">
-                            <h5 class="card-title">Piano Tutorial</h5>
-                            <div class="overlay">
-                                <div class="text">We offer Piano tutorials to students from our school or not.</div>
-                            </div>
+                            <h5 class="card-title">SVLC Logo</h5>
                         </div>
                     </div>
                 </div>

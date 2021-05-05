@@ -61,30 +61,28 @@ Users
                 </div>
                 <br>
                 <div class="row">
-                    @if(isset(Auth::user()->user_email) && Auth::user()->id == $user->id)
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password" >
-                                @if ($errors->has('password'))
-                                    <span class="invalid feedback" role="alert">
-                                        <p style="color:tomato;">{{$errors->first('password')}}</p>
-                                    </span>
-                                @endif
-                            </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" >
+                            @if ($errors->has('password'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{$errors->first('password')}}</p>
+                                </span>
+                            @endif
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="password">Confirm Password</label>
-                                <input type="password" class="form-control" name="password_confirmation" >
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="invalid feedback" role="alert">
-                                        <p style="color:tomato;">{{$errors->first('password_confirmation')}}</p>
-                                    </span>
-                                @endif
-                            </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="password">Confirm Password</label>
+                            <input type="password" class="form-control" name="password_confirmation" >
+                            @if ($errors->has('password_confirmation'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{$errors->first('password_confirmation')}}</p>
+                                </span>
+                            @endif
                         </div>
-                    @endif
+                    </div>
                     <div class="col-5">    
                         <div class="form-group">
                             <label for="contact">Contact Number</label>
@@ -109,27 +107,25 @@ Users
                 </div>
                 <br>
                 <div class="row">
-                    @if(isset(Auth::user()->user_email) && Auth::user()->user_email != $user->user_email)
-                        <div class="col">    
-                            <div class="form-group">
-                                <label for="role_id">User Role</label>
-                                <select class="form-control" name="role_id">
-                                    @foreach($roles as $role)
-                                        @if($role->id == $user->role_id)
-                                            <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
-                                        @else
-                                            <option value="{{ $role->id }}">{{ $role->role_name }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('role_id'))
-                                    <span class="invalid feedback" role="alert">
-                                        <p style="color:tomato;">{{$errors->first('role_id')}}</p>
-                                    </span>
-                                @endif
-                            </div>
+                    <div class="col">    
+                        <div class="form-group">
+                            <label for="role_id">User Role</label>
+                            <select class="form-control" name="role_id">
+                                @foreach($roles as $role)
+                                    @if($role->id == $user->role_id)
+                                        <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
+                                    @else
+                                        <option value="{{ $role->id }}">{{ $role->role_name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @if ($errors->has('role_id'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{$errors->first('role_id')}}</p>
+                                </span>
+                            @endif
                         </div>
-                    @endif
+                    </div>
                     <div class="col">    
                         <div class="form-group">
                             <label for="gender">Gender</label>

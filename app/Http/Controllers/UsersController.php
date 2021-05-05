@@ -136,7 +136,7 @@ class UsersController extends Controller
             'user_first_name'    =>  'required|alpha_spaces',
             'user_middle_name'   =>  'nullable|alpha_spaces',
             'user_last_name'     =>  'required|alpha_spaces',
-            'role_id'       =>  'numeric|min:1|max:2',
+            'role_id'            =>  'numeric|min:1|max:2',
         ], [
             "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);

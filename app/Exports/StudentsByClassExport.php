@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class StudentsExport implements FromCollection, WithHeadings
+class StudentsByClassExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection

@@ -193,7 +193,7 @@ class MiscellaneousAndOtherFeesController extends Controller
             $payment[0]->total_payables = $payment[0]->total_payables - $data->item_price;
             $payment[0]->balance_due = $payment[0]->total_payables - $payment[0]->amount_paid;
             $payment[0]->save();
-        }s
+        }
 
         $data->delete();
     }

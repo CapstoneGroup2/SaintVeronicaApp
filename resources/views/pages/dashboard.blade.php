@@ -20,7 +20,7 @@ Dashboard
         @endif
         @if($count == 1)
             <div class="col">
-                <div class="card card-home">
+                <div class="card card-home" style="margin: 10px 5px;">
                     <div class="card-body">
                         <h3 class="card-text text-success" style="font-weight: bold;">All Students
                         <button id="btn-export" class="btn btn-md btn-secondary">Export All Students</button></h3>
@@ -35,7 +35,7 @@ Dashboard
             <?php $count++; ?>
         @endif
         <div class="col">
-            <div class="card card-home">
+            <div class="card card-home" style="margin: 10px 5px;">
                 <a href="/students/classes/{{ $student_count['class_id'] }}">
                     <div class="card-body">
                         <h3 class="card-text text-success" style="font-weight: bold;">{{ $student_count['class_name'] }} Students</h3>
@@ -65,14 +65,14 @@ Dashboard
 
     <div class="row">
         <div class="col">
-            <div class="card">
+            <div class="card" style="margin: 10px 5px;">
                 <div id="gender-pie-chart">
                 
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card">
+            <div class="card" style="margin: 10px 5px;">
                 <div id="classes-pie-chart">
                 
                 </div>

@@ -20,7 +20,7 @@ Reports
             <div class="card card-home" style="margin: 10px 5px;">
                 <div class="card-body">
                     <h3 class="card-text text-success">All Students
-                        <button id="btn-export" class="btn btn-md btn-secondary">Export All Students</button></h3>
+                        <button id="btn-export" class="btn btn-md btn-secondary"><span class="glyphicon glyphicon-export"></span> Export Students</button></h3>
                 </div>
                 <div class="card-footer text-muted">
                     <p style="font-size: 1.5rem;">Total Students: <span class="text-secondary" style="font-weight: bold;">{{ $total_count['total_students'] }}</span></p>

@@ -103,6 +103,13 @@ Reports
         var chart = new google.visualization.PieChart(document.getElementById('classes-pie-chart'));
         chart.draw(data, options);
     }
+
+    $(document).ready(function() {
+
+        $('#btn-export').click(function () {
+            window.location = "/students/export";
+        });
+    })
 </script>
 
 @endsection

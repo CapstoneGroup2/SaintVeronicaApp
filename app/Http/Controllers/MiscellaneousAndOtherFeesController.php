@@ -53,7 +53,7 @@ class MiscellaneousAndOtherFeesController extends Controller
                         return '<img src="/images/default.png" height="100px" alt="default">';
                     })  
                     ->addColumn('action', function($data) {
-                        $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                        $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-eye-open"></span></a>';
                         return $button;
                     })
                     ->rawColumns(['item_price', 'item_image', 'action'])

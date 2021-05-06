@@ -64,6 +64,10 @@ class UsersController extends Controller
             'user_last_name'     =>  'required|alpha_spaces',
             'user_email'         =>  'required|email|unique:users',
             'user_role_id'       =>  'required|numeric|min:1|max:2',
+            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/',
+            'user_address'       =>  'nullable|alpha_spaces',
+            'user_gender'       =>  'nullable|alpha_spaces',
+            'user_status'       =>  'nullable|alpha_spaces',
         ], [
             "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
@@ -136,13 +140,17 @@ class UsersController extends Controller
             'user_first_name'    =>  'required|alpha_spaces',
             'user_middle_name'   =>  'nullable|alpha_spaces',
             'user_last_name'     =>  'required|alpha_spaces',
-            'role_id'            =>  'numeric|min:1|max:2',
+            'user_role_id'       =>  'required|numeric|min:1|max:2',
+            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/',
+            'user_address'       =>  'nullable|alpha_spaces',
+            'user_gender'        =>  'nullable|alpha_spaces',
+            'user_status'        =>  'nullable|alpha_spaces',
         ], [
             "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
         
         $user = User::find($id);
-        $user->role_id = $request['role_id'];
+        $user->role_id = $request['user_role_id'];
         $user->user_first_name = $request['user_first_name'];
         $user->user_middle_name = $request['user_middle_name'];
         $user->user_last_name = $request['user_last_name'];

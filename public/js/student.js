@@ -38,10 +38,44 @@ function setTable() {
         ]
     })
 }
+
+function readURL(input) {
+    console.log(input)
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#profileImage')
+                .attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 $(document).ready(function() {
-    setTable();
+
+    let date = new Date()
     
+    year = date.getFullYear();
+    month = date.getMonth()+1;
+    day = date.getDate();
+
+    if (day < 10) {
+        day = '0' + day;
+    }
+
+    if (month < 10) {
+        month = '0' + month;
+    }
+
+    let today = year+"-"+month+"-"+day
+
+    setTable();
+
     $("#loader").hide();
+
+    $('#birthDate').attr({max:today});
 
     $('#btn-add').click(function () {
         window.location = "/students/classes/create";
@@ -98,29 +132,6 @@ $(document).ready(function() {
             location.reload(true);
         }
         });
-
-
-    
-        //to disable the date of the next day and ahead
-        $(document).ready(function(){
-        let date = new Date()
-
-        year = date.getFullYear();
-        month = date.getMonth()+1;
-        day = date.getDate();
-
-        if (day < 10){
-        day = '0' + day;
-        }
-        if (month < 10) {
-            day = '0' + month;
-        }
-
-        let today = year+"-"+month+"-"+day
-
-        $('#birthDate').attr({max:today})
-        })
-        
     })
 
 });

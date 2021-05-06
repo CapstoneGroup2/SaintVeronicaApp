@@ -18,6 +18,11 @@ Users
     <form id="enrollment-form" action="/users/{{ $user->id }}" method="POST" enctype="multipart/form-data">
         {{method_field('PATCH')}}
         @csrf
+                            @if ($errors)
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{$errors}}</p>
+                                </span>
+                            @endif
 
         <h2 class="text-warning">User Information</h2>
         <hr>
@@ -27,7 +32,7 @@ Users
                 <div class="row">
                     <div class="col">    
                         <div class="form-group">
-                            <label for="First Name">First Name</label>
+                            <label for="user_first_name">First Name</label>
                             <input type="text" class="form-control" name="user_first_name" value="{{ $user->user_first_name }}" >
                             @if ($errors->has('user_first_name'))
                                 <span class="invalid feedback" role="alert">
@@ -38,7 +43,7 @@ Users
                     </div>
                     <div class="col">    
                         <div class="form-group">
-                            <label for="First Name">Middle Name</label>
+                            <label for="user_middle_name">Middle Name</label>
                             <input type="text" class="form-control" name="user_middle_name" value="{{ $user->user_middle_name }}" >
                             @if ($errors->has('user_middle_name'))
                                 <span class="invalid feedback" role="alert">
@@ -49,7 +54,7 @@ Users
                     </div>
                     <div class="col">    
                         <div class="form-group">
-                            <label for="First Name">Last Name</label>
+                            <label for="user_last_name">Last Name</label>
                             <input type="text" class="form-control" name="user_last_name" value="{{ $user->user_last_name }}" >
                             @if ($errors->has('user_last_name'))
                                 <span class="invalid feedback" role="alert">
@@ -74,7 +79,7 @@ Users
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="password">Confirm Password</label>
+                            <label for="password_confirmation">Confirm Password</label>
                             <input type="password" class="form-control" name="password_confirmation" >
                             @if ($errors->has('password_confirmation'))
                                 <span class="invalid feedback" role="alert">
@@ -85,7 +90,7 @@ Users
                     </div>
                     <div class="col-5">    
                         <div class="form-group">
-                            <label for="contact">Contact Number</label>
+                            <label for="user_contact">Contact Number</label>
                             <input type="text" class="form-control" name="user_contact" value="{{ $user->user_contact }}" >
                             @if ($errors->has('user_contact'))
                                 <span class="invalid feedback" role="alert">
@@ -97,7 +102,7 @@ Users
                 </div>
                 <br>
                 <div class="form-group">
-                    <label for="address">Home Address</label>
+                    <label for="user_address">Home Address</label>
                     <input type="text" class="form-control" name="user_address" value="{{ $user->user_address }}" >
                     @if ($errors->has('user_address'))
                         <span class="invalid feedback" role="alert">
@@ -109,8 +114,8 @@ Users
                 <div class="row">
                     <div class="col">    
                         <div class="form-group">
-                            <label for="role_id">User Role</label>
-                            <select class="form-control" name="role_id">
+                            <label for="user_role_id">User Role</label>
+                            <select class="form-control" name="user_role_id">
                                 @foreach($roles as $role)
                                     @if($role->id == $user->role_id)
                                         <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
@@ -119,16 +124,16 @@ Users
                                     @endif
                                 @endforeach
                             </select>
-                            @if ($errors->has('role_id'))
+                            @if ($errors->has('user_role_id'))
                                 <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{$errors->first('role_id')}}</p>
+                                    <p style="color:tomato;">{{$errors->first('user_role_id')}}</p>
                                 </span>
                             @endif
                         </div>
                     </div>
                     <div class="col">    
                         <div class="form-group">
-                            <label for="gender">Gender</label>
+                            <label for="user_gender">Gender</label>
                             <select class="form-control" name="user_gender">
                                 @if($user->user_gender == 'Female')
                                     <option value="Female" selected>Female</option>
@@ -142,7 +147,7 @@ Users
                     </div>
                     <div class="col">    
                         <div class="form-group">
-                            <label for="status">Status</label>
+                            <label for="user_status">Status</label>
                             <select class="form-control" name="user_status">
                                 @if($user->user_status == 'Single')
                                     <option value="Single" selected>Single</option>
@@ -159,10 +164,10 @@ Users
             <div class="col-3">
                 <div class="form-group center">
                     <br>
-                    <img src='/images/users/{{ $user->user_image }}' height="200px" width="92%">
+                    <img id = "profileImage" src='/images/users/{{ $user->user_image }}' height="200px" width="92%">
                     <br><br>
-                    <label for="status">User Profile Picture</label>
-                    <input type="file" class="form-control image" name="user_image" style="width:92%">
+                    <label for="user_image">User Profile Picture</label>
+                    <input type="file" onchange = "readURL(this);" class="form-control image" name="user_image" style="width:92%">
                     @if ($errors->has('user_image'))
                         <span class="invalid feedback" role="alert">
                             <p style="color:tomato;">{{$errors->first('user_image')}}</p>

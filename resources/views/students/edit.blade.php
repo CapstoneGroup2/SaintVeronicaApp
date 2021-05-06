@@ -83,7 +83,7 @@ Students
                     <div class="col">    
                         <div class="form-group">
                             <label for="birthdate">Birthdate</label>
-                            <input type="date" class="form-control" name="student_birth_date" value="{{ $student->student_birth_date }}" >
+                            <input type="date" class="form-control" id="birthDate" name="student_birth_date" value="{{ $student->student_birth_date }}" >
                             @if ( $errors->has('student_birth_date'))
                             <span class="invalid feedback" role="alert">
                                 <p style=color:tomato;>{{ $errors->first('student_birth_date') }}</p>
@@ -197,11 +197,11 @@ Students
             <div class="col-3">
                 <div class="form-group center">
                     <br>
-                    <label for="status">Student Profile Picture</label>
+                    <label for="student_image">Student Profile Picture</label>
                     <br><br>
-                    <img src='/images/students/{{ $student->student_image }}' height="200px" width="92%">
+                    <img id="profileImage" src='/images/students/{{ $student->student_image }}' height="200px" width="92%">
                     <br><br>
-                    <input type="file" class="form-control image" name="student_image" style="width:92%">
+                    <input type="file" onchange="readURL(this);" class="form-control image" name="student_image" style="width:92%">
                     @if ($errors->has('student_image'))
                         <span class="invalid feedback" role="alert">
                             <p style="color:tomato;">{{$errors->first('student_image')}}</p>

@@ -40,7 +40,6 @@ function setTable() {
 }
 
 function readURL(input) {
-    console.log(input)
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -78,7 +77,7 @@ $(document).ready(function() {
     $('#birthDate').attr({max:today});
 
     $('#btn-add').click(function () {
-        window.location = "/students/classes/create";
+        window.location = "/students/create";
     });
 
     $('#btn-import').click(function () {
@@ -133,5 +132,10 @@ $(document).ready(function() {
         }
         });
     })
+
+    // $('input[name="student_birth_date"]').change(function () {  
+    //     var setDate = $('input[name="student_birth_date"]').val().split("-");
+    //     $('input[name="student_age"]').val(Math.abs(parseInt(new Date().getFullYear(), 10) - parseInt(setDate, 10)));
+    // });  
 
 });

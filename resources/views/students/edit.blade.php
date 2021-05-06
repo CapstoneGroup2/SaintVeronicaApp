@@ -197,10 +197,9 @@ Students
             <div class="col-3">
                 <div class="form-group center">
                     <br>
-                    <label for="student_image">Student Profile Picture</label>
-                    <br><br>
                     <img id="profileImage" src='/images/students/{{ $student->student_image }}' height="200px" width="92%">
                     <br><br>
+                    <label for="student_image">Student Profile Picture</label>
                     <input type="file" onchange="readURL(this);" class="form-control image" name="student_image" style="width:92%">
                     @if ($errors->has('student_image'))
                         <span class="invalid feedback" role="alert">
@@ -225,12 +224,5 @@ Students
 @endsection
 
 @section('script')  
-    <script>
-        $(document).ready(function() {
-            $('input[name="student_birth_date"]').change(function () {  
-                var setDate = $('input[name="student_birth_date"]').val().split("-");
-                $('input[name="student_age"]').val(Math.abs(parseInt(new Date().getFullYear(), 10) - parseInt(setDate, 10)));
-            });  
-        });
-    </script>
+    <script src="{{URL::to('/js/student.js')}}"></script> 
 @endsection

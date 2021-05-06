@@ -18,11 +18,6 @@ Users
     <form id="enrollment-form" action="/users/{{ $user->id }}" method="POST" enctype="multipart/form-data">
         {{method_field('PATCH')}}
         @csrf
-                            @if ($errors)
-                                <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{$errors}}</p>
-                                </span>
-                            @endif
 
         <h2 class="text-warning">User Information</h2>
         <hr>

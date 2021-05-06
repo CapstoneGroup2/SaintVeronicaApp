@@ -385,7 +385,7 @@ class StudentsController extends Controller
                     }
                 }
             } catch (\Exception $exception) {
-                return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'Error occured upon importing data!');
+                return redirect('/students/classes/import')->with('error_message', 'Error occured upon importing data. Please check csv file!');
             }
 
             return redirect('/students/classes/' . session()->get('present_class_id'))->with('success', 'Students added successfully!');

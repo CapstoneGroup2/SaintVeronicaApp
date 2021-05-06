@@ -13,6 +13,12 @@ Students
     @csrf
     <h2 class="text-warning">Import CSV File Data</h2>
     <hr>
+        @if(session()->has('error_message'))
+            <div class="alert alert-danger">
+                <button class="close" type="button" data-dismiss="alert">x</button>
+                {{session()->get('error_message')}}
+            </div>
+        @endif
     <br>
     <div class="form-group" style="margin: 0 35%;">
         <input type="file" name="upload_students" class="form-control image">

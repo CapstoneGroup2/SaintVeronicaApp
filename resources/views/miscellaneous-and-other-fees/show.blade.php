@@ -29,8 +29,12 @@ Miscellaneous & Other Fees
     </div>
     <br>
     <div class="center">
-        <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>    
-        <a href="/miscellaneous-and-other-fees/{{ $miscellaneous_and_other_fees[0]->id }}/edit" role="button" class="btn btn-lg btn-warning">Edit</a>
+        @if(Auth::user()->role_id == 1) 
+            <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>   
+            <a href="/miscellaneous-and-other-fees/{{ $miscellaneous_and_other_fees[0]->id }}/edit" role="button" class="btn btn-lg btn-warning">Edit</a>
+        @else
+            <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Go Back</a>   
+        @endif
     </div>
 </form>
 @endsection

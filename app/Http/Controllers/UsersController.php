@@ -72,32 +72,36 @@ class UsersController extends Controller
             "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
 
-        $user = new User();
-        $user->role_id = $request['user_role_id'];
-        $user->user_first_name = $request['user_first_name'];
-        $user->user_middle_name = $request['user_middle_name'];
-        $user->user_last_name = $request['user_last_name'];
-        $user->user_email = $request['user_email'];
-        $user->password = bcrypt('password');
-        $user->user_contact = $request['user_contact'];
-        $user->user_address = $request['user_address'];
-        $user->user_gender = $request['user_gender'];
-        $user->user_status = $request['user_status'];
-        $user->user_active_status = 1;
-
-        if ($request->hasFile('user_image')) {
-            $image = $request->file('user_image');
-            $name = $image->getClientOriginalName();
-            $destinationPath = public_path('/images/users');
-            $image->move($destinationPath, $name);
-        } else {
-            $name = 'default.png';
+        try {
+            $user = new User();
+            $user->role_id = $request['user_role_id'];
+            $user->user_first_name = $request['user_first_name'];
+            $user->user_middle_name = $request['user_middle_name'];
+            $user->user_last_name = $request['user_last_name'];
+            $user->user_email = $request['user_email'];
+            $user->password = bcrypt('password');
+            $user->user_contact = $request['user_contact'];
+            $user->user_address = $request['user_address'];
+            $user->user_gender = $request['user_gender'];
+            $user->user_status = $request['user_status'];
+            $user->user_active_status = 1;
+    
+            if ($request->hasFile('user_image')) {
+                $image = $request->file('user_image');
+                $name = $image->getClientOriginalName();
+                $destinationPath = public_path('/images/users');
+                $image->move($destinationPath, $name);
+            } else {
+                $name = 'default.png';
+            }
+    
+            $user->user_image = $name;
+            $user->save();   
+    
+            return redirect('/users')->with('success', 'User has successfully created!');
+        } catch (\Exception $exception) {
+            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'Error occured upon importing data!');
         }
-
-        $user->user_image = $name;
-        $user->save();   
-
-        return redirect('/users')->with('success', 'User has successfully created!');
     }
 
     public function show($id)
@@ -110,7 +114,6 @@ class UsersController extends Controller
                 'roles.role_name', 'users.user_address', 'users.user_gender', 'users.user_status')
             ->get();
             
-        // dd($users);
         return view('users.show', compact('users'));
     }
 
@@ -145,6 +148,8 @@ class UsersController extends Controller
             'user_address'       =>  'nullable|alpha_spaces',
             'user_gender'        =>  'nullable|alpha_spaces',
             'user_status'        =>  'nullable|alpha_spaces',
+            'password'           =>  'nullable|min:8|required_with:password_confirmation|string|confirmed',
+            'password_confirmation'=>'nullable|min:8',
         ], [
             "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
@@ -159,26 +164,29 @@ class UsersController extends Controller
         $user->user_gender = $request['user_gender'];
         $user->user_status = $request['user_status'];
 
-        if ($request->hasFile('user_image')) {
-            $image = $request->file('user_image');
-            $name = $image->getClientOriginalName();
-            $destinationPath = public_path('/images/users');
-            $image->move($destinationPath, $name);
-            $user->user_image = $name;
-        } 
-
-        if($request['password'] != null) {
-            $user->password = bcrypt($request['password']);
+        try {
+            if ($request->hasFile('user_image')) {
+                $image = $request->file('user_image');
+                $name = $image->getClientOriginalName();
+                $destinationPath = public_path('/images/users');
+                $image->move($destinationPath, $name);
+                $user->user_image = $name;
+            } 
+    
+            if($request['password'] != null) {
+                $user->password = bcrypt($request['password']);
+            }
+    
+            $user->save();
+    
+            return redirect('/users');
+        } catch (\Exception $exception) {
+            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'Error occured upon importing data!');
         }
-
-        $user->save();
-
-        return redirect('/users');
     }
 
     public function destroy($id)
     {
-        error_log(print_r($id));
         $user = User::find($id);
         $user->user_active_status = 0;
         $user->save();

@@ -410,6 +410,10 @@ div.right {
   height: 35px;
 }
 
+#enrollment-form label {
+  font-size: 12px !important;
+}
+
 label span {
   font-size: 30px;
   text-decoration: underline;

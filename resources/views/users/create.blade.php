@@ -103,7 +103,7 @@ Users
                 </select>
                 @if ($errors->has('user_role_id'))
                     <span class="invalid feedback" role="alert">
-                        <p style="color:tomato;">{{$errors->first('user_role_id')}}</p>
+                        <p style="color:tomato;">The user role field is required.</p>
                     </span>
                 @endif
             </div>

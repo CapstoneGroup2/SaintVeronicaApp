@@ -18,6 +18,13 @@ Users
     </div>
 @endif
 
+@if(session()->has('error_message'))
+    <div class="alert alert-danger">
+        <button class="close" type="button" data-dismiss="alert">x</button>
+        {{session()->get('error_message')}}
+    </div>
+@endif
+
 <table id="dataTable" class="table table-striped table-enrollment table-default">
   <thead>
     <th scope="col" class="sticky" style="top: 120px !important;">User Role</th>

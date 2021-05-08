@@ -74,33 +74,33 @@ class StudentsController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            Validator::extend('alpha_spaces', function($attribute, $value)
-            {
-                return preg_match('/^[\pL\s]+$/u', $value);
-            });
+        Validator::extend('alpha_spaces', function($attribute, $value)
+        {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
 
-            $this->validate($request, [
-                'student_first_name'              =>  'required|alpha_spaces',
-                'student_middle_name'             =>  'nullable|alpha_spaces',
-                'student_last_name'               =>  'required|alpha_spaces',
-                'student_email'                   =>  'required',
-                'student_home_contact'            =>  'required',
-                'student_address'                 =>  'required',
-                'student_birth_date'              =>  'required|before:now',
-                'student_age'                     =>  'required|numeric|min:2|max:100',
-                'student_gender'                  =>  'required|alpha_spaces',
-                'student_mother_name'             =>  'nullable|alpha_spaces',
-                'student_mother_contact_number'   =>  'nullable',
-                'student_father_name'             =>  'nullable|alpha_spaces',
-                'student_father_contact_number'   =>  'nullable',
-                'student_guardian_name'           =>  'required|alpha_spaces',
-                'student_guardian_contact_number' =>  'required',
-                'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ], [
-                "alpha_spaces"     => "The field may only contain letters and spaces.",
-            ]);
-            
+        $this->validate($request, [
+            'student_first_name'              =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
+            'student_last_name'               =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'student_email'                   =>  'required|email|unique:users',
+            'student_home_contact'            =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_address'                 =>  'required',
+            'student_birth_date'              =>  'required|before:now',
+            'student_age'                     =>  'required|numeric|min:2|max:100',
+            'student_gender'                  =>  'required|alpha_spaces',
+            'student_mother_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
+            'student_mother_contact_number'   =>  'nullable|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_father_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
+            'student_father_contact_number'   =>  'nullable|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_guardian_name'           =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            "alpha_spaces"     => "The field may only contain letters and spaces.",
+        ]);
+
+        try {
             $student = new Student();
             $student->id = Student::latest('id')->first()->id + 1;
             $student->student_first_name = $request['student_first_name'];
@@ -150,10 +150,10 @@ class StudentsController extends Controller
             $payment->save();
 
             session()->put('student_id', $student->id);
-            
+
             return redirect('/students/payments/' . session()->get('present_class_id') . '/edit');
         } catch (\Exception $exception) {
-            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'Duplicate entry of email of the student!');
+            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'There is error in enrolling student!');
         }
     }
 
@@ -181,33 +181,33 @@ class StudentsController extends Controller
 
     public function update(Request $request, $id)
     {
-        try {
-            Validator::extend('alpha_spaces', function($attribute, $value)
-            {
-                return preg_match('/^[\pL\s]+$/u', $value);
-            });
+        Validator::extend('alpha_spaces', function($attribute, $value)
+        {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
 
-            $this->validate($request, [
-                'student_first_name'              =>  'required|alpha_spaces',
-                'student_middle_name'             =>  'nullable|alpha_spaces',
-                'student_last_name'               =>  'required|alpha_spaces',
-                'student_email'                   =>  'required',
-                'student_home_contact'            =>  'required',
-                'student_address'                 =>  'required',
-                'student_birth_date'              =>  'required|before:now',
-                'student_age'                     =>  'required|numeric|min:2|max:100',
-                'student_gender'                  =>  'required|alpha_spaces',
-                'student_mother_name'             =>  'nullable|alpha_spaces',
-                'student_mother_contact_number'   =>  'nullable',
-                'student_father_name'             =>  'nullable|alpha_spaces',
-                'student_father_contact_number'   =>  'nullable',
-                'student_guardian_name'           =>  'required',
-                'student_guardian_contact_number' =>  'required',
-                'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ], [
-                "alpha_spaces"     => "This field may only contain letters and spaces.",
-            ]);
+        $this->validate($request, [
+            'student_first_name'              =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
+            'student_last_name'               =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'student_email'                   =>  'required|email|unique:students,student_email,'.$id,
+            'student_home_contact'            =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_address'                 =>  'required',
+            'student_birth_date'              =>  'required|before:now',
+            'student_age'                     =>  'required|numeric|min:2|max:100',
+            'student_gender'                  =>  'required|alpha_spaces',
+            'student_mother_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
+            'student_mother_contact_number'   =>  'nullable|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_father_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
+            'student_father_contact_number'   =>  'nullable|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_guardian_name'           =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ], [
+            "alpha_spaces"     => "This field may only contain letters and spaces.",
+        ]);
             
+        try {
             $student = Student::find($id);
             
             $student->student_first_name = $request['student_first_name'];
@@ -240,7 +240,7 @@ class StudentsController extends Controller
 
             return redirect('/students/classes/' . session()->get('present_class_id'))->with('success', 'Student information has successfully updated!');
         } catch (\Exception $exception) {
-            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'Duplicate entry of email of the student!');
+            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'There is error in updating student information!');
         }
     }
 
@@ -262,7 +262,7 @@ class StudentsController extends Controller
             $student_class[0]->save();
             $student->save();
         } catch (\Exception $exception) {
-
+            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'There is error in deleting student!');
         }
     }
 
@@ -272,59 +272,62 @@ class StudentsController extends Controller
             'class_id'    =>    'required',
         ]);
 
-        $student_payment = Payment::where('student_id', $id)->get();
-        $student_payment_history = PaymentsHistory::where('student_id', $id)->delete(); 
+        try {
+            $student_payment = Payment::where('student_id', $id)->get();
+            $student_payment_history = PaymentsHistory::where('student_id', $id)->delete(); 
 
-        $student_class = StudentsClasses::where('student_id', $id)->get();
-        $student_class[0]->class_id = $request->class_id;
-        $student_class[0]->save();
-        
-        $students_classes = DB::table('students_classes')
-            ->join('students', 'students.id', '=', 'students_classes.student_id')
-            ->join('classes', 'classes.id', '=', 'students_classes.class_id')
-            ->get();
+            $student_class = StudentsClasses::where('student_id', $id)->get();
+            $student_class[0]->class_id = $request->class_id;
+            $student_class[0]->save();
+            
+            $students_classes = DB::table('students_classes')
+                ->join('students', 'students.id', '=', 'students_classes.student_id')
+                ->join('classes', 'classes.id', '=', 'students_classes.class_id')
+                ->get();
 
-        $classes = Classes::all();
-        $students = Student::all();
+            $classes = Classes::all();
+            $students = Student::all();
 
-        $students_count = [];
-        $put_sessions = [];
+            $students_count = [];
+            $put_sessions = [];
 
-        foreach($classes as $class) {
-            $student_count = [];
-            $student_count['class_id'] = $class->id;
-            $student_count['class_name'] = $class->class_name;
+            foreach($classes as $class) {
+                $student_count = [];
+                $student_count['class_id'] = $class->id;
+                $student_count['class_name'] = $class->class_name;
 
-            $count = 0;
-            foreach ($students_classes as $student_class) {
-                if ($student_class->class_id == $class->id) {
-                    ++$count;
+                $count = 0;
+                foreach ($students_classes as $student_class) {
+                    if ($student_class->class_id == $class->id) {
+                        ++$count;
+                    }
                 }
+
+                $student_count['class_count'] = $count;
+                array_push($students_count, $student_count);
+                array_push($put_sessions, [$class->class_name, $class->id]);
             }
 
-            $student_count['class_count'] = $count;
-            array_push($students_count, $student_count);
-            array_push($put_sessions, [$class->class_name, $class->id]);
+            session()->put('classes', $put_sessions);
+
+            $fees = MiscellaneousAndOtherFees::where('class_id', $request->class_id)->get();
+            $payable = 0;
+            foreach($fees as $fee) {
+                $payable += $fee->item_price;
+            }
+            
+            $student_payment[0]->total_payables = $payable;
+            $student_payment[0]->amount_paid = 0;
+            $student_payment[0]->balance_due = $payable;
+            $student_payment[0]->save();
+
+            session()->put('student_id', $id);
+            session()->put('present_class_id', $request->class_id);
+            
+            return redirect('/students/payments/' . $request->class_id . '/edit');
+        } catch (\Exception $exception) {
+            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'There is error in admitting student!');
         }
-
-        session()->put('classes', $put_sessions);
-
-        $fees = MiscellaneousAndOtherFees::where('class_id', $request->class_id)->get();
-        $payable = 0;
-        foreach($fees as $fee) {
-            $payable += $fee->item_price;
-        }
-        
-        $student_payment[0]->total_payables = $payable;
-        $student_payment[0]->amount_paid = 0;
-        $student_payment[0]->balance_due = $payable;
-        $student_payment[0]->save();
-
-        session()->put('student_id', $id);
-        session()->put('present_class_id', $request->class_id);
-        
-        return redirect('/students/payments/' . $request->class_id . '/edit');
-
     }
     
     public function import(Request $request)
@@ -337,60 +340,56 @@ class StudentsController extends Controller
         $csvData = file_get_contents($file);
         $rows = array_map("str_getcsv", explode("\n", $csvData));
         $header = array_shift($rows);
-            try {
+        try {
+            foreach ($rows as $row) {
+                if (isset($row[0])) {
+                    if ($row[0] != "") {
+                        $row = array_combine($header, $row);
 
-                foreach ($rows as $row) {
-                    if (isset($row[0])) {
-                        if ($row[0] != "") {
-                            $row = array_combine($header, $row);
+                        $student = new Student();
+                        $student->id = Student::latest('id')->first()->id + 1;
+                        $student->student_first_name = $row['first_name'];
+                        $student->student_middle_name = $row['middle_name'];
+                        $student->student_last_name = $row['last_name'];
+                        $student->student_email = $row['email_address'];
+                        $student->student_home_contact = $row['contact_number'];
+                        $student->student_address = $row['home_address'];
+                        $student->student_gender = $row['gender'];
+                        $student->student_age = $row['age'];
+                        $student->student_birth_date = date('Y-m-d', strtotime($row['birth_date']));
+                        $student->student_mother_name = $row['mother_name'];
+                        $student->student_mother_contact_number = $row['mother_contact_number'];
+                        $student->student_father_name = $row['father_name'];
+                        $student->student_father_contact_number = $row['father_contact_number'];
+                        $student->student_guardian_name = $row['guardian_name'];
+                        $student->student_guardian_contact_number = $row['guardian_contact_number'];            
+                        $student->student_image = 'default.png';
+                        $student->save();   
 
-                            $student = new Student();
-                            $student->id = Student::latest('id')->first()->id + 1;
-                            $student->student_first_name = $row['first_name'];
-                            $student->student_middle_name = $row['middle_name'];
-                            $student->student_last_name = $row['last_name'];
-                            $student->student_email = $row['email_address'];
-                            $student->student_home_contact = $row['contact_number'];
-                            $student->student_address = $row['home_address'];
-                            $student->student_gender = $row['gender'];
-                            $student->student_age = $row['age'];
-                            $student->student_birth_date = date('Y-m-d', strtotime($row['birth_date']));
-                            $student->student_mother_name = $row['mother_name'];
-                            $student->student_mother_contact_number = $row['mother_contact_number'];
-                            $student->student_father_name = $row['father_name'];
-                            $student->student_father_contact_number = $row['father_contact_number'];
-                            $student->student_guardian_name = $row['guardian_name'];
-                            $student->student_guardian_contact_number = $row['guardian_contact_number'];            
-                            $student->student_image = 'default.png';
-                            $student->save();   
-
-                            $student_class = new StudentsClasses();
-                            $student_class->student_id = $student->id;
-                            $student_class->class_id = session()->get('present_class_id');
-                            $student_class->save();
-                    
-                            $fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
-                            $payable = 0;
-                            foreach($fees as $fee) {
-                                $payable += $fee->item_price;
-                            }
-                            
-                            $payment = new Payment();
-                            $payment->student_id = $student->id;
-                            $payment->total_payables = $payable;
-                            $payment->amount_paid = 0;
-                            $payment->balance_due = $payable;
-                            $payment->save();
+                        $student_class = new StudentsClasses();
+                        $student_class->student_id = $student->id;
+                        $student_class->class_id = session()->get('present_class_id');
+                        $student_class->save();
+                
+                        $fees = MiscellaneousAndOtherFees::where('class_id', session()->get('present_class_id'))->get();
+                        $payable = 0;
+                        foreach($fees as $fee) {
+                            $payable += $fee->item_price;
                         }
+                        
+                        $payment = new Payment();
+                        $payment->student_id = $student->id;
+                        $payment->total_payables = $payable;
+                        $payment->amount_paid = 0;
+                        $payment->balance_due = $payable;
+                        $payment->save();
                     }
                 }
-            } catch (\Exception $exception) {
-                return redirect('/students/classes/import')->with('error_message', 'Error occured upon importing data. Please check csv file!');
             }
-
             return redirect('/students/classes/' . session()->get('present_class_id'))->with('success', 'Students added successfully!');
-        
-
+        } catch (\Exception $exception) {
+            return redirect('/students/classes/import')->with('error_message', 'Error occured upon importing data. Please check csv file!');
+        }
     } 
 
     public function toImport()

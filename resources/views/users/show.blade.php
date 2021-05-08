@@ -8,7 +8,11 @@ Users
 
 <div class="sticky">
     <h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
-    <div class="triangle-right" style="width:230px;"></div>
+    @if($users[0]->id == 1)
+        <div class="triangle-right" style="width:230px;"></div>
+    @else
+        <div class="triangle-right" style="width:160px;"></div>
+    @endif
 </div>
 <hr>
 <form id="enrollment-form" style="text-align:center;">

@@ -5,7 +5,7 @@ Users
 @endsection
 
 @section('content')
-@foreach($users as $user)
+
 <div class="sticky">
     <h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
     @if($users[0]->role_id == 1)
@@ -14,7 +14,9 @@ Users
         <div class="triangle-right" style="width:160px;"></div>
     @endif
 </div>
-    <hr>
+<hr>
+
+@foreach($users as $user)
     <form id="enrollment-form" action="/users/{{ $user->id }}" method="POST" enctype="multipart/form-data">
         {{method_field('PATCH')}}
         @csrf
@@ -97,6 +99,16 @@ Users
                 </div>
                 <br>
                 <div class="form-group">
+                    <label for="user_email">Email Address</label>
+                    <input type="email" class="form-control" name="user_email" value="{{ $user->user_email }}" >
+                    @if ($errors->has('user_email'))
+                        <span class="invalid feedback" role="alert">
+                            <p style="color:tomato;">{{$errors->first('user_email')}}</p>
+                        </span>
+                    @endif
+                </div>
+                <br>
+                <div class="form-group">
                     <label for="user_address">Home Address</label>
                     <input type="text" class="form-control" name="user_address" value="{{ $user->user_address }}" >
                     @if ($errors->has('user_address'))
@@ -121,7 +133,7 @@ Users
                             </select>
                             @if ($errors->has('user_role_id'))
                                 <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{$errors->first('user_role_id')}}</p>
+                                    <p style="color:tomato;">The user role field is required.   </p>
                                 </span>
                             @endif
                         </div>
@@ -181,11 +193,6 @@ Users
   @endforeach
 @endsection
 
-<<<<<<< HEAD
-@section('script')
-  <script src="{{ URL::to('/js/user.js') }}"></script>
-=======
 @section('script')  
     <script src="{{URL::to('/js/user.js')}}"></script> 
->>>>>>> 060b59970f831b2dfd46c0fe33c6f91c3a39102b
 @endsection

@@ -19,8 +19,6 @@ class UsersController extends Controller
             ->where('user_active_status', 1)
             ->get();
 
-        // dd($users);
-
         if (request()->ajax())
         {
             return datatables()->of($users)
@@ -59,15 +57,15 @@ class UsersController extends Controller
         });
 
         $data = $this->validate($request, [
-            'user_first_name'    =>  'required|alpha_spaces',
-            'user_middle_name'   =>  'nullable|alpha_spaces',
-            'user_last_name'     =>  'required|alpha_spaces',
-            'user_email'         =>  'required|email|unique:users',
+            'user_first_name'    =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'user_middle_name'   =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
+            'user_last_name'     =>  'required|regex:/^[A-Za-z\s-_]+$/',
             'user_role_id'       =>  'required|numeric|min:1|max:2',
-            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/',
-            'user_address'       =>  'nullable|alpha_spaces',
-            'user_gender'       =>  'nullable|alpha_spaces',
-            'user_status'       =>  'nullable|alpha_spaces',
+            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'user_address'       =>  'nullable',
+            'user_gender'        =>  'nullable|alpha_spaces',
+            'user_status'        =>  'nullable|alpha_spaces',
+            'user_email'         =>  'required|email|unique:users',
         ], [
             "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
@@ -100,7 +98,7 @@ class UsersController extends Controller
     
             return redirect('/users')->with('success', 'User has successfully created!');
         } catch (\Exception $exception) {
-            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'Error occured upon importing data!');
+            return redirect('/users')->with('error_message', 'There is error in creating user!');
         }
     }
 
@@ -140,31 +138,34 @@ class UsersController extends Controller
         });
         
         $data = $this->validate($request, [
-            'user_first_name'    =>  'required|alpha_spaces',
-            'user_middle_name'   =>  'nullable|alpha_spaces',
-            'user_last_name'     =>  'required|alpha_spaces',
+            'user_first_name'    =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'user_middle_name'   =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
+            'user_last_name'     =>  'required|regex:/^[A-Za-z\s-_]+$/',
             'user_role_id'       =>  'required|numeric|min:1|max:2',
-            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/',
-            'user_address'       =>  'nullable|alpha_spaces',
+            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'user_address'       =>  'nullable',
+            'user_email'         =>  'required|email|unique:users,user_email,'.$id,
             'user_gender'        =>  'nullable|alpha_spaces',
             'user_status'        =>  'nullable|alpha_spaces',
-            'password'           =>  'nullable|min:8|required_with:password_confirmation|string|confirmed',
+            'password'           =>  'nullable|min:8|required_with:password_confirmation|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
             'password_confirmation'=>'nullable|min:8',
         ], [
-            "alpha_spaces"     => "This field may only contain letters and spaces.",
+            "alpha_spaces"       =>  "This field may only contain letters and spaces.",
         ]);
-        
-        $user = User::find($id);
-        $user->role_id = $request['user_role_id'];
-        $user->user_first_name = $request['user_first_name'];
-        $user->user_middle_name = $request['user_middle_name'];
-        $user->user_last_name = $request['user_last_name'];
-        $user->user_contact = $request['user_contact'];
-        $user->user_address = $request['user_address'];
-        $user->user_gender = $request['user_gender'];
-        $user->user_status = $request['user_status'];
 
         try {
+            $user = User::find($id);
+            $user->role_id = $request['user_role_id'];
+            $user->user_first_name = $request['user_first_name'];
+            $user->user_middle_name = $request['user_middle_name'];
+            $user->user_last_name = $request['user_last_name'];
+            $user->user_email = $request['user_email'];
+            $user->password = bcrypt($request['password']);
+            $user->user_contact = $request['user_contact'];
+            $user->user_address = $request['user_address'];
+            $user->user_gender = $request['user_gender'];
+            $user->user_status = $request['user_status'];
+
             if ($request->hasFile('user_image')) {
                 $image = $request->file('user_image');
                 $name = $image->getClientOriginalName();
@@ -181,14 +182,18 @@ class UsersController extends Controller
     
             return redirect('/users');
         } catch (\Exception $exception) {
-            return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'Error occured upon importing data!');
+            return redirect('/users')->with('error_message', 'There is error in updating user information!');
         }
     }
 
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->user_active_status = 0;
-        $user->save();
+        try {
+            $user = User::find($id);
+            $user->user_active_status = 0;
+            $user->save();
+        } catch (\Exception $exception) {
+            return redirect('/users')->with('error_message', 'There is error in deleting user!');
+        }
     }
 }

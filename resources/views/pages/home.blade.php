@@ -5,8 +5,9 @@ Home
 @endsection
 
 @section('content')
-<h2 style="text-align: left">Home Page</h2>
-<div class="triangle-right" style="width:190px;">
+<div class="sticky">
+    <h2 style="text-align: left">Home Page</h2>
+    <div class="triangle-right" style="width:190px;"></div>
 </div>
 <hr>
 <?php $count = 1; ?>

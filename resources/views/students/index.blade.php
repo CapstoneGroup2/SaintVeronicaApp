@@ -11,13 +11,22 @@
 <div class="sticky">
   <h2 style="text-align: left">{{ session()->get('present_class_name') }} Students</h2>
 </div>
-<button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Enroll Student</button> 
+<button id="btn-add" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-plus"></span> Enroll Student</button> 
+<button id="btn-import" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-import"></span> Import Students</button> 
+<button id="btn-export" class="btn btn-lg btn-secondary"><span class="glyphicon glyphicon-export"></span> Export Students</button> 
 <hr>
 
 @if(session()->has('success'))
     <div class="alert alert-success">
         <button class="close" type="button" data-dismiss="alert">x</button>
         {{session()->get('success')}}
+    </div>
+@endif
+
+@if(session()->has('error_message'))
+    <div class="alert alert-danger">
+        <button class="close" type="button" data-dismiss="alert">x</button>
+        {{session()->get('error_message')}}
     </div>
 @endif
 
@@ -48,7 +57,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <h4 align="center" style="margin:0;">Are you sure you want to remove this student?</h4>
+        <h4 align="center" style="margin:0;">Are you sure you want to remove <span id="idnum" class="text-black" style="font-weight: bold;"></span> ID Number?</h4>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
@@ -102,101 +111,5 @@
 
 @section('script')    
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
-<script>
-var pathname = window.location.pathname;
-var num = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1);
-
-function setTable() {
-  $('#dataTable').DataTable({
-    processing: true,
-    serverSide: true,
-    ajax:{
-      url: '/students/classes/' + num,
-      type: 'GET'
-    },
-    columns:[
-      {
-        data: 'student_id',
-        name: 'student_id'
-      },
-      {
-        data: 'full_name',
-        name: 'full_name'
-      },
-      {
-        data: 'student_email',
-        name: 'student_email'
-      },
-      {
-        data: 'student_address',
-        name: 'student_address'
-      },
-      {
-        data: 'student_home_contact',
-        name: 'student_home_contact'
-      },
-      {
-        data: 'action',
-        name: 'action',
-        orderable: false,
-      }
-    ]
-  })
-}
-$(document).ready(function() {
-  setTable();
-  
-  $("#loader").hide();
-
-  $('.btn-add').click(function () {
-    window.location = "/students/create";
-  });
-
-  $('[data-toggle="tooltip"]').tooltip(); 
-
-  var id;
-
-  $(document).on('click', '.btn-remove', function() {
-    id= $(this).attr('id');
-    $('#confirmModal').modal('show');
-  });
-        
-  $(document).on('click', '.btn-admission', function() {
-    for (var i = 0; i < Object.keys(payments).length; i++) {
-      console.log(payments[i].student_id);
-      if (payments[i].student_id == $(this).attr('id')) {
-        if(payments[i].balance_due <= 0) {
-          $('#enrollment-form').attr('action', '/admission/' + $(this).attr('id'));
-          $('#student_id').val($(this).attr('id'));
-          $('#admissionModal').modal('show');
-        } else {
-          alert('Student is not yet allowed for admission!');
-        }
-      }
-    }
-  });
-
-  $('#btn-ok').click(function() {
-    var token = $("meta[name='csrf-token']").attr("content");
-    $.ajax({
-      url: '/students/' + id,
-      type: 'DELETE',
-      data: {
-          "id": id,
-          "_token": token
-      },
-      beforeSend: function(){
-        $('#confirmModal').modal('hide');
-        $("#loader").show();
-        $('table').hide();
-      },
-      success: function(dataResult){
-        console.log("succcess");
-        location.reload(true);
-      }
-    });
-  });
-});
-
-</script>
+<script src="/js/student.js"></script>
 @endsection

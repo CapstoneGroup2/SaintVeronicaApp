@@ -8,7 +8,7 @@
 
 <div class="sticky">
     <h2 style="text-align: left">ID Number: {{ $student->id }}</h2>
-    <div class="triangle-right"></div>
+    <div class="triangle-right" style="width:290px;"></div>
 </div>
 <hr>
 <form id="enrollment-form" action="/payments/{{ $student->id }}" method="POST">
@@ -81,84 +81,129 @@
             <hr>
         </div>
         <div class="row hide hiddenArea">
-            <p>ST. VERONICA LEARNING CENTER</p>
-            <p>Bantug St., Maasin City, Southern Leyte</p>
-            <br>
-            <p style="font-weight: bold">PAYMENT RECEIPT</p>
-            <br>
-            <p>ID No.: __{{ $student->id }}__</p>
-            <p>
-                Pupil Name: _____{{ $student->student_first_name }} {{($student->student_middle_name != "") ? $student->student_middle_name . " " : ""}}{{ $student->student_last_name }}_____
-                &emsp;&emsp;&emsp;&emsp;&emsp;Date: _____{{ date('jS \of F Y') }}_____
-            </p>
-            <br>
-        </div>
-        <table id="paymentTable" class="table table-default table-bordered" style="width: 100%; border: 1px solid white;border-collapse:collapse;">
-            <thead>
-                <th width="20%" style="text-align:center;border: 1px solid white;padding: 3px;">Payment Code</th>
-                <th style="text-align:center;border: 1px solid white;padding: 3px;">Description</th>
-                <th width="20%" style="text-align:center;border: 1px solid white;padding: 3px;">Amount</th>
-            </thead>
-            <tbody>
-                @foreach($miscellaneous_and_other_fees as $miscellaneous_and_other_fee)
+            <table style="border: none;">
+                <tbody>
                     <tr>
-                        <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 3px;">{{ $miscellaneous_and_other_fee->item_code }}</td>
-                        <td class="text-white" style="text-align:left;border: 1px solid white;padding: 3px;">{{ $miscellaneous_and_other_fee->item_description }}</td>
-                        <td width="20%" class="text-white" style="text-align:right;border: 1px solid white;padding: 3px;">{{ number_format($miscellaneous_and_other_fee->item_price, 2) }}</td>
+                        <td>ST. VERONICA LEARNING CENTER</td>
                     </tr>
-                @endforeach
-                <tr>
-                    <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
-                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">TOTAL PAYABLES</th>
-                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">{{ number_format($payments[0]->total_payables, 2) }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
-                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">AMOUNT PAID</th>
-                    <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">{{ number_format($payments[0]->amount_paid, 2) }}</td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
-                    <td style="text-align: right;border: 1px solid white;padding: 3px; font-weight: bold; color: white !important;">BALANCE DUE</th>
-                    <td style="text-align: right;border: 1px solid white;padding: 3px; font-weight: bold; color: white !important;">{{ number_format($payments[0]->balance_due, 2) }}</td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <td>Bantug St., Maasin City, Southern Leyte</td>
+                    </tr>
+                    <tr>
+                        <td>&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">PAYMENT RECEIPT</td>
+                    </tr>
+                    <tr>
+                        <td>&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+                    </tr>
+                    <tr>
+                        <td>ID No.: {{ $student->id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pupil Name: <span style="font-weight: bold; text-transform: uppercase;">{{ $student->student_first_name }} {{($student->student_middle_name != "") ? $student->student_middle_name . " " : ""}}{{ $student->student_last_name }}&emsp;&emsp;&emsp;&emsp;</td>
+                        <td>Date: {{ date('Y-m-d h:i:sa', strtotime("+8 Hours")) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="display: block;">
+            <table id="paymentTable" class="table table-default table-bordered" style="width: 100%; border: 1px solid white;border-collapse: collapse;">
+                <thead>
+                    <th width="20%" style="text-align:center;border: 1px solid white;padding: 3px;">Payment Code</th>
+                    <th style="text-align:center;border: 1px solid white;padding: 3px;">Description</th>
+                    <th width="20%" style="text-align:center;border: 1px solid white;padding: 3px;">Amount</th>
+                </thead>
+                <tbody>
+                    @foreach($miscellaneous_and_other_fees as $miscellaneous_and_other_fee)
+                        <tr>
+                            <td width="20%" class="text-white" style="text-align:left;border: 1px solid white;padding: 3px;">{{ $miscellaneous_and_other_fee->item_code }}</td>
+                            <td class="text-white" style="text-align:left;border: 1px solid white;padding: 3px;">{{ $miscellaneous_and_other_fee->item_description }}</td>
+                            <td width="20%" class="text-white" style="text-align:right;border: 1px solid white;padding: 3px;">{{ number_format($miscellaneous_and_other_fee->item_price, 2) }}</td>
+                        </tr>
+                    @endforeach
+                    <tr>
+                        <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
+                        <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">TOTAL PAYABLES</th>
+                        <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">{{ number_format($payments[0]->total_payables, 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
+                        <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">AMOUNT PAID</th>
+                        <td class="text-white" style="text-align: right;border: 1px solid white;padding: 3px;">{{ number_format($payments[0]->amount_paid, 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;border: 1px solid white;padding: 3px;"></td>
+                        <td style="text-align: right;border: 1px solid white;padding: 3px; font-weight: bold; color: white !important;">BALANCE DUE</th>
+                        <td style="text-align: right;border: 1px solid white;padding: 3px; font-weight: bold; color: white !important;">{{ number_format($payments[0]->balance_due, 2) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        <p>*This receipt is not valid as an official receipt.</p>
+        </div>
         <div class="row hide hiddenArea">
-            <br>
-            <br>
-            <div>
-                <p>___________________________</p>
-                <p>&emsp;&emsp;&emsp;Cashier Signature</p>
-            </div>
-            <p>Received by:</p>
-            <div>
-                <p>_______{{ Auth::user()->user_first_name }} {{ Auth::user()->user_last_name }}________</p>
-                <p>&emsp;&emsp;&emsp;&emsp;{{ (Auth::user()->role_id == 1) ? 'Administrator' : 'Registrar' }}</p>
-            </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Reviewed by:</td>
+                    </tr>
+                    <tr>
+                        <td>&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+                    </tr>
+                    <tr>
+                        <td>___________________________</td>
+                    </tr>
+                    <tr>
+                        <td>&emsp;&emsp;<span style="text-transform: uppercase;">{{ Auth::user()->user_first_name }} {{ Auth::user()->user_last_name }}</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <div id="printHistory">
         <div class="row hide hiddenArea">
-            <p>ST. VERONICA LEARNING CENTER</p>
-            <p>Bantug St., Maasin City, Southern Leyte</p>
-            <br>
-            <p style="font-weight: bold">PAYMENT HiSTORY</p>
-            <br>
-            <p>ID No.: __{{ $student->id }}__</p>
-            <p>
-                Pupil Name: _____{{ $student->student_first_name }} {{($student->student_middle_name != "") ? $student->student_middle_name . " " : ""}}{{ $student->student_last_name }}_____
-                &emsp;&emsp;&emsp;&emsp;&emsp;Date: _____{{ date('jS \of F Y') }}_____
-            </p>
-            <br>
-            @if(!empty($histories->items))
-                @foreach($histories as $history)
-                    <p>{{ date('jS \of F Y', strtotime($history->date_paid)) }} - {{ number_format($history->amount_paid, 2) }} - Received by {{ $history->user_first_name }} {{ $history->user_last_name }}</p>
-                @endforeach
-            @else
-                <p>No history of payments found.</p>
-            @endif
+            <table style="border: none;">
+                <tbody>
+                    <tr>
+                        <td>ST. VERONICA LEARNING CENTER</td>
+                    </tr>
+                    <tr>
+                        <td>Bantug St., Maasin City, Southern Leyte</td>
+                    </tr>
+                    <tr>
+                        <td>&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold">PAYMENT HISTORY</td>
+                    </tr>
+                    <tr>
+                        <td>&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+                    </tr>
+                    <tr>
+                        <td>ID No.: {{ $student->id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pupil Name: <span style="font-weight: bold; text-transform: uppercase;">{{ $student->student_first_name }} {{($student->student_middle_name != "") ? $student->student_middle_name . " " : ""}}{{ $student->student_last_name }}&emsp;&emsp;&emsp;&emsp;</td>
+                        <td>Date: {{ date('Y-m-d h:i:sa', strtotime("+8 Hours")) }}</td>
+                    </tr>
+                    <tr>
+                        <td>&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+                    </tr>
+                    @if(isset($histories[0]))
+                        @foreach($histories as $history)
+                            <tr>
+                                <td>{{ date('jS \of F Y', strtotime($history->date_paid)) }} - {{ number_format($history->amount_paid, 2) }} - Received by {{ $history->user_first_name }} {{ $history->user_last_name }}</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td>No history of payments found.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -221,6 +266,9 @@
             while(html.includes("white")) {
                 html = html.replace('white', 'black');
             }
+            while(html.includes("display: block;")) {
+                html = html.replace('display: block;', 'display:block;margin: 50px;');
+            }
 
             var printWin = window.open();
             printWin.document.write(html);
@@ -238,6 +286,9 @@
 
             while(html.includes("white")) {
                 html = html.replace('white', 'black');
+            }
+            while(html.includes("display: block;")) {
+                html = html.replace('display: block;', 'display:block;margin: 50px;');
             }
 
             console.log(html);

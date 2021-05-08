@@ -46,7 +46,7 @@ class PaymentsController extends Controller
     public function update(Request $request, $student_id)
     {
         $this->validate($request, [
-            'amount_paid'    =>  'required',
+            'amount_paid'    =>  'required|numeric|min:0',
         ]);
 
         $payment = Payment::where('student_id', $student_id)->get();

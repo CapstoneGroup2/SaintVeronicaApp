@@ -34,9 +34,9 @@ class MiscellaneousAndOtherFeesController extends Controller
                         return '<img src="/images/default.png" height="100px" alt="default">';
                     })  
                     ->addColumn('action', function($data) {
-                        $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                        $button = '<div id="'. $data->item_code .'"><a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-eye-open"></span></a>';
                         $button .= '<a href="/miscellaneous-and-other-fees/'. $data->id .'/edit" data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
-                        $button .= '<button type="button" id="'. $data->id . '" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
+                        $button .= '<button type="button" id="'. $data->id . '" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button></div>';
                         return $button;
                     })
                     ->rawColumns(['item_price', 'item_image', 'action'])
@@ -53,7 +53,7 @@ class MiscellaneousAndOtherFeesController extends Controller
                         return '<img src="/images/default.png" height="100px" alt="default">';
                     })  
                     ->addColumn('action', function($data) {
-                        $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-search"></span></a>';
+                        $button = '<a href="/miscellaneous-and-other-fees/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-eye-open"></span></a>';
                         return $button;
                     })
                     ->rawColumns(['item_price', 'item_image', 'action'])
@@ -74,7 +74,7 @@ class MiscellaneousAndOtherFeesController extends Controller
         $this->validate($request, [
             'item_code'          =>  'required',
             'item_description'   =>  'required',
-            'item_price'         =>  'required',
+            'item_price'         =>  'required|numeric|min:0',
             'item_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -99,14 +99,13 @@ class MiscellaneousAndOtherFeesController extends Controller
             ->join('students', 'students.id', '=', 'students_classes.student_id')
             ->join('classes', 'classes.id', '=', 'students_classes.class_id')
             ->where('class_id', session()->get('present_class_id'))
-            ->where('students.student_active_status', 1)
             ->get();
 
         foreach ($students_classes as $student_class) {
             $payment = Payment::where('student_id', $student_class->student_id)->get();
-            if(isset($payment[0]) != '') {
-                $payment[0]->amount_payable = $payment[0]->amount_payable + $request['item_price'];
-                $payment[0]->amount_due = $payment[0]->amount_due + $request['item_price'];
+            if(isset($payment[0])) {
+                $payment[0]->total_payables = $payment[0]->total_payables + $request['item_price'];
+                $payment[0]->balance_due = $payment[0]->balance_due + $request['item_price'];
                 $payment[0]->save();
             }
         }
@@ -137,7 +136,7 @@ class MiscellaneousAndOtherFeesController extends Controller
         $this->validate($request, [
             'item_code'          =>  'required',
             'item_description'   =>  'required',
-            'item_price'         =>  'required',
+            'item_price'         =>  'required|numeric|min:0',
             'item_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -171,8 +170,8 @@ class MiscellaneousAndOtherFeesController extends Controller
 
         foreach ($students_classes as $student_class) {
             $payment = Payment::where('student_id', $student_class->student_id)->get();
-            $payment[0]->amount_payable = $payable;
-            $payment[0]->amount_due = $payable - $payment[0]->amount_paid;
+            $payment[0]->total_payables = $payable;
+            $payment[0]->balance_due = $payable - $payment[0]->amount_paid;
             $payment[0]->save();
         }
         
@@ -191,8 +190,8 @@ class MiscellaneousAndOtherFeesController extends Controller
 
         foreach ($students_classes as $student_class) {
             $payment = Payment::where('student_id', $student_class->student_id)->get();
-            $payment[0]->amount_payable = $payment[0]->amount_payable - $data->item_price;
-            $payment[0]->amount_due = $payment[0]->amount_payable - $payment[0]->amount_paid;
+            $payment[0]->total_payables = $payment[0]->total_payables - $data->item_price;
+            $payment[0]->balance_due = $payment[0]->total_payables - $payment[0]->amount_paid;
             $payment[0]->save();
         }
 

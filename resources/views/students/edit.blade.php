@@ -53,7 +53,7 @@ Students
                     <div class="col">
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" class="form-control" name="student_email" value="{{ $student->student_email}}" readonly>
+                            <input type="email" class="form-control" name="student_email" value="{{ $student->student_email}}">
                         </div>
                     </div>
                     <div class="col-5">    
@@ -83,7 +83,7 @@ Students
                     <div class="col">    
                         <div class="form-group">
                             <label for="birthdate">Birthdate</label>
-                            <input type="date" class="form-control" name="student_birth_date" value="{{ $student->student_birth_date }}" >
+                            <input type="date" class="form-control" id="birthDate" name="student_birth_date" value="{{ $student->student_birth_date }}" >
                             @if ( $errors->has('student_birth_date'))
                             <span class="invalid feedback" role="alert">
                                 <p style=color:tomato;>{{ $errors->first('student_birth_date') }}</p>
@@ -94,7 +94,12 @@ Students
                     <div class="col-2">    
                         <div class="form-group">
                             <label for="age">Age</label>
-                            <input type="number" class="form-control" name="student_age" value="{{ $student->student_age }}" >
+                            <input type="number" class="form-control" name="student_age" value="{{ $student->student_age }}" readOnly>
+                            @if ($errors->has('student_age'))
+                            <span class="invalid feedback" role="alert">
+                                <p style="color:tomato;">{{$errors->first('student_age')}}</p>
+                            </span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-3">    
@@ -129,6 +134,11 @@ Students
                         <div class="form-group">
                             <label for="mother">Mother's Contact Number</label>
                             <input type="text" class="form-control" name="student_mother_contact_number" value="{{  $student->student_mother_contact_number }}">
+                            @if ($errors->has('student_mother_contact_number'))
+                            <span class="invalid feedback" role="alert">
+                                <p style="color:tomato;">{{$errors->first('student_mother_contact_number')}}</p>
+                            </span>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -187,18 +197,17 @@ Students
             <div class="col-3">
                 <div class="form-group center">
                     <br>
-                    <label for="status">Student Profile Picture</label>
+                    <img id="profileImage" src='/images/students/{{ $student->student_image }}' height="200px" width="92%">
                     <br><br>
-                    <img src='/images/students/{{ $student->student_image }}' height="200px" width="92%">
-                    <br><br>
-                    <input type="file" class="form-control image" name="student_image" style="width:92%">
+                    <label for="student_image">Student Profile Picture</label>
+                    <input type="file" onchange="readURL(this);" class="form-control image" name="student_image" style="width:92%">
                     @if ($errors->has('student_image'))
                         <span class="invalid feedback" role="alert">
                             <p style="color:tomato;">{{$errors->first('student_image')}}</p>
                         </span>
                     @endif
                 </div>
-            </div>
+            </div>  
         </div>
         
     <hr>
@@ -215,5 +224,5 @@ Students
 @endsection
 
 @section('script')  
-  <script type="text/javascript" src="{{ URL::to('/js/student.js') }}"></script>
+    <script src="{{URL::to('/js/student.js')}}"></script> 
 @endsection

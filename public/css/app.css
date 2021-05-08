@@ -93,7 +93,7 @@ body {
 
 div.card {
   padding: 10px;
-  margin: 30px 20px;
+  margin: 10px 5px;
   font-size: 16px;
   box-shadow: 0 5px 8px 0 rgb(0 0 0 / 20%), 0 9px 26px 0 rgb(0 0 0 / 19%);
   border: 1px solid #28a745 !important;
@@ -408,6 +408,10 @@ div.right {
   font-size: 13px;
   padding: 3px;
   height: 35px;
+}
+
+#enrollment-form label {
+  font-size: 13px !important;
 }
 
 label span {

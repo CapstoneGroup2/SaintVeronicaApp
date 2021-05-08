@@ -7,20 +7,22 @@ Announcements
 @section('content')
 
 @if ($errors->has('announcement_title') || $errors->has('announcement_message'))
-    <script>
-        console.log('sdkjbsjbhf');
-        $(document).ready(function() {
-            $('#addModal').modal('show');
-        });
-    </script>
+  <script>
+    $(document).ready(function() {
+      $('#addModal').modal('show');
+    });
+  </script>
 @endif
 
 <div class="sticky">
   <h2 style="text-align: left;">Announcements</h2> 
-</div>
 
 @if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
-    <button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Announcements</button>
+</div>
+  <button role="button" class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Announcements</button>
+@else
+  <div class="triangle-right" style="width:250px;"></div>
+</div>
 @endif
 
 <hr>
@@ -33,17 +35,21 @@ Announcements
 @endif
 
 @foreach($announcements as $announcement)
-    <div class="card card-home">
-        <div class="card-body">
-            <h2 class="card-text text-success">{{ $announcement -> announcement_title }}</h2>
-            <p style="font-size: 1.2rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> updated_at)) }}</p>
-            <h4 class="card-text text-info" style="margin: 30px;">{{ $announcement -> announcement_message}}</h4>
-            @if (isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
-                <a href="/announcements/{{ $announcement->id }}/edit" class="btn btn-md btn-warning" role="button">Edit</a>
-                <button id="{{ $announcement->id }}" class="btn btn-md btn-danger btn-remove">Remove</button>
-            @endif
-        </div>
+  <div id="{{ $announcement -> announcement_title }}" class="card text-center card-home" style="padding: 0;">
+    <div class="card-header" style="padding: 10px;">
+      <h2 class="card-text text-success">{{ $announcement -> announcement_title }}</h2>
     </div>
+    <div class="card-body" style="padding: 20px 30px;">
+      <h4 class="card-text text-info">{{ $announcement -> announcement_message}}</h4>
+    </div>
+    <div class="card-footer text-muted" style="padding: 10px;">
+      <p style="font-size: 1.4rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> updated_at)) }}</p>
+      @if (isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
+        <a href="/announcements/{{ $announcement->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
+        <button id="{{ $announcement->id }}" class="btn btn-lg btn-danger btn-remove">Remove</button>
+      @endif
+    </div>
+  </div>
 @endforeach
 
 <div id="addModal" class="modal fade" role="dialog" style="margin-top: 70px;">
@@ -94,7 +100,7 @@ Announcements
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <h4 align="center" style="margin:0;">Are you sure you want to remove this announcement?</h4>
+        <h4 align="center" style="margin:0;">Are you sure you want to remove <br><span id="title" class="text-success"></span> announcement?</h4>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>

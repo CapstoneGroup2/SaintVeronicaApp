@@ -341,7 +341,7 @@
                         </div>
                         @endforeach
                     @else
-                        <p style="text-align: center;">No history of payments found.</p>
+                        <p style="text-align: center; color:white;">No Announcements posted!</p>
                     @endif
                 </div>
                 <div class="modal-footer">

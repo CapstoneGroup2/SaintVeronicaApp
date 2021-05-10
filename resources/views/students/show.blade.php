@@ -290,8 +290,6 @@
             while(html.includes("display: block;")) {
                 html = html.replace('display: block;', 'display:block;margin: 50px;');
             }
-
-            console.log(html);
             var printWin = window.open();
             printWin.document.write(html);
             printWin.document.close();

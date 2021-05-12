@@ -12,7 +12,7 @@ Home
 <hr>
 <?php $count = 1; ?>
 @foreach($students_count as $student_count)
-    @if($count%5 == 0 || $count==1)
+    @if($count==1)
         <div class="row">
     @endif
         <div class="col">
@@ -26,20 +26,22 @@ Home
                 </a>
             </div>
         </div>
-        @if($count >= 5 && $count == count($students_count))
-            <?php
-                $remainingColumn = 4 - count($students_count)%4;
-                for($i = 1; $i <= $remainingColumn; $i++) {
-                    echo '<div class="col"></div>';
-                    ++$count;
-                }
-            ?>            
+        <?php $count++; ?>
+        @if($count == 5)
+            </div>
+            <?php $count = 1; ?>
         @endif
-    @if($count%4 == 0)
-        </div>
+    @endforeach
+
+    @if($count < 5)
+        <?php
+            for($i = $count; $i < 5; $i++) {
+                echo '<div class="col"></div>';
+                ++$count;
+            }
+        ?> 
+        </div>           
     @endif
-    <?php $count++; ?>
-@endforeach
     
 @endsection
 

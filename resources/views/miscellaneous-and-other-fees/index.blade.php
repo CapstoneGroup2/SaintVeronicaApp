@@ -16,10 +16,9 @@ Miscellaneous & Other Fees
 
 <div class="sticky">
   <h2 style="text-align: left">{{ session()->get('present_class_name') }} Class</h2>
+</div>
   @if(isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
-</div>
     <button class="btn btn-lg btn-add"><span class="glyphicon glyphicon-plus"></span> Add Miscellaneous</button> 
-</div>
   @endif
 <hr>
 

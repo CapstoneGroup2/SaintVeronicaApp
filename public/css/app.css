@@ -508,3 +508,12 @@ a:hover {
 .glyphicon {
   position: unset !important;
 }
+
+.btn-addClass {
+  background-color: #3f704d !important;
+}
+
+.btn-addClass h2 {
+  color: white !important;
+  letter-spacing: 2px;
+}

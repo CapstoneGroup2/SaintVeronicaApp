@@ -310,12 +310,6 @@ class StudentsController extends Controller
     
     public function import(Request $request)
     {
-                        
-        Validator::extend('alpha_spaces', function($attribute, $value)
-        {
-            return preg_match('/^[\pL\s]+$/u', $value);
-        });
-
         $this->validate($request, [
             'upload_students'  => 'required|file|mimes:csv,txt'
         ]);
@@ -329,28 +323,28 @@ class StudentsController extends Controller
                 if (isset($row[0])) {
                     if ($row[0] != "") {
                         $row = array_combine($header, $row);
-                        // dd($row);
 
-                        // $this->validate($row, [
-                        //     'first_name'              =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-                        //     'middle_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-                        //     'last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-                        //     'email_address'                   =>  'required|email|unique:users',
-                        //     'contact_number'            =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-                        //     'home_address'                 =>  'required',
-                        //     'birth_date'              =>  'required|before:now',
-                        //     'age'                     =>  'required|numeric|min:2|max:100',
-                        //     'gender'                  =>  'required|alpha_spaces',
-                        //     'mother_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-                        //     'mother_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-                        //     'father_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-                        //     'father_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-                        //     'guardian_name'           =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-                        //     'guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-                        //     // 'image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                        // ], [
-                        //     "alpha_spaces"     => "The field may only contain letters and spaces.",
-                        // ]);
+                        Validator::make($row, [
+                            'first_name'              =>  ['required', 'regex:/^[A-Za-z_-\s_ \s]+$/'],
+                            'middle_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+                            'last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+                            'email_address'           =>  'required|email|unique:students',
+                            'contact_number'          =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                            'home_address'            =>  'required',
+                            'birth_date'              =>  'required|before:now',
+                            'age'                     =>  'required|numeric|min:2|max:100',
+                            'gender'                  =>  'required',
+                            'mother_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+                            'mother_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                            'father_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+                            'father_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                            'guardian_name'           =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+                            'guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                        ]);
+
+                        if (!in_array($row['gender'], ['Female', 'Male'])) {
+                            return redirect('/students/classes/import')->with('error_message', 'Error occured upon importing data. Please check csv file!');
+                        }
 
                         $student = new Student();
                         $student->id = Student::latest('id')->first()->id + 1;
@@ -394,6 +388,7 @@ class StudentsController extends Controller
             }
             return redirect('/students/classes/' . session()->get('present_class_id'))->with('success', 'Students added successfully!');
         } catch (\Exception $exception) {
+            // dd($exception);
             return redirect('/students/classes/import')->with('error_message', 'Error occured upon importing data. Please check csv file!');
         }
     } 

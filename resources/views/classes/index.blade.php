@@ -25,20 +25,22 @@ Classes
     </div>
 @endif
 
-<?php $count = 1; ?>
+<?php $count = 0; ?>
 @foreach($students_count as $student_count)
-    @if($count%5 == 0 || $count==1)
+    @if($count==1 || $count==0)
         <div class="row">
     @endif
-    @if($count == 1)
+    @if($count == 0)
         <div class="col">
-            <div class="card card-home btn-addClass">
-                <div class="card-body">
-                    <h2 class="card-text text-danger" style="font-size: 21px !important;"><span class="glyphicon glyphicon-plus"></span> Add Class</h2>
+            <a>
+                <div class="card card-home btn-addClass">
+                    <div class="card-body">
+                        <h2 class="card-text text-danger" style="font-size: 21px !important;"><span class="glyphicon glyphicon-plus"></span> Add Class</h2>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
-        <?php $count++; ?>
+        <?php $count+=2; ?>
     @endif
     <div class="col">
         <div id="{{ $student_count['class_count'] }}" class="card card-home">
@@ -54,21 +56,22 @@ Classes
             </div>
         </div>
     </div>
-        
-    @if($count >= 5 && $count == count($students_count) + 1)
+        <?php $count++; ?>
+        @if($count == 5)
+            </div>
+            <?php $count = 1; ?>
+        @endif
+    @endforeach
+
+    @if($count < 5)
         <?php
-            $remainingColumn = 4 - count($students_count)%4;
-            for($i = 1; $i < $remainingColumn; $i++) {
+            for($i = $count; $i < 5; $i++) {
                 echo '<div class="col"></div>';
                 ++$count;
             }
-        ?>            
+        ?> 
+        </div>           
     @endif
-    @if($count%4 == 0)
-        </div>
-    @endif
-    <?php $count++; ?>
-@endforeach
 
 <div id="addClassModal" class="modal fade" role="dialog" style="margin-top: 130px;">
   <div class="modal-dialog">

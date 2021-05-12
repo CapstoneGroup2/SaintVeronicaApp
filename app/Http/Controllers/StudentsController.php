@@ -74,30 +74,23 @@ class StudentsController extends Controller
 
     public function store(Request $request)
     {
-        Validator::extend('alpha_spaces', function($attribute, $value)
-        {
-            return preg_match('/^[\pL\s]+$/u', $value);
-        });
-
         $this->validate($request, [
-            'student_first_name'              =>  'required|regex:/^[A-Za-z\s-_]+$/',
-            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
-            'student_last_name'               =>  'required|regex:/^[A-Za-z\s-_]+$/',
-            'student_email'                   =>  'required|email|unique:users',
-            'student_home_contact'            =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_first_name'              =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_email'                   =>  'required|email|unique:students',
+            'student_home_contact'            =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
             'student_address'                 =>  'required',
             'student_birth_date'              =>  'required|before:now',
             'student_age'                     =>  'required|numeric|min:2|max:100',
-            'student_gender'                  =>  'required|alpha_spaces',
-            'student_mother_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
-            'student_mother_contact_number'   =>  'nullable|regex:/^[-0-9\+]+$/|min:11|max:13',
-            'student_father_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
-            'student_father_contact_number'   =>  'nullable|regex:/^[-0-9\+]+$/|min:11|max:13',
-            'student_guardian_name'           =>  'required|regex:/^[A-Za-z\s-_]+$/',
-            'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_gender'                  =>  'required',
+            'student_mother_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_mother_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+            'student_father_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_father_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+            'student_guardian_name'           =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ], [
-            "alpha_spaces"     => "The field may only contain letters and spaces.",
         ]);
 
         try {
@@ -181,30 +174,23 @@ class StudentsController extends Controller
 
     public function update(Request $request, $id)
     {
-        Validator::extend('alpha_spaces', function($attribute, $value)
-        {
-            return preg_match('/^[\pL\s]+$/u', $value);
-        });
-
         $this->validate($request, [
-            'student_first_name'              =>  'required|regex:/^[A-Za-z\s-_]+$/',
-            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
-            'student_last_name'               =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'student_first_name'              =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z_-\sp_ \s]+$/',
+            'student_last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
             'student_email'                   =>  'required|email|unique:students,student_email,'.$id,
-            'student_home_contact'            =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_home_contact'            =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
             'student_address'                 =>  'required',
             'student_birth_date'              =>  'required|before:now',
             'student_age'                     =>  'required|numeric|min:2|max:100',
-            'student_gender'                  =>  'required|alpha_spaces',
-            'student_mother_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
-            'student_mother_contact_number'   =>  'nullable|regex:/^[-0-9\+]+$/|min:11|max:13',
-            'student_father_name'             =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
-            'student_father_contact_number'   =>  'nullable|regex:/^[-0-9\+]+$/|min:11|max:13',
-            'student_guardian_name'           =>  'required|regex:/^[A-Za-z\s-_]+$/',
-            'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_gender'                  =>  'required',
+            'student_mother_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_mother_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+            'student_father_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_father_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+            'student_guardian_name'           =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ], [
-            "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
             
         try {
@@ -245,21 +231,13 @@ class StudentsController extends Controller
     }
 
     public function destroy($id)
-    {
-        $student = Student::find($id);
-        $student_class = StudentsClasses::where('student_id', $id)->get();
-        $student_payment = Payment::where('student_id', $id)->get();
-        $student_payment_history = PaymentsHistory::where('student_id', $id)->get(); 
-
+    { 
         try {
-            $student_payment_history[0]->delete();
-            $student_payment[0]->delete();
-            $student_class[0]->delete();
+            PaymentsHistory::where('student_id', $id)->delete();
+            Payment::where('student_id', $id)->delete();
+            StudentsClasses::where('student_id', $id)->delete();
+            $student = Student::find($id);
             $student->delete();
-
-            $student_payment_history[0]->save();
-            $student_payment[0]->save();
-            $student_class[0]->save();
             $student->save();
         } catch (\Exception $exception) {
             return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'There is error in deleting student!');
@@ -332,6 +310,12 @@ class StudentsController extends Controller
     
     public function import(Request $request)
     {
+                        
+        Validator::extend('alpha_spaces', function($attribute, $value)
+        {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
+
         $this->validate($request, [
             'upload_students'  => 'required|file|mimes:csv,txt'
         ]);
@@ -345,6 +329,28 @@ class StudentsController extends Controller
                 if (isset($row[0])) {
                     if ($row[0] != "") {
                         $row = array_combine($header, $row);
+                        // dd($row);
+
+                        // $this->validate($row, [
+                        //     'first_name'              =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+                        //     'middle_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+                        //     'last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+                        //     'email_address'                   =>  'required|email|unique:users',
+                        //     'contact_number'            =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                        //     'home_address'                 =>  'required',
+                        //     'birth_date'              =>  'required|before:now',
+                        //     'age'                     =>  'required|numeric|min:2|max:100',
+                        //     'gender'                  =>  'required|alpha_spaces',
+                        //     'mother_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+                        //     'mother_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                        //     'father_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+                        //     'father_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                        //     'guardian_name'           =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+                        //     'guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                        //     // 'image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                        // ], [
+                        //     "alpha_spaces"     => "The field may only contain letters and spaces.",
+                        // ]);
 
                         $student = new Student();
                         $student->id = Student::latest('id')->first()->id + 1;

@@ -33,6 +33,7 @@
             <script>window.location="/home";</script>
         @endif
     @endif
+    <a href="#" id="toTopBtn" class="cd-top text-replace js-cd-top cd-top--is-visible cd-top--fade-out" data-abc="true"></a>
     <nav class="header navbar fixed-top navbar-expand-lg">
         <a href="/welcome" class="navbar-brand logo"><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
         <div class="btn-group" style="margin: 0 20px 0 auto;">

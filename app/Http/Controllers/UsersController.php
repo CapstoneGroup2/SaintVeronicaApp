@@ -57,9 +57,9 @@ class UsersController extends Controller
         });
 
         $data = $this->validate($request, [
-            'user_first_name'    =>  'required|regex:/^[A-Za-z\s-_]+$/',
-            'user_middle_name'   =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
-            'user_last_name'     =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'user_first_name'    =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'user_middle_name'   =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'user_last_name'     =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
             'user_role_id'       =>  'required|numeric|min:1|max:2',
             'user_contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
             'user_address'       =>  'nullable',
@@ -138,9 +138,9 @@ class UsersController extends Controller
         });
         
         $data = $this->validate($request, [
-            'user_first_name'    =>  'required|regex:/^[A-Za-z\s-_]+$/',
-            'user_middle_name'   =>  'nullable|regex:/^[A-Za-z\s-_]+$/',
-            'user_last_name'     =>  'required|regex:/^[A-Za-z\s-_]+$/',
+            'user_first_name'    =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'user_middle_name'   =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'user_last_name'     =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
             'user_role_id'       =>  'required|numeric|min:1|max:2',
             'user_contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
             'user_address'       =>  'nullable',

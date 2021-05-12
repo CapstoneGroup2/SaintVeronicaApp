@@ -48,6 +48,21 @@ function changeActiveState(value) {
 }
 
 $(document).ready(function () {
+    $('#toTopBtn').fadeOut();
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 20) {
+        $('#toTopBtn').fadeIn();
+        } else {
+        $('#toTopBtn').fadeOut();
+        }
+        });
+        
+        $('#toTopBtn').click(function() {
+        $("html, body").animate({
+        scrollTop: 0
+        }, 500);
+        return false;
+        });
     $(document).on('click', '.btn-showModal', function() {
         $('#announcementModal').modal('show');
     });

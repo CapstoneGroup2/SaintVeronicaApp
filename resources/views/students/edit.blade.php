@@ -106,8 +106,13 @@ Students
                         <div class="form-group">
                             <label for="gender">Gender</label>
                             <select class="form-control" name="student_gender" >
-                                <option value="Female">Female</option>
-                                <option value="Male">Male</option>
+                                @if(ucwords($student->student_gender) == 'Female')
+                                    <option value="{{ ucwords('Female') }}" selected>Female</option>
+                                    <option value="{{ ucwords('Male') }}">Male</option>
+                                @else
+                                    <option value="{{ ucwords('Male') }}" selected>Male</option>
+                                    <option value="{{ ucwords('Female') }}">Female</option>
+                                @endif
                             </select>
                             @if ($errors->has('student_gender'))
                             <span class="invalid feedback" role="alert">

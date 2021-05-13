@@ -19,7 +19,7 @@ Reports
             <div class="col">
                 <div class="card card-home">
                     <div class="card-body">
-                        <h3 class="card-text text-success" style="font-weight: bold;">All Classes{{$count}}
+                        <h3 class="card-text text-success" style="font-weight: bold;">All Classes
                         <button id="btn-export" class="btn btn-md btn-secondary"><span class="glyphicon glyphicon-export"></span> Export Students</button></h3>
                     </div>
                     <div class="card-footer text-muted">
@@ -35,7 +35,7 @@ Reports
             <div class="card card-home">
                 <a href="/students/classes/{{ $student_count['class_id'] }}">
                     <div class="card-body">
-                        <h3 class="card-text text-success" style="font-weight: bold;">{{ $student_count['class_name'] }} Class{{$count}}</h3>
+                        <h3 class="card-text text-success" style="font-weight: bold;">{{ $student_count['class_name'] }} Class</h3>
                     </div>
                     <div class="card-footer text-muted">
                         <p style="font-size: 1.5rem; font-weight: bold;">Total Students: <span class="text-secondary" style="font-weight: bold;">{{ $student_count['class_count'] }}</span></p>

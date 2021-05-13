@@ -204,8 +204,8 @@ div.login {
 .sticky {
   position: -webkit-sticky;
   position: sticky;
-  top: 80px;
-  padding: 5px 0;
+  top: 78px;
+  padding: 5px 2px;
   background-color:#FCF4A3;
   font-size: 20px;
 }
@@ -325,14 +325,15 @@ footer {
 }
 
 table th {
-  font-size: 16px !important;
+  font-size: 17px !important;
   padding: 15px !important;
   color: #FCF4A3 !important;
+  letter-spacing: 1px;
   background-color: #3f704d !important;
 }
 
 table td {
-  font-size: 14px !important;
+  font-size: 15px !important;
   padding: 10px !important;
 }
 tfoot input {
@@ -398,7 +399,7 @@ div.right {
 }
 
 #enrollment-form .form-control {
-  font-size: 13px;
+  font-size: 15px;
   border-radius: 5px;
   margin: 5px 0;
   letter-spacing: 1px;
@@ -411,7 +412,7 @@ div.right {
 }
 
 #enrollment-form label {
-  font-size: 13px !important;
+  font-size: 14px !important;
 }
 
 label span {

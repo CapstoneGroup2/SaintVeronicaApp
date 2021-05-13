@@ -75,7 +75,7 @@ class ClassesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'class_name'          =>  'required|unique:classes',
+            'class_name'          =>  'required|unique:classes,class_name,'.$id,
             'class_description'   =>  'nullable'
         ]);
 

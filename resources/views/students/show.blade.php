@@ -6,6 +6,14 @@
 
 @section('content')
 
+@if ($errors->has('amount_paid'))
+  <script>
+    $(document).ready(function() {
+      $('#paymentModal').modal('show');
+    });
+  </script>
+@endif
+
 <div class="sticky">
     <h2 style="text-align: left">ID Number: {{ $student->id }}</h2>
     <div class="triangle-right" style="width:290px;"></div>
@@ -25,43 +33,43 @@
         </div>
         <div class="col">
             <div class="form-group">
-                <p style="font-size:13px;">Full Name : <span class="text-white">{{ $student->student_first_name }} {{($student->student_middle_name != "") ? $student->student_middle_name . " " : ""}}{{ $student->student_last_name }}</span></p>
+                <p style="font-size:15px;">Full Name : <span class="text-white">{{ $student->student_first_name }} {{($student->student_middle_name != "") ? $student->student_middle_name . " " : ""}}{{ $student->student_last_name }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Email Address : <span class="text-white">{{ $student->student_email }}</span></p>
+                <p style="font-size:15px;">Email Address : <span class="text-white">{{ $student->student_email }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Address : <span class="text-white">{{ $student->student_address }}</span></p>
+                <p style="font-size:15px;">Address : <span class="text-white">{{ $student->student_address }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Contact : <span class="text-white">{{ $student->student_home_contact }}</span></p>
+                <p style="font-size:15px;">Contact : <span class="text-white">{{ $student->student_home_contact }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Birthdate : <span class="text-white">{{ date('jS \of F Y', strtotime($student->student_birth_date)) }}</span></p>
+                <p style="font-size:15px;">Birthdate : <span class="text-white">{{ date('jS \of F Y', strtotime($student->student_birth_date)) }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Age : <span class="text-white">{{ $student->student_age }} yrs. old</span></p>
+                <p style="font-size:15px;">Age : <span class="text-white">{{ $student->student_age }} yrs. old</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Gender : <span class="text-white">{{ $student->student_gender }}</span></p>
+                <p style="font-size:15px;">Gender : <span class="text-white">{{ $student->student_gender }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Mother's Name : <span class="text-white">{{ $student->student_mother_name }}</span></p>
+                <p style="font-size:15px;">Mother's Name : <span class="text-white">{{ $student->student_mother_name }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Mother's Contact Number : <span class="text-white">{{ $student->student_mother_contact_number }}</span></p>
+                <p style="font-size:15px;">Mother's Contact Number : <span class="text-white">{{ $student->student_mother_contact_number }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Father's Name : <span class="text-white">{{ $student->student_father_name }}</span></p>
+                <p style="font-size:15px;">Father's Name : <span class="text-white">{{ $student->student_father_name }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Father's Contact Number : <span class="text-white">{{ $student->student_father_contact_number }}</span></p>
+                <p style="font-size:15px;">Father's Contact Number : <span class="text-white">{{ $student->student_father_contact_number }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Guardian's Name : <span class="text-white">{{ $student->student_guardian_name }}</span></p>
+                <p style="font-size:15px;">Guardian's Name : <span class="text-white">{{ $student->student_guardian_name }}</span></p>
             </div>
             <div class="form-group">
-                <p style="font-size:13px;">Guardian's Contact Number : <span class="text-white">{{ $student->student_guardian_contact_number }}</span></p>
+                <p style="font-size:15px;">Guardian's Contact Number : <span class="text-white">{{ $student->student_guardian_contact_number }}</span></p>
             </div>
         </div>
     </div>
@@ -69,7 +77,7 @@
     <hr>
 
     <div class="right">
-        <a href="/students/classes/{{ session()->get('present_class_id') }}" class="btn btn-lg btn-danger">Cancel</a>
+        <a href="/students/classes/{{ session()->get('present_class_id') }}" class="btn btn-lg btn-danger">Back  </a>
         <a href="/students/{{ $student->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
     </div>
 
@@ -207,11 +215,17 @@
         </div>
     </div>
 
+    <?php echo '<script>$balance_due = ' . $payments[0]->balance_due . ';</script>'; ?>
+
     <hr>
     <div class="right">
         <button type="button" class="btn btn-lg btn-success btn-printReceipt">Print Receipt</button> 
         <button type="button" class="btn btn-lg btn-primary btn-printHistory">Print Payments</button> 
-        <button type="button" class="btn btn-lg btn-warning btn-payment">Pay Bill</button> 
+        @if ($payments[0]->balance_due > 0)
+            <button type="button" class="btn btn-lg btn-warning btn-payment">Pay Bill</button> 
+        @else
+            <button type="button" class="btn btn-lg btn-warning btn-payment hide">Pay Bill</button> 
+        @endif
     </div>
 
     <div id="paymentModal" class="modal fade" role="dialog" style="padding-top: 130px;">
@@ -228,7 +242,12 @@
                     <div class="modal-body" style="padding: 0 25%;">
                         <div class="form-group">
                             <label for="amount_paid">Paid Amount</label>
-                            <input type="number" class="form-control" name="amount_paid" required>
+                            <input id="amount_paid" type="number" class="form-control" name="amount_paid" value="{{ old('amount_paid') }}">
+                            @if ($errors->has('amount_paid'))
+                            <span class="invalid feedback" role="alert">
+                                <p style="color:tomato;">{{$errors->first('amount_paid')}}</p>
+                            </span>
+                            @endif
                         </div>
                     </div>
                     <br>
@@ -236,7 +255,8 @@
                     <br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                        <button id="btn-submit" type="button" class="btn btn-lg btn-success">Submit</button>
+                        <button id="submit" type="submit" class="hide">Submit</button>
                     </div>
                 </form>
             </div>
@@ -254,6 +274,14 @@
     $(document).ready(function() {
         $(document).on('click', '.btn-payment', function() {
             $('#paymentModal').modal('show');
+        });
+
+        $(document).on('click', '#btn-submit', function() {
+            if ($('#amount_paid').val() > $balance_due) {
+                alert('Amount paid should not be greater than the balance due!');
+            } else {
+                $('#submit').click();
+            }
         });
 
         $('.btn-printReceipt').on('click', function(){

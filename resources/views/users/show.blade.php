@@ -21,37 +21,38 @@ Users
     <div class="form-group">
         <img src='/images/users/{{ $users[0]->user_image }}' height="300px">
     </div>
+    <br>
+    <div class="form-group">
+        <p style="font-size:15px;">Full Name : <span class="text-white">{{ $users[0]->user_first_name }} {{($users[0]->user_middle_name != "") ? $users[0]->user_middle_name . " " : ""}}{{ $users[0]->user_last_name }}</span><p>
+    </div>
+    <div class="form-group">
+        <p style="font-size:15px;">Role Name : <span class="text-white">{{ $users[0]->role_name }}</span><p>
+    </div>
+    <div class="form-group">
+        <p style="font-size:15px;">Email Address : <span class="text-white">{{ $users[0]->user_email }}</span><p>
+    </div>
+    @if($users[0]->user_address != '')
         <div class="form-group">
-            <p style="font-size:13px;">Full Name : <span class="text-white">{{ $users[0]->user_first_name }} {{($users[0]->user_middle_name != "") ? $users[0]->user_middle_name . " " : ""}}{{ $users[0]->user_last_name }}</span><p>
+            <p style="font-size:15px;">Address : <span class="text-white">{{ $users[0]->user_address }}</span><p>
         </div>
+    @endif
+    @if($users[0]->user_contact != '')
         <div class="form-group">
-            <p style="font-size:13px;">Role Name : <span class="text-white">{{ $users[0]->role_name }}</span><p>
+            <p style="font-size:15px;">Contact : <span class="text-white">{{ $users[0]->user_contact }}</span><p>
         </div>
+    @endif
+    @if($users[0]->user_gender != '')
         <div class="form-group">
-            <p style="font-size:13px;">Email Address : <span class="text-white">{{ $users[0]->user_email }}</span><p>
+            <p style="font-size:15px;">Gender : <span class="text-white">{{ $users[0]->user_gender }}</span><p>
         </div>
-        @if($users[0]->user_address != '')
-            <div class="form-group">
-                <p style="font-size:13px;">Address : <span class="text-white">{{ $users[0]->user_address }}</span><p>
-            </div>
-        @endif
-        @if($users[0]->user_contact != '')
-            <div class="form-group">
-                <p style="font-size:13px;">Contact : <span class="text-white">{{ $users[0]->user_contact }}</span><p>
-            </div>
-        @endif
-        @if($users[0]->user_gender != '')
-            <div class="form-group">
-                <p style="font-size:13px;">Gender : <span class="text-white">{{ $users[0]->user_gender }}</span><p>
-            </div>
-        @endif
-        @if($users[0]->user_status != '')
-            <div class="form-group">
-                <p style="font-size:13px;">Status : <span class="text-white">{{ $users[0]->user_status }}</span><p>
-            </div>
-        @endif
+    @endif
+    @if($users[0]->user_status != '')
+        <div class="form-group">
+            <p style="font-size:15px;">Status : <span class="text-white">{{ $users[0]->user_status }}</span><p>
+        </div>
+    @endif
     <hr>
-    <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a>
+    <a href="{{url()->previous()}}" class="btn btn-lg btn-danger">Cancel</a> 
     <a href="/users/{{ $users[0]->id }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
 
 </form>

@@ -5,6 +5,15 @@ Miscellaneous & Other Fees
 @endsection
 
 @section('content')
+
+@if ($errors->has('amount_paid'))
+  <script>
+    $(document).ready(function() {
+      $('#paymentModal').modal('show');
+    });
+  </script>
+@endif
+
 <div class="sticky">
     <h2 style="text-align: left">ID Number: {{ session()->get('student_id') }}</h2>
     <div class="triangle-right" style="width:290px;"></div>
@@ -43,26 +52,35 @@ Miscellaneous & Other Fees
     </div>
 
     <div id="paymentModal" class="modal fade" role="dialog" style="margin-top: 130px;">
-    <div class="modal-dialog">
-        <div class="modal-content" style="background-color: #3f704d;">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color: #3f704d;">
                 <div class="modal-header">
                     <h2 class="modal-title">Payment</h2>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <br>    
-                <div class="modal-body">
+                <br>
+                <br>
+                <div class="modal-body" style="padding: 0 25%;">
                     <div class="form-group">
                         <label for="amount_paid">Paid Amount</label>
-                        <input type="number" class="form-control" name="amount_paid" required>
+                        <input type="number" class="form-control" name="amount_paid">
+                        @if ($errors->has('amount_paid'))
+                        <span class="invalid feedback" role="alert">
+                            <p style="color:tomato;">{{$errors->first('amount_paid')}}</p>
+                        </span>
+                        @endif
                     </div>
                 </div>
                 <br>    
+                <br>
+                <br>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-lg btn-warning" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-lg btn-success">Submit</button>
                 </div>
+            </div>
         </div>
-    </div>
     </div>
 
 </form>

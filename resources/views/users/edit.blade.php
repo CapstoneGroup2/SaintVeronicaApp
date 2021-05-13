@@ -85,7 +85,7 @@ Users
                             @endif
                         </div>
                     </div>
-                    <div class="col-5">    
+                    <div class="col">    
                         <div class="form-group">
                             <label for="user_contact">Contact Number</label>
                             <input type="text" class="form-control" name="user_contact" value="{{ $user->user_contact }}" >

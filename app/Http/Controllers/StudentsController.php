@@ -176,7 +176,7 @@ class StudentsController extends Controller
     {
         $this->validate($request, [
             'student_first_name'              =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z_-\sp_ \s]+$/',
+            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
             'student_last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
             'student_email'                   =>  'required|email|unique:students,student_email,'.$id,
             'student_home_contact'            =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',

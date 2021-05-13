@@ -51,8 +51,8 @@ Classes
                     </div>
             </a>
             <div id="{{ $student_count['class_name'] }}" class="card-footer text-center">
-                <a href="/classes/{{ $student_count['class_id'] }}/edit" class="btn btn-lg btn-warning" role="button">Edit</a>
-                <button id="{{ $student_count['class_id'] }}" class="btn btn-lg btn-danger btn-remove">Delete</button>
+                <a href="/classes/{{ $student_count['class_id'] }}/edit" class="btn btn-md btn-warning" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
+                <button id="{{ $student_count['class_id'] }}" class="btn btn-md btn-danger btn-remove"><span class="glyphicon glyphicon-trash"></span></button>
             </div>
         </div>
     </div>

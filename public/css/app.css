@@ -406,9 +406,9 @@ div.right {
 }
 
 #enrollment-form select.form-control, #enrollment-form .image  {
-  font-size: 13px;
-  padding: 3px;
-  height: 35px;
+  font-size: 15px;
+  padding: 2px;
+  height: 33px;
 }
 
 #enrollment-form label {

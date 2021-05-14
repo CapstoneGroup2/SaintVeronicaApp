@@ -76,20 +76,20 @@ class StudentsController extends Controller
     {
         $this->validate($request, [
             'student_first_name'              =>  'required|max:225',
-            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_middle_name'             =>  'nullable|max:225',
+            'student_last_name'               =>  'required|max:225',
             'student_email'                   =>  'required|email|unique:students',
-            'student_home_contact'            =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+            'student_home_contact'            =>  'required|min:11|max:13',
             'student_address'                 =>  'required',
             'student_birth_date'              =>  'required|before:now',
             'student_age'                     =>  'required|numeric|min:2|max:100',
             'student_gender'                  =>  'required',
-            'student_mother_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_mother_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-            'student_father_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_father_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-            'student_guardian_name'           =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+            'student_mother_name'             =>  'nullable|max:225',
+            'student_mother_contact_number'   =>  'nullable|min:11|max:13',
+            'student_father_name'             =>  'nullable|max:225',
+            'student_father_contact_number'   =>  'nullable|min:11|max:13',
+            'student_guardian_name'           =>  'required|max:225',
+            'student_guardian_contact_number' =>  'required|min:11|max:13',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -187,21 +187,21 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'student_first_name'              =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_middle_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_first_name'              =>  'required|max:225',
+            'student_middle_name'             =>  'nullable|max:225',
+            'student_last_name'               =>  'required|max:225',
             'student_email'                   =>  'required|email|unique:students,student_email,'.$id,
-            'student_home_contact'            =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+            'student_home_contact'            =>  'required|min:11|max:13',
             'student_address'                 =>  'required',
             'student_birth_date'              =>  'required|before:now',
             'student_age'                     =>  'required|numeric|min:2|max:100',
             'student_gender'                  =>  'required',
-            'student_mother_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_mother_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-            'student_father_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_father_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-            'student_guardian_name'           =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+            'student_mother_name'             =>  'nullable|max:225',
+            'student_mother_contact_number'   =>  'nullable|min:11|max:13',
+            'student_father_name'             =>  'nullable|max:225',
+            'student_father_contact_number'   =>  'nullable|min:11|max:13',
+            'student_guardian_name'           =>  'required|max:225',
+            'student_guardian_contact_number' =>  'required|min:11|max:13',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -349,21 +349,21 @@ class StudentsController extends Controller
                         $row = array_combine($header, $row);
 
                         Validator::make($row, [
-                            'first_name'              =>  ['required', 'regex:/^[A-Za-z_-\s_ \s]+$/'],
-                            'middle_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-                            'last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+                            'first_name'              =>  'required|max:225',
+                            'middle_name'             =>  'nullable|max:225',
+                            'last_name'               =>  'required|max:225',
                             'email_address'           =>  'required|email|unique:students',
-                            'contact_number'          =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                            'contact_number'          =>  'required|min:11|max:13',
                             'home_address'            =>  'required',
                             'birth_date'              =>  'required|before:now',
                             'age'                     =>  'required|numeric|min:2|max:100',
                             'gender'                  =>  'required',
-                            'mother_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-                            'mother_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-                            'father_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-                            'father_contact_number'   =>  'nullable|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
-                            'guardian_name'           =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-                            'guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
+                            'mother_name'             =>  'nullable|max:225',
+                            'mother_contact_number'   =>  'nullable|min:11|max:13',
+                            'father_name'             =>  'nullable|max:225',
+                            'father_contact_number'   =>  'nullable|min:11|max:13',
+                            'guardian_name'           =>  'required|max:225',
+                            'guardian_contact_number' =>  'required|min:11|max:13',
                         ]);
 
                         if (!in_array($row['gender'], ['Female', 'Male'])) {

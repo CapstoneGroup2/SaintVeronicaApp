@@ -94,7 +94,15 @@ class StudentsController extends Controller
         ]);
 
         if (preg_match('~[0-9]+~', $request['student_first_name'])) {
-            return back()->with('student_first_name_error'. 'The first name should not contain number.');
+            return back()->with('student_first_name_error', 'The first name should not contain number.');
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_middle_name'])) {
+            return back()->with('student_middle_name_error', 'The first name should not contain number.');
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_last_name'])) {
+            return back()->with('student_last_name_error', 'The first name should not contain number.');
         }
 
         try {
@@ -196,6 +204,18 @@ class StudentsController extends Controller
             'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        if (preg_match('~[0-9]+~', $request['student_first_name'])) {
+            return back()->with('student_first_name_error', 'The first name should not contain number.');
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_middle_name'])) {
+            return back()->with('student_middle_name_error', 'The first name should not contain number.');
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_last_name'])) {
+            return back()->with('student_last_name_error', 'The first name should not contain number.');
+        }
             
         try {
             $student = Student::find($id);

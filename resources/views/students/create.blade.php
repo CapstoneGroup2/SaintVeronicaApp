@@ -28,12 +28,27 @@
                     <p style="color:tomato">{{ $errors->first('student_first_name') }}</p>
                 </span>
                 @endif
+                @if(session()->has('student_first_name_error'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{session()->get('student_first_name_error')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
         <div class="col">    
             <div class="form-group">
                 <label for="student_middle_name">Middle Name</label>
                 <input type="text" class="form-control" name="student_middle_name" value="{{ old('student_middle_name') }}" >
+                @if ($errors->has('student_middle_name'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{$errors->first('student_middle_name')}}</p>
+                    </span>
+                @endif
+                @if(session()->has('student_middle_name_error'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{session()->get('student_middle_name_error')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
         <div class="col">    
@@ -44,6 +59,11 @@
                 <span class="invalid feedback" role="alert">
                     <p style="color:tomato;">{{ $errors->first('student_last_name') }}</p>
                 </span>
+                @endif
+                @if(session()->has('student_last_name_error'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{session()->get('student_lasst_name_error')}}</p>
+                    </span>
                 @endif
             </div>
         </div>

@@ -51,24 +51,29 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        Validator::extend('alpha_spaces', function($attribute, $value)
-        {
-            return preg_match('/^[\pL\s]+$/u', $value);
-        });
-
         $data = $this->validate($request, [
-            'user_first_name'    =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'user_middle_name'   =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'user_last_name'     =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'user_first_name'    =>  'required|max:225',
+            'user_middle_name'   =>  'nullable|max:225',
+            'user_last_name'     =>  'required|max:225',
             'user_role_id'       =>  'required|numeric|min:1|max:2',
             'user_contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
             'user_address'       =>  'nullable',
-            'user_gender'        =>  'nullable|alpha_spaces',
-            'user_status'        =>  'nullable|alpha_spaces',
+            'user_gender'        =>  'nullable',
+            'user_status'        =>  'nullable',
             'user_email'         =>  'required|email|unique:users',
-        ], [
-            "alpha_spaces"     => "This field may only contain letters and spaces.",
         ]);
+
+        if (preg_match('~[0-9]+~', $request['user_first_name'])) {
+            return back()->with('user_first_name_error', 'The first name should not contain number.');
+        }
+
+        if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
+            return back()->with('user_middle_name_error', 'The first name should not contain number.');
+        }
+
+        if (preg_match('~[0-9]+~', $request['user_last_name'])) {
+            return back()->with('user_last_name_error', 'The first name should not contain number.');
+        }
 
         try {
             $user = new User();
@@ -131,27 +136,32 @@ class UsersController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        Validator::extend('alpha_spaces', function($attribute, $value)
-        {
-            return preg_match('/^[\pL\s]+$/u', $value);
-        });
-        
-        $data = $this->validate($request, [
-            'user_first_name'    =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'user_middle_name'   =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
-            'user_last_name'     =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+    {        
+        $this->validate($request, [
+            'user_first_name'    =>  'required|max:225',
+            'user_middle_name'   =>  'nullable|max:225',
+            'user_last_name'     =>  'required|max:225',
             'user_role_id'       =>  'required|numeric|min:1|max:2',
-            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'user_contact'       =>  'required|min:11|max:13',
             'user_address'       =>  'nullable',
             'user_email'         =>  'required|email|unique:users,user_email,'.$id,
-            'user_gender'        =>  'nullable|alpha_spaces',
-            'user_status'        =>  'nullable|alpha_spaces',
+            'user_gender'        =>  'nullable',
+            'user_status'        =>  'nullable',
             'password'           =>  'nullable|min:8|required_with:password_confirmation|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
             'password_confirmation'=>'nullable|min:8',
-        ], [
-            "alpha_spaces"       =>  "This field may only contain letters and spaces.",
         ]);
+
+        if (preg_match('~[0-9]+~', $request['user_first_name'])) {
+            return back()->with('user_first_name_error', 'The first name should not contain number.');
+        }
+
+        if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
+            return back()->with('user_middle_name_error', 'The first name should not contain number.');
+        }
+
+        if (preg_match('~[0-9]+~', $request['user_last_name'])) {
+            return back()->with('user_last_name_error', 'The first name should not contain number.');
+        }
 
         try {
             $user = User::find($id);

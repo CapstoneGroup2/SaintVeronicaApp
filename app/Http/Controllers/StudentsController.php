@@ -75,7 +75,7 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'student_first_name'              =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
+            'student_first_name'              =>  'required|max:225',
             'student_middle_name'             =>  'nullable|regex:/^[A-Za-z_-\s_ \s]+$/',
             'student_last_name'               =>  'required|regex:/^[A-Za-z_-\s_ \s]+$/',
             'student_email'                   =>  'required|email|unique:students',
@@ -92,6 +92,10 @@ class StudentsController extends Controller
             'student_guardian_contact_number' =>  'required|regex:/^[-0-9\+_-\s]+$/|min:11|max:13',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        if (preg_match('~[0-9]+~', $request['student_first_name'])) {
+            return back()->with('student_first_name_error'. 'The first name should not contain number.');
+        }
 
         try {
             $student = new Student();

@@ -36,6 +36,11 @@ Users
                                     <p style="color:tomato;">{{$errors->first('user_first_name')}}</p>
                                 </span>
                             @endif
+                            @if(session()->has('user_first_name_error'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{session()->get('user_first_name_error')}}</p>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="col">    
@@ -47,6 +52,11 @@ Users
                                     <p style="color:tomato;">{{$errors->first('user_middle_name')}}</p>
                                 </span>
                             @endif
+                            @if(session()->has('user_middle_name_error'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{session()->get('user_middle_name_error')}}</p>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="col">    
@@ -56,6 +66,11 @@ Users
                             @if ($errors->has('user_last_name'))
                                 <span class="invalid feedback" role="alert">
                                     <p style="color:tomato;">{{$errors->first('user_last_name')}}</p>
+                                </span>
+                            @endif
+                            @if(session()->has('user_last_name_error'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{session()->get('user_last_name_error')}}</p>
                                 </span>
                             @endif
                         </div>

@@ -8,7 +8,6 @@
     <title>{{config('app.name', 'St.Veronica System')}} - Login</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-theme.min.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -48,8 +47,14 @@
                     @endif
 
                     <div class="form-group">
-                        <label for="email" style="margin-bottom: 1rem; letter-spacing: 1px;">Email:</label>
-                        <input type="email" class="form-control" id="name" name="email" placeholder="Your Email *" value="{{ old('email') }}" />
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="email" style="text-align: right">Email:</label>
+                            </div>
+                            <div class="col">
+                                <input type="email" class="form-control" id="name" name="email" value="{{ old('email') }}" />
+                            </div>
+                        </div>
                         @if ($errors->has('email'))
                             <span class="invalid feedback" role="alert">
                                 <p style="color:tomato;">{{$errors->first('email')}}</p>
@@ -58,8 +63,15 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="password" style="margin-bottom: 1rem; letter-spacing: 1px;">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password *" value="{{ old('password') }}" />
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="password">Password:</label>
+                            </div>
+                            <div class="col">
+                                <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}" />
+                                <span toggle="#password" class="glyphicon glyphicon-eye-open field-icon toggle-password"></span>
+                            </div>
+                        </div>
                         @if ($errors->has('password'))
                             <span class="invalid feedback" role="alert">
                                 <p style="color:tomato;">{{$errors->first('password')}}</p>
@@ -84,5 +96,6 @@
             </div>
         </div>
     </div>
+    <script src="/js/login.js"></script>
     </body>
 </html>

@@ -82,13 +82,18 @@ class UsersController extends Controller
             $user->user_middle_name = $request['user_middle_name'];
             $user->user_last_name = $request['user_last_name'];
             $user->user_email = $request['user_email'];
-            $user->password = bcrypt('password');
             $user->user_contact = $request['user_contact'];
             $user->user_address = $request['user_address'];
             $user->user_gender = $request['user_gender'];
             $user->user_status = $request['user_status'];
             $user->user_active_status = 1;
-    
+
+            if ($request['user_role_id'] == 1) {
+                $user->password = bcrypt(ucwords($request['user_last_name']) . substr(strtolower($request['user_first_name']), 0, 2) . '@admin');
+            } else {
+                $user->password = bcrypt(ucwords($request['user_last_name']) . substr(strtolower($request['user_first_name']), 0, 2) . '@registrar');
+            }
+
             if ($request->hasFile('user_image')) {
                 $image = $request->file('user_image');
                 $name = $image->getClientOriginalName();
@@ -170,7 +175,6 @@ class UsersController extends Controller
             $user->user_middle_name = $request['user_middle_name'];
             $user->user_last_name = $request['user_last_name'];
             $user->user_email = $request['user_email'];
-            $user->password = bcrypt($request['password']);
             $user->user_contact = $request['user_contact'];
             $user->user_address = $request['user_address'];
             $user->user_gender = $request['user_gender'];

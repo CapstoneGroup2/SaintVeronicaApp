@@ -202,7 +202,7 @@ class StudentsController extends Controller
             'student_father_contact_number'   =>  'nullable|min:11|max:13',
             'student_guardian_name'           =>  'required|max:225',
             'student_guardian_contact_number' =>  'required|min:11|max:13',
-            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         if (preg_match('~[0-9]+~', $request['student_first_name'])) {
@@ -260,9 +260,8 @@ class StudentsController extends Controller
             PaymentsHistory::where('student_id', $id)->delete();
             Payment::where('student_id', $id)->delete();
             StudentsClasses::where('student_id', $id)->delete();
-            $student = Student::find($id);
+            $student = Student::findOrFail($id);
             $student->delete();
-            $student->save();
         } catch (\Exception $exception) {
             return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'There is error in deleting student!');
         }

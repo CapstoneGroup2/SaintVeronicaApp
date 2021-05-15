@@ -33,7 +33,6 @@ class UsersController extends Controller
                     $button = '<a href="/users/'. $data->id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-eye-open"></span></a>';
                     $button .= '<a href="/users/'. $data->id .'/edit
                     " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
-                    $button .= '<button type="button" id="'. $data->id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
                     return $button;
                 })
                 ->rawColumns(['role_name', 'full_name', 'action'])
@@ -132,7 +131,7 @@ class UsersController extends Controller
             ->where('users.id', $id)
             ->select('users.id', 'users.role_id', 'users.user_first_name', 'users.user_middle_name', 'users.user_last_name', 
                 'users.user_address', 'users.user_image', 'users.user_contact', 'users.user_email', 
-                'roles.role_name', 'users.user_address', 'users.user_gender', 'users.user_status')
+                'roles.role_name', 'users.user_address', 'users.user_gender', 'users.user_status', 'user_active_status')
             ->get();
 
         $roles = Role::all();
@@ -154,6 +153,7 @@ class UsersController extends Controller
             'user_status'        =>  'nullable',
             'password'           =>  'nullable|min:8|required_with:password_confirmation|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
             'password_confirmation'=>'nullable|min:8',
+            'user_active_status' =>  'required|numeric|min:1|max:2'
         ]);
 
         if (preg_match('~[0-9]+~', $request['user_first_name'])) {
@@ -179,6 +179,7 @@ class UsersController extends Controller
             $user->user_address = $request['user_address'];
             $user->user_gender = $request['user_gender'];
             $user->user_status = $request['user_status'];
+            $user->user_active_status = $request['user_active_status'];
 
             if ($request->hasFile('user_image')) {
                 $image = $request->file('user_image');
@@ -197,17 +198,6 @@ class UsersController extends Controller
             return redirect('/users');
         } catch (\Exception $exception) {
             return redirect('/users')->with('error_message', 'There is error in updating user information!');
-        }
-    }
-
-    public function destroy($id)
-    {
-        try {
-            $user = User::find($id);
-            $user->user_active_status = 0;
-            $user->save();
-        } catch (\Exception $exception) {
-            return redirect('/users')->with('error_message', 'There is error in deleting user!');
         }
     }
 }

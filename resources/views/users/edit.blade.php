@@ -160,8 +160,12 @@ Users
                                 @if($user->user_gender == 'Female')
                                     <option value="Female" selected>Female</option>
                                     <option value="Male">Male</option>
-                                @else
+                                @elseif($user->user_gender == 'Male')
                                     <option value="Male" selected>Male</option>
+                                    <option value="Female">Female</option>
+                                @else 
+                                    <option value="" selected>Select Gender</option>
+                                    <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 @endif
                             </select>
@@ -174,9 +178,27 @@ Users
                                 @if($user->user_status == 'Single')
                                     <option value="Single" selected>Single</option>
                                     <option value="Married">Married</option>
-                                @else
+                                @elseif($user->user_status == 'Married')
                                     <option value="Married" selected>Married</option>
                                     <option value="Single">Single</option>
+                                @else 
+                                    <option value="" selected>Select Status</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="user_active_status">Active Status</label>
+                            <select class="form-control" name="user_active_status">
+                                @if($user->user_active_status == '1')
+                                    <option value="1" selected>True</option>
+                                    <option value="2">False</option>
+                                @elseif($user->user_active_status == '2')
+                                    <option value="2" selected>False</option>
+                                    <option value="1">True</option>
                                 @endif
                             </select>
                         </div>

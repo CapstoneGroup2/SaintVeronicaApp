@@ -130,6 +130,12 @@ nav {
   display: inline !important;
 }
 
+#logo-login {
+  width: 130px;
+  height: 120px;
+  margin: 0 38% 30px 38%;
+}
+
 div.login {
   width: 150px;
   margin: 100px;
@@ -239,15 +245,6 @@ img#profile {
   padding: 1px 5px;
 }
 
-img#logo-login {
-  width: 30%;
-  border-radius: 50%;
-  height: 30%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 div.container {
   max-width: 98% !important;
   padding: 10px;
@@ -279,7 +276,7 @@ div.container {
   color: #333;
 }
 .login-container form{
-  padding: 10%;
+  padding: 8% 8%;
 }
 .btnSubmit
 { 

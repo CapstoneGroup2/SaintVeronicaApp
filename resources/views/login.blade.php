@@ -38,9 +38,10 @@
                 <form method="POST" action="{{ url('/login') }}">
                     @csrf
 
+                    <img id="logo-login" src="{{ URL::to('/images/logo.jpg') }}">
 
                     @if($message = Session::get('error'))
-                        <div class="alert alert-danger alert-block" style="font-size: 13px;">
+                        <div class="alert alert-danger alert-block" style="font-size: 15px;letter-spacing: 2px;">
                             <button class="close" type="button" data-dismiss="alert">x</button>
                             <strong>{{ $message }}</strong>
                         </div>
@@ -53,15 +54,14 @@
                             </div>
                             <div class="col">
                                 <input type="email" class="form-control" id="name" name="email" value="{{ old('email') }}" />
+                                @if ($errors->has('email'))
+                                    <span class="invalid feedback" role="alert">
+                                        <p style="color:tomato;">{{$errors->first('email')}}</p>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        @if ($errors->has('email'))
-                            <span class="invalid feedback" role="alert">
-                                <p style="color:tomato;">{{$errors->first('email')}}</p>
-                            </span>
-                        @endif
                     </div>
-                    
                     <div class="form-group">
                         <div class="row">
                             <div class="col-4">
@@ -70,17 +70,15 @@
                             <div class="col">
                                 <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}" />
                                 <span toggle="#password" class="glyphicon glyphicon-eye-open field-icon toggle-password"></span>
+                                @if ($errors->has('password'))
+                                    <span class="invalid feedback" role="alert">
+                                        <p style="color:tomato;">{{$errors->first('password')}}</p>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        @if ($errors->has('password'))
-                            <span class="invalid feedback" role="alert">
-                                <p style="color:tomato;">{{$errors->first('password')}}</p>
-                            </span>
-                        @endif
                     </div>
-
                     <br>
-
                     <div class="form-group">
                         <div class="row">
                             <div class="col">

@@ -6,6 +6,8 @@ Route::get('/login', 'Auth\MainController@index');
 
 Route::post('/login', 'Auth\MainController@checklogin');
 
+// Auth::routes(['verify' => true]);
+
 Route::middleware(['admin'])->group(function () {
 
     Route::get('/', function() {
@@ -40,7 +42,7 @@ Route::middleware(['admin'])->group(function () {
 
     Route::resource('/announcements', 'AnnouncementsController')->only([
         'store', 'show', 'edit', 'update', 'delete'
-    ]);;
+    ]);
 });
 
 Route::middleware(['registrar'])->group(function () {
@@ -61,6 +63,8 @@ Route::middleware(['registrar'])->group(function () {
 Route::middleware(['web'])->group(function () {
     
     Route::get('/logout', 'Auth\MainController@logout');
+
+    Route::get('/students/send-mail', 'StudentsController@sendMail');
 
     Route::get('/students/classes/import', 'StudentsController@toImport');
 
@@ -94,9 +98,9 @@ Route::middleware(['web'])->group(function () {
     
     Route::resource('/announcements', 'AnnouncementsController')->only([
         'index'
-    ]);;
+    ]);
     
     Route::resource('/users', 'UsersController')->only([
         'edit', 'update'
-    ]);;
+    ]);
 });

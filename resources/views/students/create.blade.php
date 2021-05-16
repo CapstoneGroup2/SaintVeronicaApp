@@ -12,7 +12,7 @@
 </div>
 
 <form id="enrollment-form" action="/students" method="post" enctype="multipart/form-data">
-    <div class="sticky" style="top: 142px !important; background-color: #3f704d !important">
+    <div class="sticky" style="top: 138px !important; background-color: #3f704d !important">
         <h2 class="text-warning">Enrollment Form</h2> 
         <hr>
     </div>

@@ -104,7 +104,7 @@ class UsersController extends Controller
     
             $user->user_image = $name;
             $user->save();   
-    
+
             return redirect('/users')->with('success', 'User has successfully created!');
         } catch (\Exception $exception) {
             return redirect('/users')->with('error_message', 'There is error in creating user!');

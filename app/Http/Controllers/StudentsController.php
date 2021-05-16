@@ -90,7 +90,7 @@ class StudentsController extends Controller
             'student_father_contact_number'   =>  'nullable|min:11|max:13',
             'student_guardian_name'           =>  'required|max:225',
             'student_guardian_contact_number' =>  'required|min:11|max:13',
-            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         if (preg_match('~[0-9]+~', $request['student_first_name'])) {
@@ -155,8 +155,10 @@ class StudentsController extends Controller
             $payment->save();
 
             session()->put('student_id', $student->id);
+            session()->put('student_enrolled', $student->student_email);
+            session()->put('class_enrolled', session()->get('present_class_name'));
 
-            return redirect('/students/payments/' . session()->get('present_class_id') . '/edit');
+            return redirect('/students/send-mail');
         } catch (\Exception $exception) {
             return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'There is error in enrolling student!');
         }
@@ -429,5 +431,16 @@ class StudentsController extends Controller
     public function exportAll()
     {
         return Excel::download(new StudentsExport, 'Students_' . (new \DateTime())->format(DATE_ATOM) . '.csv');
+    }
+
+    public function sendMail() 
+    {
+        $details = [    
+            'title' =>  'Welcome to Saint Veronica Learning Center!',
+            'body'  =>  'You are successfully enrolled as ' . session()->get('class_enrolled') . ' student in Saint Veronica Learning Center.'
+        ];
+        \Mail::to(session()->get('student_enrolled'))->send(new \App\Mail\TestMail($details));
+
+        return redirect('/students/payments/' . session()->get('present_class_id') . '/edit');
     }
 }

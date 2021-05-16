@@ -13,12 +13,13 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([ 
             'role_id'   =>  1,
-            'user_first_name' => 'Josephine',
-            'user_last_name' => 'Morre',
+            'user_first_name' => 'Admin',
+            'user_last_name' => 'Admin',
             'user_image' => 'default.png',
             'user_email' => 'admin@admin.com',
+            'email_verified_at' => now(),
             'user_contact'  => '0912-345-6789',
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('Admin@123'),
             'user_active_status' => 1,
             'created_at' => date('Y-m-d'),
             'updated_at' => date('Y-m-d'),
@@ -26,12 +27,13 @@ class UserTableSeeder extends Seeder
 
         DB::table('users')->insert([ 
             'role_id'   =>  2,
-            'user_first_name' => 'Josephine',
-            'user_last_name' => 'Morre',
+            'user_first_name' => 'Registrar',
+            'user_last_name' => 'Registrar',
             'user_image' => 'default.png',
             'user_email' => 'registrar@registrar.com',
+            'email_verified_at' => now(),
             'user_contact'  => '0912-345-6789',
-            'password' => bcrypt('registrar'),
+            'password' => bcrypt('Registrar@123'),
             'user_active_status' => 1,
             'created_at' => date('Y-m-d'),
             'updated_at' => date('Y-m-d'),

@@ -26,7 +26,6 @@ class AnnouncementsController extends Controller
         $announcement = new Announcement();
         $announcement->announcement_title = $request['announcement_title'];
         $announcement->announcement_message = $request['announcement_message'];
-        $announcement->is_approved = 1;
         $announcement->date_approved = date('Y-m-d H:i:s');
         $announcement->save();
 

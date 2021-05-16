@@ -17,20 +17,20 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('student_image')->nullable();
-            $table->string('student_first_name');
-            $table->string('student_middle_name')->nullable();
-            $table->string('student_last_name');
-            $table->string('student_email')->unique();
+            $table->string('student_first_name', 50);
+            $table->string('student_middle_name', 50)->nullable();
+            $table->string('student_last_name', 50);
+            $table->string('student_email', 225)->unique();
             $table->string('student_home_contact');
-            $table->string('student_address');
+            $table->string('student_address', 255);
             $table->integer('student_age');
             $table->date('student_birth_date');
             $table->string('student_gender');
-            $table->string('student_mother_name')->nullable();
+            $table->string('student_mother_name', 50)->nullable();
             $table->string('student_mother_contact_number')->nullable();
-            $table->string('student_father_name')->nullable();
+            $table->string('student_father_name', 50)->nullable();
             $table->string('student_father_contact_number')->nullable();
-            $table->string('student_guardian_name');
+            $table->string('student_guardian_name', 50);
             $table->string('student_guardian_contact_number');
             $table->timestamps();
         });

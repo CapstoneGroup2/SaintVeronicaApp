@@ -36,10 +36,10 @@ Announcements
 
 @foreach($announcements as $announcement)
   <div id="{{ $announcement -> announcement_title }}" class="card text-center card-home" style="padding: 0;">
-    <div class="card-header" style="padding: 10px;">
+    <div class="card-header" style="padding: 10px 100px;">
       <h2 class="card-text text-success">{{ $announcement -> announcement_title }}</h2>
     </div>
-    <div class="card-body" style="padding: 20px 30px;">
+    <div class="card-body" style="padding: 20px 150px;">
       <h4 class="card-text text-info">{{ $announcement -> announcement_message}}</h4>
     </div>
     <div class="card-footer text-muted" style="padding: 10px;">

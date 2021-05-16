@@ -18,8 +18,8 @@ class CreateMiscellaneousAndOtherFeesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('class_id');
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
-            $table->string('item_code');
-            $table->string('item_description');
+            $table->string('item_code', 50);
+            $table->string('item_description', 225);
             $table->double('item_price');
             $table->string('item_image')->nullable();
             $table->timestamps();

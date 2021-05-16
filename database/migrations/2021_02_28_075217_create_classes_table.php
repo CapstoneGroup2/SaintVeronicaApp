@@ -16,8 +16,8 @@ class CreateClassesTable extends Migration
         Schema::dropIfExists('classes');
         Schema::create('classes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('class_name');
-            $table->string('class_description')->nullable();
+            $table->string('class_name', 225);
+            $table->string('class_description', 10000)->nullable();
             $table->timestamps();
         });
     }

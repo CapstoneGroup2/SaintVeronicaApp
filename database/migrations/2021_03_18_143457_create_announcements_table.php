@@ -16,9 +16,8 @@ class CreateAnnouncementsTable extends Migration
         Schema::dropIfExists('announcements');
         Schema::create('announcements', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('announcement_title');
-            $table->string('announcement_message');
-            $table->integer('is_approved');
+            $table->string('announcement_title', 225);
+            $table->string('announcement_message', 10000);
             $table->timestamp('date_approved');
             $table->timestamps();
         });

@@ -8,7 +8,7 @@
 </head>
 <body>
     <div>
-        <center><img src="{{ URL::to('/images/logo_mail.jpg') }}"></center>
+        <center><img alt="Logo" src="{{ URL::to('/images/logo_mail.jpg') }}"></center>
         <br>
         <h3>{{ $details['title'] }}</h3>
         <br>

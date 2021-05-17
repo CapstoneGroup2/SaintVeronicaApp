@@ -77,12 +77,12 @@ class UsersController extends Controller
         try {
             $user = new User();
             $user->role_id = $request['user_role_id'];
-            $user->user_first_name = $request['user_first_name'];
-            $user->user_middle_name = $request['user_middle_name'];
-            $user->user_last_name = $request['user_last_name'];
+            $user->user_first_name = ucwords(strtolower($request['user_first_name']));
+            $user->user_middle_name = ucwords(strtolower($request['user_middle_name']));
+            $user->user_last_name = ucwords(strtolower($request['user_last_name']));
             $user->user_email = $request['user_email'];
             $user->user_contact = $request['user_contact'];
-            $user->user_address = $request['user_address'];
+            $user->user_address = ucwords(strtolower($request['user_address']));
             $user->user_gender = $request['user_gender'];
             $user->user_status = $request['user_status'];
             $user->user_active_status = 1;
@@ -171,12 +171,12 @@ class UsersController extends Controller
         try {
             $user = User::find($id);
             $user->role_id = $request['user_role_id'];
-            $user->user_first_name = $request['user_first_name'];
-            $user->user_middle_name = $request['user_middle_name'];
-            $user->user_last_name = $request['user_last_name'];
+            $user->user_first_name = ucwords(strtolower($request['user_first_name']));
+            $user->user_middle_name = ucwords(strtolower($request['user_middle_name']));
+            $user->user_last_name = ucwords(strtolower($request['user_last_name']));
             $user->user_email = $request['user_email'];
             $user->user_contact = $request['user_contact'];
-            $user->user_address = $request['user_address'];
+            $user->user_address = ucwords(strtolower($request['user_address']));
             $user->user_gender = $request['user_gender'];
             $user->user_status = $request['user_status'];
             $user->user_active_status = $request['user_active_status'];

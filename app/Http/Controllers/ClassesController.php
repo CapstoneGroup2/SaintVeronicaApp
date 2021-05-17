@@ -53,7 +53,7 @@ class ClassesController extends Controller
         ]);
 
         $class = new Classes();
-        $class->class_name = $request['class_name'];
+        $class->class_name = ucwords(strtolower($request['class_name']));
         $class->class_description = $request['class_description'];
         $class->save();
 
@@ -80,7 +80,7 @@ class ClassesController extends Controller
         ]);
 
         $class = Classes::find($id);
-        $class->class_name = $request['class_name'];
+        $class->class_name = ucwords(strtolower($request['class_name']));
         $class->class_description = $request['class_description'];
         $class->save();
 

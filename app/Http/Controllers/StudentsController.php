@@ -108,20 +108,20 @@ class StudentsController extends Controller
         try {
             $student = new Student();
             $student->id = Student::latest('id')->first()->id + 1;
-            $student->student_first_name = $request['student_first_name'];
-            $student->student_middle_name = $request['student_middle_name'];
-            $student->student_last_name = $request['student_last_name'];
+            $student->student_first_name = ucwords(strtolower($request['student_first_name']));
+            $student->student_middle_name = ucwords(strtolower($request['student_middle_name']));
+            $student->student_last_name = ucwords(strtolower($request['student_last_name']));
             $student->student_email = $request['student_email'];
             $student->student_home_contact = $request['student_home_contact'];
-            $student->student_address = $request['student_address'];
+            $student->student_address = ucwords(strtolower($request['student_address']));
             $student->student_gender = $request['student_gender'];
             $student->student_age = $request['student_age'];
             $student->student_birth_date = date('Y-m-d', strtotime($request['student_birth_date']));
-            $student->student_mother_name = $request['student_mother_name'];
+            $student->student_mother_name = ucwords(strtolower($request['student_mother_name']));
             $student->student_mother_contact_number = $request['student_mother_contact_number'];
-            $student->student_father_name = $request['student_father_name'];
+            $student->student_father_name = ucwords(strtolower($request['student_father_name']));
             $student->student_father_contact_number = $request['student_father_contact_number'];
-            $student->student_guardian_name = $request['student_guardian_name'];
+            $student->student_guardian_name = ucwords(strtolower($request['student_guardian_name']));
             $student->student_guardian_contact_number = $request['student_guardian_contact_number'];
 
             if ($request->hasFile('student_image')) {
@@ -224,20 +224,20 @@ class StudentsController extends Controller
         try {
             $student = Student::find($id);
             
-            $student->student_first_name = $request['student_first_name'];
-            $student->student_middle_name = $request['student_middle_name'];
-            $student->student_last_name = $request['student_last_name'];
+            $student->student_first_name = ucwords(strtolower($request['student_first_name']));
+            $student->student_middle_name = ucwords(strtolower($request['student_middle_name']));
+            $student->student_last_name = ucwords(strtolower($request['student_last_name']));
             $student->student_email = $request['student_email'];
             $student->student_home_contact = $request['student_home_contact'];
-            $student->student_address = $request['student_address'];
+            $student->student_address = ucwords(strtolower($request['student_address']));
             $student->student_gender = $request['student_gender'];
             $student->student_age = $request['student_age'];
             $student->student_birth_date = date('Y-m-d', strtotime($request['student_birth_date']));
-            $student->student_mother_name = $request['student_mother_name'];
+            $student->student_mother_name = ucwords(strtolower($request['student_mother_name']));
             $student->student_mother_contact_number = $request['student_mother_contact_number'];
-            $student->student_father_name = $request['student_father_name'];
+            $student->student_father_name = ucwords(strtolower($request['student_father_name']));
             $student->student_father_contact_number = $request['student_father_contact_number'];
-            $student->student_guardian_name = $request['student_guardian_name'];
+            $student->student_guardian_name = ucwords(strtolower($request['student_guardian_name']));
             $student->student_guardian_contact_number = $request['student_guardian_contact_number'];
 
             if ($request->hasFile('student_image')) {

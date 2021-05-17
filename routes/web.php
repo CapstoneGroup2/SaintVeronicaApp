@@ -6,8 +6,6 @@ Route::get('/login', 'Auth\MainController@index');
 
 Route::post('/login', 'Auth\MainController@checklogin');
 
-Auth::routes(['verify' => true]);
-
 Route::middleware(['admin'])->group(function () {
 
     Route::get('/', function() {

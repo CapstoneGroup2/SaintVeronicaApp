@@ -158,7 +158,9 @@ class StudentsController extends Controller
             session()->put('student_enrolled', $student->student_email);
             session()->put('class_enrolled', session()->get('present_class_name'));
 
-            return redirect('/students/send-mail');
+            // return redirect('/students/send-mail');
+
+            return redirect('/students/payments/' . session()->get('present_class_id') . '/edit');
         } catch (\Exception $exception) {
             return redirect('/students/classes/' . session()->get('present_class_id'))->with('error_message', 'There is error in enrolling student!');
         }

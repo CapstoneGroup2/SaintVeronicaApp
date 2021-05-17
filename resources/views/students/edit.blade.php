@@ -249,5 +249,5 @@ Students
 @endsection
 
 @section('script')  
-    <script src="{{URL::to('/js/student.js')}}"></script> 
+    <script src="{{ URL::to('/js/student.js') }}"></script>
 @endsection

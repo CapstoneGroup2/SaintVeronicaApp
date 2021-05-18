@@ -12,7 +12,7 @@ class AnnouncementsController extends Controller
 {
     public function index()
     {
-        $announcements = Announcement::orderBy('updated_at', 'desc')->get();
+        $announcements = Announcement::orderBy('created_at', 'desc')->get();
         return view('announcements.index', compact('announcements'));
     }
 
@@ -57,6 +57,5 @@ class AnnouncementsController extends Controller
     {
         $announcement = Announcement::find($id);
         $announcement->delete();
-        $announcement->save();
     }
 }

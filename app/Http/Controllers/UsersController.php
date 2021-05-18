@@ -60,6 +60,7 @@ class UsersController extends Controller
             'user_gender'        =>  'nullable',
             'user_status'        =>  'nullable',
             'user_email'         =>  'required|email|unique:users',
+            'user_image'         =>  'mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         if (preg_match('~[0-9]+~', $request['user_first_name'])) {
@@ -88,21 +89,21 @@ class UsersController extends Controller
             $user->user_active_status = 1;
 
             if ($request['user_role_id'] == 1) {
-                $user->password = bcrypt(ucwords($request['user_last_name']) . substr(strtolower($request['user_first_name']), 0, 2) . '@admin');
+                $user->password = bcrypt(ucwords(strtolower($request['user_last_name'])) . substr(strtolower($request['user_first_name']), 0, 2) . '@admin');
             } else {
-                $user->password = bcrypt(ucwords($request['user_last_name']) . substr(strtolower($request['user_first_name']), 0, 2) . '@registrar');
+                $user->password = bcrypt(ucwords(strtolower($request['user_last_name'])) . substr(strtolower($request['user_first_name']), 0, 2) . '@registrar');
             }
 
-            if ($request->hasFile('user_image')) {
-                $image = $request->file('user_image');
-                $name = $image->getClientOriginalName();
-                $destinationPath = public_path('/images/users');
-                $image->move($destinationPath, $name);
-            } else {
-                $name = 'default.png';
-            }
+            // if ($request->hasFile('user_image')) {
+            //     $image = $request->file('user_image');
+            //     $name = $image->getClientOriginalName();
+            //     $destinationPath = public_path('/images/users');
+            //     $image->move($destinationPath, $name);
+            // } else {
+            //     $name = 'default.png';  
+            // }
     
-            $user->user_image = $name;
+            $user->user_image = 'default.png';
             $user->save();   
 
             return redirect('/users')->with('success', 'User has successfully created!');
@@ -153,7 +154,8 @@ class UsersController extends Controller
             'user_status'        =>  'nullable',
             'password'           =>  'nullable|min:8|required_with:password_confirmation|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
             'password_confirmation'=>'nullable|min:8',
-            'user_active_status' =>  'required|numeric|min:1|max:2'
+            'user_active_status' =>  'required|numeric|min:1|max:2',
+            'user_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         if (preg_match('~[0-9]+~', $request['user_first_name'])) {

@@ -123,7 +123,7 @@ Users
                 @endif
             </div>
         </div>
-        <div class="col-3">    
+        <div class="col">    
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select class="form-control" name="user_gender">
@@ -153,9 +153,9 @@ Users
                 @endif
             </div>
         </div>
-        <div class="col">
+        <!-- <div class="col">
             <div class="form-group">
-                <label for="image">Profile Picture</label>
+                <label for="user_image">Profile Picture</label>
                 <input type="file" name="user_image" class="form-control image">
                 @if ($errors->has('user_image'))
                     <span class="invalid feedback" role="alert">
@@ -163,7 +163,7 @@ Users
                     </span>
                 @endif
             </div>
-        </div>
+        </div> -->
     </div>
 
     <hr>

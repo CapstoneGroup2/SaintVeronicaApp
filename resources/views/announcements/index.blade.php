@@ -43,7 +43,7 @@ Announcements
       <h4 class="card-text text-info">{{ $announcement -> announcement_message}}</h4>
     </div>
     <div class="card-footer text-muted" style="padding: 10px;">
-      <p style="font-size: 1.4rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> updated_at)) }}</p>
+      <p style="font-size: 1.4rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> created_at)) }}</p>
       @if (isset(Auth::user()->user_email) && Auth::user()->role_id == 1)
         <a href="/announcements/{{ $announcement->id }}/edit" class="btn btn-lg btn-warning" role="button"><span class="glyphicon glyphicon-pencil"></span></a>
         <button id="{{ $announcement->id }}" class="btn btn-lg btn-danger btn-remove"><span class="glyphicon glyphicon-trash"></span></button>

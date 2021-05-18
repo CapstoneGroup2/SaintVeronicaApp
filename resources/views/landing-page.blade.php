@@ -337,7 +337,7 @@
                                 <p class="card-text text-info">{{ $announcement -> announcement_message}}</p>
                             </div>
                             <div class="card-footer text-muted" style="padding: 10px;">
-                                <p style="font-size: 1.3rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> updated_at)) }}</p>
+                                <p style="font-size: 1.3rem;">{{ date("l, jS \of F Y, h:i:s A", strtotime($announcement -> created_at)) }}</p>
                             </div>
                         </div>
                         @endforeach

@@ -30,6 +30,7 @@ $(document).ready(function() {
             success: function(data) {
                 $('#confirmModal').modal('hide');
                 $('#btn-ok').text('OK');
+                location.reload();
             }
         });
     });

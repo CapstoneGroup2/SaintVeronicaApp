@@ -111,7 +111,7 @@ class StudentsController extends Controller
             $student->student_first_name = ucwords(strtolower($request['student_first_name']));
             $student->student_middle_name = ucwords(strtolower($request['student_middle_name']));
             $student->student_last_name = ucwords(strtolower($request['student_last_name']));
-            $student->student_email = $request['student_email'];
+            $student->student_email = strtolower($request['student_email']);
             $student->student_home_contact = $request['student_home_contact'];
             $student->student_address = ucwords(strtolower($request['student_address']));
             $student->student_gender = $request['student_gender'];
@@ -190,25 +190,6 @@ class StudentsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'student_first_name'              =>  'required|max:225',
-            'student_middle_name'             =>  'nullable|max:225',
-            'student_last_name'               =>  'required|max:225',
-            'student_email'                   =>  'required|email|unique:students,student_email,'.$id,
-            'student_home_contact'            =>  'required|min:11|max:13',
-            'student_address'                 =>  'required',
-            'student_birth_date'              =>  'required|before:now',
-            'student_age'                     =>  'required|numeric|min:2|max:100',
-            'student_gender'                  =>  'required',
-            'student_mother_name'             =>  'nullable|max:225',
-            'student_mother_contact_number'   =>  'nullable|min:11|max:13',
-            'student_father_name'             =>  'nullable|max:225',
-            'student_father_contact_number'   =>  'nullable|min:11|max:13',
-            'student_guardian_name'           =>  'required|max:225',
-            'student_guardian_contact_number' =>  'required|min:11|max:13',
-            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg',
-        ]);
-
         if (preg_match('~[0-9]+~', $request['student_first_name'])) {
             return back()->with('student_first_name_error', 'The first name should not contain number.');
         }
@@ -227,7 +208,7 @@ class StudentsController extends Controller
             $student->student_first_name = ucwords(strtolower($request['student_first_name']));
             $student->student_middle_name = ucwords(strtolower($request['student_middle_name']));
             $student->student_last_name = ucwords(strtolower($request['student_last_name']));
-            $student->student_email = $request['student_email'];
+            $student->student_email = strtolower($request['student_email']);
             $student->student_home_contact = $request['student_home_contact'];
             $student->student_address = ucwords(strtolower($request['student_address']));
             $student->student_gender = $request['student_gender'];

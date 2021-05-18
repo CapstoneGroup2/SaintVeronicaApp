@@ -80,7 +80,7 @@ class UsersController extends Controller
             $user->user_first_name = ucwords(strtolower($request['user_first_name']));
             $user->user_middle_name = ucwords(strtolower($request['user_middle_name']));
             $user->user_last_name = ucwords(strtolower($request['user_last_name']));
-            $user->user_email = $request['user_email'];
+            $user->user_email = strtolower($request['user_email']);
             $user->user_contact = $request['user_contact'];
             $user->user_address = ucwords(strtolower($request['user_address']));
             $user->user_gender = $request['user_gender'];
@@ -174,7 +174,7 @@ class UsersController extends Controller
             $user->user_first_name = ucwords(strtolower($request['user_first_name']));
             $user->user_middle_name = ucwords(strtolower($request['user_middle_name']));
             $user->user_last_name = ucwords(strtolower($request['user_last_name']));
-            $user->user_email = $request['user_email'];
+            $user->user_email = strtolower($request['user_email']);
             $user->user_contact = $request['user_contact'];
             $user->user_address = ucwords(strtolower($request['user_address']));
             $user->user_gender = $request['user_gender'];

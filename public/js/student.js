@@ -39,26 +39,11 @@ function setTable() {
     })
 }
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#profileImage')
-                .attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
 $(document).ready(function() {
 
     setTable();
 
     $("#loader").hide();
-
-    $('#birthDate').attr({max:today});
 
     $('#btn-add').click(function () {
         window.location = "/students/create";
@@ -115,25 +100,6 @@ $(document).ready(function() {
             location.reload(true);
         }
         });
-    })
-
-    $('input[name="student_birth_date"]').change(function () {  
-        var dob = new Date($('input[name="student_birth_date"]').val());  
-        //calculate month difference from current date in time  
-        var month_diff = Date.now() - dob.getTime();  
-        
-        //convert the calculated difference in date format  
-        var age_dt = new Date(month_diff);   
-        
-        //extract year from date      
-        var year = age_dt.getUTCFullYear();  
-        
-        //now calculate the age of the user  
-        var age = Math.abs(year - 1970);  
-        
-        //display the calculated age  
-        console.log("Age of the date entered: " + age + " years");  
-        $('input[name="student_age"]').val(age);
     })
 
 });

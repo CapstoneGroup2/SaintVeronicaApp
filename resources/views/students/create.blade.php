@@ -242,5 +242,33 @@
 @endsection
 
 @section('script')
-    <script src="{{ URL::to('/js/student.js') }}"></script>
+    <script>
+    $(document).ready(function () {
+
+        $('input[name="student_birth_date"]').change(function () {   
+            var dob = new Date($('input[name="student_birth_date"]').val());  
+            //calculate month difference from current date in time  
+            var month_diff = Date.now() - dob.getTime();  
+            
+            //convert the calculated difference in date format  
+            var age_dt = new Date(month_diff);   
+            
+            //extract year from date      
+            var year = age_dt.getUTCFullYear();  
+            
+            //now calculate the age of the user  
+            var age = year - 1970;  
+
+            if (age < 2) {
+                alert('Student should not be younger than 2 years old!');
+                $('input[name="student_birth_date"]').val('');
+                $('input[name="student_age"]').val(0);
+            } else {
+                //display the calculated age  
+                console.log("Age of the date entered: " + age + " years");  
+                $('input[name="student_age"]').val(age);
+            }
+        })
+    })
+    </script>
 @endsection

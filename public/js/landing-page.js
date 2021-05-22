@@ -22,9 +22,6 @@ function onload() {
         document.getElementById("demo").innerHTML += txt.charAt(i);
         i++;
         setTimeout(onload, speed);
-        // if (i === txt.length) {
-        //     document.getElementById("cursor").style.visibility = "visible";
-        // }
     }
 }
 function showImage(imgPath, imgText, galleryId) { 

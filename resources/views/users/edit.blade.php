@@ -210,7 +210,7 @@ Users
             <div class="col-3">
                 <div class="form-group center">
                     <br>
-                    <img id = "profileImage" src='/images/users/{{ $user->user_image }}' height="200px" width="92%">
+                    <img id = "profileImage" src='/images/users/{{ $user->user_image }}' height="300px" width="92%">
                     <br><br>
                     <label for="user_image">User Profile Picture</label>
                     <input type="file" onchange = "readURL(this);" class="form-control image" name="user_image" style="width:92%">

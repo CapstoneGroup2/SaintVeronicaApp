@@ -81,7 +81,8 @@ Users
                     <div class="col">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" >
+                            <input type="password" class="form-control" id="password" name="password" >
+                            <span toggle="#password" class="glyphicon glyphicon-eye-open field-icon toggle-password" style="color: black"></span>
                             @if ($errors->has('password'))
                                 <span class="invalid feedback" role="alert">
                                     <p style="color:tomato;">{{$errors->first('password')}}</p>
@@ -92,7 +93,8 @@ Users
                     <div class="col">
                         <div class="form-group">
                             <label for="password_confirmation">Confirm Password</label>
-                            <input type="password" class="form-control" name="password_confirmation" >
+                            <input type="password" class="form-control" id="confirmation" name="password_confirmation" >
+                            <span toggle="#confirmation" class="glyphicon glyphicon-eye-open field-icon toggle-confirmation" style="color: black"></span>
                             @if ($errors->has('password_confirmation'))
                                 <span class="invalid feedback" role="alert">
                                     <p style="color:tomato;">{{$errors->first('password_confirmation')}}</p>

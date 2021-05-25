@@ -531,3 +531,8 @@ a:hover {
   position: relative !important;
   z-index: 2;
 } 
+
+a.active, button.active {
+  background-color: #3f704d;
+  color: #FCF4A3;
+}

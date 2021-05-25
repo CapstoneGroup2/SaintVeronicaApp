@@ -14,7 +14,7 @@
                 <a href="/users/{{ Auth::user()->id }}/edit" role="button" class="btn btn-success" style="color: white !important">
                     <img id="profile" src="/images/users/{{ Auth::user()->user_image }}">{{ Auth::user()->user_email }}
                 </a>
-                <a href="/logout" role="button" class="btn btn-danger" style="color: white !important"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                <a href="/logout" role="button" id="btn-logout" class="btn btn-danger" style="color: white !important"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
             </div>
         </nav>
         
@@ -24,15 +24,15 @@
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
                 @if(Auth::user()->role_id == 1)
-                    <a href="/dashboard"><i class="fa fa-fw fa-home"></i> Dashboard</a>
-                    <button class="dropdown-btn"><i class="fa fa-fw fa-wrench"></i> Management
+                    <a href="/dashboard" id="1"><i class="fa fa-fw fa-home"></i> Dashboard</a>
+                    <button id="2" class="dropdown-btn"><i class="fa fa-fw fa-wrench"></i> Management
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
                         <a href="/users"><i class="fa fa-check-square"></i> Users</a>
                         <a href="/classes"><i class="fa fa-check-square"></i> Classes</a>
                     </div>
-                    <button class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 
+                    <button id="3" class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
@@ -40,7 +40,7 @@
                             <a href="/students/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
                         @endforeach
                     </div>
-                    <button class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
+                    <button id="4" class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
@@ -48,12 +48,12 @@
                             <a href="/miscellaneous-and-other-fees/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
                         @endforeach
                     </div>
-                    <a href="/payments-history"><i class="fa fa-fw fas fa-bullhorn"></i> History of Payments</a>
-                    <a href="/announcements"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>
+                    <a href="/payments-history" id="5"><i class="fa fa-fw fas fa-history"></i> History of Payments</a>
+                    <a href="/announcements" id="6"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>
 
                 @elseif(Auth::user()->role_id == 2)
-                    <a href="/home"><i class="fa fa-fw fa-home"></i> Home</a>
-                    <button class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 
+                    <a href="/home" id="1"><i class="fa fa-fw fa-home"></i> Home</a>
+                    <button id="2" class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
@@ -61,7 +61,7 @@
                             <a href="/students/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
                         @endforeach
                     </div>
-                    <button class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
+                    <button id="3" class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
@@ -69,9 +69,9 @@
                             <a href="/miscellaneous-and-other-fees/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
                         @endforeach
                     </div>
-                    <a href="/payments-history"><i class="fa fa-fw fas fa-bullhorn"></i> History of Payments</a>
-                    <a href="/announcements"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>
-                    <a href="/reports"><i class="fa fa-fw fa fa-area-chart"></i> Reports</a>
+                    <a id="4" href="/payments-history"><i class="fa fa-fw fas fa-history"></i> History of Payments</a>
+                    <a id="5" href="/announcements"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>
+                    <a id="6" href="/reports"><i class="fa fa-fw fa fa-area-chart"></i> Reports</a>
                 @endif
                 
             </div>
@@ -81,36 +81,7 @@
         </div>
         
         @yield('script')
-        <script>
-
-        var dropdown = document.getElementsByClassName("dropdown-btn")
-
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
-        function openNav() 
-        {
-            document.getElementById("mySidenav").style.display = "block";
-            document.getElementById("main").style.paddingLeft = "260px";
-            document.getElementById("toggle").style.display = "none";
-        }
-
-        function closeNav() 
-        {
-            document.getElementById("mySidenav").style.display = "none";
-            document.getElementById("main").style.paddingLeft= "10px";
-            document.getElementById("toggle").style.display = "block";
-        }
-
-        </script>
+        <script src="/js/app.js"></script>
     @else
 
         <script>window.location = "/logout";</script>

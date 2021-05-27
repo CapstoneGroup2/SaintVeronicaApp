@@ -88,6 +88,11 @@ Users
                                     <p style="color:tomato;">{{$errors->first('password')}}</p>
                                 </span>
                             @endif
+                            @if(session()->has('password_error'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{session()->get('password_error')}}</p>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="col">

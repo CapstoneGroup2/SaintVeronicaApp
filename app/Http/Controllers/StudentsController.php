@@ -98,11 +98,11 @@ class StudentsController extends Controller
         }
 
         if (preg_match('~[0-9]+~', $request['student_middle_name'])) {
-            return back()->with('student_middle_name_error', 'The first name should not contain number.');
+            return back()->with('student_middle_name_error', 'The middle name should not contain number.');
         }
 
         if (preg_match('~[0-9]+~', $request['student_last_name'])) {
-            return back()->with('student_last_name_error', 'The first name should not contain number.');
+            return back()->with('student_last_name_error', 'The last name should not contain number.');
         }
 
         try {
@@ -191,15 +191,15 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
         if (preg_match('~[0-9]+~', $request['student_first_name'])) {
-            return back()->with('student_first_name_error', 'The first name should not contain number.');
+            return back()->with('student_first_name_error', 'The first name field should not contain number.');
         }
 
         if (preg_match('~[0-9]+~', $request['student_middle_name'])) {
-            return back()->with('student_middle_name_error', 'The first name should not contain number.');
+            return back()->with('student_middle_name_error', 'The middle name field should not contain number.');
         }
 
         if (preg_match('~[0-9]+~', $request['student_last_name'])) {
-            return back()->with('student_last_name_error', 'The first name should not contain number.');
+            return back()->with('student_last_name_error', 'The last name field should not contain number.');
         }
             
         try {

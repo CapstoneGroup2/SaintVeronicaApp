@@ -64,15 +64,15 @@ class UsersController extends Controller
         ]);
 
         if (preg_match('~[0-9]+~', $request['user_first_name'])) {
-            return back()->with('user_first_name_error', 'The first name should not contain number.');
+            return back()->with('user_first_name_error', 'The first name field should not contain number.');
         }
 
         if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
-            return back()->with('user_middle_name_error', 'The first name should not contain number.');
+            return back()->with('user_middle_name_error', 'The middle name field should not contain number.');
         }
 
         if (preg_match('~[0-9]+~', $request['user_last_name'])) {
-            return back()->with('user_last_name_error', 'The first name should not contain number.');
+            return back()->with('user_last_name_error', 'The last name field should not contain number.');
         }
 
         try {
@@ -152,22 +152,26 @@ class UsersController extends Controller
             'user_email'         =>  'required|email|unique:users,user_email,'.$id,
             'user_gender'        =>  'nullable',
             'user_status'        =>  'nullable',
-            'password'           =>  'nullable|min:8|required_with:password_confirmation|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed',
+            'password'           =>  'nullable|min:8|required_with:password_confirmation|confirmed',
             'password_confirmation'=>'nullable|min:8',
             'user_active_status' =>  'required|numeric|min:1|max:2',
             'user_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         if (preg_match('~[0-9]+~', $request['user_first_name'])) {
-            return back()->with('user_first_name_error', 'The first name should not contain number.');
+            return back()->with('user_first_name_error', 'The first name field should not contain number.');
         }
 
         if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
-            return back()->with('user_middle_name_error', 'The first name should not contain number.');
+            return back()->with('user_middle_name_error', 'The middle name field should not contain number.');
         }
 
         if (preg_match('~[0-9]+~', $request['user_last_name'])) {
-            return back()->with('user_last_name_error', 'The first name should not contain number.');
+            return back()->with('user_last_name_error', 'The last name field should not contain number.');
+        }
+
+        if (!preg_match('~(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+~', $request['password'])) {
+            return back()->with('password_error', 'The password should contain symbol, uppercase letter, lowercase letter, and number.');
         }
 
         try {

@@ -3,6 +3,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>{{config('app.name', 'St.Veronica System')}} - @yield('title')</title>
+<link rel="shortcut icon" href="/images/logo.png"/>
 
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">

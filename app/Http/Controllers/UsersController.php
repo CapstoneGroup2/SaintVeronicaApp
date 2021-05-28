@@ -50,6 +50,27 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+        $error = 0;
+
+        if (preg_match('~[0-9]+~', $request['user_first_name'])) {
+            back()->with('user_first_name_error', 'The first name field should not contain number.');
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
+            back()->with('user_middle_name_error', 'The middle name field should not contain number.');
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['user_last_name'])) {
+            back()->with('user_last_name_error', 'The last name field should not contain number.');
+            $error = 1;
+        }
+
+        if ($error === 1) {
+            return back();
+        }
+
         $data = $this->validate($request, [
             'user_first_name'    =>  'required|max:225',
             'user_middle_name'   =>  'nullable|max:225',
@@ -62,18 +83,6 @@ class UsersController extends Controller
             'user_email'         =>  'required|email|unique:users',
             'user_image'         =>  'mimes:jpeg,png,jpg,gif,svg',
         ]);
-
-        if (preg_match('~[0-9]+~', $request['user_first_name'])) {
-            return back()->with('user_first_name_error', 'The first name field should not contain number.');
-        }
-
-        if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
-            return back()->with('user_middle_name_error', 'The middle name field should not contain number.');
-        }
-
-        if (preg_match('~[0-9]+~', $request['user_last_name'])) {
-            return back()->with('user_last_name_error', 'The last name field should not contain number.');
-        }
 
         try {
             $user = new User();
@@ -142,6 +151,33 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {        
+
+        $error = 0;
+
+        if (preg_match('~[0-9]+~', $request['user_first_name'])) {
+            back()->with('user_first_name_error', 'The first name field should not contain number.');
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
+            back()->with('user_middle_name_error', 'The middle name field should not contain number.');
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['user_last_name'])) {
+            back()->with('user_last_name_error', 'The last name field should not contain number.');
+            $error = 1;
+        }
+
+        if ($request['password'] && !preg_match('~(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+~', $request['password'])) {
+            back()->with('password_error', 'The password should contain symbol, uppercase letter, lowercase letter, and number.');
+            $error = 1;
+        }
+
+        if ($error === 1) {
+            return back();
+        }
+        
         $this->validate($request, [
             'user_first_name'    =>  'required|max:225',
             'user_middle_name'   =>  'nullable|max:225',
@@ -157,22 +193,6 @@ class UsersController extends Controller
             'user_active_status' =>  'required|numeric|min:1|max:2',
             'user_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
-
-        if (preg_match('~[0-9]+~', $request['user_first_name'])) {
-            return back()->with('user_first_name_error', 'The first name field should not contain number.');
-        }
-
-        if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
-            return back()->with('user_middle_name_error', 'The middle name field should not contain number.');
-        }
-
-        if (preg_match('~[0-9]+~', $request['user_last_name'])) {
-            return back()->with('user_last_name_error', 'The last name field should not contain number.');
-        }
-
-        if (!preg_match('~(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+~', $request['password'])) {
-            return back()->with('password_error', 'The password should contain symbol, uppercase letter, lowercase letter, and number.');
-        }
 
         try {
             $user = User::find($id);

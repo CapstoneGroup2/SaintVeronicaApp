@@ -74,6 +74,42 @@ class StudentsController extends Controller
 
     public function store(Request $request)
     {
+        $error = 0;
+
+        if (preg_match('~[0-9]+~', $request['student_first_name'])) {
+            back()->with('student_first_name_error', 'The first name field should not contain number.');
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_middle_name'])) {
+            back()->with('student_middle_name_error', 'The middle name field should not contain number.');
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_last_name'])) {
+            back()->with('student_last_name_error', 'The last name field  should not contain number.');
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_mother_name'])) {
+            back()->with('student_mother_name_error', "The mother's name field  should not contain number.");
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_father_name'])) {
+            back()->with('student_father_name_error', "The father's name field  should not contain number.");
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_guardian_name'])) {
+            back()->with('student_guardian_name_error', "The guardian's name field  should not contain number.");
+            $error = 1;
+        }
+
+        if ($error === 1) {
+            return back();
+        }
+
         $this->validate($request, [
             'student_first_name'              =>  'required|max:225',
             'student_middle_name'             =>  'nullable|max:225',
@@ -92,18 +128,6 @@ class StudentsController extends Controller
             'student_guardian_contact_number' =>  'required|min:11|max:13',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
-
-        if (preg_match('~[0-9]+~', $request['student_first_name'])) {
-            return back()->with('student_first_name_error', 'The first name field should not contain number.');
-        }
-
-        if (preg_match('~[0-9]+~', $request['student_middle_name'])) {
-            return back()->with('student_middle_name_error', 'The middle name field should not contain number.');
-        }
-
-        if (preg_match('~[0-9]+~', $request['student_last_name'])) {
-            return back()->with('student_last_name_error', 'The last name field  should not contain number.');
-        }
 
         try {
             $student = new Student();
@@ -190,16 +214,40 @@ class StudentsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $error = 0;
+
         if (preg_match('~[0-9]+~', $request['student_first_name'])) {
-            return back()->with('student_first_name_error', 'The first name field should not contain number.');
+            back()->with('student_first_name_error', 'The first name field should not contain number.');
+            $error = 1;
         }
 
         if (preg_match('~[0-9]+~', $request['student_middle_name'])) {
-            return back()->with('student_middle_name_error', 'The middle name field should not contain number.');
+            back()->with('student_middle_name_error', 'The middle name field should not contain number.');
+            $error = 1;
         }
 
         if (preg_match('~[0-9]+~', $request['student_last_name'])) {
-            return back()->with('student_last_name_error', 'The last name field should not contain number.');
+            back()->with('student_last_name_error', 'The last name field  should not contain number.');
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_mother_name'])) {
+            back()->with('student_mother_name_error', "The mother's name field  should not contain number.");
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_father_name'])) {
+            back()->with('student_father_name_error', "The father's name field  should not contain number.");
+            $error = 1;
+        }
+
+        if (preg_match('~[0-9]+~', $request['student_guardian_name'])) {
+            back()->with('student_guardian_name_error', "The guardian's name field  should not contain number.");
+            $error = 1;
+        }
+
+        if ($error === 1) {
+            return back();
         }
             
         try {

@@ -62,7 +62,7 @@
                 @endif
                 @if(session()->has('student_last_name_error'))
                     <span class="invalid feedback" role="alert">
-                        <p style="color:tomato;">{{session()->get('student_lasst_name_error')}}</p>
+                        <p style="color:tomato;">{{session()->get('student_last_name_error')}}</p>
                     </span>
                 @endif
             </div>
@@ -171,6 +171,11 @@
                     <p style="color:tomato;">{{$errors->first('student_mother_name')}}</p>
                 </span>
                 @endif
+                @if(session()->has('student_mother_name_error'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{session()->get('student_mother_name_error')}}</p>
+                    </span>
+                @endif
             </div>
         </div>
         <div class="col-5">
@@ -190,6 +195,11 @@
                 <span class="invalid feedback" role="alert">
                     <p style="color:tomato;">{{$errors->first('student_father_name')}}</p>
                 </span>
+                @endif
+                @if(session()->has('student_father_name_error'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{session()->get('student_father_name_error')}}</p>
+                    </span>
                 @endif
             </div>
         </div>
@@ -215,6 +225,11 @@
                 <span class="invalid feedback" role="alert">
                     <p style="color:tomato;">{{$errors->first('student_guardian_name')}}</p>
                 </span>
+                @endif
+                @if(session()->has('student_guardian_name_error'))
+                    <span class="invalid feedback" role="alert">
+                        <p style="color:tomato;">{{session()->get('student_guardian_name_error')}}</p>
+                    </span>
                 @endif
             </div>
         </div>

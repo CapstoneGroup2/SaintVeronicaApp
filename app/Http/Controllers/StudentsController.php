@@ -115,17 +115,17 @@ class StudentsController extends Controller
             'student_middle_name'             =>  'nullable|max:225',
             'student_last_name'               =>  'required|max:225',
             'student_email'                   =>  'required|email|unique:students',
-            'student_home_contact'            =>  'required|min:11|max:13',
+            'student_home_contact'            =>  'required|min:11|max:11|regex:/^[-0-9\+]+$/',
             'student_address'                 =>  'required',
             'student_birth_date'              =>  'required|before:now',
             'student_age'                     =>  'required|numeric|min:2|max:100',
             'student_gender'                  =>  'required',
             'student_mother_name'             =>  'nullable|max:225',
-            'student_mother_contact_number'   =>  'nullable|min:11|max:13',
+            'student_mother_contact_number'   =>  'nullable|min:11|max:11|regex:/^[-0-9\+]+$/',
             'student_father_name'             =>  'nullable|max:225',
-            'student_father_contact_number'   =>  'nullable|min:11|max:13',
+            'student_father_contact_number'   =>  'nullable|min:11|max:11|regex:/^[-0-9\+]+$/',
             'student_guardian_name'           =>  'required|max:225',
-            'student_guardian_contact_number' =>  'required|min:11|max:13',
+            'student_guardian_contact_number' =>  'required|min:11|max:11|regex:/^[-0-9\+]+$/',
             'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
@@ -249,6 +249,25 @@ class StudentsController extends Controller
         if ($error === 1) {
             return back();
         }
+
+        $this->validate($request, [
+            'student_first_name'              =>  'required|max:225',
+            'student_middle_name'             =>  'nullable|max:225',
+            'student_last_name'               =>  'required|max:225',
+            'student_email'                   =>  'required|email|unique:students,student_email,'.$id,
+            'student_home_contact'            =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'student_address'                 =>  'required',
+            'student_birth_date'              =>  'required|before:now',
+            'student_age'                     =>  'required|numeric|min:2|max:100',
+            'student_gender'                  =>  'required',
+            'student_mother_name'             =>  'nullable|max:225',
+            'student_mother_contact_number'   =>  'nullable|min:11|max:11|regex:/^[-0-9\+]+$/',
+            'student_father_name'             =>  'nullable|max:225',
+            'student_father_contact_number'   =>  'nullable|min:11|max:11|regex:/^[-0-9\+]+$/',
+            'student_guardian_name'           =>  'required|max:225',
+            'student_guardian_contact_number' =>  'required|min:11|max:11|regex:/^[-0-9\+]+$/',
+            'student_image'                   =>  'image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
             
         try {
             $student = Student::find($id);
@@ -304,7 +323,7 @@ class StudentsController extends Controller
     {
         $this->validate($request, [
             'class_id'    =>    'required',
-        ]);
+        ], ['class_id.required' => 'This field is required.' ] );
 
         try {
             $student_payment = Payment::where('student_id', $id)->get();

@@ -183,7 +183,7 @@ class UsersController extends Controller
             'user_middle_name'   =>  'nullable|max:225',
             'user_last_name'     =>  'required|max:225',
             'user_role_id'       =>  'required|numeric|min:1|max:2',
-            'user_contact'       =>  'required|min:11|max:13',
+            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
             'user_address'       =>  'nullable',
             'user_email'         =>  'required|email|unique:users,user_email,'.$id,
             'user_gender'        =>  'nullable',

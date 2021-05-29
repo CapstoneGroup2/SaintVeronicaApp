@@ -6,6 +6,15 @@
 
 @section('content')
 
+
+@if ($errors->has('class_id'))
+  <script>
+    $(document).ready(function() {
+      $('#admissionModal').modal('show');
+    });
+  </script>
+@endif
+
 <?php echo '<script>var payments = ' . $payments . ';</script>'; ?>
 
 <div class="sticky">

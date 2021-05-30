@@ -254,7 +254,7 @@ div.container {
 .row.content {height: 450px}
 
 .login-container{
-  margin: 5% auto;
+  margin: 5% auto 0 auto;
   width: 40%;
   padding: 10px;
 }

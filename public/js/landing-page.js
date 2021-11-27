@@ -1,6 +1,7 @@
 var i = 0;
 var txt = 'Get to know us!';
-var speed = 80;
+var speed = 90;
+
 
 window.fbAsyncInit = function() {
     FB.init({

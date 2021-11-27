@@ -31,6 +31,7 @@
                     <div class="dropdown-container">
                         <a href="/users"><i class="fa fa-check-square"></i> Users</a>
                         <a href="/classes"><i class="fa fa-check-square"></i> Classes</a>
+                        <a href="/school year"><i class="fa fa-check-square"></i>  School Year</a>
                     </div>
                     <button id="3" class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 
                         <i class="fa fa-caret-down"></i>

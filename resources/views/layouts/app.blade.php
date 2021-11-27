@@ -30,6 +30,7 @@
                     </button>
                     <div class="dropdown-container">
                         <a href="/users"><i class="fa fa-check-square"></i> Users</a>
+                        <a href="/school-year"><i class="fa fa-check-square"></i> List of School Year</a>
                         <a href="/classes"><i class="fa fa-check-square"></i> Classes</a>
                     </div>
                     <button id="3" class="dropdown-btn"><i class="fa fa-fw fa-user"></i> Students 

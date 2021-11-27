@@ -38,6 +38,10 @@ Route::middleware(['admin'])->group(function () {
         'create', 'store', 'edit', 'update'
     ]);
 
+    Route::resource('/school-year', 'SchoolYearController')->only([
+        'index', 'create', 'store', 'edit', 'update'
+    ]);
+
     Route::resource('/announcements', 'AnnouncementsController')->only([
         'store', 'show', 'edit', 'update', 'delete'
     ]);

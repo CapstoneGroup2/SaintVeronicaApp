@@ -42,10 +42,10 @@
             "database/seeds",
             "database/seeds/RolesTableSeeder.php",
             "database/seeds/ClassesTableSeeder.php",
-            "database/seeds/StudentsTableSeeder.php",
+            "database/seeds/ItemsTableSeeder.php",
             "database/seeds/UserTableSeeder.php",
-            "database/seeds/StudentsClassesTableSeeder.php",
-            "database/seeds/PaymentsTableSeeder.php",
+            "database/seeds/SchoolYearTableSeeder.php",
+            "database/seeds/ClassSectionsTableSeeder.php",
             "database/factories"
         ]
     },

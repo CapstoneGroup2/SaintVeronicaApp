@@ -16,22 +16,20 @@ class CreateStudentsTable extends Migration
         Schema::dropIfExists('students');
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('student_image')->nullable();
-            $table->string('student_first_name', 50);
-            $table->string('student_middle_name', 50)->nullable();
-            $table->string('student_last_name', 50);
-            $table->string('student_email', 225)->unique();
-            $table->string('student_home_contact');
-            $table->string('student_address', 255);
-            $table->integer('student_age');
-            $table->date('student_birth_date');
-            $table->string('student_gender');
-            $table->string('student_mother_name', 50)->nullable();
-            $table->string('student_mother_contact_number')->nullable();
-            $table->string('student_father_name', 50)->nullable();
-            $table->string('student_father_contact_number')->nullable();
-            $table->string('student_guardian_name', 50);
-            $table->string('student_guardian_contact_number');
+            $table->string('first_name', 50);
+            $table->string('middle_name', 50)->nullable();
+            $table->string('last_name', 50);
+            $table->string('email', 225)->unique();
+            $table->string('contact', 225);
+            $table->string('address', 255);
+            $table->date('birth_date');
+            $table->string('gender');
+            $table->string('mother_name', 50)->nullable();
+            $table->string('mother_contact_number')->nullable();
+            $table->string('father_name', 50)->nullable();
+            $table->string('father_contact_number')->nullable();
+            $table->string('guardian_name', 50);
+            $table->string('guardian_contact_number');
             $table->timestamps();
         });
     }

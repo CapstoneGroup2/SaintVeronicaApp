@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMiscellaneousAndOtherFeesTable extends Migration
+class CreateAdmissionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateMiscellaneousAndOtherFeesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('miscellaneous_and_other_fees');
-        Schema::create('miscellaneous_and_other_fees', function (Blueprint $table) {
+        Schema::dropIfExists('admission');
+        Schema::create('admission', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('item_id');
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->unsignedBigInteger('school_year_id');
             $table->foreign('school_year_id')->references('id')->on('school_year')->onDelete('cascade');
-            $table->unsignedBigInteger('class_id');
-            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
+            $table->unsignedBigInteger('class_section_id');
+            $table->foreign('class_section_id')->references('id')->on('class_sections')->onDelete('cascade');
+            $table->date('admission_date');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreateMiscellaneousAndOtherFeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('miscellaneous_and_other_fees');
+        Schema::dropIfExists('admission');
     }
 }

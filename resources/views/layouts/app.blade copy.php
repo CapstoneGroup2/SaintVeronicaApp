@@ -12,7 +12,7 @@
             <a class="navbar-brand logo" href=""><img id="logo-navbar" src="{{ URL::to('/images/logo.jpg') }}">St. Veronica Learning Center</a>
             <div class="btn-group" style="margin: 0 20px 0 auto">
                 <a href="/users/{{ Auth::user()->id }}/edit" role="button" class="btn btn-success" style="color: white !important">
-                    {{ Auth::user()->email }}
+                    <img id="profile" src="/images/users/{{ Auth::user()->image }}">{{ Auth::user()->email }}
                 </a>
                 <a href="/logout" role="button" id="btn-logout" class="btn btn-danger" style="color: white !important"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
             </div>
@@ -38,11 +38,17 @@
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
+                        @foreach(session()->get('classes') as $class)
+                            <a href="/students/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
+                        @endforeach
                     </div>
                     <button id="4" class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
+                        @foreach(session()->get('classes') as $class)
+                            <a href="/miscellaneous-and-other-fees/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
+                        @endforeach
                     </div>
                     <a href="/payments-history" id="5"><i class="fa fa-fw fas fa-history"></i> History of Payments</a>
                     <a href="/announcements" id="6"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>
@@ -53,11 +59,17 @@
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
+                        @foreach(session()->get('classes') as $class)
+                            <a href="/students/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
+                        @endforeach
                     </div>
                     <button id="3" class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
+                        @foreach(session()->get('classes') as $class)
+                            <a href="/miscellaneous-and-other-fees/classes/{{ $class[1] }}"><i class="fa fa-check-square"></i> {{ $class[0] }}</a>
+                        @endforeach
                     </div>
                     <a id="4" href="/payments-history"><i class="fa fa-fw fas fa-history"></i> History of Payments</a>
                     <a id="5" href="/announcements"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>

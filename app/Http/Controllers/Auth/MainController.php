@@ -23,9 +23,9 @@ class MainController extends Controller
         ]);
 
         $user_data = array(
-            'user_email'     =>  $request->get('email'),
+            'email'     =>  $request->get('email'),
             'password'       =>  $request->get('password'),
-            'user_active_status' => 1
+            'active_status' => 1
         );
 
         if(Auth::attempt($user_data))

@@ -22,7 +22,7 @@ class MiscellaneousAndOtherFeesController extends Controller
 
         if (request()->ajax())
         {
-            if (isset(Auth::user()->user_email) && Auth::user()->role_id == 1) {
+            if (isset(Auth::user()->email) && Auth::user()->role_id == 1) {
                 return datatables()->of($miscellaneous_and_other_fees)
                     ->addColumn('item_price', function($data){
                         return number_format($data->item_price, 2, '.', '');

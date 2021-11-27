@@ -12,10 +12,24 @@ class ClassesTableSeeder extends Seeder
     public function run()
     {
         DB::table('classes')->insert([ 
-            ['class_name' => 'Nursery', 'class_description' => 'Nursery'],
-            ['class_name' => 'Nursery 2', 'class_description' => 'Nursery 2'],
-            ['class_name' => 'Kinder 1', 'class_description' => 'Kinder 1'],
-            ['class_name' => 'Kinder 2', 'class_description' => 'Kinder 2'],
+            ['class' => 'Nursery'],
+            ['class' => 'Nursery 2'],
+            ['class' => 'Kinder 1'],
+            ['class' => 'Kinder 2'],
+            ['class' => 'Grade 1'],
+            ['class' => 'Grade 2'],
+            ['class' => 'Grade 3'],
+            ['class' => 'Grade 4'],
+            ['class' => 'Grade 5'],
+            ['class' => 'Grade 6'],
+            ['class' => 'Grade 7'],
+            ['class' => 'Grade 8'],
+            ['class' => 'Grade 9'],
+            ['class' => 'Grade 10'],
+            ['class' => 'Grade 11'],
+            ['class' => 'Grade 12'],
+            ['class' => 'Piano Lesson'],
+            ['class' => 'Voice Lesson']
         ]);
     }
 }

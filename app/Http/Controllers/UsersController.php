@@ -15,8 +15,8 @@ class UsersController extends Controller
     {
         $users = DB::table('users')
             ->join('roles', 'roles.id', '=', 'users.role_id')
-            ->select('users.id', 'users.user_first_name', 'users.user_last_name', 'users.user_address', 'users.user_email', 'users.user_contact', 'roles.role_name')
-            ->where('user_active_status', 1)
+            ->select('users.id', 'users.first_name', 'users.last_name', 'users.address', 'users.email', 'users.contact', 'roles.role_name')
+            ->where('active_status', 1)
             ->get();
 
         if (request()->ajax())
@@ -26,7 +26,7 @@ class UsersController extends Controller
                     return '<span style="font-weight: bold; font-size: 17px;">' . $data->role_name . '</span>';
                 })
                 ->addColumn('full_name', function($data) {
-                    $full_name = $data->user_first_name . ' ' . $data->user_last_name;
+                    $full_name = $data->first_name . ' ' . $data->last_name;
                     return $full_name;
                 })
                 ->addColumn('action', function($data) {
@@ -52,18 +52,18 @@ class UsersController extends Controller
     {
         $error = 0;
 
-        if (preg_match('~[0-9]+~', $request['user_first_name'])) {
-            back()->with('user_first_name_error', 'The first name field should not contain number.');
+        if (preg_match('~[0-9]+~', $request['first_name'])) {
+            back()->with('first_name_error', 'The first name field should not contain number.');
             $error = 1;
         }
 
-        if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
-            back()->with('user_middle_name_error', 'The middle name field should not contain number.');
+        if (preg_match('~[0-9]+~', $request['middle_name'])) {
+            back()->with('middle_name_error', 'The middle name field should not contain number.');
             $error = 1;
         }
 
-        if (preg_match('~[0-9]+~', $request['user_last_name'])) {
-            back()->with('user_last_name_error', 'The last name field should not contain number.');
+        if (preg_match('~[0-9]+~', $request['last_name'])) {
+            back()->with('last_name_error', 'The last name field should not contain number.');
             $error = 1;
         }
 
@@ -72,39 +72,39 @@ class UsersController extends Controller
         }
 
         $data = $this->validate($request, [
-            'user_first_name'    =>  'required|max:225',
-            'user_middle_name'   =>  'nullable|max:225',
-            'user_last_name'     =>  'required|max:225',
-            'user_role_id'       =>  'required|numeric|min:1|max:2',
-            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
-            'user_address'       =>  'nullable',
-            'user_gender'        =>  'nullable',
-            'user_status'        =>  'nullable',
-            'user_email'         =>  'required|email|unique:users',
-            'user_image'         =>  'mimes:jpeg,png,jpg,gif,svg',
+            'first_name'    =>  'required|max:225',
+            'middle_name'   =>  'nullable|max:225',
+            'last_name'     =>  'required|max:225',
+            'role_id'       =>  'required|numeric|min:1|max:2',
+            'contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'address'       =>  'nullable',
+            'gender'        =>  'nullable',
+            'status'        =>  'nullable',
+            'email'         =>  'required|email|unique:users',
+            'image'         =>  'mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         try {
             $user = new User();
-            $user->role_id = $request['user_role_id'];
-            $user->user_first_name = ucwords(strtolower($request['user_first_name']));
-            $user->user_middle_name = ucwords(strtolower($request['user_middle_name']));
-            $user->user_last_name = ucwords(strtolower($request['user_last_name']));
-            $user->user_email = strtolower($request['user_email']);
-            $user->user_contact = $request['user_contact'];
-            $user->user_address = ucwords(strtolower($request['user_address']));
-            $user->user_gender = $request['user_gender'];
-            $user->user_status = $request['user_status'];
-            $user->user_active_status = 1;
+            $user->role_id = $request['role_id'];
+            $user->first_name = ucwords(strtolower($request['first_name']));
+            $user->middle_name = ucwords(strtolower($request['middle_name']));
+            $user->last_name = ucwords(strtolower($request['last_name']));
+            $user->email = strtolower($request['email']);
+            $user->contact = $request['contact'];
+            $user->address = ucwords(strtolower($request['address']));
+            $user->gender = $request['gender'];
+            $user->status = $request['status'];
+            $user->active_status = 1;
 
-            if ($request['user_role_id'] == 1) {
-                $user->password = bcrypt(ucwords(strtolower($request['user_last_name'])) . substr(strtolower($request['user_first_name']), 0, 2) . '@admin');
+            if ($request['role_id'] == 1) {
+                $user->password = bcrypt(ucwords(strtolower($request['last_name'])) . substr(strtolower($request['first_name']), 0, 2) . '@admin');
             } else {
-                $user->password = bcrypt(ucwords(strtolower($request['user_last_name'])) . substr(strtolower($request['user_first_name']), 0, 2) . '@registrar');
+                $user->password = bcrypt(ucwords(strtolower($request['last_name'])) . substr(strtolower($request['first_name']), 0, 2) . '@registrar');
             }
 
-            // if ($request->hasFile('user_image')) {
-            //     $image = $request->file('user_image');
+            // if ($request->hasFile('image')) {
+            //     $image = $request->file('image');
             //     $name = $image->getClientOriginalName();
             //     $destinationPath = public_path('/images/users');
             //     $image->move($destinationPath, $name);
@@ -112,7 +112,7 @@ class UsersController extends Controller
             //     $name = 'default.png';  
             // }
     
-            $user->user_image = 'default.png';
+            $user->image = 'default.png';
             $user->save();   
 
             return redirect('/users')->with('success', 'User has successfully created!');
@@ -126,9 +126,9 @@ class UsersController extends Controller
         $users = DB::table('users')
             ->join('roles', 'roles.id', '=', 'users.role_id')
             ->where('users.id', $id)
-            ->select('users.id', 'users.user_first_name', 'users.user_middle_name', 'users.user_last_name', 
-                'users.user_address', 'users.user_image', 'users.user_contact', 'users.user_email', 
-                'roles.role_name', 'users.user_address', 'users.user_gender', 'users.user_status')
+            ->select('users.id', 'users.first_name', 'users.middle_name', 'users.last_name', 
+                'users.address', 'users.image', 'users.contact', 'users.email', 
+                'roles.role_name', 'users.address', 'users.gender', 'users.status')
             ->get();
             
         return view('users.show', compact('users'));
@@ -139,9 +139,9 @@ class UsersController extends Controller
         $users = DB::table('users')
             ->join('roles', 'roles.id', '=', 'users.role_id')
             ->where('users.id', $id)
-            ->select('users.id', 'users.role_id', 'users.user_first_name', 'users.user_middle_name', 'users.user_last_name', 
-                'users.user_address', 'users.user_image', 'users.user_contact', 'users.user_email', 
-                'roles.role_name', 'users.user_address', 'users.user_gender', 'users.user_status', 'user_active_status')
+            ->select('users.id', 'users.role_id', 'users.first_name', 'users.middle_name', 'users.last_name', 
+                'users.address', 'users.image', 'users.contact', 'users.email', 
+                'roles.role_name', 'users.address', 'users.gender', 'users.status', 'active_status')
             ->get();
 
         $roles = Role::all();
@@ -154,18 +154,18 @@ class UsersController extends Controller
 
         $error = 0;
 
-        if (preg_match('~[0-9]+~', $request['user_first_name'])) {
-            back()->with('user_first_name_error', 'The first name field should not contain number.');
+        if (preg_match('~[0-9]+~', $request['first_name'])) {
+            back()->with('first_name_error', 'The first name field should not contain number.');
             $error = 1;
         }
 
-        if (preg_match('~[0-9]+~', $request['user_middle_name'])) {
-            back()->with('user_middle_name_error', 'The middle name field should not contain number.');
+        if (preg_match('~[0-9]+~', $request['middle_name'])) {
+            back()->with('middle_name_error', 'The middle name field should not contain number.');
             $error = 1;
         }
 
-        if (preg_match('~[0-9]+~', $request['user_last_name'])) {
-            back()->with('user_last_name_error', 'The last name field should not contain number.');
+        if (preg_match('~[0-9]+~', $request['last_name'])) {
+            back()->with('last_name_error', 'The last name field should not contain number.');
             $error = 1;
         }
 
@@ -179,40 +179,39 @@ class UsersController extends Controller
         }
         
         $this->validate($request, [
-            'user_first_name'    =>  'required|max:225',
-            'user_middle_name'   =>  'nullable|max:225',
-            'user_last_name'     =>  'required|max:225',
-            'user_role_id'       =>  'required|numeric|min:1|max:2',
-            'user_contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
-            'user_address'       =>  'nullable',
-            'user_email'         =>  'required|email|unique:users,user_email,'.$id,
-            'user_gender'        =>  'nullable',
-            'user_status'        =>  'nullable',
+            'first_name'    =>  'required|max:225',
+            'middle_name'   =>  'nullable|max:225',
+            'last_name'     =>  'required|max:225',
+            'role_id'       =>  'required|numeric|min:1|max:2',
+            'contact'       =>  'required|regex:/^[-0-9\+]+$/|min:11|max:13',
+            'address'       =>  'nullable',
+            'email'         =>  'required|email|unique:users,email,'.$id,
+            'gender'        =>  'nullable',
+            'status'        =>  'nullable',
             'password'           =>  'nullable|min:8|required_with:password_confirmation|confirmed',
             'password_confirmation'=>'nullable|min:8',
-            'user_active_status' =>  'required|numeric|min:1|max:2',
-            'user_image'         =>  'image|mimes:jpeg,png,jpg,gif,svg',
+            'active_status' =>  'required|numeric|min:1|max:2',
         ]);
 
         try {
             $user = User::find($id);
-            $user->role_id = $request['user_role_id'];
-            $user->user_first_name = ucwords(strtolower($request['user_first_name']));
-            $user->user_middle_name = ucwords(strtolower($request['user_middle_name']));
-            $user->user_last_name = ucwords(strtolower($request['user_last_name']));
-            $user->user_email = strtolower($request['user_email']);
-            $user->user_contact = $request['user_contact'];
-            $user->user_address = ucwords(strtolower($request['user_address']));
-            $user->user_gender = $request['user_gender'];
-            $user->user_status = $request['user_status'];
-            $user->user_active_status = $request['user_active_status'];
+            $user->role_id = $request['role_id'];
+            $user->first_name = ucwords(strtolower($request['first_name']));
+            $user->middle_name = ucwords(strtolower($request['middle_name']));
+            $user->last_name = ucwords(strtolower($request['last_name']));
+            $user->email = strtolower($request['email']);
+            $user->contact = $request['contact'];
+            $user->address = ucwords(strtolower($request['address']));
+            $user->gender = $request['gender'];
+            $user->status = $request['status'];
+            $user->active_status = $request['active_status'];
 
-            if ($request->hasFile('user_image')) {
-                $image = $request->file('user_image');
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
                 $name = $image->getClientOriginalName();
                 $destinationPath = public_path('/images/users');
                 $image->move($destinationPath, $name);
-                $user->user_image = $name;
+                $user->image = $name;
             } 
     
             if($request['password'] != null) {

@@ -7,7 +7,7 @@ Users
 @section('content')
 
 <div class="sticky">
-    <h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
+    <h2 style="text-align: left">{{ $users[0]->role }}</h2>
     @if($users[0]->role_id == 1)
         <div class="triangle-right" style="width:230px;"></div>
     @else
@@ -29,48 +29,48 @@ Users
                 <div class="row">
                     <div class="col">    
                         <div class="form-group">
-                            <label for="user_first_name">First Name</label>
-                            <input type="text" class="form-control" name="user_first_name" value="{{ $user->user_first_name }}" >
-                            @if ($errors->has('user_first_name'))
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control" name="first_name" value="{{ $user->first_name }}" >
+                            @if ($errors->has('first_name'))
                                 <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{$errors->first('user_first_name')}}</p>
+                                    <p style="color:tomato;">{{$errors->first('first_name')}}</p>
                                 </span>
                             @endif
-                            @if(session()->has('user_first_name_error'))
+                            @if(session()->has('first_name_error'))
                                 <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{session()->get('user_first_name_error')}}</p>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col">    
-                        <div class="form-group">
-                            <label for="user_middle_name">Middle Name</label>
-                            <input type="text" class="form-control" name="user_middle_name" value="{{ $user->user_middle_name }}" >
-                            @if ($errors->has('user_middle_name'))
-                                <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{$errors->first('user_middle_name')}}</p>
-                                </span>
-                            @endif
-                            @if(session()->has('user_middle_name_error'))
-                                <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{session()->get('user_middle_name_error')}}</p>
+                                    <p style="color:tomato;">{{session()->get('first_name_error')}}</p>
                                 </span>
                             @endif
                         </div>
                     </div>
                     <div class="col">    
                         <div class="form-group">
-                            <label for="user_last_name">Last Name</label>
-                            <input type="text" class="form-control" name="user_last_name" value="{{ $user->user_last_name }}" >
-                            @if ($errors->has('user_last_name'))
+                            <label for="middle_name">Middle Name</label>
+                            <input type="text" class="form-control" name="middle_name" value="{{ $user->middle_name }}" >
+                            @if ($errors->has('middle_name'))
                                 <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{$errors->first('user_last_name')}}</p>
+                                    <p style="color:tomato;">{{$errors->first('middle_name')}}</p>
                                 </span>
                             @endif
-                            @if(session()->has('user_last_name_error'))
+                            @if(session()->has('middle_name_error'))
                                 <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{session()->get('user_last_name_error')}}</p>
+                                    <p style="color:tomato;">{{session()->get('middle_name_error')}}</p>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col">    
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" value="{{ $user->last_name }}" >
+                            @if ($errors->has('last_name'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{$errors->first('last_name')}}</p>
+                                </span>
+                            @endif
+                            @if(session()->has('last_name_error'))
+                                <span class="invalid feedback" role="alert">
+                                    <p style="color:tomato;">{{session()->get('last_name_error')}}</p>
                                 </span>
                             @endif
                         </div>
@@ -109,11 +109,11 @@ Users
                     </div>
                     <div class="col">    
                         <div class="form-group">
-                            <label for="user_contact">Contact Number</label>
-                            <input type="text" class="form-control" name="user_contact" value="{{ $user->user_contact }}" >
-                            @if ($errors->has('user_contact'))
+                            <label for="contact">Contact Number</label>
+                            <input type="text" class="form-control" name="contact" value="{{ $user->contact }}" >
+                            @if ($errors->has('contact'))
                                 <span class="invalid feedback" role="alert">
-                                    <p style="color:tomato;">{{$errors->first('user_contact')}}</p>
+                                    <p style="color:tomato;">{{$errors->first('contact')}}</p>
                                 </span>
                             @endif
                         </div>
@@ -121,21 +121,21 @@ Users
                 </div>
                 <br>
                 <div class="form-group">
-                    <label for="user_email">Email Address</label>
-                    <input type="email" class="form-control" name="user_email" value="{{ $user->user_email }}" >
-                    @if ($errors->has('user_email'))
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" name="email" value="{{ $user->email }}" >
+                    @if ($errors->has('email'))
                         <span class="invalid feedback" role="alert">
-                            <p style="color:tomato;">{{$errors->first('user_email')}}</p>
+                            <p style="color:tomato;">{{$errors->first('email')}}</p>
                         </span>
                     @endif
                 </div>
                 <br>
                 <div class="form-group">
-                    <label for="user_address">Home Address</label>
-                    <input type="text" class="form-control" name="user_address" value="{{ $user->user_address }}" >
-                    @if ($errors->has('user_address'))
+                    <label for="address">Home Address</label>
+                    <input type="text" class="form-control" name="address" value="{{ $user->address }}" >
+                    @if ($errors->has('address'))
                         <span class="invalid feedback" role="alert">
-                            <p style="color:tomato;">{{$errors->first('user_address')}}</p>
+                            <p style="color:tomato;">{{$errors->first('address')}}</p>
                         </span>
                     @endif
                 </div>
@@ -143,17 +143,17 @@ Users
                 <div class="row">
                     <div class="col">    
                         <div class="form-group">
-                            <label for="user_role_id">User Role</label>
-                            <select class="form-control" name="user_role_id">
+                            <label for="role_id">User Role</label>
+                            <select class="form-control" name="role_id">
                                 @foreach($roles as $role)
                                     @if($role->id == $user->role_id)
-                                        <option value="{{ $role->id }}" selected>{{ $role->role_name }}</option>
+                                        <option value="{{ $role->id }}" selected>{{ $role->role }}</option>
                                     @else
-                                        <option value="{{ $role->id }}">{{ $role->role_name }}</option>
+                                        <option value="{{ $role->id }}">{{ $role->role }}</option>
                                     @endif
                                 @endforeach
                             </select>
-                            @if ($errors->has('user_role_id'))
+                            @if ($errors->has('role_id'))
                                 <span class="invalid feedback" role="alert">
                                     <p style="color:tomato;">The user role field is required.   </p>
                                 </span>
@@ -162,12 +162,12 @@ Users
                     </div>
                     <div class="col">    
                         <div class="form-group">
-                            <label for="user_gender">Gender</label>
-                            <select class="form-control" name="user_gender">
-                                @if($user->user_gender == 'Female')
+                            <label for="gender">Gender</label>
+                            <select class="form-control" name="gender">
+                                @if($user->gender == 'Female')
                                     <option value="Female" selected>Female</option>
                                     <option value="Male">Male</option>
-                                @elseif($user->user_gender == 'Male')
+                                @elseif($user->gender == 'Male')
                                     <option value="Male" selected>Male</option>
                                     <option value="Female">Female</option>
                                 @else 
@@ -180,12 +180,12 @@ Users
                     </div>
                     <div class="col">    
                         <div class="form-group">
-                            <label for="user_status">Status</label>
-                            <select class="form-control" name="user_status">
-                                @if($user->user_status == 'Single')
+                            <label for="status">Status</label>
+                            <select class="form-control" name="status">
+                                @if($user->status == 'Single')
                                     <option value="Single" selected>Single</option>
                                     <option value="Married">Married</option>
-                                @elseif($user->user_status == 'Married')
+                                @elseif($user->status == 'Married')
                                     <option value="Married" selected>Married</option>
                                     <option value="Single">Single</option>
                                 @else 
@@ -198,32 +198,18 @@ Users
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="user_active_status">Active Status</label>
-                            <select class="form-control" name="user_active_status">
-                                @if($user->user_active_status == '1')
+                            <label for="active_status">Active Status</label>
+                            <select class="form-control" name="active_status">
+                                @if($user->active_status == '1')
                                     <option value="1" selected>True</option>
                                     <option value="2">False</option>
-                                @elseif($user->user_active_status == '2')
+                                @elseif($user->active_status == '2')
                                     <option value="2" selected>False</option>
                                     <option value="1">True</option>
                                 @endif
                             </select>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="form-group center">
-                    <br>
-                    <img id = "profileImage" src='/images/users/{{ $user->user_image }}' height="300px" width="92%">
-                    <br><br>
-                    <label for="user_image">User Profile Picture</label>
-                    <input type="file" onchange = "readURL(this);" class="form-control image" name="user_image" style="width:92%">
-                    @if ($errors->has('user_image'))
-                        <span class="invalid feedback" role="alert">
-                            <p style="color:tomato;">{{$errors->first('user_image')}}</p>
-                        </span>
-                    @endif
                 </div>
             </div>
         </div>

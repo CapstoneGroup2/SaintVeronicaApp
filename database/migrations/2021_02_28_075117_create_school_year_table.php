@@ -13,8 +13,8 @@ class CreateSchoolYearTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('school_year');
-        Schema::create('school_year', function (Blueprint $table) {
+        Schema::dropIfExists('school_years');
+        Schema::create('school_years', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('school_year', 225);
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateSchoolYearTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('school_year');
+        Schema::dropIfExists('school_years');
     }
 }

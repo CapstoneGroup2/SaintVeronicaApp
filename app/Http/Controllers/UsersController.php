@@ -15,7 +15,7 @@ class UsersController extends Controller
     {
         $users = DB::table('users')
             ->join('roles', 'roles.id', '=', 'users.role_id')
-            ->select('users.id', 'users.first_name', 'users.last_name', 'users.address', 'users.email', 'users.contact', 'roles.role_name')
+            ->select('users.id', 'users.first_name', 'users.last_name', 'users.address', 'users.email', 'users.contact', 'roles.role')
             ->where('active_status', 1)
             ->get();
 
@@ -23,7 +23,7 @@ class UsersController extends Controller
         {
             return datatables()->of($users)
                 ->addColumn('role_name', function($data) {
-                    return '<span style="font-weight: bold; font-size: 17px;">' . $data->role_name . '</span>';
+                    return '<span style="font-weight: bold; font-size: 17px;">' . $data->role . '</span>';
                 })
                 ->addColumn('full_name', function($data) {
                     $full_name = $data->first_name . ' ' . $data->last_name;
@@ -127,8 +127,8 @@ class UsersController extends Controller
             ->join('roles', 'roles.id', '=', 'users.role_id')
             ->where('users.id', $id)
             ->select('users.id', 'users.first_name', 'users.middle_name', 'users.last_name', 
-                'users.address', 'users.image', 'users.contact', 'users.email', 
-                'roles.role_name', 'users.address', 'users.gender', 'users.status')
+                'users.address', 'users.contact', 'users.email', 
+                'roles.role', 'users.address', 'users.gender', 'users.status')
             ->get();
             
         return view('users.show', compact('users'));
@@ -140,8 +140,8 @@ class UsersController extends Controller
             ->join('roles', 'roles.id', '=', 'users.role_id')
             ->where('users.id', $id)
             ->select('users.id', 'users.role_id', 'users.first_name', 'users.middle_name', 'users.last_name', 
-                'users.address', 'users.image', 'users.contact', 'users.email', 
-                'roles.role_name', 'users.address', 'users.gender', 'users.status', 'active_status')
+                'users.address', 'users.contact', 'users.email', 
+                'roles.role', 'users.address', 'users.gender', 'users.status', 'active_status')
             ->get();
 
         $roles = Role::all();
@@ -205,14 +205,6 @@ class UsersController extends Controller
             $user->gender = $request['gender'];
             $user->status = $request['status'];
             $user->active_status = $request['active_status'];
-
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $name = $image->getClientOriginalName();
-                $destinationPath = public_path('/images/users');
-                $image->move($destinationPath, $name);
-                $user->image = $name;
-            } 
     
             if($request['password'] != null) {
                 $user->password = bcrypt($request['password']);

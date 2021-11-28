@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Classes;
-use App\Models\Student;
+use App\Models\SchoolYear;
+use App\Models\Admission;
 use App\Models\MiscellaneousAndOtherFees;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +12,26 @@ class SchoolYearController extends Controller
 {
     public function index()
     {
-        echo "AMPOTTTTT";
+        $school_years = SchoolYear::all();
+        $students = Admission::all();
+
+        $list_of_school_year_and_students = [];
+
+        foreach($school_years as $school_year) {
+            $students_per_school_year = [];
+            $students_per_school_year['school_year_id'] = $school_year->id;
+            $students_per_school_year['school_year'] = $school_year->school_year;
+
+            $student_count = 0;
+            foreach($students as $student) {
+                if($student->school_year_id == $school_year->id) {
+                    ++$student_count;
+                }
+            }
+
+            $students_per_school_year['students_count'] = $student_count;
+            array_push($list_of_school_year_and_students, $students_per_school_year);
+        }
         // $students_classes = DB::table('students_classes')
         //     ->join('students', 'students.id', '=', 'students_classes.student_id')
         //     ->join('classes', 'classes.id', '=', 'students_classes.class_id')
@@ -44,7 +63,7 @@ class SchoolYearController extends Controller
         // session()->put('classes', $put_sessions);
 
         // return view('school-year.index', compact('students_count'));
-        return view('school-year.index');
+        return view('school-year.index', compact('list_of_school_year_and_students'));
     }
 
     public function store(Request $request)

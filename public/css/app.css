@@ -515,11 +515,11 @@ a:hover {
   position: unset !important;
 }
 
-.btn-addClass {
+.btn-addClass, .btn-addSchoolYear {
   background-color: #3f704d !important;
 }
 
-.btn-addClass h2 {
+.btn-addClass h2, .btn-addSchoolYear h2 {
   color: white !important;
   letter-spacing: 2px;
 }

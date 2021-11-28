@@ -7,7 +7,7 @@ Users
 @section('content')
 
 <div class="sticky">
-    <h2 style="text-align: left">{{ $users[0]->role_name }}</h2>
+    <h2 style="text-align: left">{{ $users[0]->role }}</h2>
     @if($users[0]->id == 1)
         <div class="triangle-right" style="width:230px;"></div>
     @else
@@ -18,37 +18,34 @@ Users
 <form id="enrollment-form" style="text-align:center;">
     <h2 class="text-warning">User Profile Information</h2> 
     <hr>
-    <div class="form-group">
-        <img src='/images/users/{{ $users[0]->user_image }}' height="300px">
-    </div>
     <br>
     <div class="form-group">
-        <p style="font-size:15px;">Full Name : <span class="text-white">{{ $users[0]->user_first_name }} {{($users[0]->user_middle_name != "") ? $users[0]->user_middle_name . " " : ""}}{{ $users[0]->user_last_name }}</span><p>
+        <p style="font-size:15px;">Full Name : <span class="text-white">{{ $users[0]->first_name }} {{($users[0]->middle_name != "") ? $users[0]->middle_name . " " : ""}}{{ $users[0]->last_name }}</span><p>
     </div>
     <div class="form-group">
-        <p style="font-size:15px;">Role Name : <span class="text-white">{{ $users[0]->role_name }}</span><p>
+        <p style="font-size:15px;">Role Name : <span class="text-white">{{ $users[0]->role }}</span><p>
     </div>
     <div class="form-group">
-        <p style="font-size:15px;">Email Address : <span class="text-white">{{ $users[0]->user_email }}</span><p>
+        <p style="font-size:15px;">Email Address : <span class="text-white">{{ $users[0]->email }}</span><p>
     </div>
-    @if($users[0]->user_address != '')
+    @if($users[0]->address != '')
         <div class="form-group">
-            <p style="font-size:15px;">Address : <span class="text-white">{{ $users[0]->user_address }}</span><p>
+            <p style="font-size:15px;">Address : <span class="text-white">{{ $users[0]->address }}</span><p>
         </div>
     @endif
-    @if($users[0]->user_contact != '')
+    @if($users[0]->contact != '')
         <div class="form-group">
-            <p style="font-size:15px;">Contact : <span class="text-white">{{ $users[0]->user_contact }}</span><p>
+            <p style="font-size:15px;">Contact : <span class="text-white">{{ $users[0]->contact }}</span><p>
         </div>
     @endif
-    @if($users[0]->user_gender != '')
+    @if($users[0]->gender != '')
         <div class="form-group">
-            <p style="font-size:15px;">Gender : <span class="text-white">{{ $users[0]->user_gender }}</span><p>
+            <p style="font-size:15px;">Gender : <span class="text-white">{{ $users[0]->gender }}</span><p>
         </div>
     @endif
-    @if($users[0]->user_status != '')
+    @if($users[0]->status != '')
         <div class="form-group">
-            <p style="font-size:15px;">Status : <span class="text-white">{{ $users[0]->user_status }}</span><p>
+            <p style="font-size:15px;">Status : <span class="text-white">{{ $users[0]->status }}</span><p>
         </div>
     @endif
     <hr>

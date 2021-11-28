@@ -13,13 +13,13 @@ class CreateAdmissionTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('admission');
-        Schema::create('admission', function (Blueprint $table) {
+        Schema::dropIfExists('admissions');
+        Schema::create('admissions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->unsignedBigInteger('school_year_id');
-            $table->foreign('school_year_id')->references('id')->on('school_year')->onDelete('cascade');
+            $table->foreign('school_year_id')->references('id')->on('school_years')->onDelete('cascade');
             $table->unsignedBigInteger('class_section_id');
             $table->foreign('class_section_id')->references('id')->on('class_sections')->onDelete('cascade');
             $table->date('admission_date');
@@ -34,6 +34,6 @@ class CreateAdmissionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admission');
+        Schema::dropIfExists('admissions');
     }
 }

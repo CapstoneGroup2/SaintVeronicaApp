@@ -9,8 +9,7 @@ class Classes extends Model
     protected $primaryKey= 'id';
 
     protected $fillable = [
-        'class_name',
-        'class_description'
+        'class',
     ];
     
     public function students() {

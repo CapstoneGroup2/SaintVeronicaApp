@@ -75,20 +75,20 @@ function setTable() {
     },
     columns:[
       {
-        data: 'role_name',
-        name: 'role_name'
+        data: 'role',
+        name: 'role'
       },
       {
         data: 'full_name',
         name: 'full_name'
       },
       {
-        data: 'user_email',
-        name: 'user_email'
+        data: 'email',
+        name: 'email'
       },
       {
-        data: 'user_contact',
-        name: 'user_contact'
+        data: 'contact',
+        name: 'contact'
       },
       {
         data: 'action',

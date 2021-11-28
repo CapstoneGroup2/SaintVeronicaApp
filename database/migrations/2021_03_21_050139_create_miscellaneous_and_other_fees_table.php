@@ -19,7 +19,7 @@ class CreateMiscellaneousAndOtherFeesTable extends Migration
             $table->unsignedBigInteger('item_id');
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->unsignedBigInteger('school_year_id');
-            $table->foreign('school_year_id')->references('id')->on('school_year')->onDelete('cascade');
+            $table->foreign('school_year_id')->references('id')->on('school_years')->onDelete('cascade');
             $table->unsignedBigInteger('class_id');
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->timestamps();

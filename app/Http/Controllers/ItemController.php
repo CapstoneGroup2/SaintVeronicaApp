@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Classes;
+use App\Models\Item;
 use App\Models\Student;
 use App\Models\MiscellaneousAndOtherFees;
 use Illuminate\Support\Facades\DB;
@@ -12,39 +12,30 @@ class ItemController extends Controller
 {
     public function index()
     {
-        echo "AMPOTTTTT";
-        // $students_classes = DB::table('students_classes')
-        //     ->join('students', 'students.id', '=', 'students_classes.student_id')
-        //     ->join('classes', 'classes.id', '=', 'students_classes.class_id')
-        //     ->get();
+        $items = Item::all();
 
-        // $classes = Classes::all();
-        // $students = Student::all();
-
-        // $students_count = [];
-        // $put_sessions = [];
-
-        // foreach($classes as $class) {
-        //     $student_count = [];
-        //     $student_count['class_id'] = $class->id;
-        //     $student_count['class_name'] = $class->class_name;
-
-        //     $count = 0;
-        //     foreach ($students_classes as $student_class) {
-        //         if ($student_class->class_id == $class->id) {
-        //             ++$count;
-        //         }
-        //     }
-
-        //     $student_count['class_count'] = $count;
-        //     array_push($students_count, $student_count);
-        //     array_push($put_sessions, [$class->class_name, $class->id]);
-        // }
-
-        // session()->put('classes', $put_sessions);
-
-        // return view('school-year.index', compact('students_count'));
-        return view('item.index');
+        if (request()->ajax())
+        {
+            return datatables()->of($items)
+                ->addColumn('code', function($data) {
+                    return '<span style="font-weight: bold; font-size: 15px;">' . $data->code . '</span>';
+                })
+                ->addColumn('item', function($data) {
+                    return '<span style="font-weight: bold; font-size: 15px;">' . $data->item . '</span>';
+                })
+                ->addColumn('price', function($data) {
+                    return '<span style="font-weight: bold; font-size: 15px;">Php ' . number_format($data->price, 2) . '</span>';
+                })
+                ->addColumn('action', function($data) {
+                    $button = '<a href="/item/'. $data->id .'/edit
+                    " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
+                    return $button;
+                })
+                ->rawColumns(['code', 'item', 'price', 'action'])
+                ->make(true);
+        }
+        
+        return view('item.index', compact('items'));
     }
 
     // public function store(Request $request)

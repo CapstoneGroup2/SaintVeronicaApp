@@ -38,11 +38,17 @@
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
+                        @foreach(session()->get('school_year_session') as $school_year)
+                            <a href="/school-year/{{ $school_year[0] }}/students"><i class="fa fa-check-square"></i> {{ $school_year[1] }}</a>
+                        @endforeach
                     </div>
                     <button id="4" class="dropdown-btn"><i class="fa fa-fw fa-money"></i> Miscellaneous & Other Fees
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
+                        @foreach(session()->get('school_year_session') as $school_year)
+                            <a href="/school-year/{{ $school_year[0] }}/items"><i class="fa fa-check-square"></i> {{ $school_year[1] }}</a>
+                        @endforeach
                     </div>
                     <a href="/payments-history" id="5"><i class="fa fa-fw fas fa-history"></i> History of Payments</a>
                     <a href="/announcements" id="6"><i class="fa fa-fw fas fa-bullhorn"></i> Announcements</a>

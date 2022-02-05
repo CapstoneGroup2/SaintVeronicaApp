@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Classes;
 use App\Models\Student;
+use App\Models\Admission;
 use App\Models\MiscellaneousAndOtherFees;
 use Illuminate\Support\Facades\DB;
 
@@ -43,6 +44,57 @@ class ClassesController extends Controller
         session()->put('classes', $put_sessions);
 
         return view('classes.index', compact('students_count'));
+    }
+
+    public function showStudents($id) {
+        $list_of_students = [];
+
+        $classes = Classes::where('class_id', $id)->get();
+
+        foreach($classes as $class) {
+            $students = DB::table('admissions')
+                ->join('students', 'students.id', 'admissions.student_id')
+                ->join('class_sections', 'class_sections.id', 'admissions.class_section_id')
+                ->join('school_years', 'school_years.id', 'admissions.school_year_id')
+                ->where('admissions.class_section_id', $class->id)
+                ->where('admissions.school_year_id', session()->get('selected_school_year_in_students_page'))
+                ->get();
+            array_push($list_of_students, $students);
+        }
+
+        if (request()->ajax())
+        {
+            return datatables()->of($list_of_students)
+                ->addColumn('student_id', function($data) {
+                    return '<span style="font-weight: bold; font-size: 17px;">' . $data->student_id . '</span>';
+                })
+                ->addColumn('full_name', function($data) {
+                    $full_name = $data->middle_name != "" ? $data->first_name . ' ' . $data->middle_name . ' '. $data->last_name : $data->first_name . ' ' . $data->last_name;
+                    return $full_name;
+                })
+                ->addColumn('email', function($data) {
+                    return '<span style="font-weight: bold; font-size: 17px;">' . $data->email . '</span>';
+                })
+                ->addColumn('address', function($data) {
+                    return '<span style="font-weight: bold; font-size: 17px;">' . $data->address . '</span>';
+                })
+                ->addColumn('contact', function($data) {
+                    return '<span style="font-weight: bold; font-size: 17px;">' . $data->contact . '</span>';
+                })
+                ->addColumn('action', function($data) {
+                    $button = '<a href="/students/'. $data->student_id . '" data-toggle="tooltip" title="View" class="btn btn-md btn-primary" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-eye-open"></span></a>';
+                    $button .= '<a href="/students/'. $data->student_id .'/edit
+                    " data-toggle="tooltip" title="Edit" class="btn btn-md btn-warning" role="button" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-pencil"></span></a>';
+                    $button .= '<button type="button" id="'. $data->student_id .'" data-toggle="tooltip" title="Remove" class="btn btn-md btn-danger btn-remove" style="margin: 2px; padding: 0 2%"><span class="glyphicon glyphicon-trash"></span></button>';
+                    $button .= '<button id="'. $data->student_id .'" class="btn btn-lg btn-success btn-admission">For Admission</button>';
+                    return $button;
+                })
+                ->rawColumns(['student_id', 'full_name', 'email', 'address', 'contact', 'action'])
+                ->make(true);
+        }
+
+        return view('students.index', compact(list_of_students));
+
     }
 
     public function store(Request $request)

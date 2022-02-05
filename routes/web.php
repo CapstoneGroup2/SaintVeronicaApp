@@ -114,4 +114,8 @@ Route::middleware(['web'])->group(function () {
     Route::resource('/users', 'UsersController')->only([
         'edit', 'update'
     ]);
+
+    Route::get('/school-year/{id}/students', 'SchoolYearController@showStudentsByClass');
+
+    Route::get('/classes/{id}/students', 'ClassesController@showStudents');
 });

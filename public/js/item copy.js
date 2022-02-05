@@ -5,7 +5,7 @@ function setTable() {
         processing: true,
         serverSide: true,
         ajax:{
-        url: '/items',
+        url: '/miscellaneous-and-other-fees/classes/' + num,
         type: 'GET'
         },
         columns:[

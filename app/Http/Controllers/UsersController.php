@@ -81,7 +81,6 @@ class UsersController extends Controller
             'gender'        =>  'nullable',
             'status'        =>  'nullable',
             'email'         =>  'required|email|unique:users',
-            'image'         =>  'mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         try {
@@ -102,15 +101,6 @@ class UsersController extends Controller
             } else {
                 $user->password = bcrypt(ucwords(strtolower($request['last_name'])) . substr(strtolower($request['first_name']), 0, 2) . '@registrar');
             }
-
-            // if ($request->hasFile('image')) {
-            //     $image = $request->file('image');
-            //     $name = $image->getClientOriginalName();
-            //     $destinationPath = public_path('/images/users');
-            //     $image->move($destinationPath, $name);
-            // } else {
-            //     $name = 'default.png';  
-            // }
     
             $user->image = 'default.png';
             $user->save();   

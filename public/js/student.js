@@ -1,12 +1,26 @@
 var pathname = window.location.pathname;
 var num = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1);
 
+function openClass(evt, classBelonged) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(classBelonged).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
 function setTable() {
-    $('#dataTable').DataTable({
+    $('#dataTable-N1').DataTable({
         processing: true,
         serverSide: true,
         ajax:{
-        url: '/students/classes/' + num,
+        url: '/classes/1/students',
         type: 'GET'
         },
         columns:[
@@ -19,16 +33,54 @@ function setTable() {
             name: 'full_name'
         },
         {
-            data: 'student_email',
-            name: 'student_email'
+            data: 'email',
+            name: 'email'
         },
         {
-            data: 'student_address',
-            name: 'student_address'
+            data: 'address',
+            name: 'address'
         },
         {
-            data: 'student_home_contact',
-            name: 'student_home_contact'
+            data: 'contact',
+            name: 'contact'
+        },
+        {
+            data: 'action',
+            name: 'action',
+            orderable: false,
+        }
+        ]
+    })
+}
+
+function setTable() {
+    $('#dataTable-N2').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax:{
+        url: '/classes/2/students',
+        type: 'GET'
+        },
+        columns:[
+        {
+            data: 'student_id',
+            name: 'student_id'
+        },
+        {
+            data: 'full_name',
+            name: 'full_name'
+        },
+        {
+            data: 'email',
+            name: 'email'
+        },
+        {
+            data: 'address',
+            name: 'address'
+        },
+        {
+            data: 'contact',
+            name: 'contact'
         },
         {
             data: 'action',

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SchoolYear;
 use App\Models\Admission;
+use App\Models\ClassSection;
+use App\Models\Classes;
 use App\Models\MiscellaneousAndOtherFees;
 use Illuminate\Support\Facades\DB;
 
@@ -32,38 +34,50 @@ class SchoolYearController extends Controller
             $students_per_school_year['students_count'] = $student_count;
             array_push($list_of_school_year_and_students, $students_per_school_year);
         }
-        // $students_classes = DB::table('students_classes')
-        //     ->join('students', 'students.id', '=', 'students_classes.student_id')
-        //     ->join('classes', 'classes.id', '=', 'students_classes.class_id')
-        //     ->get();
 
-        // $classes = Classes::all();
-        // $students = Student::all();
-
-        // $students_count = [];
-        // $put_sessions = [];
-
-        // foreach($classes as $class) {
-        //     $student_count = [];
-        //     $student_count['class_id'] = $class->id;
-        //     $student_count['class_name'] = $class->class_name;
-
-        //     $count = 0;
-        //     foreach ($students_classes as $student_class) {
-        //         if ($student_class->class_id == $class->id) {
-        //             ++$count;
-        //         }
-        //     }
-
-        //     $student_count['class_count'] = $count;
-        //     array_push($students_count, $student_count);
-        //     array_push($put_sessions, [$class->class_name, $class->id]);
-        // }
-
-        // session()->put('classes', $put_sessions);
-
-        // return view('school-year.index', compact('students_count'));
         return view('school-year.index', compact('list_of_school_year_and_students'));
+    }
+
+    public function showStudentsByClass($id) {
+
+        // $admission_students = DB::table('admissions')
+        //     ->join('students', 'students.id', 'admissions.student_id')
+        //     ->join('class_sections', 'class_sections.id', 'admissions.class_section_id')
+        //     ->join('school_years', 'school_years.id', 'admissions.school_year_id')
+        //     ->where('admissions.school_year_id', $id)
+        //     ->get();
+        
+        // $school_year = SchoolYear::where('id' , $id)->get();
+
+        // session()->put('selected_school_year_id_in_students_page', $id);
+        // session()->put('selected_school_year_in_students_page', $school_year[0]->school_year);
+        // return view('students.index', compact($admission_students));
+
+        $list_of_students_per_class = [];
+        
+        $classes = Classes::all();
+
+        foreach($classes as $class) {
+            $student_per_class = [];
+            $class_sections = ClassSection::where('class_id', $class->id)->get();
+            $sections = [];
+            foreach($class_sections as $class_section) {
+                $students_in_class_section = Admission::where('class_section_id', $class_section->id)->where('school_year_id', $id)->count();
+                array_push($sections, [$class_section->section, $students_in_class_section]);
+            }
+            $student_per_class['class_sections'] = $sections;
+            $student_per_class['class_id'] = $class->id;
+            $student_per_class['class_name'] = $class->class;
+            $student_per_class['school_year_id'] = $id;
+            array_push($list_of_students_per_class, $student_per_class);
+        }
+
+        $school_year = SchoolYear::where('id', $id)->get();
+
+        session()->put('selected_school_year_in_students_page', $school_year[0]->school_year);
+        session()->put('selected_school_year_id_in_students_page', $id);
+
+        return view('students.index', compact('list_of_students_per_class'));
     }
 
     public function store(Request $request)
